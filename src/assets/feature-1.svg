@@ -1,0 +1,33 @@
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="200" rx="10" fill="#f4f7fa" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="50" cy="50" r="30" fill="#7928CA" opacity="0.1" />
+  <circle cx="250" cy="150" r="40" fill="#0070F3" opacity="0.1" />
+  
+  <!-- Main Content - Dashboard UI -->
+  <rect x="40" y="40" width="220" height="120" rx="8" fill="white" stroke="#E2E8F0" stroke-width="1.5" />
+  
+  <!-- UI Header -->
+  <rect x="40" y="40" width="220" height="30" rx="8" fill="#F9FAFB" stroke="#E2E8F0" stroke-width="1.5" />
+  
+  <!-- Header Elements -->
+  <circle cx="55" cy="55" r="5" fill="#7928CA" />
+  <rect x="70" y="52" width="50" height="6" rx="3" fill="#718096" />
+  <rect x="200" y="52" width="30" height="6" rx="3" fill="#7928CA" />
+  
+  <!-- Content Elements -->
+  <rect x="50" y="80" width="60" height="10" rx="3" fill="#4A5568" />
+  <rect x="50" y="95" width="180" height="6" rx="3" fill="#A0AEC0" />
+  <rect x="50" y="105" width="140" height="6" rx="3" fill="#A0AEC0" />
+  
+  <!-- UI Elements - Buttons or Actions -->
+  <rect x="50" y="125" width="40" height="20" rx="4" fill="#7928CA" />
+  <rect x="100" y="125" width="40" height="20" rx="4" fill="white" stroke="#7928CA" stroke-width="1.5" />
+  
+  <!-- Star Icon -->
+  <g transform="translate(210, 120) scale(0.8)">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#FFD700" stroke="#E6B800" stroke-width="1" stroke-linejoin="round" />
+  </g>
+</svg>

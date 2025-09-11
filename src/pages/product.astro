@@ -1,0 +1,277 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import CTASection from '../components/CTASection.astro';
+
+const features = [
+    {
+        title: "Real-Time Data Enrichment",
+        description: "Instantly enrich leads with verified contact details, company information, and social profiles using our advanced API."
+    },
+    {
+        title: "GDPR & CCPA Compliant",
+        description: "Built-in compliance features ensure all lead data collection and processing meets global privacy regulations."
+    },
+    {
+        title: "High Accuracy Guarantee",
+        description: "99.5% data accuracy with real-time verification and continuous data quality monitoring."
+    },
+    {
+        title: "White-Label Integration",
+        description: "Seamlessly integrate into your platform with customizable UI components that match your brand identity."
+    },
+    {
+        title: "Advanced Lead Scoring",
+        description: "AI-powered lead scoring and qualification to help prioritize your highest-value prospects."
+    },
+    {
+        title: "Developer-First APIs",
+        description: "RESTful APIs with comprehensive documentation, SDKs, and webhook support for seamless integration."
+    }
+];
+
+const apiFeatures = [
+    {
+        title: "Contact Enrichment",
+        description: "Email, phone, social profiles",
+        example: "/api/v1/contacts/enrich"
+    },
+    {
+        title: "Company Intelligence",
+        description: "Firmographics, technographics, funding data",
+        example: "/api/v1/companies/intel"
+    },
+    {
+        title: "Lead Verification",
+        description: "Email validation, phone verification",
+        example: "/api/v1/verify/contact"
+    },
+    {
+        title: "Intent Data",
+        description: "Buying signals and behavioral insights",
+        example: "/api/v1/intent/signals"
+    }
+];
+---
+
+<Layout
+        title="Laravel Mail - Product"
+        description="Laravel's Mail lead enrichment API is easy to use and fast to launch, with compliant email marketing infrastructure and features customers will love."
+>
+    <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                        A <span class="gradient-text">Modern Approach</span> to your Marketing Infrastructure
+                    </h1>
+                    <p class="mt-6 text-xl text-gray-600 max-w-lg">
+                        Laravel's Mail marketing platform and API is easy to use and fast to launch, with compliant infrastructure and features customers will love.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="https://app.laravelmail.com" class="btn btn-primary">Try now</a>
+                        <a href="/docs" class="btn btn-secondary">View Docs</a>
+                    </div>
+
+                    <div class="mt-8 flex items-center space-x-6 text-sm text-gray-600">
+                        <div class="flex items-center">
+                            <div class="h-2 w-2 bg-green-500 rounded-full mr-2"></div>
+                            <span>99.9% Uptime SLA</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="h-2 w-2 bg-blue-500 rounded-full mr-2"></div>
+                            <span>SOC 2 Certified</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="h-2 w-2 bg-blue-500 rounded-full mr-2"></div>
+                            <span>GDPR Compliant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="relative">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue rounded-xl blur opacity-30"></div>
+                        <div class="relative bg-white rounded-xl shadow-xl overflow-hidden">
+                            <Image
+                                    src="https://i.imgur.com/F0KPMAD.png"
+                                    alt="Laravel Mail Dashboard"
+                                    class="w-full h-auto"
+                                    width={700}
+                                    height={500}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-leadscaptain-gray">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Powerful API Endpoints
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Everything you need to build world-class lead generation tools.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {apiFeatures.map((feature, index) => (
+                        <div
+                                class="bg-white rounded-xl p-8 shadow-sm animate-on-scroll border-l-4 border-leadscaptain-purple"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="text-xl font-semibold">{feature.title}</h3>
+                                    <p class="mt-2 text-gray-600">{feature.description}</p>
+                                    <code class="mt-3 block text-sm bg-gray-100 px-3 py-2 rounded text-leadscaptain-purple font-mono">
+                                        {feature.example}
+                                    </code>
+                                </div>
+                            </div>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Key Features
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Everything you need to offer a complete lead enrichment solution to your customers.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {features.map((feature, index) => (
+                        <div
+                                class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 animate-on-scroll border border-gray-100"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue flex items-center justify-center text-white mb-6">
+                                <div class="h-6 w-6 bg-white/30 rounded"></div>
+                            </div>
+                            <h3 class="text-xl font-semibold">{feature.title}</h3>
+                            <p class="mt-3 text-gray-600">{feature.description}</p>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-leadscaptain-gray">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold">
+                        Built for <span class="gradient-text">Scale & Compliance</span>
+                    </h2>
+                    <p class="mt-6 text-xl text-gray-600">
+                        Process millions of lead enrichment requests with enterprise-grade security and compliance.
+                    </p>
+
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-start">
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium">Enterprise Security</h4>
+                                <p class="text-gray-600">SOC 2 Type II, GDPR & CCPA compliant infrastructure</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium">Global Infrastructure</h4>
+                                <p class="text-gray-600">Multi-region deployment with <50ms response times</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium">Smart Rate Limiting</h4>
+                                <p class="text-gray-600">Intelligent throttling and queueing for optimal performance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="bg-gray-900 rounded-xl p-6 text-green-400 font-mono text-sm overflow-hidden">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-gray-400">Laravel Mail API Response</span>
+                            <div class="flex space-x-2">
+                                <div class="h-2 w-2 bg-red-500 rounded-full"></div>
+                                <div class="h-2 w-2 bg-yellow-500 rounded-full"></div>
+                                <div class="h-2 w-2 bg-green-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        <pre class="text-xs leading-relaxed">
+{`{
+  "status": "success",
+  "contact": {
+    "email": "john.doe@company.com",
+    "phone": "+1-555-123-4567",
+    "linkedin": "linkedin.com/in/johndoe",
+    "title": "VP of Sales",
+    "confidence": 0.95
+  },
+  "company": {
+    "name": "TechCorp Inc",
+    "domain": "techcorp.com",
+    "industry": "SaaS",
+    "size": "201-500",
+    "revenue": "$50M-$100M"
+  },
+  "enrichment_time": "127ms"
+}`}
+            </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="text-center animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Trusted by Sales Teams Worldwide
+                </h2>
+                <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
+                    From startups to enterprise companies, teams rely on Laravel Marketing Platform to power their lead generation.
+                </p>
+
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-pink-600">500+</div>
+                        <div class="text-sm text-gray-500">Active Customers</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-pink-400">50M+</div>
+                        <div class="text-sm text-gray-500">Leads Enriched</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-pink-400">99.5%</div>
+                        <div class="text-sm text-gray-500">Accuracy Rate</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-pink-400">24/7</div>
+                        <div class="text-sm text-gray-500">Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <CTASection />
+
+</Layout>

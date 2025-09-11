@@ -1,0 +1,70 @@
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="200" rx="10" fill="#f4f7fa" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="20" cy="40" r="15" fill="#7928CA" opacity="0.1" />
+  <circle cx="270" cy="180" r="15" fill="#0070F3" opacity="0.1" />
+  
+  <!-- Globe -->
+  <g transform="translate(150, 80) scale(0.8)">
+    <circle cx="0" cy="0" r="60" fill="#E2E8F0" stroke="#A0AEC0" stroke-width="1" />
+    
+    <!-- Continents -->
+    <path d="M-40,-10 Q-30,-25 -10,-20 T10,-30 T40,-15 Q50,-5 40,5 T20,15 T0,20 T-20,15 T-40,25 T-45,10 Q-50,0 -40,-10 Z" fill="#0070F3" />
+    <path d="M-10,20 Q0,15 10,20 T25,25 T20,40 Q10,45 -5,40 T-15,30 Z" fill="#0070F3" />
+    <path d="M15,-10 Q25,-15 35,-10 T45,5 Q40,15 30,10 T15,0 Z" fill="#0070F3" />
+    
+    <!-- Grid Lines -->
+    <circle cx="0" cy="0" r="45" fill="none" stroke="#CBD5E0" stroke-width="0.5" />
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#CBD5E0" stroke-width="0.5" />
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#CBD5E0" stroke-width="0.5" />
+    
+    <line x1="-60" y1="0" x2="60" y2="0" stroke="#CBD5E0" stroke-width="0.5" />
+    <line x1="0" y1="-60" x2="0" y2="60" stroke="#CBD5E0" stroke-width="0.5" />
+    <line x1="-45" y1="-45" x2="45" y2="45" stroke="#CBD5E0" stroke-width="0.5" />
+    <line x1="-45" y1="45" x2="45" y2="-45" stroke="#CBD5E0" stroke-width="0.5" />
+  </g>
+  
+  <!-- US Flag Icon -->
+  <g transform="translate(50, 130)">
+    <rect x="0" y="0" width="24" height="16" fill="#f0f0f0" stroke="#e0e0e0" stroke-width="0.5" />
+    <rect x="0" y="0" width="12" height="8" fill="#2a56c6" />
+    <rect x="12" y="0" width="12" height="2" fill="#dc3030" />
+    <rect x="0" y="2" width="24" height="2" fill="#dc3030" />
+    <rect x="0" y="4" width="24" height="2" fill="#dc3030" />
+    <rect x="0" y="6" width="24" height="2" fill="#dc3030" />
+    <rect x="0" y="8" width="24" height="2" fill="#dc3030" />
+    <rect x="0" y="10" width="24" height="2" fill="#dc3030" />
+    <rect x="0" y="12" width="24" height="2" fill="#dc3030" />
+    <rect x="0" y="14" width="24" height="2" fill="#dc3030" />
+  </g>
+  
+  <!-- Canada Flag Icon -->
+  <g transform="translate(226, 130)">
+    <rect x="0" y="0" width="24" height="16" fill="#f0f0f0" stroke="#e0e0e0" stroke-width="0.5" />
+    <rect x="0" y="0" width="6" height="16" fill="#dc3030" />
+    <rect x="18" y="0" width="6" height="16" fill="#dc3030" />
+    <path d="M12,5 L14,9 L18,10 L14,12 L13,16 L12,13 L11,16 L10,12 L6,10 L10,9 Z" fill="#dc3030" />
+  </g>
+  
+  <!-- Connection Lines -->
+  <path d="M100,80 Q125,60 150,80" stroke="#7928CA" stroke-width="2" fill="none" />
+  <path d="M200,80 Q175,60 150,80" stroke="#7928CA" stroke-width="2" fill="none" />
+  
+  <line x1="70" y1="125" x2="100" y2="100" stroke="#7928CA" stroke-width="1.5" />
+  <line x1="230" y1="125" x2="200" y2="100" stroke="#7928CA" stroke-width="1.5" />
+  
+  <!-- Text Labels -->
+  <g transform="translate(150, 30)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="14" fill="#4A5568" text-anchor="middle" font-weight="bold">Global Coverage</text>
+  </g>
+  
+  <g transform="translate(62, 150)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#4A5568" text-anchor="middle">USA</text>
+  </g>
+  
+  <g transform="translate(238, 150)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="10" fill="#4A5568" text-anchor="middle">Canada</text>
+  </g>
+</svg>

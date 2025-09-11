@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Documentation | Leads Captain">
+	<main class="py-20 px-6 sm:px-8 lg:px-12">
+		<div class="max-w-7xl mx-auto">
+			<!-- Hero Section -->
+			<div class="text-center mb-16">
+				<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Documentation</h1>
+				<p class="text-xl text-gray-600 max-w-2xl mx-auto">
+					Everything you need to know about integrating and using Laravel's Mail platform.
+				</p>
+			</div>
+
+			<!-- Quick Links -->
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+				<a href="/docs/api" class="group">
+					<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<div class="w-12 h-12 bg-payflo-blue/10 rounded-lg flex items-center justify-center mb-4">
+							<svg class="w-6 h-6 text-payflo-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+							</svg>
+						</div>
+						<h2 class="text-xl font-semibold mb-2 text-gray-900 group-hover:text-payflo-blue transition-colors duration-200">API Reference</h2>
+						<p class="text-gray-600">Detailed documentation of our REST API endpoints and parameters.</p>
+					</div>
+				</a>
+
+				<a href="/docs/index" class="group">
+					<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<div class="w-12 h-12 bg-payflo-purple/10 rounded-lg flex items-center justify-center mb-4">
+							<svg class="w-6 h-6 text-payflo-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+							</svg>
+						</div>
+						<h2 class="text-xl font-semibold mb-2 text-gray-900 group-hover:text-payflo-purple transition-colors duration-200">Tutorials</h2>
+						<p class="text-gray-600">Step-by-step guides to help you get started with our platform.</p>
+					</div>
+				</a>
+
+                <a href="/docs/index" class="group">
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+                        <div class="w-12 h-12 bg-payflo-purple/10 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-payflo-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h2 class="text-xl font-semibold mb-2 text-gray-900 group-hover:text-payflo-purple transition-colors duration-200">Tutorials</h2>
+                        <p class="text-gray-600">Step-by-step guides to help you get started with our platform.</p>
+                    </div>
+                </a>
+			</div>
+
+			<!-- Getting Started Section -->
+			<div class="mb-16">
+				<h2 class="text-3xl font-bold text-gray-900 mb-8">Getting Started</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+						<h3 class="text-xl font-semibold mb-4">Quick Start Guide</h3>
+						<p class="text-gray-600 mb-6">Get up and running with Leads Captain in minutes.</p>
+						<ol class="list-decimal list-inside space-y-4 text-gray-600">
+							<li>Sign up for an account</li>
+							<li>Configure your email settings</li>
+							<li>Add your first subscriber</li>
+						</ol>
+						<a href="/docs/index" class="mt-6 inline-block text-payflo-blue hover:text-payflo-purple font-medium">
+							Read the guide →
+						</a>
+					</div>
+
+					<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+						<h3 class="text-xl font-semibold mb-4">Integration Guide</h3>
+						<p class="text-gray-600 mb-6">Learn how to integrate Leads Captain with your existing systems.</p>
+						<ul class="list-disc list-inside space-y-4 text-gray-600">
+							<li>API authentication</li>
+							<li>Webhooks setup</li>
+							<li>Data synchronization</li>
+							<li>Error handling</li>
+						</ul>
+						<a href="/docs" class="mt-6 inline-block text-payflo-blue hover:text-payflo-purple font-medium">
+							View integration docs →
+						</a>
+					</div>
+				</div>
+			</div>
+
+
+			<div>
+				<h2 class="text-3xl font-bold text-gray-900 mb-8">Popular Topics</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					<a href="/documentation/payroll-processing" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<h3 class="text-lg font-semibold mb-2">Payroll Processing</h3>
+						<p class="text-gray-600">Learn about our payroll processing system and features.</p>
+					</a>
+
+					<a href="/documentation/tax-calculations" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<h3 class="text-lg font-semibold mb-2">Tax Calculations</h3>
+						<p class="text-gray-600">Understanding how our tax engine works.</p>
+					</a>
+
+					<a href="/documentation/compliance" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<h3 class="text-lg font-semibold mb-2">Compliance</h3>
+						<p class="text-gray-600">Stay compliant with our built-in compliance tools.</p>
+					</a>
+
+					<a href="/documentation/reporting" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<h3 class="text-lg font-semibold mb-2">Reporting</h3>
+						<p class="text-gray-600">Generate and customize payroll reports.</p>
+					</a>
+
+					<a href="/documentation/employee-portal" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<h3 class="text-lg font-semibold mb-2">Employee Portal</h3>
+						<p class="text-gray-600">Set up and manage the employee self-service portal.</p>
+					</a>
+
+					<a href="/documentation/security" class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+						<h3 class="text-lg font-semibold mb-2">Security</h3>
+						<p class="text-gray-600">Learn about our security features and best practices.</p>
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</main>
+</Layout>

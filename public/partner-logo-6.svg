@@ -1,0 +1,21 @@
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Company Logo: SyncWave -->
+  <rect width="180" height="60" fill="none" />
+  
+  <!-- Wave Symbol -->
+  <g transform="translate(38, 30)">
+    <!-- Wave Pattern -->
+    <path d="M0,0 Q5,-10 10,0 T20,0 T30,0" stroke="#7928CA" stroke-width="3" fill="none" />
+    <path d="M0,0 Q5,10 10,0 T20,0 T30,0" stroke="#0070F3" stroke-width="3" fill="none" />
+    
+    <!-- Sync Circle -->
+    <circle cx="15" cy="0" r="4" fill="white" stroke="#4A5568" stroke-width="1.5" />
+    <path d="M13,-2 L17,2 M13,2 L17,-2" stroke="#4A5568" stroke-width="1.5" />
+  </g>
+  
+  <!-- Company Text -->
+  <text x="90" y="32" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4A5568">SyncWave</text>
+  
+  <!-- Tagline -->
+  <text x="90" y="42" font-family="Arial, sans-serif" font-size="7" fill="#718096" text-anchor="middle">REAL-TIME SOLUTIONS</text>
+</svg>

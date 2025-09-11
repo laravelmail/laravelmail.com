@@ -1,0 +1,196 @@
+---
+const faqs = [
+    {
+        question: "How quickly can I get my leads?",
+        answer:
+            "Most lists are delivered within 2–5 business days, depending on the volume and segmentation you request."
+    },
+    {
+        question: "Are the leads verified?",
+        answer:
+            "Yes. Every lead is verified through multiple sources, including LinkedIn and business directories, to ensure high accuracy and low bounce rates."
+    },
+    {
+        question: "What industries do you cover?",
+        answer:
+            "We work across 20+ industries — including SaaS, retail, e-commerce, and professional services. You can request a tailored segment for your target audience."
+    },
+    {
+        question: "Can I see a sample list before buying?",
+        answer:
+            "Absolutely. We provide a free sample list so you can check data quality and ensure it matches your ICP (ideal customer profile). <a href='https://leadscaptain.com/book-demo' class='text-purple-600 hover:underline'>Request your sample</a> to get started."
+    },
+    {
+        question: "How does pricing work?",
+        answer:
+            "Pricing depends on the number of leads, industry focus, and level of verification required. <a href='https://leadscaptain.com/pricing' class='text-purple-600 hover:underline'>View our pricing page</a> or <a href='https://leadscaptain.com/contact' class='text-purple-600 hover:underline'>contact us</a> for a custom quote."
+    },
+    {
+        question: "What kind of support do you provide?",
+        answer:
+            "Our team offers dedicated onboarding support, quick responses via email or chat, and ongoing assistance to help you maximize ROI from your lead lists. <a href='https://leadscaptain.com/contact' class='text-purple-600 hover:underline'>Get in touch</a> with our support team."
+    },
+    {
+        question: "How do you ensure data privacy and compliance?",
+        answer:
+            "We comply with GDPR, CCPA, and other privacy regulations. All data is sourced ethically and we provide opt-out options for leads. Your data is never shared with third parties without explicit consent."
+    },
+    {
+        question: "Can I request custom lead criteria?",
+        answer:
+            "Yes, we specialize in custom lead generation. You can specify job titles, company sizes, geographic locations, technologies used, and other criteria to match your ideal customer profile."
+    },
+    {
+        question: "What data sources do you use?",
+        answer:
+            "We aggregate data from multiple verified sources including LinkedIn, business directories, company websites, industry databases, and public records to ensure comprehensive and accurate lead information."
+    },
+    {
+        question: "Do you offer refunds if I'm not satisfied?",
+        answer:
+            "We stand behind our lead quality with a satisfaction guarantee. If you're not happy with the first batch, we'll provide a full refund or replacement leads at no additional cost."
+    },
+    {
+        question: "How fresh are the leads you provide?",
+        answer:
+            "Our leads are refreshed regularly, with most data being less than 90 days old. We prioritize recent contact information and company updates to ensure maximum relevance."
+    },
+    {
+        question: "Can you integrate with my CRM system?",
+        answer:
+            "Yes, we can deliver leads in various formats including CSV, Excel, or integrate directly with popular CRM systems like Salesforce, HubSpot, and Pipedrive through API connections."
+    }
+];
+
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+        }
+    }))
+};
+---
+
+<section class="py-20 bg-gray-50 relative overflow-hidden">
+    <!-- Subtle background pattern -->
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+                Frequently Asked Questions
+            </h2>
+            <p class="mt-4 text-xl text-gray-600">
+                Everything you need to know about Laravel Mail and our self hosted marketing platform and B2B lead
+                lists.
+            </p>
+        </div>
+
+        <!-- FAQ Items -->
+        <div class="mt-12 max-w-3xl mx-auto">
+            {faqs.map((faq, index) => (
+                    <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
+                        <details class="group">
+                            <summary class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-gray-50 list-none">
+                                <h3 class="text-lg font-medium text-gray-900 group-open:text-purple-600 transition-colors duration-300">
+                                    {faq.question}
+                                </h3>
+                                <div class="flex-shrink-0 ml-2">
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-5 w-5 text-gray-500 group-open:rotate-180 transition-transform duration-300"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                    >
+                                        <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="px-6 pb-6 animate-fade-in">
+                                <div class="text-gray-900 leading-relaxed text-base" set:html={faq.answer}></div>
+                            </div>
+                        </details>
+                    </div>
+            ))}
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="mt-12 text-center">
+            <p class="text-gray-600">Still have questions? We're here to help.</p>
+            <a
+                    href="/contact"
+                    class="mt-4 inline-flex items-center text-purple-600 font-medium hover:underline group"
+            >
+                Contact Us
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+</script>
+
+<style>
+    /* Hide the default marker/triangle */
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    details summary::marker {
+        display: none;
+    }
+
+    /* Smooth animation for content reveal */
+    details[open] div {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Ensure text is always black and readable */
+    details p {
+        color: #111827 !important;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    /* Enhanced hover effects */
+    details:hover summary {
+        background-color: #f9fafb;
+    }
+</style>

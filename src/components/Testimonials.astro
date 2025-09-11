@@ -1,0 +1,69 @@
+---
+
+const testimonials = [
+    {
+        quote: "Plugging Laravel Mail Platform into our CRM felt like unlocking turbo mode. In just weeks, our pipeline visibility skyrocketed, and closing cycles got way shorter.",
+        author: "Elena",
+        role: "Head of Growth at SaaSync",
+        avatar: "/testimonial-avatar-1.jpg"
+    },
+    {
+        quote: "The Laravel Mail Platform crew walked us through setup step by step. Their playbook on nurturing and converting leads has been a total game-changer.",
+        author: "David",
+        role: "Product Manager at SalesBridge",
+        avatar: "/testimonial-avatar-2.jpg"
+    },
+    {
+        quote: "We used to bleed leads in hand-offs. Now with Laravel Mail, we retain, track, and convert like pros. Feels like we built a sales engine in-house.",
+        author: "Maria",
+        role: "CEO at DealFlow",
+        avatar: "/testimonial-avatar-3.jpg"
+    }
+];
+---
+
+<section class="py-20 bg-white relative overflow-hidden">
+  <!-- Subtle background pattern with parallax effect -->
+  <div class="absolute inset-0 opacity-5 parallax" data-speed="0.15">
+    <div class="absolute inset-0 bg-repeat" style="background-image: url('/grid-pattern.svg');"></div>
+  </div>
+  
+  <div class="container-custom relative">
+    <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold" title="trusted email marketing platform">
+        Trusted by Laravel Developers.
+      </h2>
+      <p class="mt-4 text-xl text-gray-600">
+        See what our customers have to say about building with Laravel Mail.
+      </p>
+    </div>
+    
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((testimonial, index) => (
+        <div 
+          class="testimonial-card animate-on-scroll group" 
+          style={`animation-delay: ${index * 0.15}s`}
+        >
+          <div class="flex items-center mb-6">
+            <div class="relative mr-4 overflow-hidden rounded-full transition-all duration-300 group-hover:shadow-md">
+              <img 
+                src={testimonial.avatar} 
+                alt={testimonial.author} 
+                class="w-12 h-12 rounded-full transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div>
+              <h6 class="font-semibold transition-colors duration-300 group-hover:text-payflo-purple">{testimonial.author}</h6>
+              <p class="text-sm text-gray-600">{testimonial.role}</p>
+            </div>
+          </div>
+          <p class="text-gray-700 italic relative">
+            <span class="absolute -top-2 -left-1 text-4xl text-payflo-purple opacity-20 transition-all duration-300 group-hover:opacity-40 group-hover:scale-110">"</span>
+            {testimonial.quote}
+            <span class="absolute -bottom-2 -right-1 text-4xl text-payflo-purple opacity-20 transition-all duration-300 group-hover:opacity-40 group-hover:scale-110">"</span>
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

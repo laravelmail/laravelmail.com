@@ -1,0 +1,199 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import teamImage from '../assets/team-photo.jpg';
+
+const teamMembers = [
+    {
+        name: "Juan Rodriguez",
+        role: "Founder & CEO",
+        bio: "Ex-Intuit growth hacker who scaled a lead-gen SaaS from zero to acquisition. Passionate about data enrichment and revenue acceleration.",
+        avatar: "/avatar-juan.jpg"
+    },
+    {
+        name: "Sophia Chen",
+        role: "CTO",
+        bio: "Data infrastructure expert with 12+ years building high-scale APIs at Gusto & Segment. Obsessed with clean, accurate data pipelines.",
+        avatar: "/avatar-sophia.jpg"
+    },
+    {
+        name: "Marcus Johnson",
+        role: "Head of Product",
+        bio: "Ex-Salesforce PM who led CRM data enrichment tools. Now shaping the future of B2B intelligence at LeadsCaptain.",
+        avatar: "/avatar-marcus.jpg"
+    },
+    {
+        name: "Priya Patel",
+        role: "Head of Compliance & Data Integrity",
+        bio: "Former attorney specialising in GDPR, CCPA, and data governance. Ensuring LeadsCaptain delivers compliant and ethical data.",
+        avatar: "/avatar-priya.jpg"
+    }
+];
+
+const values = [
+    {
+        title: "Empower Sales Teams",
+        description: "We give sales teams and platforms the enriched data they need to close deals faster.",
+        icon: "mdi:chart-line"
+    },
+    {
+        title: "Accuracy First",
+        description: "Our enrichment engine verifies and updates leads in real-time so you can trust your pipeline.",
+        icon: "mdi:check-circle"
+    },
+    {
+        title: "Developer Friendly",
+        description: "Our APIs make it simple for devs to plug in data enrichment without hassle.",
+        icon: "mdi:code-tags"
+    },
+    {
+        title: "Build Trust",
+        description: "We respect compliance, privacy, and transparency while delivering top-tier B2B data.",
+        icon: "mdi:shield-check"
+    }
+];
+
+const timeline = [
+    {
+        year: "2019",
+        title: "The Problem",
+        description: "The team experienced firsthand the pain of inaccurate, stale lead data in fast-scaling startups."
+    },
+    {
+        year: "2020",
+        title: "Team Assembles",
+        description: "Ex-Salesforce, Segment, and Intuit engineers come together to solve B2B data enrichment."
+    },
+    {
+        year: "2021",
+        title: "LeadsCaptain Launch",
+        description: "LeadsCaptain goes live with APIs to enrich, verify, and update B2B contact + company data."
+    },
+    {
+        year: "2023",
+        title: "Rapid Adoption",
+        description: "LeadsCaptain grows to serve sales teams, SaaS platforms, and agencies across multiple markets."
+    }
+];
+---
+
+<Layout
+        title="LeadsCaptain - About Us"
+        description="Learn about LeadsCaptain's mission, values, team, and story. We're building the most accurate, compliant, and scalable lead enrichment infrastructure for the modern sales stack."
+>
+    <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                    About <span class="gradient-text">Laravel Mail</span>
+                </h1>
+                <p class="mt-6 text-xl text-gray-600">
+                    We empower teams to reimagine email marketing and lead generation with enriched, real-time, and compliant B2B data.
+                </p>
+            </div>
+
+            <div class="mt-16 animate-on-scroll">
+                <div class="relative rounded-xl overflow-hidden">
+                    <Image
+                            src={teamImage}
+                            alt="Laravel Company Team"
+                            class="w-full h-auto"
+                            width={1200}
+                            height={600}
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-leadscaptain-gray">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Our Values
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    The principles that guide everything we build.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {values.map((value, index) => (
+                        <div
+                                class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 animate-on-scroll"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+
+                            <h3 class="text-xl font-semibold">{value.title}</h3>
+                            <p class="mt-3 text-gray-600">{value.description}</p>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Our Story
+                </h2>
+            </div>
+
+            <div class="mt-12 max-w-4xl mx-auto">
+                <div class="relative">
+                    {timeline.map((event, index) => (
+                            <div class="relative pl-8 pb-12 animate-on-scroll" style={`animation-delay: ${index * 0.15}s`}>
+                                <div class="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-leadscaptain-purple to-leadscaptain-blue"></div>
+                                <div class="absolute left-[-4px] top-2 h-2 w-2 rounded-full bg-leadscaptain-purple"></div>
+                                <div class="text-sm font-semibold text-leadscaptain-purple">{event.year}</div>
+                                <h3 class="mt-2 text-xl font-semibold">{event.title}</h3>
+                                <p class="mt-2 text-gray-600">{event.description}</p>
+                            </div>
+                    ))}
+                </div>
+                <div class="mt-12 text-center">
+                    <p class="text-xl font-medium text-gray-700">
+                        From the team that scaled Salesforce data products and built high-scale APIs, we're building the
+                        enrichment infrastructure we wish we had when scaling sales teams.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-leadscaptain-gray">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Meet Our Team
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    The experts building LeadsCaptain's lead intelligence platform.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {teamMembers.map((member, index) => (
+                        <div
+                                class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center animate-on-scroll"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <div class="relative inline-block">
+                                <img
+                                        src={member.avatar}
+                                        alt={member.name}
+                                        class="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-leadscaptain-purple/20"
+                                />
+                                <div class="absolute bottom-4 right-0 h-6 w-6 rounded-full bg-green-400 border-2 border-white"></div>
+                            </div>
+                            <h3 class="text-xl font-semibold">{member.name}</h3>
+                            <p class="text-leadscaptain-purple font-medium">{member.role}</p>
+                            <p class="mt-3 text-gray-600 text-sm">{member.bio}</p>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+</Layout>

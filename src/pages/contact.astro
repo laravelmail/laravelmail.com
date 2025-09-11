@@ -1,0 +1,235 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const contactMethods = [
+    {
+        title: "Sales",
+        description: "Discuss lead generation solutions and pricing for your business growth.",
+        email: "sales@leadscaptain.com"
+    },
+    {
+        title: "Support",
+        description: "Get help with your lead generation campaigns and technical questions.",
+        email: "support@leadscaptain.com"
+    },
+    {
+        title: "Partnerships",
+        description: "Explore referral programs and strategic partnership opportunities.",
+        email: "partners@leadscaptain.com"
+    }
+];
+---
+
+<Layout
+        title="Contact Us - Leads Captain"
+        description="Get in touch with our lead generation experts for sales inquiries, campaign support, or partnership opportunities."
+>
+    <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                    Ready to <span class="gradient-text">Captain</span> Your Growth?
+                </h1>
+                <p class="mt-6 text-xl text-gray-600">
+                    Let's discuss how we can generate high-quality leads and accelerate your business growth.
+                    +1 472 212 2917
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                {contactMethods.map((method, index) => (
+                        <div
+                                class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 text-center animate-on-scroll hover:shadow-xl transition-shadow duration-300"
+                                style={`animation-delay: ${index * 0.15}s`}
+                        >
+                            <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-blue-600/10 text-blue-600 mb-6">
+                                <div class="h-8 w-8 bg-blue-600/20 rounded"></div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-gray-900">{method.title}</h3>
+                            <p class="mt-3 text-gray-600">{method.description}</p>
+                            <a href={`mailto:${method.email}`} class="mt-4 block text-blue-600 font-medium hover:text-blue-700 hover:underline transition-colors">
+                                {method.email}
+                            </a>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-50">
+        <div class="container-custom">
+            <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="p-8 md:p-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Get Your Free Lead Generation Audit</h2>
+                    <p class="text-gray-600 mb-8">Tell us about your business and we'll provide a customized lead generation strategy.</p>
+
+                    <style type="text/css" scoped>
+                        .mauticform_wrapper { max-width: 600px; margin: 10px auto; }
+                        .mauticform-innerform {}
+                        .mauticform-post-success {}
+                        .mauticform-name { font-weight: bold; font-size: 1.5em; margin-bottom: 3px; }
+                        .mauticform-description { margin-top: 2px; margin-bottom: 10px; }
+                        .mauticform-error { margin-bottom: 10px; color: red; }
+                        .mauticform-message { margin-bottom: 10px; color: green; }
+                        .mauticform-row { display: block; margin-bottom: 20px; }
+                        .mauticform-label { font-size: 1.1em; display: block; font-weight: bold; margin-bottom: 5px; }
+                        .mauticform-row.mauticform-required .mauticform-label:after { color: #e32; content: " *"; display: inline; }
+                        .mauticform-helpmessage { display: block; font-size: 0.9em; margin-bottom: 3px; }
+                        .mauticform-errormsg { display: block; color: red; margin-top: 2px; }
+                        .mauticform-selectbox, .mauticform-input, .mauticform-textarea { width: 100%; padding: 0.5em 0.5em; border: 1px solid #CCC; background: #fff; box-shadow: 0px 0px 0px #fff inset; border-radius: 4px; box-sizing: border-box; }
+                        .mauticform-checkboxgrp-row {}
+                        .mauticform-checkboxgrp-label { font-weight: normal; }
+                        .mauticform-checkboxgrp-checkbox {}
+                        .mauticform-radiogrp-row {}
+                        .mauticform-radiogrp-label { font-weight: normal; }
+                        .mauticform-radiogrp-radio {}
+                        .mauticform-button-wrapper .mauticform-button.btn-ghost, .mauticform-pagebreak-wrapper .mauticform-pagebreak.btn-ghost { color: #5d6c7c;background-color: #ffffff;border-color: #dddddd;}
+                        .mauticform-button-wrapper .mauticform-button, .mauticform-pagebreak-wrapper .mauticform-pagebreak { display: inline-block;margin-bottom: 0;font-weight: 600;text-align: center;vertical-align: middle;cursor: pointer;background-image: none;border: 1px solid transparent;white-space: nowrap;padding: 6px 12px;font-size: 13px;line-height: 1.3856;border-radius: 3px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+                        .mauticform-button-wrapper .mauticform-button.btn-ghost[disabled], .mauticform-pagebreak-wrapper .mauticform-pagebreak.btn-ghost[disabled] { background-color: #ffffff; border-color: #dddddd; opacity: 0.75; cursor: not-allowed; }
+                        .mauticform-pagebreak-wrapper .mauticform-button-wrapper {  display: inline; }
+
+
+                        .autoComplete_wrapper {position: relative;}
+                        .autoComplete_wrapper > input::placeholder {transition: all 0.3s ease;}
+                        .autoComplete_wrapper > ul {position: absolute;max-height: 226px;overflow-y: scroll;top: 100%;left: 0;right: 0;padding: 0;margin: 0.5rem 0 0 0;border-radius: 4px;background-color: #fff;border: 1px solid rgba(33, 33, 33, 0.1);z-index: 1000;outline: none;}
+                        .autoComplete_wrapper > ul > li {padding: 10px 20px;list-style: none;text-align: left;font-size: 16px;color: #212121;transition: all 0.1s ease-in-out;border-radius: 3px;background-color: rgba(255, 255, 255, 1);white-space: nowrap;overflow: hidden;text-overflow: ellipsis;transition: all 0.2s ease;}
+                        .autoComplete_wrapper > ul > li > span {float: right;}
+                        .autoComplete_wrapper > ul > li::selection {color: rgba(#ffffff, 0);background-color: rgba(#ffffff, 0);}
+                        .autoComplete_wrapper > ul > li:hover {cursor: pointer;background-color: rgba(123, 123, 123, 0.1);}
+                        .autoComplete_wrapper > ul > li mark {background-color: transparent;font-weight: bold;}
+                        .autoComplete_wrapper > ul > li mark::selection {background-color: rgba(#ffffff, 0);}
+                        .autoComplete_wrapper > ul > li[aria-selected="true"] {background-color: rgba(123, 123, 123, 0.1);}
+                        @media only screen and (max-width: 600px) {
+                            .autoComplete_wrapper > input {width: 18rem;}
+                        }
+                    </style>
+
+                    <style type="text/css" scoped>
+                        .mauticform-field-hidden { display:none }
+                    </style>
+                    <div id="mauticform_wrapper_contactleadscaptain" class="mauticform_wrapper">
+                        <form autocomplete="true" role="form" method="post" action="https://marketing.laravelcompany.com/form/submit?formId=1" id="mauticform_contactleadscaptain" data-mautic-form="contactleadscaptain" enctype="multipart/form-data"><div class="mauticform-error" id="mauticform_contactleadscaptain_error"></div>
+                            <div class="mauticform-message" id="mauticform_contactleadscaptain_message"></div><div class="mauticform-innerform">
+                                <div class="mauticform-page-wrapper mauticform-page-1" data-mautic-form-page="1">
+
+                                    <div id="mauticform_contactleadscaptain_full_name" class="mauticform-row mauticform-text mauticform-field-1 mauticform-required" data-validate="full_name" data-validation-type="text">
+                                        <label id="mauticform_label_contactleadscaptain_full_name" for="mauticform_input_contactleadscaptain_full_name" class="mauticform-label">Full Name *</label>
+
+                                        <input type="text" name="mauticform[full_name]" value="" id="mauticform_input_contactleadscaptain_full_name" class="mauticform-input">
+
+                                        <span class="mauticform-errormsg" style="display:none;">Please provide full name</span>
+                                    </div>
+
+                                    <div id="mauticform_contactleadscaptain_business_email" class="mauticform-row mauticform-text mauticform-field-2 mauticform-required" data-validate="business_email" data-validation-type="text">
+                                        <label id="mauticform_label_contactleadscaptain_business_email" for="mauticform_input_contactleadscaptain_business_email" class="mauticform-label">Business Email *</label>
+
+                                        <input type="text" name="mauticform[business_email]" value="" id="mauticform_input_contactleadscaptain_business_email" class="mauticform-input">
+
+                                        <span class="mauticform-errormsg" style="display:none;">Please provide a valid email</span>
+                                    </div>
+
+
+
+                                    <div id="mauticform_contactleadscaptain_tell_us_about_your_lead_g" class="mauticform-row mauticform-text mauticform-field-3">
+                                        <label id="mauticform_label_contactleadscaptain_tell_us_about_your_lead_g" for="mauticform_input_contactleadscaptain_tell_us_about_your_lead_g" class="mauticform-label">Tell us about your lead generation goals *</label>
+
+                                        <textarea name="mauticform[tell_us_about_your_lead_g]" id="mauticform_input_contactleadscaptain_tell_us_about_your_lead_g" class="mauticform-textarea"></textarea>
+
+                                        <span class="mauticform-errormsg" style="display:none;"></span>
+                                    </div>
+
+
+
+
+
+                                    <div id="mauticform_contactleadscaptain_submit" class="mauticform-row mauticform-button-wrapper mauticform-field-4">
+                                        <button class="btn btn-ghost mauticform-button" name="mauticform[submit]" value="1" id="mauticform_input_contactleadscaptain_submit" type="submit">Contact</button>
+                                    </div>
+                                </div></div><input type="hidden" name="mauticform[formId]" id="mauticform_contactleadscaptain_id" value="1">
+                            <input type="hidden" name="mauticform[return]" id="mauticform_contactleadscaptain_return" value="">
+                            <input type="hidden" name="mauticform[formName]" id="mauticform_contactleadscaptain_name" value="contactleadscaptain">
+
+                        </form>
+                    </div>
+
+                    <script type="text/javascript">
+                        /** This section is only needed once per page if manually copying **/
+                        if (typeof MauticSDKLoaded == 'undefined') {
+                            var MauticSDKLoaded = true;
+                            var head            = document.getElementsByTagName('head')[0];
+                            var script          = document.createElement('script');
+                            script.type         = 'text/javascript';
+                            script.src          = 'https://marketing.laravelcompany.com/media/js/mautic-form.js?v954aeb46';
+                            script.onload       = function() {
+                                MauticSDK.onLoad();
+                            };
+                            head.appendChild(script);
+                            var MauticDomain = 'https://marketing.laravelcompany.com';
+                            var MauticLang   = {
+                                'submittingMessage': "Please wait..."
+                            }
+                        }else if (typeof MauticSDK != 'undefined') {
+                            MauticSDK.onLoad();
+                        }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our Office</h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Leads Captain headquarters - where lead generation strategies come to life.
+                </p>
+                <address class="mt-6 not-italic text-gray-600">
+                    The Workspace
+                    7 High Pavement
+                    SS14 1EA<br>
+                    United Kingdom
+                </address>
+                <div class="mt-6 flex justify-center space-x-6 text-gray-600">
+                    <div class="flex items-center">
+                        <div class="h-5 w-5 mr-2 bg-blue-600 rounded"></div>
+                        <span>+1 (472) 212-2917</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="h-5 w-5 mr-2 bg-blue-600 rounded"></div>
+                        <span>Mon-Fri 9AM-6PM GMT</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 h-96 rounded-xl overflow-hidden animate-on-scroll shadow-lg">
+                <!-- Placeholder for map iframe -->
+                <div class="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="h-16 w-16 bg-blue-600 rounded-full mx-auto mb-4"></div>
+                        <p class="text-gray-600 font-medium">Basildon, Workspace Office Location</p>
+                        <p class="text-gray-500 text-sm">Interactive map will be embedded here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-blue-600">
+        <div class="container-custom">
+            <div class="text-center text-white">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Ready to Generate More Leads?</h2>
+                <p class="text-xl text-blue-100 mb-8">Join 500+ businesses that trust Leads Captain to drive their growth.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="mailto:sales@leadscaptain.com" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors">
+                        Start Your Free Consultation
+                    </a>
+                    <a href="tel:+441268XXXXXX" class="border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-blue-600 transition-colors">
+                        Call +1 (472) 212-2917
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

@@ -1,0 +1,27 @@
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Company Logo: PlatformX -->
+  <rect width="180" height="60" fill="none" />
+  
+  <!-- Platform Symbol -->
+  <g transform="translate(40, 30)">
+    <!-- Base Platform -->
+    <rect x="-15" y="5" width="30" height="5" rx="2" fill="#0070F3" />
+    
+    <!-- Columns -->
+    <rect x="-12" y="-10" width="4" height="15" rx="1" fill="#0070F3" />
+    <rect x="8" y="-10" width="4" height="15" rx="1" fill="#0070F3" />
+    
+    <!-- Top -->
+    <rect x="-15" y="-15" width="30" height="5" rx="2" fill="#0070F3" />
+    
+    <!-- X Element -->
+    <path d="M-2,-5 L2,5 M-2,5 L2,-5" stroke="#FF4D4D" stroke-width="2" stroke-linecap="round" />
+  </g>
+  
+  <!-- Company Text -->
+  <text x="72" y="29" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#4A5568">PLATFORM</text>
+  <text x="140" y="29" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF4D4D">X</text>
+  
+  <!-- Tagline -->
+  <text x="90" y="40" font-family="Arial, sans-serif" font-size="8" fill="#718096" text-anchor="middle">BUILD • SCALE • THRIVE</text>
+</svg>

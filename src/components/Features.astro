@@ -1,0 +1,352 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import featureImage1 from '../assets/feature-1.svg';
+import featureImage2 from '../assets/feature-2.svg';
+import featureImage3 from '../assets/feature-3.svg';
+
+const features = [
+    {
+        title: "Technology & SaaS Leads",
+        description:
+            "Connect with CTOs, developers, and tech decision-makers at startups and enterprises. Perfect for software companies, app developers, and cloud service providers.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Software Development", "Cloud Computing", "AI/ML", "Cybersecurity"]
+    },
+    {
+        title: "Healthcare & Medical Leads",
+        description:
+            "Reach hospital administrators, doctors, and healthcare executives. Ideal for medical equipment suppliers, pharmaceutical companies, and healthcare IT solutions.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Hospitals", "Clinics", "Pharmaceuticals", "Medical Devices"]
+    },
+    {
+        title: "Financial Services Leads",
+        description:
+            "Target CFOs, investment bankers, and financial advisors at banks and fintech companies. Perfect for financial software, payment processors, and wealth management firms.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Banking", "Fintech", "Investment Firms", "Insurance"]
+    },
+    {
+        title: "Real Estate & Property Leads",
+        description:
+            "Connect with property developers, real estate agents, and facility managers. Great for construction companies, property management software, and real estate services.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Property Development", "Real Estate Agencies", "Construction", "Architecture"]
+    },
+    {
+        title: "Manufacturing & Industrial Leads",
+        description:
+            "Reach plant managers, procurement directors, and supply chain executives. Ideal for industrial equipment suppliers, manufacturing software, and B2B services.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Manufacturing", "Industrial Equipment", "Supply Chain", "Quality Control"]
+    },
+    {
+        title: "Retail & E-commerce Leads",
+        description:
+            "Target store owners, retail buyers, and e-commerce managers. Perfect for retail software, POS systems, inventory management, and online marketplace solutions.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Retail Stores", "E-commerce", "Online Marketplaces", "POS Systems"]
+    },
+    {
+        title: "Education & Training Leads",
+        description:
+            "Connect with school administrators, training directors, and education consultants. Great for educational software, training programs, and learning management systems.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["K-12 Schools", "Universities", "Corporate Training", "E-learning"]
+    },
+    {
+        title: "Professional Services Leads",
+        description:
+            "Reach lawyers, accountants, consultants, and service professionals. Perfect for legal software, accounting tools, and professional service automation.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Legal Services", "Accounting", "Consulting", "Marketing Agencies"]
+    },
+    {
+        title: "Hospitality & Tourism Leads",
+        description:
+            "Target hotel managers, restaurant owners, and tourism operators. Ideal for hospitality software, booking systems, and tourism services.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Hotels", "Restaurants", "Tourism", "Event Planning"]
+    },
+    {
+        title: "Construction & Engineering Leads",
+        description:
+            "Connect with project managers, engineers, and construction executives. Perfect for construction software, building materials, and engineering services.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Construction", "Engineering", "Building Materials", "Project Management"]
+    },
+    {
+        title: "Transportation & Logistics Leads",
+        description:
+            "Reach fleet managers, logistics directors, and transportation executives. Ideal for logistics software, shipping companies, and transportation services.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Shipping", "Logistics", "Fleet Management", "Transportation"]
+    },
+    {
+        title: "Energy & Utilities Leads",
+        description:
+            "Target energy executives, utility managers, and sustainability directors. Perfect for renewable energy, utility software, and environmental services.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Renewable Energy", "Utilities", "Oil & Gas", "Environmental Services"]
+    },
+    {
+        title: "Marketing & Advertising Leads",
+        description:
+            "Connect with marketing directors, agency owners, and brand managers. Great for marketing software, advertising agencies, and digital marketing services.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Digital Marketing", "Advertising Agencies", "Brand Management", "SEO Services"]
+    },
+    {
+        title: "Human Resources & Staffing Leads",
+        description:
+            "Reach HR directors, recruiters, and staffing executives. Perfect for HR software, recruitment agencies, and talent management solutions.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["HR Software", "Recruitment", "Staffing Agencies", "Talent Management"]
+    },
+    {
+        title: "Agriculture & Farming Leads",
+        description:
+            "Target farm owners, agricultural executives, and food producers. Ideal for farming equipment, agricultural software, and food processing companies.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Farming", "Agricultural Equipment", "Food Processing", "AgriTech"]
+    },
+    {
+        title: "Government & Public Sector Leads",
+        description:
+            "Connect with government officials, public sector executives, and procurement officers. Perfect for government contractors and public sector software.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Government", "Public Sector", "Procurement", "Policy Making"]
+    },
+    {
+        title: "Non-Profit & NGO Leads",
+        description:
+            "Reach executive directors, program managers, and development officers. Great for non-profit software, fundraising platforms, and social impact organizations.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Non-Profit", "NGOs", "Fundraising", "Social Impact"]
+    },
+    {
+        title: "Media & Entertainment Leads",
+        description:
+            "Target media executives, content creators, and entertainment professionals. Perfect for media software, production companies, and digital content platforms.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Media", "Entertainment", "Content Creation", "Digital Publishing"]
+    },
+    {
+        title: "Automotive & Mobility Leads",
+        description:
+            "Connect with automotive executives, dealership owners, and mobility service providers. Ideal for automotive software, mobility solutions, and vehicle services.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Automotive", "Dealerships", "Mobility Services", "Vehicle Technology"]
+    },
+    {
+        title: "Food & Beverage Leads",
+        description:
+            "Reach restaurant owners, food manufacturers, and beverage executives. Perfect for food service software, beverage distribution, and food processing.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Restaurants", "Food Manufacturing", "Beverage", "Food Service"]
+    },
+    {
+        title: "Telecommunications Leads",
+        description:
+            "Target telecom executives, network operators, and communication service providers. Great for telecom software, network infrastructure, and communication services.",
+        icon: "ph:lightning-duotone",
+        image: featureImage3,
+        industries: ["Telecommunications", "Network Infrastructure", "Communication Services", "VoIP"]
+    },
+    {
+        title: "Insurance & Risk Management Leads",
+        description:
+            "Connect with insurance executives, risk managers, and claims processors. Perfect for insurance software, risk assessment tools, and insurance services.",
+        icon: "ph:check-circle-duotone",
+        image: featureImage1,
+        industries: ["Insurance", "Risk Management", "Claims Processing", "Underwriting"]
+    },
+    {
+        title: "Legal & Compliance Leads",
+        description:
+            "Reach law firm partners, compliance officers, and legal executives. Ideal for legal software, compliance tools, and legal service providers.",
+        icon: "ph:globe-duotone",
+        image: featureImage2,
+        industries: ["Law Firms", "Compliance", "Legal Services", "Regulatory Affairs"]
+    }
+];
+---
+
+<!-- Features Section Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "B2B Lead Generation Services",
+    "description": "Professional B2B lead generation services providing verified, curated leads across multiple industries",
+    "provider": {
+        "@type": "Organization",
+        "name": "LeadsCaptain",
+        "url": "https://leadscaptain.com"
+    },
+    "serviceType": "Lead Generation",
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "B2B Lead Services",
+        "itemListElement": [
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Curated & Verified Leads",
+                    "description": "Handpicked and verified business contacts from LinkedIn and professional directories"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Multi-Industry Coverage",
+                    "description": "Comprehensive lead generation across retail, SaaS, e-commerce, and professional services"
+                }
+            },
+            {
+                "@type": "Offer",
+                "itemOffered": {
+                    "@type": "Service",
+                    "name": "Fast & Scalable Delivery",
+                    "description": "Rapid delivery of 500 to 50,000+ leads with guaranteed quality and scalability"
+                }
+            }
+        ]
+    }
+}
+</script>
+
+<section class="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden" itemscope itemtype="https://schema.org/WebPageElement">
+    <!-- Background -->
+    <div class="absolute inset-0 opacity-5 parallax" data-speed="0.1">
+        <div
+                class="absolute inset-0 bg-repeat"
+                style="background-image: url('/grid-pattern.svg');"
+        ></div>
+    </div>
+
+    <div class="container-custom relative">
+        <!-- Header -->
+        <header class="text-center max-w-3xl mx-auto" itemscope itemtype="https://schema.org/WebPageElement">
+            <h2
+                    class="animate-on-scroll delay-0 text-3xl md:text-4xl font-bold leading-tight"
+                    itemprop="headline"
+            >
+                Everything you need to
+                <span class="gradient-text">scale with B2B leads</span>
+            </h2>
+            <p
+                    class="animate-on-scroll delay-1 mt-4 text-xl text-gray-600 leading-relaxed"
+                    itemprop="description"
+            >
+                Leadscaptain delivers verified, segmented, and ready-to-use contacts across
+                <span class="font-medium text-gray-800">20+ industries</span>.
+                <span class="font-medium text-gray-800"
+                >No scraping headaches, no guesswork — just real opportunities to close
+          deals faster.</span
+                >
+            </p>
+        </header>
+
+        <!-- Features -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+                    <article
+                            class={`feature-card animate-on-scroll delay-${index + 2} group bg-white p-6 rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+                            itemScope
+                            itemType="https://schema.org/Service"
+                    >
+                        <div
+                                class="h-12 w-12 rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center text-white mb-6 transition-transform duration-300 group-hover:scale-110"
+                        >
+                            <Icon
+                                    name={feature.icon}
+                                    class="h-6 w-6 transition-transform duration-300 group-hover:rotate-12"
+                            />
+                        </div>
+                        <h3
+                                class="text-xl font-semibold transition-colors duration-300 group-hover:text-purple-600"
+                                itemProp="name"
+                        >
+                            {feature.title}
+                        </h3>
+                        <p class="mt-3 text-gray-600 leading-relaxed text-sm" itemProp="description">
+                            {feature.description}
+                        </p>
+
+                        <!-- Industry Tags -->
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            {feature.industries.slice(0, 3).map(industry => (
+                                <span class="inline-block px-2 py-1 text-xs font-medium bg-purple-100 text-purple-700 rounded-full">
+                                    {industry}
+                                </span>
+                            ))}
+                            {feature.industries.length > 3 && (
+                                <span class="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-full">
+                                    +{feature.industries.length - 3} more
+                                </span>
+                            )}
+                        </div>
+
+                        <div class="mt-6 hover-zoom rounded-lg overflow-hidden">
+                            <Image
+                                    src={feature.image}
+                                    alt={`LeadsCaptain ${feature.title} - Professional B2B lead generation service`}
+                                    title={feature.title}
+                                    class="w-full h-auto rounded-lg transition-all duration-500"
+                                    width={300}
+                                    height={200}
+                            />
+                        </div>
+                    </article>
+            ))}
+        </div>
+
+        <!-- KPI Row -->
+        <div
+                class="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center animate-on-scroll delay-5"
+                itemscope
+                itemtype="https://schema.org/Organization"
+        >
+            <div class="flex flex-col" itemprop="knowsAbout" itemscope itemtype="https://schema.org/QuantitativeValue">
+                <span class="text-3xl md:text-4xl font-bold text-purple-600" itemprop="value">50K+</span>
+                <span class="mt-2 text-gray-600" itemprop="unitText">Verified Leads</span>
+                <meta itemprop="description" content="Over 50,000 verified business leads in our database" />
+            </div>
+            <div class="flex flex-col" itemprop="knowsAbout" itemscope itemtype="https://schema.org/QuantitativeValue">
+                <span class="text-3xl md:text-4xl font-bold text-purple-600" itemprop="value">20+</span>
+                <span class="mt-2 text-gray-600" itemprop="unitText">Industries Covered</span>
+                <meta itemprop="description" content="Lead generation services across 20+ major industries" />
+            </div>
+            <div class="flex flex-col" itemprop="knowsAbout" itemscope itemtype="https://schema.org/QuantitativeValue">
+                <span class="text-3xl md:text-4xl font-bold text-purple-600" itemprop="value">95%</span>
+                <span class="mt-2 text-gray-600" itemprop="unitText">Email Deliverability</span>
+                <meta itemprop="description" content="95% email deliverability rate for all lead lists" />
+            </div>
+        </div>
+    </div>
+</section>

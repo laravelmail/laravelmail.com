@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="API Reference | LeadsCaptain">
+    <main class="py-20 px-6 sm:px-8 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">API Reference</h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Complete reference documentation for the LeadsCaptain API.
+                </p>
+            </div>
+
+            <!-- API Overview -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">API Overview</h2>
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Base URL</h3>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <code class="text-leadscaptain-blue">https://api.leadscaptain.com/v1</code>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4">Authentication</h3>
+                        <p class="text-gray-600 mb-4">All API requests require authentication using an API key in the header:</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <code class="text-leadscaptain-blue">Authorization: Bearer YOUR_API_KEY</code>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Response Format</h3>
+                        <p class="text-gray-600 mb-4">All responses are returned in JSON format with the following structure:</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+							<pre class="text-sm text-leadscaptain-blue">{`
+{
+  "status": "success",
+  "data": { },
+  "meta": { }
+}`}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Endpoints -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Endpoints</h2>
+
+                <!-- People -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">People</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">GET</span>
+                                <code class="text-gray-900">/people</code>
+                            </div>
+                            <p class="text-gray-600 mb-4">List enriched people profiles with metadata (name, company, contact, socials).</p>
+                            <a href="/documentation/api-reference/people#list" class="text-leadscaptain-blue hover:text-leadscaptain-purple font-medium">
+                                View details →
+                            </a>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">POST</span>
+                                <code class="text-gray-900">/people/search</code>
+                            </div>
+                            <p class="text-gray-600 mb-4">Search people by name, email, company, or LinkedIn.</p>
+                            <a href="/documentation/api-reference/people#search" class="text-leadscaptain-blue hover:text-leadscaptain-purple font-medium">
+                                View details →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Companies -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Companies</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">GET</span>
+                                <code class="text-gray-900">/companies</code>
+                            </div>
+                            <p class="text-gray-600 mb-4">List companies with enriched firmographic data.</p>
+                            <a href="/documentation/api-reference/companies#list" class="text-leadscaptain-blue hover:text-leadscaptain-purple font-medium">
+                                View details →
+                            </a>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">POST</span>
+                                <code class="text-gray-900">/companies/search</code>
+                            </div>
+                            <p class="text-gray-600 mb-4">Search companies by domain, name, or LinkedIn profile.</p>
+                            <a href="/documentation/api-reference/companies#search" class="text-leadscaptain-blue hover:text-leadscaptain-purple font-medium">
+                                View details →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leads -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Leads</h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">POST</span>
+                                <code class="text-gray-900">/leads/enrich</code>
+                            </div>
+                            <p class="text-gray-600 mb-4">Submit partial lead info (email, domain, LinkedIn) and enrich with full profile.</p>
+                            <a href="/documentation/api-reference/leads#enrich" class="text-leadscaptain-blue hover:text-leadscaptain-purple font-medium">
+                                View details →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rate Limits -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Rate Limits</h2>
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                    <p class="text-gray-600 mb-6">Our API implements rate limiting to ensure stability and fair usage:</p>
+                    <ul class="list-disc list-inside space-y-4 text-gray-600">
+                        <li>200 requests per minute per API key</li>
+                        <li>5000 requests per hour per API key</li>
+                        <li>50,000 requests per day per API key</li>
+                    </ul>
+                    <div class="mt-6">
+                        <p class="text-gray-600">Rate limit information is included in the response headers:</p>
+                        <div class="bg-gray-50 p-4 rounded-lg mt-4">
+							<pre class="text-sm text-leadscaptain-blue">{`
+X-RateLimit-Limit: 200
+X-RateLimit-Remaining: 180
+X-RateLimit-Reset: 1725097600`}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Handling -->
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">Error Handling</h2>
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                    <p class="text-gray-600 mb-6">The API uses conventional HTTP response codes to indicate the success or failure of an API request:</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <span class="text-green-600 font-semibold">2xx</span>
+                            <p class="text-gray-600">Success response indicating the request was processed successfully</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="text-yellow-600 font-semibold">4xx</span>
+                            <p class="text-gray-600">Client error response indicating an issue with the request</p>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <span class="text-red-600 font-semibold">5xx</span>
+                            <p class="text-gray-600">Server error response indicating an issue on our end</p>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <p class="text-gray-600 mb-4">Error Response Format:</p>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+							<pre class="text-sm text-leadscaptain-blue">{`
+{
+  "status": "error",
+  "error": {
+    "code": "invalid_request",
+    "message": "The request was invalid",
+    "details": { }
+  }
+}`}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

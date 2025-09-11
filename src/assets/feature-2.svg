@@ -1,0 +1,46 @@
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="200" rx="10" fill="#f4f7fa" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="270" cy="30" r="20" fill="#7928CA" opacity="0.1" />
+  <circle cx="30" cy="170" r="25" fill="#0070F3" opacity="0.1" />
+  
+  <!-- API Gateway Concept -->
+  <g transform="translate(90, 50)">
+    <!-- API Gateway Box -->
+    <rect x="0" y="0" width="120" height="60" rx="8" fill="#7928CA" />
+    <text x="60" y="35" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">API Gateway</text>
+    
+    <!-- Lightning Icon -->
+    <path d="M75 20 L70 30 L78 30 L65 45 L70 35 L62 35 Z" fill="white" />
+  </g>
+  
+  <!-- Connected Services -->
+  <g transform="translate(50, 140)">
+    <rect x="0" y="0" width="40" height="30" rx="5" fill="#0070F3" />
+    <text x="20" y="19" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Data</text>
+  </g>
+  
+  <g transform="translate(130, 140)">
+    <rect x="0" y="0" width="40" height="30" rx="5" fill="#0070F3" />
+    <text x="20" y="19" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Auth</text>
+  </g>
+  
+  <g transform="translate(210, 140)">
+    <rect x="0" y="0" width="40" height="30" rx="5" fill="#0070F3" />
+    <text x="20" y="19" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Tasks</text>
+  </g>
+  
+  <!-- Connection Lines -->
+  <line x1="90" y1="110" x2="70" y2="140" stroke="#A0AEC0" stroke-width="2" />
+  <line x1="150" y1="110" x2="150" y2="140" stroke="#A0AEC0" stroke-width="2" />
+  <line x1="210" y1="110" x2="230" y2="140" stroke="#A0AEC0" stroke-width="2" />
+  
+  <!-- Code Element Display -->
+  <g transform="translate(45, 25)">
+    <rect x="0" y="0" width="70" height="40" rx="5" fill="white" stroke="#E2E8F0" stroke-width="1.5" />
+    <text x="10" y="15" font-family="monospace" font-size="8" fill="#4A5568">GET /api</text>
+    <text x="10" y="30" font-family="monospace" font-size="8" fill="#7928CA">{ data }</text>
+  </g>
+</svg>

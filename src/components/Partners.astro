@@ -1,0 +1,36 @@
+---
+const partners = [
+  { name: "Acme Corp", logo: "/partner-logo-1.svg" },
+  { name: "TechFlow", logo: "/partner-logo-2.svg" },
+  { name: "Quantum", logo: "/partner-logo-3.svg" },
+  { name: "Innovate", logo: "/partner-logo-4.svg" },
+  { name: "PlatformX", logo: "/partner-logo-5.svg" },
+  { name: "SyncWave", logo: "/partner-logo-6.svg" },
+];
+---
+
+<section class="py-16 bg-white relative overflow-hidden">
+  <div class="container-custom">
+    <div class="text-center">
+      <h3 class="animate-on-scroll delay-0 text-gray-500 font-medium tracking-wider">
+        TRUSTED BY LEADING COMPANIES
+      </h3>
+    </div>
+    
+    <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center justify-items-center">
+      {partners.map((partner, index) => (
+        <div 
+          class={`group cursor-pointer animate-on-scroll delay-${index}`}
+        >
+          <div class="relative p-4 rounded-lg transition-all duration-300 hover:bg-gray-50">
+            <img 
+              src={partner.logo} 
+              alt={partner.name} 
+              class="h-12 w-auto mx-auto grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:scale-110"
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

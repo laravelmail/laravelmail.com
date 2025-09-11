@@ -1,0 +1,18 @@
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Company Logo: Quantum -->
+  <rect width="180" height="60" fill="none" />
+  
+  <!-- Abstract Quantum Symbol -->
+  <g transform="translate(50, 30)">
+    <circle cx="0" cy="0" r="15" fill="none" stroke="#7928CA" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="10" fill="none" stroke="#7928CA" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="5" fill="#7928CA" />
+    
+    <!-- Orbits -->
+    <ellipse cx="0" cy="0" rx="18" ry="8" fill="none" stroke="#7928CA" stroke-width="1" transform="rotate(30)" />
+    <ellipse cx="0" cy="0" rx="18" ry="8" fill="none" stroke="#7928CA" stroke-width="1" transform="rotate(150)" />
+  </g>
+  
+  <!-- Company Text -->
+  <text x="90" y="35" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#7928CA">QUANTUM</text>
+</svg>

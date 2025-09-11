@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gradient-purple-blue: linear-gradient(135deg, #7928CA 0%, #0070F3 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans text-payflo-dark;
+  position: relative; /* For scroll progress bar */
+}
+
+/* ===== Basic Animations ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-play-state: paused;
+}
+
+.animate-on-scroll.animated {
+  animation-play-state: running;
+}
+
+/* Animation delays for staggered entrance */
+.delay-0 { animation-delay: 0s; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+.delay-5 { animation-delay: 0.5s; }
+
+.gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: var(--gradient-purple-blue);
+}
+
+/* ===== Button Styles & Effects ===== */
+.btn {
+  @apply inline-block px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0); /* For better performance */
+}
+
+.btn:hover,
+.btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus {
+  outline: 2px solid theme('colors.payflo-purple');
+  outline-offset: 2px;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+.btn-primary {
+  @apply bg-payflo-purple text-white hover:bg-opacity-90;
+}
+
+.btn-secondary {
+  @apply bg-white text-payflo-dark border border-gray-200 hover:bg-gray-50;
+}
+
+.container-custom {
+  @apply container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl;
+}
+
+.section {
+  @apply py-16 md:py-24;
+}
+
+/* ===== Cards and UI Elements ===== */
+.feature-card {
+  @apply bg-white rounded-xl p-6 shadow-lg transition-all duration-300;
+  transform: translateZ(0); /* For better performance */
+}
+
+.feature-card:hover,
+.feature-card:focus-within {
+  @apply shadow-xl;
+  transform: translateY(-5px);
+}
+
+/* ===== Header Scroll Effect ===== */
+header {
+  transition: all 0.3s ease;
+}
+
+header.scrolled {
+  @apply shadow-md bg-white/95;
+  backdrop-filter: blur(8px);
+}
+
+/* ===== Navigation Link Effects ===== */
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: theme('colors.payflo-purple');
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  width: 100%;
+}
+
+.active-nav-link {
+  @apply text-payflo-purple;
+}
+
+.active-nav-link::after {
+  width: 100%;
+}
+
+/* ===== Scroll Progress Bar ===== */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(to right, theme('colors.payflo-purple'), theme('colors.payflo-blue'));
+  z-index: 100;
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* ===== FAQ Accordion Animations ===== */
+.faq-item {
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-content {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-content.faq-open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.faq-summary-open {
+  @apply text-payflo-purple;
+}
+
+/* ===== Mobile Menu Animations ===== */
+#mobile-menu {
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+#mobile-menu.mobile-menu-open {
+  max-height: 500px;
+  opacity: 1;
+}
+
+#mobile-menu.mobile-menu-closing {
+  max-height: 0;
+  opacity: 0;
+}
+
+/* Hamburger to X animation */
+#menu-toggle svg {
+  transition: transform 0.3s ease;
+}
+
+#menu-toggle.menu-open svg {
+  transform: rotate(90deg);
+}
+
+/* ===== Parallax Effect ===== */
+.parallax {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ===== Image Hover Effects ===== */
+.hover-zoom {
+  overflow: hidden;
+}
+
+.hover-zoom img {
+  transition: transform 0.5s ease;
+}
+
+.hover-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* ===== Testimonial Card Effects ===== */
+.testimonial-card {
+  @apply bg-payflo-gray rounded-xl p-8 transition-all duration-300;
+}
+
+.testimonial-card:hover,
+.testimonial-card:focus-within {
+  @apply bg-white shadow-lg;
+  transform: translateY(-5px);
+}
+
+/* ===== Focus Indicators ===== */
+*:focus {
+  outline: 2px solid theme('colors.payflo-purple');
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users but keep for keyboard users */
+.js-focus-visible *:focus:not(.focus-visible) {
+  outline: none;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: theme('colors.payflo-purple');
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

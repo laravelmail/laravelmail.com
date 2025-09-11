@@ -1,0 +1,16 @@
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Company Logo: Acme Corp -->
+  <rect width="180" height="60" fill="none" />
+  
+  <!-- Logo Shape -->
+  <path d="M40,15 L60,15 L65,30 L60,45 L40,45 L35,30 Z" fill="#4A5568" />
+  
+  <!-- Inner Element -->
+  <circle cx="50" cy="30" r="7" fill="white" />
+  
+  <!-- Company Text -->
+  <text x="75" y="35" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4A5568">ACME CORP</text>
+  
+  <!-- Tagline -->
+  <text x="75" y="45" font-family="Arial, sans-serif" font-size="8" fill="#718096">INNOVATION SINCE 2005</text>
+</svg>
