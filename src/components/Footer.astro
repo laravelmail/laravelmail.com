@@ -73,8 +73,7 @@ const organizationSchema = {
                     <Image src={logoSrc} alt="LeadsCaptain Logo" width={140} height={45} class="brightness-0 invert" />
                 </a>
                 <p class="mt-4 text-gray-400 max-w-md">
-                    LeadsCaptain delivers verified, curated B2B leads across industries. We help businesses grow faster with
-                    data you can trust — handpicked from LinkedIn, Booking, and top directories.
+                    Grow your business faster with Laravel Mail, the self-hosted email marketing platform that gives you the control to reach curated B2B leads you can trust.
                 </p>
                 <div class="mt-6 flex space-x-4">
                     {socialLinks.map(social => {
@@ -123,7 +122,7 @@ const organizationSchema = {
                                         href={link.href}
                                         class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
                                         style={`transition-delay: ${index * 50}ms;`}
-                                        title={titles[link.name] || link.name}
+                                        title={link.name}
                                 >
                                     {link.name}
                                 </a>
@@ -133,22 +132,6 @@ const organizationSchema = {
                 </ul>
             </div>
 
-            <!--<div>-->
-            <!--    <h3 class="text-lg font-semibold mb-4 text-white/90">Resources</h3>-->
-            <!--    <ul class="space-y-3">-->
-            <!--        {resourceLinks.map((link, index) => (-->
-            <!--                <li class="transform transition-all duration-300 hover:translate-x-1">-->
-            <!--                    <a-->
-            <!--                            href={link.href}-->
-            <!--                            class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"-->
-            <!--                            style={`transition-delay: ${index * 50}ms;`}-->
-            <!--                    >-->
-            <!--                        {link.name}-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--        ))}-->
-            <!--    </ul>-->
-            <!--</div>-->
 
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-white/90">Legal</h3>
