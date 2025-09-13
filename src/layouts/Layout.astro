@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title = "Laravel Mail",
-  description = "Self hosted marketing platform that delivers results."
+  description = "Powerful self-hosted marketing automation platform — free, open-source, and designed to deliver real results. Access free email marketing, lead generation, and lead management tools for businesses of all sizes."
 } = Astro.props;
 
 // Preload critical assets
@@ -27,7 +27,7 @@ const faviconImg = await getImage({src: Logo, width: 32, height: 32});
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href={faviconImg.src} />
     <meta name="generator" content={Astro.generator} />
-    <title>{title} | Laravel Mail Platform</title>
+    <title>{title} | Laravel Mail</title>
     <ViewTransitions />
 
     <!-- Preload critical resources -->
@@ -43,7 +43,7 @@ const faviconImg = await getImage({src: Logo, width: 32, height: 32});
         "url": "https://laravelmail.com",
         "logo": "logo.svg",
         "sameAs": [
-          "https://www.linkedin.com/in/laravel-mail"
+          "https://www.linkedin.com/company/laravel-company-official"
         ]
       }
     </script>
