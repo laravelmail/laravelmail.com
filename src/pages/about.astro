@@ -32,60 +32,92 @@ const teamMembers = [
 
 const values = [
     {
-        title: "Empower Sales Teams",
-        description: "We give sales teams and platforms the enriched data they need to close deals faster.",
-        icon: "mdi:chart-line"
+        title: "Privacy-First Email Enrichment",
+        description: "Enrich your email marketing campaigns with accurate, compliant B2B contact data — all while respecting GDPR, CCPA, and user privacy. No third-party trackers. No data leaks.",
+        icon: "mdi:email-check-outline",
+        keywords: ["email marketing enrichment", "GDPR compliant email data", "privacy-first B2B data"]
     },
     {
-        title: "Accuracy First",
-        description: "Our enrichment engine verifies and updates leads in real-time so you can trust your pipeline.",
-        icon: "mdi:check-circle"
+        title: "Self-Hosted Data Control",
+        description: "Deploy our enrichment engine on your own infrastructure. Own your data pipeline. No vendor lock-in. Ideal for enterprises and privacy-focused teams who demand full control.",
+        icon: "mdi:server-network",
+        keywords: ["self-hosted email enrichment", "on-premise B2B data", "data sovereignty", "no vendor lock-in"]
     },
     {
-        title: "Developer Friendly",
-        description: "Our APIs make it simple for devs to plug in data enrichment without hassle.",
-        icon: "mdi:code-tags"
+        title: "Real-Time Accuracy for Sales & Marketing",
+        description: "Boost email open rates and conversion with real-time verified emails, job titles, and company data — so your sales and marketing teams target the right people, every time.",
+        icon: "mdi:chart-line",
+        keywords: ["accurate email data", "real-time lead enrichment", "sales pipeline accuracy", "email deliverability"]
     },
     {
-        title: "Build Trust",
-        description: "We respect compliance, privacy, and transparency while delivering top-tier B2B data.",
-        icon: "mdi:shield-check"
+        title: "Developer-First, Privacy-Compliant APIs",
+        description: "Plug into clean, well-documented APIs that respect data privacy by design. Seamlessly integrate into your CRM, ESP, or self-hosted martech stack — without compromising compliance.",
+        icon: "mdi:code-json",
+        keywords: ["privacy-compliant API", "email enrichment API", "self-hosted integration", "developer-friendly B2B data"]
+    },
+    {
+        title: "Trust Through Transparency & Compliance",
+        description: "We don't just say we're compliant — we build for it. Audit logs, data minimization, consent-forward architecture, and full transparency so you can trust every enriched record.",
+        icon: "mdi:shield-half-full",
+        keywords: ["GDPR compliant enrichment", "transparent data sourcing", "B2B data compliance", "ethical data enrichment"]
+    },
+    {
+        title: "Empower Your Stack — Not Our Servers",
+        description: "Whether you're building a cold email platform, CRM, or marketing automation tool — our self-hosted solution puts power back in your hands. Your rules. Your infrastructure. Your data.",
+        icon: "mdi:cloud-off-outline",
+        keywords: ["self-hosted email platform", "own your data stack", "private B2B enrichment", "infrastructure control"]
     }
 ];
 
 const timeline = [
     {
         year: "2019",
-        title: "The Problem",
-        description: "The team experienced firsthand the pain of inaccurate, stale lead data in fast-scaling startups."
+        title: "The Pain Point: Broken Data, Broken Campaigns",
+        description: "Founders watched email campaigns fail and sales pipelines stall due to stale, inaccurate B2B contact data — especially in fast-scaling startups where data hygiene was ignored.",
+        keywords: ["email marketing failure", "bad lead data", "sales pipeline stall", "startup data problems"]
     },
     {
         year: "2020",
-        title: "Team Assembles",
-        description: "Ex-Salesforce, Segment, and Intuit engineers come together to solve B2B data enrichment."
+        title: "Privacy-Conscious Builders Unite",
+        description: "Engineers from Salesforce, Segment, and Intuit — veterans of data infrastructure and compliance — joined forces to build a privacy-first, self-hostable B2B enrichment engine.",
+        keywords: ["privacy-first data team", "ex-Salesforce engineers", "GDPR-compliant enrichment", "self-hosted data solution"]
     },
     {
         year: "2021",
-        title: "LeadsCaptain Launch",
-        description: "LeadsCaptain goes live with APIs to enrich, verify, and update B2B contact + company data."
+        title: "Laravel Mail Launch: Enrich Without Compromise",
+        description: "Launched with developer-friendly APIs focused on real-time email & company data enrichment — built with privacy, accuracy, and optional self-hosting from day one.",
+        keywords: ["B2B email enrichment API", "self-hosted launch", "real-time data verification", "developer-first enrichment"]
     },
     {
         year: "2023",
-        title: "Rapid Adoption",
-        description: "LeadsCaptain grows to serve sales teams, SaaS platforms, and agencies across multiple markets."
+        title: "Trusted by Privacy-First Teams & Platforms",
+        description: "Adopted by SaaS platforms, sales teams, and marketing agencies who demand accurate, compliant, and optionally self-hosted data — without sacrificing speed or scale.",
+        keywords: ["GDPR-compliant adoption", "self-hosted B2B data", "email marketing platforms", "privacy-first SaaS tools"]
+    },
+    {
+        year: "2024",
+        title: "Self-Hosted Enterprise Tier Released",
+        description: "Introduced full on-premise/self-hosted deployment for enterprises and regulated industries — giving complete data control, audit trails, and zero external dependencies.",
+        keywords: ["on-premise B2B data", "enterprise self-hosted", "zero data dependency", "audit trail enrichment"]
+    },
+    {
+        year: "2025",
+        title: "Privacy by Design, Everywhere",
+        description: "Expanded compliance guardrails, regional data routing, and consent-aware enrichment — making LeadsCaptain the default choice for global, privacy-regulated email marketing and sales stacks.",
+        keywords: ["global data compliance", "consent-aware enrichment", "email marketing compliance", "privacy by design"]
     }
 ];
 ---
 
 <Layout
-        title="LeadsCaptain - About Us"
-        description="Learn about LeadsCaptain's mission, values, team, and story. We're building the most accurate, compliant, and scalable lead enrichment infrastructure for the modern sales stack."
+        title="About Us"
+        description="Learn about Laravel Mail's platform mission, values, team, and story. We're building the most accurate, compliant, and scalable lead enrichment infrastructure for the modern sales stack."
 >
     <section class="pt-20 pb-16 md:pt-28 md:pb-24">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-                    About <span class="gradient-text">Laravel Mail</span>
+                    About <span class="gradient-text" title="about laravel mail">Laravel Mail</span>
                 </h1>
                 <p class="mt-6 text-xl text-gray-600">
                     We empower teams to reimagine <b title="email marketing">email marketing</b> and lead generation with enriched, real-time, and compliant B2B data.
@@ -96,7 +128,7 @@ const timeline = [
                 <div class="relative rounded-xl overflow-hidden">
                     <Image
                             src={teamImage}
-                            alt="Laravel Company Team"
+                            alt="Laravel Mail Team"
                             class="w-full h-auto"
                             width={1200}
                             height={600}
@@ -109,11 +141,11 @@ const timeline = [
     <section class="py-20 bg-leadscaptain-gray">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold">
-                    Our Values
+                <h2 class="text-3xl md:text-4xl font-bold" title="Core values of Laravel Mail platform">
+                    Our Core Values at <b>Laravel Mail</b>
                 </h2>
                 <p class="mt-4 text-xl text-gray-600">
-                    The principles that guide everything we build.
+                    The guiding principles behind our self-hosted <b>Laravel Mail email marketing platform</b> — transparency, scalability, and innovation.
                 </p>
             </div>
 
@@ -123,9 +155,17 @@ const timeline = [
                                 class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 animate-on-scroll"
                                 style={`animation-delay: ${index * 0.1}s`}
                         >
-
-                            <h3 class="text-xl font-semibold">{value.title}</h3>
+                            <h3 class="text-xl font-semibold" title={value.title}>{value.title}</h3>
                             <p class="mt-3 text-gray-600">{value.description}</p>
+
+                            <!-- Keywords Display -->
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                {value.keywords.map((keyword) => (
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-leadscaptain-purple/10 text-leadscaptain-purple border border-leadscaptain-purple/20">
+                                        {keyword}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                 ))}
             </div>
@@ -135,7 +175,7 @@ const timeline = [
     <section class="py-20 bg-white">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold">
+                <h2 class="text-3xl md:text-4xl font-bold" title="the story of laravel mail">
                     Our Story
                 </h2>
             </div>
@@ -149,6 +189,15 @@ const timeline = [
                                 <div class="text-sm font-semibold text-leadscaptain-purple">{event.year}</div>
                                 <h3 class="mt-2 text-xl font-semibold">{event.title}</h3>
                                 <p class="mt-2 text-gray-600">{event.description}</p>
+
+                                <!-- Keywords Display for Timeline -->
+                                <div class="mt-3 flex flex-wrap gap-2">
+                                    {event.keywords.map((keyword) => (
+                                            <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200">
+                                            {keyword}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                     ))}
                 </div>
