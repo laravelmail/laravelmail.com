@@ -11,9 +11,10 @@ const companyLinks = [
 
 
 const legalLinks = [
-    { name: 'Privacy Policy', href: 'https://leadscaptain.com/privacy-policy' },
-    { name: 'Terms of Service', href: 'https://leadscaptain.com/terms-of-service' },
-    { name: 'Cookie Policy', href: 'https://leadscaptain.com/cookie-policy' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
+    { name: 'Terms of Service', href: '/terms-of-service' },
+    { name: 'Cookie Policy', href: '/cookie-policy' },
+    { name: 'Careers', href: '/careers' },
 ];
 
 const socialLinks = [
@@ -45,6 +46,7 @@ const organizationSchema = {
     },
     "foundingDate": "2020", // Replace with actual founding date
     "knowsAbout": [
+        "Email Marketing",
         "B2B Lead Generation",
         "Business Data",
         "Sales Leads",
@@ -88,7 +90,7 @@ const organizationSchema = {
                                     rel="noopener noreferrer"
                                     class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform"
                                     aria-label={`Follow LeadsCaptain on ${social.name}`}
-                                    title={titles[social.name] || `Follow us on ${social.name}`}
+                                    title={ `Follow us on ${social.name}`}
                             >
                                 {social.icon === 'twitter' && (
                                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
