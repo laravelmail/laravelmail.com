@@ -36,12 +36,12 @@ const organizationSchema = {
         "url": "https://laravelmail.com/contact"
     },
     "sameAs": [
-        "https://twitter.com/leadscaptain",
-        "https://linkedin.com/company/leadscaptain"
+        "https://twitter.com/thelaravelmail",
+        "https://linkedin.com/company/thelaravelmail"
     ],
     "address": {
         "@type": "PostalAddress",
-        "addressCountry": "US" // Replace with actual country
+        "addressCountry": "GB" // Replace with actual country
     },
     "foundingDate": "2020", // Replace with actual founding date
     "knowsAbout": [
@@ -69,11 +69,11 @@ const organizationSchema = {
     <div class="container-custom relative">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-gray-800">
             <div class="lg:col-span-2">
-                <a href="/" class="inline-block transition-transform duration-300 hover:scale-105" aria-label="LeadsCaptain home">
-                    <Image src={logoSrc} alt="LeadsCaptain Logo" width={140} height={45} class="brightness-0 invert" />
+                <a href="/" class="inline-block transition-transform duration-300 hover:scale-105" aria-label="Laravel Mail home">
+                    <Image src={logoSrc} alt="Laravel Mail Logo" width={140} height={45} class="brightness-0 invert" />
                 </a>
                 <p class="mt-4 text-gray-400 max-w-md">
-                    Grow your business faster with Laravel Mail, the self-hosted email marketing platform that gives you the control to reach curated B2B leads you can trust.
+                    Grow your business faster with <b>Laravel Mail</b>, the self-hosted email marketing platform that gives you the control to reach curated B2B leads you can trust.
                 </p>
                 <div class="mt-6 flex space-x-4">
                     {socialLinks.map(social => {
@@ -111,7 +111,7 @@ const organizationSchema = {
                 <ul class="space-y-3">
                     {companyLinks.map((link, index) => {
                         const titles = {
-                            'About Us': 'Learn about LeadsCaptain\'s mission and expert team',
+                            'About Us': 'Learn about Laravel Mail\'s mission and expert team',
                             'How It Works': 'Discover our proven B2B lead generation methodology',
                             'Contact': 'Connect with our sales experts for custom solutions',
                             'Blog': 'Explore industry insights and lead generation strategies'
@@ -148,7 +148,7 @@ const organizationSchema = {
                                         href={link.href}
                                         class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
                                         style={`transition-delay: ${index * 50}ms;`}
-                                        title={titles[link.name] || link.name}
+                                        title={link.name}
                                 >
                                     {link.name}
                                 </a>
@@ -166,9 +166,9 @@ const organizationSchema = {
                 <span class="hidden sm:inline text-gray-600">|</span>
                 <a href="/contact" class="hover:text-white transition-colors duration-300" title="Access our support team and customer service">Contact</a>
                 <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/privacy-policy" class="hover:text-white transition-colors duration-300" title="Understand our data protection and privacy measures">Privacy</a>
+                <a href="/privacy" class="hover:text-white transition-colors duration-300" title="Understand our data protection and privacy measures">Privacy</a>
                 <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/terms-of-service" class="hover:text-white transition-colors duration-300" title="Review our service conditions and legal framework">Terms</a>
+                <a href="/terms" class="hover:text-white transition-colors duration-300" title="Review our service conditions and legal framework">Terms</a>
             </div>
         </div>
     </div>
