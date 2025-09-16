@@ -72,91 +72,96 @@ const faqSchema = {
 ---
 
 <section class="py-20 bg-gray-50 relative overflow-hidden">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-<!-- Header -->
-<div class="text-center max-w-3xl mx-auto">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900">
-    Frequently Asked Questions
-</h2>
-<p class="mt-4 text-xl text-gray-600">
-    Everything you need to know about the Laravel Mail platform, our self-hosted marketing tools, and B2B lead management.
-</p>
-</div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <!-- Header -->
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+                Frequently Asked Questions
+            </h2>
+            <p class="mt-4 text-xl text-gray-600">
+                Everything you need to know about the Laravel Mail platform, our self-hosted marketing tools, and B2B
+                lead management.
+            </p>
+        </div>
 
-<!-- FAQ Items -->
-<div class="mt-12 max-w-3xl mx-auto">
-    {faqs.map((faq, index) => (
-            <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
-            <details class="group">
-            <summary class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-gray-50 list-none">
-            <h3 title={faq.question} class="text-lg font-medium text-gray-900 group-open:text-purple-600 transition-colors duration-300">
-            {faq.question}
-            </h3>
-            <div class="flex-shrink-0 ml-2">
-        <svg xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 text-gray-500 group-open:rotate-180 transition-transform duration-300"
-        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-        d="M19 9l-7 7-7-7"/>
-            </svg>
-            </div>
-            </summary>
-            <div class="px-6 pb-6 animate-fade-in">
-        <div class="text-gray-900 leading-relaxed text-base" set:html={faq.answer}></div>
-            </div>
-            </details>
-            </div>
-))}
-</div>
+        <!-- FAQ Items -->
+        <div class="mt-12 max-w-3xl mx-auto">
+            {faqs.map((faq, index) => (
+                    <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
+                        <details class="group">
+                            <summary
+                                    class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-gray-50 list-none">
+                                <h3 title={faq.question}
+                                    class="text-lg font-medium text-gray-900 group-open:text-purple-600 transition-colors duration-300">
+                                    {faq.question}
+                                </h3>
+                                <div class="flex-shrink-0 ml-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="h-5 w-5 text-gray-500 group-open:rotate-180 transition-transform duration-300"
+                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                            </summary>
+                            <div class="px-6 pb-6 animate-fade-in">
+                                <div class="text-gray-900 leading-relaxed text-base" set:html={faq.answer}></div>
+                            </div>
+                        </details>
+                    </div>
+            ))}
+        </div>
 
-<!-- Contact CTA -->
-<div class="mt-12 text-center">
-<p class="text-gray-600">Still have questions? 🚀 We're here to help.</p>
-<a title="self hosted laravel mail platform"
-href="/contact"
-class="mt-4 inline-flex items-center text-purple-600 font-medium hover:underline group">
-    Contact Us
-<svg xmlns="http://www.w3.org/2000/svg"
-class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
-fill="none" viewBox="0 0 24 24" stroke="currentColor">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-    </svg>
-    </a>
+        <!-- Contact CTA -->
+        <div class="mt-12 text-center">
+            <p class="text-gray-600">Still have questions? 🚀 We're here to help.</p>
+            <a title="self hosted laravel mail platform"
+               href="/contact"
+               class="mt-4 inline-flex items-center text-purple-600 font-medium hover:underline group">
+                Contact Us
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
+                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </a>
+        </div>
     </div>
-    </div>
-    </section>
+</section>
 
-    <script type="application/ld+json">
-    {JSON.stringify(faqSchema)}
-    </script>
 
-    <style>
+<style>
     details summary::-webkit-details-marker {
-    display: none;
-}
-details summary::marker {
-    display: none;
-}
-details[open] div {
-    animation: fadeIn 0.3s ease-in-out;
-}
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-}
-    100% {
-        opacity: 1;
-        transform: translateY(0);
+        display: none;
     }
-}
-details p {
-    color: #111827 !important;
-    font-size: 16px;
-    line-height: 1.6;
-}
-details:hover summary {
-    background-color: #f9fafb;
-}
+
+    details summary::marker {
+        display: none;
+    }
+
+    details[open] div {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    details p {
+        color: #111827 !important;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    details:hover summary {
+        background-color: #f9fafb;
+    }
 </style>
