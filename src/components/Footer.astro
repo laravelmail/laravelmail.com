@@ -18,8 +18,8 @@ const legalLinks = [
 ];
 
 const socialLinks = [
-    { name: 'Twitter', href: 'https://twitter.com/leadscaptain', icon: 'twitter' },
-    { name: 'LinkedIn', href: 'https://linkedin.com/company/leadscaptain', icon: 'linkedin' },
+    { name: 'Twitter', href: 'https://twitter.com/#', icon: 'twitter' },
+    { name: 'LinkedIn', href: 'https://linkedin.com/company/#', icon: 'linkedin' },
 ];
 
 // Structured data for organization
@@ -32,21 +32,18 @@ const organizationSchema = {
     "description": "Laravel Mail is a self hosted email marketing platform that delivers verified, curated B2B leads across industries. We help businesses grow faster with data you can trust.",
     "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+1-555-0123", // Replace with actual phone
+        "telephone": "+44-744-821-88-99", // Replace with actual phone
         "contactType": "customer service",
         "url": "https://laravelmail.com/contact"
     },
-    "sameAs": [
-        "https://twitter.com/thelaravelmail",
-        "https://linkedin.com/company/thelaravelmail"
-    ],
     "address": {
         "@type": "PostalAddress",
-        "addressCountry": "GB" // Replace with actual country
+        "addressCountry": "GB"
     },
-    "foundingDate": "2020", // Replace with actual founding date
+    "foundingDate": "2020",
     "knowsAbout": [
         "Email Marketing",
+        "Self hosted platform",
         "B2B Lead Generation",
         "Business Data",
         "Sales Leads",
@@ -54,8 +51,6 @@ const organizationSchema = {
         "CRM Integration"
     ]
 };
-
-// Site navigation schema
 
 ---
 
@@ -89,7 +84,7 @@ const organizationSchema = {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform"
-                                    aria-label={`Follow LeadsCaptain on ${social.name}`}
+                                    aria-label={`Follow Laravel Mail on ${social.name}`}
                                     title={ `Follow us on ${social.name}`}
                             >
                                 {social.icon === 'twitter' && (
@@ -166,11 +161,9 @@ const organizationSchema = {
             <div class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6">
                 <a href="/sitemap.xml" class="hover:text-white transition-colors duration-300" title="Complete website navigation and page directory">Sitemap</a>
                 <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/contact" class="hover:text-white transition-colors duration-300" title="Access our support team and customer service">Contact</a>
+                <a href="/privacy-policy" class="hover:text-white transition-colors duration-300" title="Understand our data protection and privacy measures">Privacy</a>
                 <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/privacy" class="hover:text-white transition-colors duration-300" title="Understand our data protection and privacy measures">Privacy</a>
-                <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/terms" class="hover:text-white transition-colors duration-300" title="Review our service conditions and legal framework">Terms</a>
+                <a href="/terms-of-service" class="hover:text-white transition-colors duration-300" title="Review our service conditions and legal framework">Terms</a>
             </div>
         </div>
     </div>
