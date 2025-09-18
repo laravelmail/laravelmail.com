@@ -211,14 +211,7 @@ const features = [
                             itemScope
                             itemType="https://schema.org/Service"
                     >
-                        <div
-                                class="h-12 w-12 rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center text-white mb-6 transition-transform duration-300 group-hover:scale-110"
-                        >
-                            <Icon
-                                    name={feature.icon}
-                                    class="h-6 w-6 transition-transform duration-300 group-hover:rotate-12"
-                            />
-                        </div>
+
                         <h3 title={`self hosted email platform for ${feature.title}`}  class="text-xl font-semibold group-hover:text-purple-600" itemProp="name">
                             Mail Platform for {feature.title}
                         </h3>
@@ -241,16 +234,7 @@ const features = [
                             )}
                         </div>
 
-                        <div class="mt-6 hover-zoom rounded-lg overflow-hidden">
-                            <Image
-                                    src={feature.image}
-                                    alt={`Self-hosted email marketing for ${feature.title}`}
-                                    title={feature.title}
-                                    class="w-full h-auto rounded-lg transition-all duration-500"
-                                    width={300}
-                                    height={200}
-                            />
-                        </div>
+
                     </article>
             ))}
         </div>
