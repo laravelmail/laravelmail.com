@@ -1,0 +1,221 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import WorkflowConcept from "src/assets/img/workflow_concept.png"
+---
+
+<Layout title="Workflows setup">
+    <main class="py-20 px-6 sm:px-8 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6" title="learn how to setup workflows in laravel mail">
+                    Workflows Setup
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Add powerful drag & drop automation workflows to your Laravel Mail platform. Create automated email sequences triggered by events like user registration, purchase completion, or custom actions.
+                </p>
+            </div>
+
+            <!-- Installation Section -->
+            <div class="mb-16">
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Installation</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 space-y-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">1. Install via Composer</h4>
+                            <div class="bg-gray-900 text-gray-100 p-4 rounded-md font-mono text-sm">
+                                composer require the42coders/workflows
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">2. Register Routes</h4>
+                            <p class="text-gray-600 mb-3">
+                                Add the following to your <code class="bg-gray-100 px-2 py-1 rounded">web.php</code> routes file. Make sure to secure these routes with your authentication middleware:
+                            </p>
+
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">3. Publish Assets</h4>
+                            <div class="bg-gray-900 text-gray-100 p-4 rounded-md font-mono text-sm mb-3">
+                                php artisan vendor:publish --provider="App\Workflows\WorkflowsServiceProvider" --tag=assets
+                            </div>
+                            <p class="text-gray-600 text-sm">
+                                <strong>Optional:</strong> You can also publish config, language files, and views using the respective tags: <code class="bg-gray-100 px-1 py-0.5 rounded">--tag=config</code>, <code class="bg-gray-100 px-1 py-0.5 rounded">--tag=lang</code>, <code class="bg-gray-100 px-1 py-0.5 rounded">--tag=views</code>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow Concept -->
+            <div class="mb-16">
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">How Workflows Work</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 space-y-6">
+                        <div>
+                            <p class="text-gray-600 mb-6">
+                                A workflow consists of <strong>Triggers</strong> and <strong>Tasks</strong>. The trigger starts the workflow, and tasks are individual nodes that execute code in sequence. Information is passed between tasks using the DataBus system.
+                            </p>
+                            <Image src={WorkflowConcept} alt="Workflow Concept Diagram" class="rounded-lg border border-gray-200 shadow-sm w-full"/>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6 mt-8">
+                            <div class="text-center p-4">
+                                <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-blue-600 font-bold">T</span>
+                                </div>
+                                <h5 class="font-semibold mb-2">Triggers</h5>
+                                <p class="text-sm text-gray-600">Starting points that initiate workflows based on events</p>
+                            </div>
+                            <div class="text-center p-4">
+                                <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-green-600 font-bold">A</span>
+                                </div>
+                                <h5 class="font-semibold mb-2">Tasks</h5>
+                                <p class="text-sm text-gray-600">Individual code execution nodes that perform actions</p>
+                            </div>
+                            <div class="text-center p-4">
+                                <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <span class="text-purple-600 font-bold">D</span>
+                                </div>
+                                <h5 class="font-semibold mb-2">DataBus</h5>
+                                <p class="text-sm text-gray-600">System for passing data between workflow components</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Triggers Section -->
+            <div class="mb-16">
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Available Triggers</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 space-y-8">
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Observer Trigger</h4>
+                            <p class="text-gray-600 mb-4">
+                                Listens to Eloquent Model events (created, updated, deleted) and automatically starts workflows when these events occur.
+                            </p>
+                            <div class="bg-gray-50 p-4 rounded-md">
+                                <p class="text-sm text-gray-700 mb-2"><strong>Setup:</strong> Add the trait to your Eloquent models:</p>
+                                <code class="text-sm font-mono">use WorkflowObservable;</code>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-3">
+                                <strong>Use case:</strong> Send welcome emails when users register, or notify admins when orders are placed.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Button Trigger</h4>
+                            <p class="text-gray-600 mb-4">
+                                Renders clickable buttons in your frontend that execute workflows when clicked. Perfect for manual actions.
+                            </p>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-medium mb-2">Render by Name:</h5>
+                                    <div class="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm">
+                                         App\Workflows\Triggers\ButtonTrigger::renderButtonByName('workflow_name', $model)
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-medium mb-2">Render by Workflow ID:</h5>
+                                    <div class="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm">
+                                        App\Workflows\Triggers\ButtonTrigger::renderButtonByWorkflowId(1, $model)
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-medium mb-2">Render by Category:</h5>
+                                    <div class="bg-gray-900 text-gray-100 p-3 rounded-md font-mono text-sm">
+                                        App\Workflows\Triggers\ButtonTrigger::renderButtonsByCategory('email_actions', $model)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-sm text-gray-600 mt-3">
+                                <strong>Use case:</strong> "Send Invoice" buttons on order pages, or "Archive User" buttons in admin panels.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Section -->
+            <div class="mb-16">
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Email-Related Tasks</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 space-y-6">
+                        <p class="text-gray-600 mb-6">
+                            Key tasks for building email automation workflows:
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h5 class="font-semibold text-lg mb-2">SendMail</h5>
+                                <p class="text-gray-600 text-sm mb-3">Send emails with dynamic content and attachments. Works perfectly with HtmlInput and DomPDF tasks.</p>
+                                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Core Email Task</span>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h5 class="font-semibold text-lg mb-2">HtmlInput</h5>
+                                <p class="text-gray-600 text-sm mb-3">Rich text editor with Blade template support. Create email templates with dynamic placeholders.</p>
+                                <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Template Builder</span>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h5 class="font-semibold text-lg mb-2">DomPDF</h5>
+                                <p class="text-gray-600 text-sm mb-3">Generate PDF attachments from HTML content. Perfect for invoices, receipts, and reports.</p>
+                                <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">PDF Generation</span>
+                            </div>
+
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h5 class="font-semibold text-lg mb-2">LoadModel</h5>
+                                <p class="text-gray-600 text-sm mb-3">Load additional data from your database to use in email templates and conditions.</p>
+                                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Data Loading</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Getting Started -->
+            <div class="mb-16">
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Getting Started</h3>
+                    <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 space-y-6">
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-6">
+                            <div class="flex">
+                                <div class="ml-3">
+                                    <p class="text-sm text-blue-700">
+                                        <strong>Ready to build workflows?</strong> After installation, visit <code class="bg-blue-100 px-2 py-1 rounded">/workflows</code> in your Laravel application to access the drag & drop workflow builder.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4">Example: Welcome Email Workflow</h4>
+                            <ol class="list-decimal list-inside text-gray-600 space-y-2">
+                                <li>Set up an <strong>Observer Trigger</strong> on your User model for the "created" event</li>
+                                <li>Add an <strong>HtmlInput Task</strong> to create a welcome email template with user placeholders</li>
+                                <li>Add a <strong>SendMail Task</strong> to send the welcome email</li>
+                                <li>Connect the tasks in the visual workflow builder</li>
+                                <li>Save and activate your workflow</li>
+                            </ol>
+                            <p class="text-sm text-gray-600 mt-4">
+                                Now every new user registration will automatically trigger a personalized welcome email!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+</Layout>
