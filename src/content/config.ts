@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
+//todo add docs
 const blogCollection = defineCollection({
   type: 'data',
   schema: z.object({
