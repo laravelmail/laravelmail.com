@@ -1,0 +1,329 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Campaigns setup">
+    <main class="py-20 px-6 sm:px-8 lg:px-12">
+        <div class="max-w-7xl mx-auto">
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6" title="Complete Exim configuration guide for Laravel">
+            Exim Configuration for Laravel
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Complete reference documentation for configuring Exim Mail Transfer Agent for Laravel applications, covering installation, security, routing, and integration.
+        </p>
+    </div>
+
+    <!-- Introduction Section -->
+    <section id="introduction" class="mb-16">
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 space-y-6">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Introduction to Exim and Laravel</h2>
+
+            <p class="text-gray-700 leading-relaxed">
+                Exim is a highly flexible and powerful Mail Transfer Agent (MTA) used to route, deliver, and receive email messages. As an MTA, Exim operates at the core of email delivery systems, handling the complexities of SMTP (Simple Mail Transfer Protocol) and ensuring emails reach their intended destinations.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed">
+                For Laravel developers, Exim is particularly relevant because Laravel's mail functionality relies on an underlying MTA to send emails. While Laravel provides an elegant abstraction layer for sending emails via its Mail facade and configuration files, the actual delivery of emails depends on the MTA configured on the server.
+            </p>
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                <h3 class="text-xl font-semibold text-blue-900 mb-3">Why Configure Exim for Laravel?</h3>
+                <ul class="space-y-2 text-blue-800">
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">•</span>
+                        <strong>Troubleshooting:</strong> When emails fail to send, knowing how Exim works helps diagnose and resolve issues
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">•</span>
+                        <strong>Security:</strong> Properly configuring Exim ensures your email server is secure and not exploited for spam
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 mr-2">•</span>
+                        <strong>Advanced Use Cases:</strong> Custom email routing, rate limiting, or third-party service integration
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Concepts Section -->
+    <section id="core-concepts" class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Core Exim Concepts</h2>
+
+        <div class="space-y-8">
+            <!-- Runtime Configuration -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Runtime Configuration</h3>
+                <p class="text-gray-600 mb-4">
+                    Exim's behavior is controlled by a single configuration file, typically located at <code class="bg-gray-100 px-2 py-1 rounded">/etc/exim/exim.conf</code>.
+                    This file is divided into sections, each defining specific aspects of Exim's operation.
+                </p>
+                <div class="bg-gray-900 text-gray-100 p-4 rounded-lg">
+                    <code># Configuration file uses key-value format<br>
+                        # Comments are denoted by the # symbol<br>
+                        qualify_domain = yourdomain.com</code>
+                </div>
+            </div>
+
+            <!-- Drivers -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Exim Drivers</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Routers</h4>
+                        <p class="text-gray-600 text-sm">Determine how to route an email (local mailbox or remote server)</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Transports</h4>
+                        <p class="text-gray-600 text-sm">Define how an email is delivered (via SMTP or to local file)</p>
+                    </div>
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-900 mb-2">Authenticators</h4>
+                        <p class="text-gray-600 text-sm">Handle SMTP authentication for incoming/outgoing emails</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mail Flow -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Basic Mail Flow</h3>
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200 flex-1 text-center">
+                        <h4 class="font-semibold text-green-800">1. Reception</h4>
+                        <p class="text-green-700 text-sm">Email accepted via SMTP</p>
+                    </div>
+                    <div class="hidden md:block text-gray-400">→</div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 flex-1 text-center">
+                        <h4 class="font-semibold text-blue-800">2. Routing</h4>
+                        <p class="text-blue-700 text-sm">Routers determine destination</p>
+                    </div>
+                    <div class="hidden md:block text-gray-400">→</div>
+                    <div class="bg-purple-50 p-4 rounded-lg border border-purple-200 flex-1 text-center">
+                        <h4 class="font-semibold text-purple-800">3. Delivery</h4>
+                        <p class="text-purple-700 text-sm">Transports handle delivery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Installing Exim</h2>
+
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <h3 class="text-2xl font-semibold mb-4">Building from Source</h3>
+            <p class="text-gray-600 mb-4">
+                To build Exim from source, you'll need dependencies like PCRE2 library for regular expressions and DBM libraries for database lookups.
+            </p>
+            <div class="bg-gray-900 text-gray-100 p-4 rounded-lg space-y-2">
+                <div><code># Download and extract Exim source</code></div>
+                <div><code>wget https://ftp.exim.org/pub/exim/exim4/exim-4.96.tar.gz</code></div>
+                <div><code>tar -xvzf exim-4.96.tar.gz</code></div>
+                <div><code>cd exim-4.96</code></div>
+                <div><code></code></div>
+                <div><code># Configure and build</code></div>
+                <div><code>./configure --with-pcre2 --with-dbm</code></div>
+                <div><code>make</code></div>
+                <div><code>sudo make install</code></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configuration Section -->
+    <section id="configuration" class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Key Configuration for Laravel</h2>
+
+        <div class="space-y-8">
+            <!-- Basic Settings -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Essential Settings</h3>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Qualify Domain</h4>
+                        <p class="text-gray-600 text-sm mb-3">Sets default domain for unqualified addresses</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm">
+                            <code>qualify_domain = yourdomain.com</code>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Local Domains</h4>
+                        <p class="text-gray-600 text-sm mb-3">Specifies which domains are local</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm">
+                            <code>local_domains = yourdomain.com : yourseconddomain.net</code>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Trusted Users</h4>
+                        <p class="text-gray-600 text-sm mb-3">Users allowed to send without authentication</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm">
+                            <code>trusted_users = www-data : myuser</code>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">TLS/SSL Options</h4>
+                        <p class="text-gray-600 text-sm mb-3">Enable secure email delivery</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm space-y-1">
+                            <div><code>tls_advertise_hosts = *</code></div>
+                            <div><code>tls_certificate = /etc/ssl/exim.crt</code></div>
+                            <div><code>tls_privatekey = /etc/ssl/exim.pem</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Routing Configuration -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Routing Configuration</h3>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">DNS Lookup Router</h4>
+                        <p class="text-gray-600 text-sm mb-3">Routes emails based on DNS MX records</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm space-y-1">
+                            <div><code>dnslookup:</code></div>
+                            <div><code>    driver = dnslookup</code></div>
+                            <div><code>    domains = ! +local_domains</code></div>
+                            <div><code>    transport = remote_smtp</code></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Manual Route Router</h4>
+                        <p class="text-gray-600 text-sm mb-3">Routes emails to a specific host</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm space-y-1">
+                            <div><code>my_smarthost:</code></div>
+                            <div><code>    driver = manualroute</code></div>
+                            <div><code>    transport = smarthost_smtp</code></div>
+                            <div><code>    route_list = smarthost.example.com</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transport Configuration -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Transport Configuration</h3>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Local Delivery</h4>
+                        <p class="text-gray-600 text-sm mb-3">Delivers emails to local mailboxes</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm space-y-1">
+                            <div><code>local_delivery:</code></div>
+                            <div><code>    driver = appendfile</code></div>
+                            <div><code>    file = /var/mail/$local_part</code></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Remote SMTP</h4>
+                        <p class="text-gray-600 text-sm mb-3">Sends emails to remote servers</p>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm space-y-1">
+                            <div><code>remote_smtp:</code></div>
+                            <div><code>    driver = smtp</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laravel Integration -->
+    <section id="laravel-integration" class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Laravel Integration</h2>
+
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <h3 class="text-2xl font-semibold mb-4">Laravel .env Configuration</h3>
+            <p class="text-gray-600 mb-4">
+                Configure Laravel to work with your local Exim installation by setting these environment variables:
+            </p>
+
+            <div class="bg-gray-900 text-gray-100 p-4 rounded-lg space-y-1">
+                <div><code>MAIL_MAILER=smtp</code></div>
+                <div><code>MAIL_HOST=127.0.0.1</code></div>
+                <div><code>MAIL_PORT=25</code></div>
+                <div><code>MAIL_USERNAME=null</code></div>
+                <div><code>MAIL_PASSWORD=null</code></div>
+                <div><code>MAIL_ENCRYPTION=null</code></div>
+                <div><code>MAIL_FROM_ADDRESS="your-email@example.com"</code></div>
+            </div>
+
+            <div class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                <p class="text-yellow-800 text-sm">
+                    <strong>Note:</strong> Make sure your Exim configuration allows the web server user (typically www-data) to send emails without authentication when connecting from localhost.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security & Monitoring -->
+    <section id="security-monitoring" class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Security & Monitoring</h2>
+
+        <div class="space-y-8">
+            <!-- Security -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Security Considerations</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-red-50 p-4 rounded-lg border border-red-200">
+                        <h4 class="font-semibold text-red-800 mb-2">Privilege Management</h4>
+                        <p class="text-red-700 text-sm">Run Exim with minimal privileges</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-semibold text-green-800 mb-2">TLS Encryption</h4>
+                        <p class="text-green-700 text-sm">Always enable TLS for secure delivery</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h4 class="font-semibold text-blue-800 mb-2">Input Sanitization</h4>
+                        <p class="text-blue-700 text-sm">Sanitize inputs when using pipe transports</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monitoring -->
+            <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-semibold mb-4">Monitoring & Debugging</h3>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Queue Management</h4>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm">
+                            <code>exim -bp</code>
+                        </div>
+                        <p class="text-gray-600 text-sm mt-2">List the mail queue</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Address Testing</h4>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm">
+                            <code>exim -bt user@domain.com</code>
+                        </div>
+                        <p class="text-gray-600 text-sm mt-2">Test address routing</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">Debug Mode</h4>
+                        <div class="bg-gray-900 text-gray-100 p-3 rounded text-sm">
+                            <code>exim -d</code>
+                        </div>
+                        <p class="text-gray-600 text-sm mt-2">Enable debugging output</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started CTA -->
+    <div class="text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-lg">
+        <h2 class="text-2xl font-bold mb-4">Ready to Configure Exim for Laravel?</h2>
+        <p class="mb-6">Start with the basic configuration, set up your routers and transports, then integrate with your Laravel application for reliable email delivery.</p>
+        <div class="bg-black/20 p-4 rounded-lg inline-block">
+            <code class="text-lg">vi /etc/exim/exim.conf</code>
+        </div>
+    </div>
+</div>
+    </main>
+</Layout>
