@@ -8,8 +8,6 @@ const companyLinks = [
     { name: 'Blog', href: '/blog' },
 ];
 
-
-
 const legalLinks = [
     { name: 'Privacy Policy', href: '/privacy-policy' },
     { name: 'Terms of Service', href: '/terms-of-service' },
@@ -66,7 +64,12 @@ const organizationSchema = {
     <div class="container-custom relative">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-gray-800">
             <div class="lg:col-span-2">
-                <a href="/" class="inline-block transition-transform duration-300 hover:scale-105" aria-label="Laravel Mail home">
+                <a
+                        href="/"
+                        class="inline-block transition-transform duration-300 hover:scale-105"
+                        aria-label="Laravel Mail home"
+                        onclick="window.trackFooterClick && window.trackFooterClick('Footer', 'Logo')"
+                >
                     <Image src={logoSrc} alt="Laravel Mail Logo" width={140} height={45} class="brightness-0 invert" />
                 </a>
                 <p class="mt-4 text-gray-400 max-w-md">
@@ -79,25 +82,26 @@ const organizationSchema = {
                             'LinkedIn': 'Network with B2B professionals and industry leaders'
                         };
                         return (
-                            <a
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform"
-                                    aria-label={`Follow Laravel Mail on ${social.name}`}
-                                    title={ `Follow us on ${social.name}`}
-                            >
-                                {social.icon === 'twitter' && (
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                                        </svg>
-                                )}
-                                {social.icon === 'linkedin' && (
-                                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                        </svg>
-                                )}
-                            </a>
+                                <a
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform"
+                                        aria-label={`Follow Laravel Mail on ${social.name}`}
+                                        title={`Follow us on ${social.name}`}
+                                        onclick={`window.trackFooterClick && window.trackFooterClick('Social Media', '${social.name}')`}
+                                >
+                                    {social.icon === 'twitter' && (
+                                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                                            </svg>
+                                    )}
+                                    {social.icon === 'linkedin' && (
+                                            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                            </svg>
+                                    )}
+                                </a>
                         );
                     })}
                 </div>
@@ -114,21 +118,21 @@ const organizationSchema = {
                             'Blog': 'Explore industry insights and lead generation strategies'
                         };
                         return (
-                            <li class="transform transition-all duration-300 hover:translate-x-1">
-                                <a
-                                        href={link.href}
-                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
-                                        style={`transition-delay: ${index * 50}ms;`}
-                                        title={link.name}
-                                >
-                                    {link.name}
-                                </a>
-                            </li>
+                                <li class="transform transition-all duration-300 hover:translate-x-1">
+                                    <a
+                                            href={link.href}
+                                            class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
+                                            style={`transition-delay: ${index * 50}ms;`}
+                                            title={link.name}
+                                            onclick={`window.trackFooterClick && window.trackFooterClick('Footer Navigation', 'Company - ${link.name}')`}
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
                         );
                     })}
                 </ul>
             </div>
-
 
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-white/90">Legal</h3>
@@ -140,16 +144,17 @@ const organizationSchema = {
                             'Cookie Policy': 'Manage your cookie preferences and privacy settings'
                         };
                         return (
-                            <li class="transform transition-all duration-300 hover:translate-x-1">
-                                <a
-                                        href={link.href}
-                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
-                                        style={`transition-delay: ${index * 50}ms;`}
-                                        title={link.name}
-                                >
-                                    {link.name}
-                                </a>
-                            </li>
+                                <li class="transform transition-all duration-300 hover:translate-x-1">
+                                    <a
+                                            href={link.href}
+                                            class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
+                                            style={`transition-delay: ${index * 50}ms;`}
+                                            title={link.name}
+                                            onclick={`window.trackFooterClick && window.trackFooterClick('Footer Navigation', 'Legal - ${link.name}')`}
+                                    >
+                                        {link.name}
+                                    </a>
+                                </li>
                         );
                     })}
                 </ul>
@@ -159,11 +164,32 @@ const organizationSchema = {
         <div class="pt-8 text-center text-gray-400 text-sm">
             <p class="hover:text-gray-300 transition-colors duration-300">&copy; {new Date().getFullYear()} Laravel Company. All rights reserved.</p>
             <div class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6">
-                <a href="/sitemap.xml" class="hover:text-white transition-colors duration-300" title="Complete website navigation and page directory">Sitemap</a>
+                <a
+                        href="/sitemap.xml"
+                        class="hover:text-white transition-colors duration-300"
+                        title="Complete website navigation and page directory"
+                        onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Sitemap')"
+                >
+                    Sitemap
+                </a>
                 <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/privacy-policy" class="hover:text-white transition-colors duration-300" title="Understand our data protection and privacy measures">Privacy</a>
+                <a
+                        href="/privacy-policy"
+                        class="hover:text-white transition-colors duration-300"
+                        title="Understand our data protection and privacy measures"
+                        onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Privacy Policy')"
+                >
+                    Privacy
+                </a>
                 <span class="hidden sm:inline text-gray-600">|</span>
-                <a href="/terms-of-service" class="hover:text-white transition-colors duration-300" title="Review our service conditions and legal framework">Terms</a>
+                <a
+                        href="/terms-of-service"
+                        class="hover:text-white transition-colors duration-300"
+                        title="Review our service conditions and legal framework"
+                        onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Terms of Service')"
+                >
+                    Terms
+                </a>
             </div>
         </div>
     </div>
@@ -174,16 +200,60 @@ const organizationSchema = {
 
 <!-- Additional SEO structured data -->
 <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Laravel Mail",
-    "url": "https://laravelmail.com",
-    "description": "Self hosted marketing platform with Verified B2B lead generation service providing curated business leads across industries",
-    "publisher": {
-        "@type": "Organization",
-        "name": "Laravel Company"
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Laravel Mail",
+        "url": "https://laravelmail.com",
+        "description": "Self hosted marketing platform with Verified B2B lead generation service providing curated business leads across industries",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Laravel Company"
+        }
     }
-}
 </script>
 
+<!-- Google Analytics Footer Tracking Script -->
+<script>
+    // Safe tracking function that works with or without GA
+    window.trackFooterClick = function(category, label, value = 1) {
+        try {
+            // Try GA4 gtag first
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click', {
+                    'event_category': category,
+                    'event_label': label,
+                    'value': value,
+                    'transport_type': category === 'Social Media' ? 'beacon' : undefined
+                });
+                console.log('GA4 tracked:', category, '-', label);
+                return;
+            }
+
+            // Fallback to Universal Analytics if available
+            if (typeof ga !== 'undefined') {
+                ga('send', 'event', category, 'click', label, value);
+                console.log('UA tracked:', category, '-', label);
+                return;
+            }
+
+            // Fallback to Google Tag Manager dataLayer if available
+            if (typeof dataLayer !== 'undefined') {
+                dataLayer.push({
+                    'event': 'footer_click',
+                    'event_category': category,
+                    'event_label': label,
+                    'value': value
+                });
+                console.log('GTM tracked:', category, '-', label);
+                return;
+            }
+
+            // Final fallback - just log to console for debugging
+            console.log('Footer click tracked (no GA):', category, '-', label);
+
+        } catch (error) {
+            console.warn('Footer tracking error:', error);
+        }
+    };
+</script>
