@@ -1,10 +1,12 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import { fade } from 'astro:transitions';
 import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-import Logo from 'src/assets/favicon.png'
+import favIcon from 'src/assets/favicon.ico'
+
 interface Props {
   title: string;
   description?: string;
@@ -15,108 +17,194 @@ const {
   description = "Powerful self-hosted marketing automation platform — free, open-source, and designed to deliver real results. Access free email marketing, lead generation, and lead management tools for businesses of all sizes."
 } = Astro.props;
 
-// Preload critical assets
-const faviconImg = await getImage({src: Logo, width: 32, height: 32});
+const favicon = await getImage({src: favIcon, width: 32, height: 32});
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href={faviconImg.src} />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title} | Laravel Mail</title>
-    <ViewTransitions />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content={description} />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href={favicon.src} />
+  <link rel="shortcut icon" href={favicon.src} />
+  <meta name="generator" content={Astro.generator} />
 
-    <!-- Preload critical resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <title>{title} | Laravel Mail</title>
 
-    <!-- Structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Laravel Mail",
-        "url": "https://laravelmail.com",
-        "logo": "logo.svg"
+  <!-- Enhanced View Transitions with fallback -->
+  <ViewTransitions fallback="none" />
+
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Laravel Mail",
+      "url": "https://laravelmail.com",
+      "logo": "logo.svg"
+    }
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:image" content={favicon.src} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={favicon.src} />
+
+  <!-- View Transitions CSS Animations -->
+  <style is:global>
+    /* Smooth fade transition for page changes */
+    @keyframes fade-in {
+      from {
+        opacity: 0;
       }
-    </script>
+    }
 
-    <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content={faviconImg.src} />
+    @keyframes fade-out {
+      to {
+        opacity: 0;
+      }
+    }
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
+    @keyframes slide-from-right {
+      from {
+        transform: translateX(30px);
+      }
+    }
 
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={faviconImg.src} />
-  </head>
-  <body class="min-h-screen flex flex-col">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3N6ZKFN"
-                    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-    <a href="#main-content" class="skip-link" title="self hosted marketing platform">Laravel Mail</a>
-    <Header />
-    <main id="main-content" class="flex-grow">
-      <slot />
-    </main>
-    <Footer />
+    @keyframes slide-to-left {
+      to {
+        transform: translateX(-30px);
+      }
+    }
 
-    <!-- Intersection Observer for animations on scroll -->
-    <script>
-      document.addEventListener('astro:page-load', () => {
-        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    ::view-transition-old(root) {
+      animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+      300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+    }
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('animated');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
+    ::view-transition-new(root) {
+      animation: 320ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+      300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+    }
 
-        animatedElements.forEach(element => {
-          observer.observe(element);
-        });
+    /* Smooth transitions for specific elements */
+    ::view-transition-old(header),
+    ::view-transition-new(header) {
+      animation-duration: 200ms;
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+      }
+    }
+
+    /* Loading indicator during transitions */
+    html.astro-transitioning {
+      cursor: wait;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N3N6ZKFN"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<a href="#main-content" class="skip-link" title="self hosted marketing platform">Laravel Mail</a>
+
+<Header transition:persist="header" />
+
+<main id="main-content" class="flex-grow" transition:animate={fade({ duration: '0.3s' })}>
+  <slot />
+</main>
+
+<Footer transition:persist="footer" />
+
+<!-- Enhanced Intersection Observer for animations -->
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+          observer.unobserve(entry.target);
+        }
       });
-    </script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-N3N6ZKFN');</script>
-    <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6QEESYV4DY"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6QEESYV4DY');
-    </script>
-    <!-- Hotjar Tracking Code for Leads Captain -->
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    <script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:5321464,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="VVrN3f8rO7LVfHMX67813A" async></script>
-  </body>
+    animatedElements.forEach(element => {
+      observer.observe(element);
+    });
+  });
+
+  // Handle view transition events
+  document.addEventListener('astro:before-preparation', () => {
+    console.log('Preparing for navigation...');
+  });
+
+  document.addEventListener('astro:after-swap', () => {
+    console.log('Content swapped!');
+  });
+
+  // Smooth scroll restoration
+  document.addEventListener('astro:page-load', () => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script is:inline>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N3N6ZKFN');
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6QEESYV4DY"></script>
+<script is:inline>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-6QEESYV4DY');
+</script>
+
+<!-- Hotjar Tracking Code -->
+<script is:inline>
+(function(h,o,t,j,a,r){
+  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+  h._hjSettings={hjid:5321464,hjsv:6};
+  a=o.getElementsByTagName('head')[0];
+  r=o.createElement('script');r.async=1;
+  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+  a.appendChild(r);
+})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+<script async src="https://analytics.ahrefs.com/analytics.js" data-key="VVrN3f8rO7LVfHMX67813A"></script>
+</body>
 </html>
