@@ -1,0 +1,57 @@
+# Open source email marketing platform
+
+> Laravel Mail provides free and open-source marketing automation software available to everyone. Free email marketing and lead management software.
+
+## Laravel Mail
+[Laravel Mail](https://laravelmail.com#main-content)
+
+## About
+[About](https://laravelmail.com/about)
+
+## Documentation
+[Documentation](https://laravelmail.com/docs)
+
+## Product
+[Product](https://laravelmail.com/product)
+
+## Blog
+[Blog](https://laravelmail.com/blog)
+
+## Try Now
+[Try Now](https://app.laravelmail.com)
+
+## Try
+[Try](https://laravelmail.com/try)
+
+## Get Started
+[Get Started](https://app.laravelmail.com/docs/demo)
+
+## Laravel Mail
+[Laravel Mail](https://laravelmail.com)
+
+## Check our pricing
+[Check our pricing](https://laravelmail.com/pricing)
+
+## get in touch
+[get in touch](https://laravelmail.com/contact)
+
+## Read Documentation
+[Read Documentation](https://laravelmail.com/documentation)
+
+## About Us
+[About Us](https://laravelmail.com/about-us)
+
+## Privacy Policy
+[Privacy Policy](https://laravelmail.com/privacy-policy)
+
+## Terms of Service
+[Terms of Service](https://laravelmail.com/terms-of-service)
+
+## Cookie Policy
+[Cookie Policy](https://laravelmail.com/cookie-policy)
+
+## Careers
+[Careers](https://laravelmail.com/careers)
+
+## Sitemap
+[Sitemap](https://laravelmail.com/sitemap.xml)
