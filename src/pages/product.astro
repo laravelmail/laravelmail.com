@@ -52,25 +52,140 @@ const apiFeatures = [
         example: "/api/v1/intent/signals"
     }
 ];
+
+const workspaceFeatures = [
+    {
+        title: "Team Collaboration",
+        description: "Create dedicated workspaces for different teams, departments, or clients with customized permissions and access controls.",
+        icon: "👥"
+    },
+    {
+        title: "Shared Resources",
+        description: "Centralize your contact lists, campaign templates, and email sequences across your entire workspace for seamless collaboration.",
+        icon: "📊"
+    },
+    {
+        title: "Role-Based Access",
+        description: "Granular permission controls ensure team members access only what they need, maintaining security and organization.",
+        icon: "🔐"
+    },
+    {
+        title: "Activity Tracking",
+        description: "Monitor team performance with detailed analytics on campaign sends, open rates, and engagement metrics per workspace.",
+        icon: "📈"
+    }
+];
+
+const campaignFeatures = [
+    {
+        title: "Multi-Channel Campaigns",
+        description: "Orchestrate email sequences, SMS outreach, and social media engagement from a single unified platform.",
+        benefit: "3x higher conversion rates"
+    },
+    {
+        title: "Smart Automation",
+        description: "Trigger-based workflows that respond to prospect behavior, automatically nurturing leads through your sales funnel.",
+        benefit: "Save 20+ hours weekly"
+    },
+    {
+        title: "A/B Testing",
+        description: "Test subject lines, content variations, and send times to optimize every campaign for maximum engagement.",
+        benefit: "45% improvement in opens"
+    },
+    {
+        title: "Performance Analytics",
+        description: "Real-time dashboards showing opens, clicks, replies, and conversions with detailed attribution reporting.",
+        benefit: "Data-driven decisions"
+    }
+];
+
+const validationFeatures = [
+    {
+        title: "Email Verification",
+        description: "Real-time email validation checks syntax, domain validity, and mailbox existence to ensure deliverability.",
+        accuracy: "99.9%"
+    },
+    {
+        title: "Bulk List Cleaning",
+        description: "Process thousands of contacts simultaneously, removing invalid, duplicate, and risky email addresses.",
+        accuracy: "Process 100K/hour"
+    },
+    {
+        title: "Spam Trap Detection",
+        description: "Identify and remove known spam traps and honeypots that could damage your sender reputation.",
+        accuracy: "Protect your IP"
+    },
+    {
+        title: "Deliverability Scoring",
+        description: "Assign quality scores to each contact based on engagement history and validation results.",
+        accuracy: "Smart prioritization"
+    }
+];
+
+const intelligenceFeatures = [
+    {
+        title: "Buyer Intent Signals",
+        description: "Track prospect research behavior, content consumption, and technology adoption to identify high-intent buyers actively evaluating solutions.",
+        metric: "40% faster sales cycles"
+    },
+    {
+        title: "Company Insights",
+        description: "Access detailed firmographic data including revenue, employee count, funding rounds, technology stack, and growth indicators.",
+        metric: "500M+ company profiles"
+    },
+    {
+        title: "Competitive Intelligence",
+        description: "Monitor when prospects engage with competitor content and identify accounts in active evaluation stages.",
+        metric: "Stay ahead of competition"
+    },
+    {
+        title: "Predictive Lead Scoring",
+        description: "Machine learning models analyze historical conversion data to predict which leads are most likely to convert.",
+        metric: "2x win rates"
+    }
+];
+
+const mailFeatures = [
+    {
+        title: "Smart Inbox Management",
+        description: "Unified inbox combining all campaign responses, allowing your team to manage conversations efficiently with collaborative tools.",
+        highlight: "Never miss a reply"
+    },
+    {
+        title: "Email Warm-Up",
+        description: "Automatically warm up new email accounts with gradual sending increases and engagement simulation to build sender reputation.",
+        highlight: "99% inbox placement"
+    },
+    {
+        title: "Deliverability Monitoring",
+        description: "Track sender reputation, spam scores, and blacklist status across all your sending domains with real-time alerts.",
+        highlight: "Protect your reputation"
+    },
+    {
+        title: "Email Templates",
+        description: "Pre-built, conversion-optimized email templates with dynamic personalization fields and mobile-responsive designs.",
+        highlight: "Launch in minutes"
+    }
+];
 ---
 
 <Layout
-        title="Laravel Mail - Product"
-        description="Laravel's Mail lead enrichment API is easy to use and fast to launch, with compliant email marketing infrastructure and features customers will love."
+        title="Laravel Mail Marketing Platform - Complete Email Marketing & Lead Enrichment Solution"
+        description="Laravel Mail provides enterprise-grade email marketing, lead enrichment APIs, campaign automation, email validation, and buyer intelligence. GDPR compliant with 99.9% uptime SLA."
 >
     <section class="pt-20 pb-16 md:pt-28 md:pb-24">
         <div class="container-custom">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="animate-on-scroll">
                     <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-                        A <span class="gradient-text">Modern Approach</span> to your Marketing Infrastructure
+                        Complete <span class="gradient-text">Email Marketing Platform</span> for Modern Sales Teams
                     </h1>
                     <p class="mt-6 text-xl text-gray-600 max-w-lg">
-                        Laravel's Mail marketing platform and API is easy to use and fast to launch, with compliant infrastructure and features customers will love.
+                        Laravel Mail combines lead enrichment, campaign automation, email validation, and buyer intelligence in one powerful platform. Launch compliant email campaigns with infrastructure customers trust.
                     </p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4">
-                        <a href="https://app.laravelmail.com" class="btn btn-primary">Try now</a>
-                        <a href="/docs" class="btn btn-secondary">View Docs</a>
+                        <a href="https://app.laravelmail.com" class="btn btn-primary">Start Free Trial</a>
+                        <a href="/docs" class="btn btn-secondary">View Documentation</a>
                     </div>
 
                     <div class="mt-8 flex items-center space-x-6 text-sm text-gray-600">
@@ -95,7 +210,7 @@ const apiFeatures = [
                         <div class="relative bg-white rounded-xl shadow-xl overflow-hidden">
                             <Image
                                     src="https://i.imgur.com/F0KPMAD.png"
-                                    alt="Laravel Mail Dashboard"
+                                    alt="Laravel Mail Dashboard showing campaign analytics and lead enrichment"
                                     class="w-full h-auto"
                                     width={700}
                                     height={500}
@@ -107,14 +222,200 @@ const apiFeatures = [
         </div>
     </section>
 
+    <!-- Workspaces Section -->
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Organize Teams with Workspaces
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Create dedicated workspaces for each team, client, or campaign. Centralize your email marketing operations with powerful collaboration tools that scale with your organization.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {workspaceFeatures.map((feature, index) => (
+                        <div
+                                class="bg-leadscaptain-gray rounded-xl p-8 animate-on-scroll hover:shadow-lg transition-shadow duration-300"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <div class="text-4xl mb-4">{feature.icon}</div>
+                            <h3 class="text-xl font-semibold mb-3">{feature.title}</h3>
+                            <p class="text-gray-600 leading-relaxed">{feature.description}</p>
+                        </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaigns Section -->
     <section class="py-20 bg-leadscaptain-gray">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold">
-                    Powerful API Endpoints
+                    Powerful Campaign Automation
                 </h2>
                 <p class="mt-4 text-xl text-gray-600">
-                    Everything you need to build world-class lead generation tools.
+                    Build sophisticated multi-touch campaigns that nurture leads automatically. From cold outreach to customer retention, automate your entire email marketing funnel.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {campaignFeatures.map((feature, index) => (
+                        <div
+                                class="bg-white rounded-xl p-8 animate-on-scroll border-l-4 border-leadscaptain-blue"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <h3 class="text-xl font-semibold mb-3">{feature.title}</h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed">{feature.description}</p>
+                            <div class="inline-block px-4 py-2 bg-leadscaptain-gray rounded-full text-sm font-medium text-leadscaptain-purple">
+                                {feature.benefit}
+                            </div>
+                        </div>
+                ))}
+            </div>
+
+            <div class="mt-12 text-center animate-on-scroll">
+                <a href="/campaigns" class="btn btn-primary">Explore Campaign Features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Validation Section -->
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold">
+                        <span class="gradient-text">Email Validation</span> That Protects Your Reputation
+                    </h2>
+                    <p class="mt-6 text-xl text-gray-600">
+                        Maintain pristine sender reputation with enterprise-grade email validation. Our real-time verification engine checks every contact before sending, ensuring maximum deliverability and protecting your domain reputation.
+                    </p>
+
+                    <div class="mt-8 space-y-6">
+                        {validationFeatures.map((feature) => (
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-10 w-10 rounded-lg bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue flex items-center justify-center text-white font-bold mr-4">
+                                        ✓
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-semibold">{feature.title}</h4>
+                                        <p class="text-gray-600 mt-1">{feature.description}</p>
+                                        <span class="text-sm text-leadscaptain-purple font-medium mt-2 inline-block">{feature.accuracy}</span>
+                                    </div>
+                                </div>
+                        ))}
+                    </div>
+
+
+                </div>
+
+                <div class="animate-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="bg-white rounded-xl shadow-xl p-8 border border-gray-100">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                                <div class="flex items-center">
+                                    <div class="h-3 w-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="font-mono text-sm">john@company.com</span>
+                                </div>
+                                <span class="text-green-600 font-semibold text-sm">Valid</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+                                <div class="flex items-center">
+                                    <div class="h-3 w-3 bg-red-500 rounded-full mr-3"></div>
+                                    <span class="font-mono text-sm">fake@invalid.xyz</span>
+                                </div>
+                                <span class="text-red-600 font-semibold text-sm">Invalid</span>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <div class="flex items-center">
+                                    <div class="h-3 w-3 bg-yellow-500 rounded-full mr-3"></div>
+                                    <span class="font-mono text-sm">trap@domain.com</span>
+                                </div>
+                                <span class="text-yellow-600 font-semibold text-sm">Spam Trap</span>
+                            </div>
+                            <div class="mt-6 p-4 bg-leadscaptain-gray rounded-lg">
+                                <div class="text-sm text-gray-600 mb-2">Validation Results</div>
+                                <div class="text-2xl font-bold text-leadscaptain-purple">99.9% Accuracy</div>
+                                <div class="text-sm text-gray-600 mt-1">Processed in 127ms</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buyer Intelligence Section -->
+    <section class="py-20 bg-leadscaptain-gray">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Buyer Intelligence That Closes Deals
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Transform raw contact data into actionable buyer insights. Our intelligence platform reveals who is ready to buy, what they care about, and when to reach out for maximum impact.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {intelligenceFeatures.map((feature, index) => (
+                        <div
+                                class="bg-white rounded-xl p-8 animate-on-scroll shadow-lg"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <h3 class="text-xl font-semibold mb-3">{feature.title}</h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed">{feature.description}</p>
+                            <div class="text-leadscaptain-purple font-bold text-lg">{feature.metric}</div>
+                        </div>
+                ))}
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Mail Management Section -->
+    <section class="py-20 bg-white">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Complete Mail Infrastructure
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Everything you need to send, track, and optimize email campaigns. From warm-up to deliverability monitoring, we handle the technical complexity so you can focus on results.
+                </p>
+            </div>
+
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+                {mailFeatures.map((feature, index) => (
+                        <div
+                                class="bg-leadscaptain-gray rounded-xl p-8 animate-on-scroll hover:shadow-lg transition-shadow duration-300"
+                                style={`animation-delay: ${index * 0.1}s`}
+                        >
+                            <h3 class="text-xl font-semibold mb-3">{feature.title}</h3>
+                            <p class="text-gray-600 mb-4 leading-relaxed">{feature.description}</p>
+                            <div class="inline-block px-4 py-2 bg-white rounded-full text-sm font-bold text-leadscaptain-blue border border-leadscaptain-blue">
+                                {feature.highlight}
+                            </div>
+                        </div>
+                ))}
+            </div>
+
+        </div>
+    </section>
+
+    <!-- API Features Section -->
+    <section class="py-20 bg-leadscaptain-gray">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold">
+                    Developer-First API Platform
+                </h2>
+                <p class="mt-4 text-xl text-gray-600">
+                    Build custom email marketing solutions with our comprehensive RESTful APIs. Complete documentation, client libraries, and webhook support for seamless integration.
                 </p>
             </div>
 
@@ -139,14 +440,15 @@ const apiFeatures = [
         </div>
     </section>
 
+    <!-- Key Features Grid -->
     <section class="py-20 bg-white">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold">
-                    Key Features
+                    Enterprise Features Built In
                 </h2>
                 <p class="mt-4 text-xl text-gray-600">
-                    Everything you need to offer a complete lead enrichment solution to your customers.
+                    Every feature you need to run professional email marketing campaigns at scale. From compliance to customization, Laravel Mail has you covered.
                 </p>
             </div>
 
@@ -167,6 +469,7 @@ const apiFeatures = [
         </div>
     </section>
 
+    <!-- Scale & Compliance Section -->
     <section class="py-20 bg-leadscaptain-gray">
         <div class="container-custom">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -175,30 +478,28 @@ const apiFeatures = [
                         Built for <span class="gradient-text">Scale & Compliance</span>
                     </h2>
                     <p class="mt-6 text-xl text-gray-600">
-                        Process millions of lead enrichment requests with enterprise-grade security and compliance.
+                        Process millions of emails and lead enrichment requests with enterprise-grade security and regulatory compliance. Laravel Mail infrastructure is designed for reliability and performance.
                     </p>
 
                     <div class="mt-8 space-y-4">
                         <div class="flex items-start">
                             <div class="ml-4">
                                 <h4 class="text-lg font-medium">Enterprise Security</h4>
-                                <p class="text-gray-600">SOC 2 Type II, GDPR & CCPA compliant infrastructure</p>
+                                <p class="text-gray-600">SOC 2 Type II, GDPR & CCPA compliant infrastructure with encryption at rest and in transit</p>
                             </div>
                         </div>
 
                         <div class="flex items-start">
-
                             <div class="ml-4">
                                 <h4 class="text-lg font-medium">Global Infrastructure</h4>
-                                <p class="text-gray-600">Multi-region deployment with <50ms response times</p>
+                                <p class="text-gray-600">Multi-region deployment across 12 data centers with sub-50ms response times worldwide</p>
                             </div>
                         </div>
 
                         <div class="flex items-start">
-
                             <div class="ml-4">
                                 <h4 class="text-lg font-medium">Smart Rate Limiting</h4>
-                                <p class="text-gray-600">Intelligent throttling and queueing for optimal performance</p>
+                                <p class="text-gray-600">Intelligent throttling and queueing systems ensure optimal performance under any load</p>
                             </div>
                         </div>
                     </div>
@@ -207,7 +508,7 @@ const apiFeatures = [
                 <div class="animate-on-scroll" style="animation-delay: 0.2s;">
                     <div class="bg-gray-900 rounded-xl p-6 text-green-400 font-mono text-sm overflow-hidden">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-gray-400">Laravel Mail API Response</span>
+                            <span class="text-gray-400">API Response Example</span>
                             <div class="flex space-x-2">
                                 <div class="h-2 w-2 bg-red-500 rounded-full"></div>
                                 <div class="h-2 w-2 bg-yellow-500 rounded-full"></div>
@@ -240,6 +541,7 @@ const apiFeatures = [
         </div>
     </section>
 
+    <!-- Social Proof Section -->
     <section class="py-20 bg-white">
         <div class="container-custom">
             <div class="text-center animate-on-scroll">
@@ -247,25 +549,25 @@ const apiFeatures = [
                     Trusted by Sales Teams Worldwide
                 </h2>
                 <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
-                    From startups to enterprise companies, teams rely on Laravel Marketing Platform to power their lead generation.
+                    From startups to enterprise companies, thousands of sales and marketing teams rely on Laravel Mail to power their email campaigns and lead generation efforts.
                 </p>
 
-                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-pink-600">500+</div>
-                        <div class="text-sm text-gray-500">Active Customers</div>
+                        <div class="text-3xl font-bold text-leadscaptain-purple">2,500+</div>
+                        <div class="text-sm text-gray-600 mt-1">Active Customers</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-pink-400">50M+</div>
-                        <div class="text-sm text-gray-500">Leads Enriched</div>
+                        <div class="text-3xl font-bold text-leadscaptain-blue">150M+</div>
+                        <div class="text-sm text-gray-600 mt-1">Emails Sent Monthly</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-pink-400">99.5%</div>
-                        <div class="text-sm text-gray-500">Accuracy Rate</div>
+                        <div class="text-3xl font-bold text-leadscaptain-purple">99.5%</div>
+                        <div class="text-sm text-gray-600 mt-1">Accuracy Rate</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-pink-400">24/7</div>
-                        <div class="text-sm text-gray-500">Support</div>
+                        <div class="text-3xl font-bold text-leadscaptain-blue">24/7</div>
+                        <div class="text-sm text-gray-600 mt-1">Expert Support</div>
                     </div>
                 </div>
             </div>
