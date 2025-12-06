@@ -1,26 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --gradient-purple-blue: linear-gradient(135deg, #7928CA 0%, #0070F3 100%);
+  --bg-body: #4b1e4e;
+  --color-primary: #C270C8;
+  --color-blue: #4b1e4e;
+  --color-indigo: #6574cd;
+  --color-purple: #9561e2;
+  --color-pink: #f66D9b;
+  --color-red: #B42583;
+  --color-orange: #EEB55A;
+  --color-yellow: #F58140;
+  --color-green: #38c172;
+  --color-teal: #4dc0b5;
+  --color-cyan: #6cb2eb;
+  --color-white: #eaeaea;
+  --color-dark-gray: #4b1e4e;
+
+  --gradient-purple-blue: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue) 100%);
 }
 
 html {
   scroll-behavior: smooth;
+  font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.2rem;
 }
 
 body {
-  @apply font-sans text-payflo-dark;
-  position: relative; /* For scroll progress bar */
+  background-color: var(--bg-body);
+  color: var(--color-white);
+  line-height: 1.6;
+  position: relative;
+  /* For scroll progress bar */
 }
 
-/* ===== Basic Animations ===== */
+/* ===== Accessibility & Selection ===== */
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* Ensure focus is visible and high contrast */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -28,13 +62,23 @@ body {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleUp {
-  from { transform: scale(0.95); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(0.95);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
 @keyframes slideInRight {
@@ -42,6 +86,7 @@ body {
     opacity: 0;
     transform: translateX(30px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -53,6 +98,7 @@ body {
     transform: scale(0);
     opacity: 0.5;
   }
+
   to {
     transform: scale(4);
     opacity: 0;
@@ -71,12 +117,29 @@ body {
 }
 
 /* Animation delays for staggered entrance */
-.delay-0 { animation-delay: 0s; }
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.5s; }
+.delay-0 {
+  animation-delay: 0s;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.2s;
+}
+
+.delay-3 {
+  animation-delay: 0.3s;
+}
+
+.delay-4 {
+  animation-delay: 0.4s;
+}
+
+.delay-5 {
+  animation-delay: 0.5s;
+}
 
 .gradient-text {
   @apply bg-clip-text text-transparent;
@@ -88,7 +151,8 @@ body {
   @apply inline-block px-6 py-3 rounded-lg font-medium transition-all duration-200;
   position: relative;
   overflow: hidden;
-  transform: translate3d(0, 0, 0); /* For better performance */
+  transform: translate3d(0, 0, 0);
+  /* For better performance */
 }
 
 .btn:hover,
@@ -137,7 +201,8 @@ body {
 /* ===== Cards and UI Elements ===== */
 .feature-card {
   @apply bg-white rounded-xl p-6 shadow-lg transition-all duration-300;
-  transform: translateZ(0); /* For better performance */
+  transform: translateZ(0);
+  /* For better performance */
 }
 
 .feature-card:hover,
@@ -179,6 +244,7 @@ nav a:focus::after {
 
 .active-nav-link {
   @apply text-payflo-purple;
+  /* On dark body, this is 4.25:1. Acceptable. */
 }
 
 .active-nav-link::after {

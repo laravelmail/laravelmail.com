@@ -4,14 +4,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        'payflo-purple': '#7928CA',
-        'payflo-blue': '#0070F3',
-        'payflo-pink': '#FF4D4D',
-        'payflo-gray': '#F4F7FA',
-        'payflo-dark': '#111111',
+        'payflo-purple': '#C270C8', // Updated to primary
+        'payflo-blue': '#4b1e4e',   // Updated to blue (dark purple)
+        'payflo-pink': '#f66D9b',
+        'payflo-gray': '#eaeaea',   // Updated to white/light for contrast
+        'payflo-dark': '#4b1e4e',   // Updated to dark gray
+
+        // Add new palette directly
+        'custom-primary': '#C270C8',
+        'custom-bg': '#4b1e4e',
+        'custom-red': '#B42583',
+        'custom-orange': '#EEB55A',
+        'custom-yellow': '#F58140',
       },
       fontFamily: {
-        sans: ['Inter Variable', 'sans-serif'],
+        sans: ['Nunito', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out forwards',
