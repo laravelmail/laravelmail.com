@@ -21,12 +21,34 @@
   --color-dark-gray: #4b1e4e;
 
   --gradient-purple-blue: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue) 100%);
+
+  /* Reduced motion preference */
+  --transition-duration: 0.3s;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-duration: 0.01ms;
+    --transition-timing: linear;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 html {
   scroll-behavior: smooth;
   font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
+  /* Ensure sufficient line height for readability */
+  line-height: 1.6;
 }
 
 body {
@@ -34,19 +56,41 @@ body {
   color: var(--color-white);
   line-height: 1.6;
   position: relative;
-  /* For scroll progress bar */
+  /* Minimum touch target size */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ===== Accessibility & Selection ===== */
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-white);
+  /* Ensure sufficient contrast ratio (WCAG AA) */
 }
 
 /* Ensure focus is visible and high contrast */
 *:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 3px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  *:focus-visible {
+    outline-width: 4px;
+  }
+
+  body {
+    font-weight: 500;
+  }
+}
+
+/* Dark mode user preference */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--bg-body);
+    color: var(--color-white);
+  }
 }
 
 @keyframes fadeInUp {
@@ -108,7 +152,7 @@ body {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(40px);
-  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeInUp 0.8s var(--transition-timing) forwards;
   animation-play-state: paused;
 }
 
@@ -148,11 +192,21 @@ body {
 
 /* ===== Button Styles & Effects ===== */
 .btn {
-  @apply inline-block px-6 py-3 rounded-lg font-medium transition-all duration-200;
+  @apply inline-block px-6 py-3 rounded-lg font-medium transition-all;
   position: relative;
   overflow: hidden;
   transform: translate3d(0, 0, 0);
-  /* For better performance */
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+  /* Minimum touch target size (48x48px) */
+  min-height: 48px;
+  min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Clear focus indicator */
+  border: 2px solid transparent;
+  cursor: pointer;
 }
 
 .btn:hover,
@@ -165,9 +219,17 @@ body {
   transform: translateY(1px);
 }
 
-.btn:focus {
-  outline: 2px solid theme('colors.payflo-purple');
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
   outline-offset: 2px;
+  border: 2px solid transparent;
+}
+
+/* Disabled state with sufficient contrast */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .ripple-effect {
@@ -200,9 +262,12 @@ body {
 
 /* ===== Cards and UI Elements ===== */
 .feature-card {
-  @apply bg-white rounded-xl p-6 shadow-lg transition-all duration-300;
+  @apply rounded-xl p-6 shadow-lg transition-all;
   transform: translateZ(0);
-  /* For better performance */
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+  /* Ensure minimum padding for readability */
+  min-height: 200px;
 }
 
 .feature-card:hover,
@@ -213,7 +278,7 @@ body {
 
 /* ===== Header Scroll Effect ===== */
 header {
-  transition: all 0.3s ease;
+  transition: all var(--transition-duration) ease;
 }
 
 header.scrolled {
@@ -224,17 +289,22 @@ header.scrolled {
 /* ===== Navigation Link Effects ===== */
 nav a {
   position: relative;
+  /* Minimum touch target size */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
 }
 
 nav a::after {
   content: '';
   position: absolute;
   width: 0;
-  height: 2px;
+  height: 3px;
   bottom: -4px;
   left: 0;
   background-color: theme('colors.payflo-purple');
-  transition: width 0.3s ease;
+  transition: width var(--transition-duration) ease;
 }
 
 nav a:hover::after,
@@ -242,9 +312,14 @@ nav a:focus::after {
   width: 100%;
 }
 
+/* Visible focus state */
+nav a:focus-visible {
+  outline: 2px solid theme('colors.payflo-purple');
+  outline-offset: 4px;
+}
+
 .active-nav-link {
   @apply text-payflo-purple;
-  /* On dark body, this is 4.25:1. Acceptable. */
 }
 
 .active-nav-link::after {
@@ -270,22 +345,40 @@ nav a:focus::after {
 
 .faq-item summary {
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-duration) ease;
+  /* Minimum touch target */
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  user-select: none;
+  /* Better contrast indicator */
+  border: 2px solid transparent;
 }
 
 .faq-item summary::-webkit-details-marker {
   display: none;
 }
 
+/* Focus indicator for accordion */
+.faq-item summary:focus-visible {
+  outline: 2px solid theme('colors.payflo-purple');
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .faq-content {
   max-height: 0;
   opacity: 0;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s var(--transition-timing);
+  /* Sufficient padding for readability */
+  padding: 0 1rem;
 }
 
 .faq-content.faq-open {
   max-height: 500px;
   opacity: 1;
+  padding: 1rem;
 }
 
 .faq-summary-open {
@@ -311,8 +404,23 @@ nav a:focus::after {
 }
 
 /* Hamburger to X animation */
+#menu-toggle {
+  min-height: 48px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#menu-toggle:focus-visible {
+  outline: 2px solid theme('colors.payflo-purple');
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 #menu-toggle svg {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-duration) ease;
 }
 
 #menu-toggle.menu-open svg {
@@ -331,7 +439,11 @@ nav a:focus::after {
 }
 
 .hover-zoom img {
-  transition: transform 0.5s ease;
+  transition: transform var(--transition-duration) ease;
+  /* Responsive images */
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .hover-zoom:hover img {
@@ -340,7 +452,10 @@ nav a:focus::after {
 
 /* ===== Testimonial Card Effects ===== */
 .testimonial-card {
-  @apply bg-payflo-gray rounded-xl p-8 transition-all duration-300;
+  @apply bg-payflo-gray rounded-xl p-8 transition-all;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: var(--transition-timing);
+  min-height: 200px;
 }
 
 .testimonial-card:hover,
@@ -360,20 +475,75 @@ nav a:focus::after {
   outline: none;
 }
 
-/* Skip to main content link */
+/* ===== Skip to Main Content Link ===== */
 .skip-link {
   position: absolute;
   top: -40px;
   left: 6px;
   background: theme('colors.payflo-purple');
   color: white;
-  padding: 8px;
+  padding: 12px 16px;
   border-radius: 4px;
   text-decoration: none;
   z-index: 1000;
-  transition: top 0.3s;
+  transition: top var(--transition-duration);
+  font-weight: 600;
+  /* Minimum touch target size */
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 .skip-link:focus {
   top: 6px;
+}
+
+/* ===== Headings for Better Hierarchy ===== */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+  color: var(--color-dark-gray);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ===== Lists for Better Readability ===== */
+ul, ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+li {
+  margin: 0.5rem 0;
+  line-height: 1.8;
+}
+
+/* ===== Links Styling ===== */
+a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color var(--transition-duration) ease;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
 }

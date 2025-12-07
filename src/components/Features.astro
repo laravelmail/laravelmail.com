@@ -33,7 +33,7 @@ const features = [
     {
         title: "Real Estate & Property Marketing",
         description:
-            "Promote listings, open houses, and development updates directly to buyers and investors. With LaravelMail’s self-hosted email marketing platform, you retain full control over branding, data, and costs—perfect for free marketing at scale.",
+            "Promote listings, open houses, and development updates directly to buyers and investors. With LaravelMail's self-hosted email marketing platform, you retain full control over branding, data, and costs—perfect for free marketing at scale.",
         icon: "ph:check-circle-duotone",
         image: featureImage1,
         industries: ["Property Development", "Real Estate Agencies", "Construction", "Architecture"]
@@ -57,7 +57,7 @@ const features = [
     {
         title: "Education & Training Campaigns",
         description:
-            "Promote courses, certifications, and campus events while keeping student data private. LaravelMail’s self-hosted email marketing platform enables schools and edtechs to run free marketing campaigns with full GDPR/CCPA compliance.",
+            "Promote courses, certifications, and campus events while keeping student data private. LaravelMail's self-hosted email marketing platform enables schools and edtechs to run free marketing campaigns with full GDPR/CCPA compliance.",
         icon: "ph:check-circle-duotone",
         image: featureImage1,
         industries: ["K-12 Schools", "Universities", "Corporate Training", "E-learning"]
@@ -65,7 +65,7 @@ const features = [
     {
         title: "Professional Services Marketing",
         description:
-            "Reach lawyers, accountants, and consultants with polished, segmented campaigns. LaravelMail gives professional firms a free email marketing tool that’s secure, brand-controlled, and built on open source marketing principles.",
+            "Reach lawyers, accountants, and consultants with polished, segmented campaigns. LaravelMail gives professional firms a free email marketing tool that's secure, brand-controlled, and built on open source marketing principles.",
         icon: "ph:globe-duotone",
         image: featureImage2,
         industries: ["Legal Services", "Accounting", "Consulting", "Marketing Agencies"]
@@ -89,7 +89,7 @@ const features = [
     {
         title: "Transportation & Logistics Campaigns",
         description:
-            "Notify fleet managers and logistics partners about route changes, promotions, or service updates. Use LaravelMail’s open source marketing platform for reliable, self-hosted email marketing—no subscription required.",
+            "Notify fleet managers and logistics partners about route changes, promotions, or service updates. Use LaravelMail's open source marketing platform for reliable, self-hosted email marketing—no subscription required.",
         icon: "ph:globe-duotone",
         image: featureImage2,
         industries: ["Shipping", "Logistics", "Fleet Management", "Transportation"]
@@ -97,7 +97,7 @@ const features = [
     {
         title: "Energy & Utilities Marketing",
         description:
-            "Share sustainability reports, outage alerts, and green energy offers with utility executives. LaravelMail provides a free email marketing system that’s secure, scalable, and fully under your control.",
+            "Share sustainability reports, outage alerts, and green energy offers with utility executives. LaravelMail provides a free email marketing system that's secure, scalable, and fully under your control.",
         icon: "ph:lightning-duotone",
         image: featureImage3,
         industries: ["Renewable Energy", "Utilities", "Oil & Gas", "Environmental Services"]
@@ -129,7 +129,7 @@ const features = [
     {
         title: "Government & Public Sector Outreach",
         description:
-            "Send policy briefs, RFPs, and citizen alerts through a secure, auditable channel. LaravelMail’s open source marketing platform ensures compliance, data sovereignty, and cost-free email marketing for public agencies.",
+            "Send policy briefs, RFPs, and citizen alerts through a secure, auditable channel. LaravelMail's open source marketing platform ensures compliance, data sovereignty, and cost-free email marketing for public agencies.",
         icon: "ph:check-circle-duotone",
         image: featureImage1,
         industries: ["Government", "Public Sector", "Procurement", "Policy Making"]
@@ -169,7 +169,7 @@ const features = [
     {
         title: "Telecommunications Campaigns",
         description:
-            "Notify clients about network upgrades, new plans, or outages with guaranteed inbox placement. LaravelMail’s self-hosted email marketing platform offers telecoms a free marketing alternative to costly ESPs.",
+            "Notify clients about network upgrades, new plans, or outages with guaranteed inbox placement. LaravelMail's self-hosted email marketing platform offers telecoms a free marketing alternative to costly ESPs.",
         icon: "ph:lightning-duotone",
         image: featureImage3,
         industries: ["Telecommunications", "Network Infrastructure", "Communication Services", "VoIP"]
@@ -177,7 +177,7 @@ const features = [
     {
         title: "Insurance & Risk Management Emails",
         description:
-            "Deliver policy renewals, claims support, and risk advisories with precision and privacy. LaravelMail provides insurers a free marketing tool that’s compliant, scalable, and fully self-managed.",
+            "Deliver policy renewals, claims support, and risk advisories with precision and privacy. LaravelMail provides insurers a free marketing tool that's compliant, scalable, and fully self-managed.",
         icon: "ph:check-circle-duotone",
         image: featureImage1,
         industries: ["Insurance", "Risk Management", "Claims Processing", "Underwriting"]
@@ -201,34 +201,33 @@ const features = [
 ];
 ---
 
-<section class="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+<section class="py-20">
     <div class="container-custom relative">
-        <!-- Features -->
         <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {features.map((feature, index) => (
                     <article
-                            class={`feature-card animate-on-scroll delay-${index + 2} group bg-white p-6 rounded-2xl shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+                            class={`feature-card animate-on-scroll delay-${index + 2} group bg-white/10 border border-white/20 p-6 rounded-2xl transition-all duration-300 hover:bg-white/15 hover:border-white/30`}
                             itemScope
                             itemType="https://schema.org/Service"
                     >
 
-                        <h3 title={`self hosted email platform for ${feature.title}`}  class="text-xl font-semibold group-hover:text-purple-600" itemProp="name">
+                        <h3 title={`self hosted email platform for ${feature.title}`} class="text-lg font-semibold text-white group-hover:text-purple-300 transition-colors" itemProp="name">
                             Mail Platform for {feature.title}
                         </h3>
                         <p
-                                class="mt-3 text-gray-600 leading-relaxed text-sm"
+                                class="mt-3 text-gray-300 leading-relaxed text-sm"
                                 itemProp="description"
                                 set:html={feature.description}
                         ></p>
 
                         <div class="mt-4 flex flex-wrap gap-2">
                             {feature.industries.slice(0, 3).map(industry => (
-                                    <span title={`mail platform for ${industry}`} class="inline-block px-2 py-1 text-xs font-medium bg-purple-100 text-purple-700 rounded-full">
+                                    <span title={`mail platform for ${industry}`} class="inline-block px-2 py-1 text-xs font-medium bg-purple-500/20 text-purple-200 rounded-full border border-purple-400/30">
                 {industry}
               </span>
                             ))}
                             {feature.industries.length > 3 && (
-                                    <span class="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-600 rounded-full">
+                                    <span class="inline-block px-2 py-1 text-xs font-medium bg-white/5 text-gray-300 rounded-full border border-white/10">
                 +{feature.industries.length - 3} more
               </span>
                             )}
