@@ -13,7 +13,7 @@ interface Props {
 }
 
 const {
-  title = "Laravel Mail",
+  title = "Self Hosted Marketing Platform",
   description = "Powerful self-hosted marketing automation platform — free, open-source, and designed to deliver real results. Access free email marketing, lead generation, and lead management tools for businesses of all sizes.",
 } = Astro.props;
 
@@ -30,7 +30,7 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
     <link rel="shortcut icon" href={favicon.src} />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title} | Marketing Platform</title>
+    <title>{title}</title>
 
     <!-- Enhanced View Transitions with fallback -->
     <ViewTransitions fallback="none" />

@@ -4,11 +4,6 @@ import Logo from "src/assets/logo.svg";
 
 const navItems = [
     {
-        name: "About",
-        href: "/about",
-        title: "Learn more about laravel self hosted marketing platform",
-    },
-    {
         name: "Product",
         href: "/product",
         title: "Free self hosted marketing platform",
@@ -37,7 +32,7 @@ function trackClick(label) {
             href="/"
             onClick={() => trackClick("logo_home")}
             class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
-            aria-label="Leads Captain home"
+            aria-label="self hosted social marketing platform with automation"
         >
             <Image
                 src={Logo}
@@ -72,36 +67,13 @@ function trackClick(label) {
             <a
                 title="free marketing platform"
                 target="_blank"
-                href="https://app.laravelmail.com/register"
+                href="https://app.laravelmail.com/"
                 onClick={() => trackClick("try_now")}
                 class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
             >
                 Try Now
             </a>
 
-            <!-- Mobile Menu Button -->
-            <button
-                id="menu-toggle"
-                class="md:hidden flex items-center transition-transform duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded p-1"
-                aria-label="Toggle navigation menu"
-                aria-expanded="false"
-                aria-controls="mobile-menu"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
         </div>
     </div>
 
@@ -126,11 +98,11 @@ function trackClick(label) {
                 ))
             }
             <a
-                href="/try"
+                href="https://app.laravelmail.com/"
                 onClick={() => trackClick("mobile_try")}
                 class="block py-2 px-2 text-gray-700 hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
             >
-                Try
+                View Demo
             </a>
         </div>
     </nav>

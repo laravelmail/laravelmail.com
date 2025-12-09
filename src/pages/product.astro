@@ -44,7 +44,7 @@ const apiFeatures = [
     },
     {
         title: "Company Intelligence",
-        description: "Firmographics, technographics, funding data",
+        description: "Firmographics, funding data",
         example: "/api/v1/companies/intel",
     },
     {
@@ -196,31 +196,30 @@ const mailFeatures = [
 ---
 
 <Layout
-    title="Laravel Mail Marketing Platform - Complete Email Marketing & Lead Enrichment Solution"
-    description="Laravel Mail provides enterprise-grade email marketing, lead enrichment APIs, campaign automation, email validation, and buyer intelligence. GDPR compliant with 99.9% uptime SLA."
+    title="Self hosted marketing platform"
+    description="Our platform provides enterprise-grade email marketing, lead enrichment APIs, campaign automation, email validation, and buyer intelligence"
 >
     <section class="pt-20 pb-16 md:pt-28 md:pb-24">
         <div class="container-custom">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="animate-on-scroll">
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-                        Complete <span class="gradient-text"
-                            >Email Marketing Platform</span
+                    <h1 class="text-4xl md:text-5xl text-white font-bold leading-tight">
+                        Complete <span class="gradient-text text-white"
+                            >AI Marketing Platform</span
                         > for Modern Sales Teams
                     </h1>
-                    <p class="mt-6 text-xl text-gray-600 max-w-lg">
-                        Laravel Mail combines lead enrichment, campaign
-                        automation, email validation, and buyer intelligence in
-                        one powerful platform. Launch compliant email campaigns
-                        with infrastructure customers trust.
+                    <p class="mt-6 text-xl text-white max-w-lg">
+                        Our platform combines lead enrichment, campaign
+                        automation, ai marketing using ollama, free email validation, and buyer intelligence in
+                        one powerful platform.
                     </p>
                     <div class="mt-8 flex flex-col sm:flex-row gap-4">
                         <a
-                            href="https://app.laravelmail.com/register"
-                            class="btn btn-primary">Start Free Trial</a
+                            href="https://app.laravelmail.com/"
+                            class="btn btn-primary">Test demo</a
                         >
-                        <a href="/docs" class="btn btn-secondary"
-                            >View Documentation</a
+                        <a href="https://app.laravelmail.com/docs" class="btn btn-secondary"
+                            >Documentation</a
                         >
                     </div>
 
@@ -240,7 +239,7 @@ const mailFeatures = [
                         <div class="flex items-center">
                             <div class="h-2 w-2 bg-blue-500 rounded-full mr-2">
                             </div>
-                            <span>GDPR Compliant</span>
+                            <span>WhatsApp Business Integration</span>
                         </div>
                     </div>
                 </div>
@@ -255,11 +254,11 @@ const mailFeatures = [
                             class="relative bg-white rounded-xl shadow-xl overflow-hidden"
                         >
                             <Image
-                                src="https://i.imgur.com/F0KPMAD.png"
-                                alt="Laravel Mail Dashboard showing campaign analytics and lead enrichment"
+                                    inferSize={true}
+                                    src="/screens/dashboard.png"
+                                alt="Marketing dashboard showing inbox messages."
                                 class="w-full h-auto"
-                                width={700}
-                                height={500}
+
                             />
                         </div>
                     </div>
@@ -273,13 +272,11 @@ const mailFeatures = [
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold">
-                    Organize Teams with Workspaces
+                    Organize your marketing
                 </h2>
                 <p class="mt-4 text-xl text-gray-600">
-                    Create dedicated workspaces for each team, client, or
-                    campaign. Centralize your email marketing operations with
-                    powerful collaboration tools that scale with your
-                    organization.
+                    Centralize your marketing operations with
+                    powerful integrations that scale with your organization.
                 </p>
             </div>
 
@@ -290,7 +287,6 @@ const mailFeatures = [
                             class="bg-leadscaptain-gray rounded-xl p-8 animate-on-scroll hover:shadow-lg transition-shadow duration-300"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
-                            <div class="text-4xl mb-4">{feature.icon}</div>
                             <h3 class="text-xl font-semibold mb-3">
                                 {feature.title}
                             </h3>
@@ -331,7 +327,7 @@ const mailFeatures = [
                             <p class="text-gray-600 mb-4 leading-relaxed">
                                 {feature.description}
                             </p>
-                            <div class="inline-block px-4 py-2 bg-leadscaptain-gray rounded-full text-sm font-medium text-leadscaptain-purple">
+                            <div class="inline-block px-4 py-2 bg-leadscaptain-gray rounded-full text-sm font-medium text-gray-600">
                                 {feature.benefit}
                             </div>
                         </div>
@@ -339,11 +335,7 @@ const mailFeatures = [
                 }
             </div>
 
-            <div class="mt-12 text-center animate-on-scroll">
-                <a href="/campaigns" class="btn btn-primary"
-                    >Explore Campaign Features</a
-                >
-            </div>
+
         </div>
     </section>
 
@@ -401,7 +393,7 @@ const mailFeatures = [
                                         class="h-3 w-3 bg-green-500 rounded-full mr-3"
                                     >
                                     </div>
-                                    <span class="font-mono text-sm"
+                                    <span class="font-mono text-sm text-gray-600"
                                         >john@company.com</span
                                     >
                                 </div>
@@ -418,7 +410,7 @@ const mailFeatures = [
                                         class="h-3 w-3 bg-red-500 rounded-full mr-3"
                                     >
                                     </div>
-                                    <span class="font-mono text-sm"
+                                    <span class="font-mono text-sm text-gray-600"
                                         >fake@invalid.xyz</span
                                     >
                                 </div>
@@ -434,7 +426,7 @@ const mailFeatures = [
                                         class="h-3 w-3 bg-yellow-500 rounded-full mr-3"
                                     >
                                     </div>
-                                    <span class="font-mono text-sm"
+                                    <span class="font-mono text-sm text-gray-600"
                                         >trap@domain.com</span
                                     >
                                 </div>
@@ -450,7 +442,7 @@ const mailFeatures = [
                                     Validation Results
                                 </div>
                                 <div
-                                    class="text-2xl font-bold text-purple"
+                                    class="text-2xl font-bold text-fuchsia-600"
                                 >
                                     99.9% Accuracy
                                 </div>
@@ -544,12 +536,10 @@ const mailFeatures = [
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold text-white">
-                    Developer-First API Platform
+                    Supports REST API Integration
                 </h2>
                 <p class="mt-4 text-xl text-gray-600">
-                    Build custom email marketing solutions with our
-                    comprehensive RESTful APIs. Complete documentation, client
-                    libraries, and webhook support for seamless integration.
+                    Build custom <strong>marketing solutions</strong> with our <strong>company</strong>.
                 </p>
             </div>
 
@@ -562,9 +552,10 @@ const mailFeatures = [
                         >
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
-                                    <h3 class="text-xl font-semibold">
+                                    <h3 class="text-xl font-semibold" title={feature.title}>
                                         {feature.title}
                                     </h3>
+
                                     <p class="mt-2 text-gray-600">
                                         {feature.description}
                                     </p>
@@ -588,9 +579,9 @@ const mailFeatures = [
                     Enterprise Features Built In
                 </h2>
                 <p class="mt-4 text-xl text-gray-600">
-                    Every feature you need to run professional email marketing
-                    campaigns at scale. From compliance to customization,
-                    Laravel Mail has you covered.
+                    Every feature you need to run <b>professional marketing campaigns</b> at scale, using open source tools
+                    From compliance to customization,
+                    Open source marketing platform that has you covered.
                 </p>
             </div>
 
@@ -625,14 +616,13 @@ const mailFeatures = [
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="animate-on-scroll">
                     <h2 class="text-3xl md:text-4xl font-bold">
-                        Built for <span class="gradient-text"
-                            >Scale & Compliance</span
+                        Built for <span class="gradient-text">Scale & Compliance</span
                         >
                     </h2>
                     <p class="mt-6 text-xl text-gray-600">
                         Process millions of emails and lead enrichment requests
                         with enterprise-grade security and regulatory
-                        compliance. Laravel Mail infrastructure is designed for
+                        compliance. Our infrastructure is designed for
                         reliability and performance.
                     </p>
 
@@ -650,18 +640,6 @@ const mailFeatures = [
                             </div>
                         </div>
 
-                        <div class="flex items-start">
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">
-                                    Global Infrastructure
-                                </h4>
-                                <p class="text-gray-600">
-                                    Multi-region deployment across 12 data
-                                    centers with sub-50ms response times
-                                    worldwide
-                                </p>
-                            </div>
-                        </div>
 
                         <div class="flex items-start">
                             <div class="ml-4">
@@ -671,6 +649,17 @@ const mailFeatures = [
                                 <p class="text-gray-600">
                                     Intelligent throttling and queueing systems
                                     ensure optimal performance under any load
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium">
+                                    WhatsApp Integration
+                                </h4>
+                                <p class="text-gray-600">
+                                    Reach your customers with our WhatApp Business integration.
                                 </p>
                             </div>
                         </div>
@@ -699,20 +688,17 @@ const mailFeatures = [
 {`{
   "status": "success",
   "contact": {
-    "email": "john.doe@company.com",
+    "email": "info@laravelcompany.com",
     "phone": "+1-555-123-4567",
-    "linkedin": "linkedin.com/in/johndoe",
-    "title": "VP of Sales",
+    "company": "Laravel Company",
     "confidence": 0.95
   },
   "company": {
-    "name": "TechCorp Inc",
-    "domain": "techcorp.com",
+    "name": "Laravel Company",
     "industry": "SaaS",
-    "size": "201-500",
+    "size": "5",
     "revenue": "$50M-$100M"
   },
-  "enrichment_time": "127ms"
 }`}
             </pre>
                     </div>
@@ -726,12 +712,12 @@ const mailFeatures = [
         <div class="container-custom">
             <div class="text-center animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold">
-                    Trusted by Sales Teams Worldwide
+                    Used by Developers Worldwide.
                 </h2>
                 <p class="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
                     From startups to enterprise companies, thousands of sales
-                    and marketing teams rely on Laravel Mail to power their
-                    email campaigns and lead generation efforts.
+                    and marketing teams rely on our platform to power their
+                    marketing campaigns and lead generation efforts.
                 </p>
 
                 <div
@@ -744,7 +730,7 @@ const mailFeatures = [
                             2,500+
                         </div>
                         <div class="text-sm text-gray-600 mt-1">
-                            Active Customers
+                            Active Downloads
                         </div>
                     </div>
                     <div class="text-center">
@@ -765,14 +751,7 @@ const mailFeatures = [
                             Accuracy Rate
                         </div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-3xl font-bold text-leadscaptain-blue">
-                            24/7
-                        </div>
-                        <div class="text-sm text-gray-600 mt-1">
-                            Expert Support
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
