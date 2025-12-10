@@ -1,0 +1,45 @@
+---
+const improvements = [
+    "Unified omnichannel dashboard",
+    "Optimized performance",
+    "Enhanced analytics & reporting"
+];
+---
+
+<div class="max-w-6xl mx-auto">
+    <div class="bg-gradient-to-r from-purple-900/40 via-pink-900/40 to-purple-900/40 border border-purple-500/30 rounded-xl p-12">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="md:flex-1">
+                <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">
+                    Redesigned User Interface
+                </h3>
+                <p class="text-gray-300 text-lg mb-6">
+                    Experience a completely revamped dashboard with intuitive navigation, faster load times, dark mode optimization, and responsive design that works seamlessly across all devices. Manage all your campaigns from a unified, beautiful interface.
+                </p>
+                <ul class="space-y-3">
+                    {improvements.map(improvement => (
+                            <li class="flex items-center text-gray-300">
+                                <svg class="w-5 h-5 mr-3 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                </svg>
+                                {improvement}
+                            </li>
+                    ))}
+                </ul>
+            </div>
+
+            <div class="md:flex-1">
+                <div class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg p-8 border border-purple-500/20">
+                    <div class="aspect-square bg-gray-800 rounded-lg flex items-center justify-center">
+                        <div class="text-center">
+                            <svg class="w-20 h-20 text-purple-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0m-9 5h.01"></path>
+                            </svg>
+                            <p class="text-gray-400 font-medium">Modern, Intuitive Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
