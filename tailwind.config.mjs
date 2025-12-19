@@ -10,6 +10,11 @@ export default {
         'payflo-gray': '#eaeaea',   // Updated to white/light for contrast
         'payflo-dark': '#4b1e4e',   // Updated to dark gray
 
+        // Leadscaptain Palette
+        'leadscaptain-purple': '#C270C8',
+        'leadscaptain-blue': '#4b1e4e',
+        'leadscaptain-gray': '#F9FAFB', // Optimized for light sections
+
         // Add new palette directly
         'custom-primary': '#C270C8',
         'custom-bg': '#4b1e4e',
