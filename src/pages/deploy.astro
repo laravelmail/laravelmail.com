@@ -1,0 +1,187 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const repoUrl = "https://github.com/laravelmail/laravelmail.com";
+
+const deploymentPlatforms = [
+    {
+        name: "AWS Amplify",
+        logo: "https://oneclick.amplifyapp.com/deploy-to-amplify.svg",
+        url: `https://console.aws.amazon.com/amplify/home#/deploy?repo=${repoUrl}`,
+        description: "Deploy to AWS Amplify Console with one click.",
+        bgColor: "bg-orange-50",
+        borderColor: "border-orange-200",
+    },
+    {
+        name: "Vercel",
+        logo: "https://vercel.com/button",
+        url: `https://vercel.com/new/clone?repository-url=${repoUrl}`,
+        description: "Deploy to Vercel in seconds.",
+        bgColor: "bg-gray-50",
+        borderColor: "border-gray-200",
+    },
+    {
+        name: "Netlify",
+        logo: "https://www.netlify.com/img/deploy/button.svg",
+        url: `https://app.netlify.com/start/deploy?repository=${repoUrl}`,
+        description: "Push to Netlify for seamless deployment.",
+        bgColor: "bg-cyan-50",
+        borderColor: "border-cyan-200",
+    },
+    {
+        name: "DigitalOcean",
+        logo: "https://www.deploytodo.com/do-btn.svg",
+        url: `https://www.digitalocean.com/deploy?repository=${repoUrl}`,
+        description: "Deploy to DigitalOcean App Platform.",
+        bgColor: "bg-blue-50",
+        borderColor: "border-blue-200",
+    },
+    {
+        name: "Railway",
+        logo: "https://railway.app/button.svg",
+        url: `https://railway.app/new/import?repo=${repoUrl}`,
+        description: "Deploy to Railway with one click.",
+        bgColor: "bg-purple-50",
+        borderColor: "border-purple-200",
+    },
+    {
+        name: "Heroku",
+        logo: "https://www.herokucdn.com/deploy/button.svg",
+        url: `https://heroku.com/deploy?template=${repoUrl}`,
+        description: "Deploy to Heroku Cloud.",
+        bgColor: "bg-indigo-50",
+        borderColor: "border-indigo-200",
+    },
+];
+---
+
+<Layout
+    title="Deploy - Laravel Mail"
+    description="One-click deployment for Laravel Mail on various cloud platforms including AWS Amplify, DigitalOcean, Vercel, and more."
+>
+    <section
+        class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden bg-white"
+    >
+        <div class="container-custom relative z-10">
+            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
+                <h1
+                    class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight"
+                >
+                    One-Click <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-payflo-purple to-payflo-blue"
+                        >Deployment</span
+                    >
+                </h1>
+                <p
+                    class="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto"
+                >
+                    Choose your favorite cloud platform and deploy <strong
+                        >Laravel Mail</strong
+                    > instantly. Zero configuration required to get started.
+                </p>
+            </div>
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            >
+                {
+                    deploymentPlatforms.map((platform) => (
+                        <div
+                            class={`group p-8 rounded-2xl border ${platform.borderColor} ${platform.bgColor} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 animate-on-scroll`}
+                        >
+                            <div class="h-12 flex items-center mb-6">
+                                <h3 class="text-2xl font-bold text-gray-900">
+                                    {platform.name}
+                                </h3>
+                            </div>
+                            <p class="text-gray-600 mb-8 min-h-[3rem]">
+                                {platform.description}
+                            </p>
+                            <a
+                                href={platform.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-block transition-transform duration-300 hover:scale-105 active:scale-95"
+                            >
+                                <img
+                                    src={platform.logo}
+                                    alt={`Deploy to ${platform.name}`}
+                                    class="h-10 w-auto"
+                                />
+                            </a>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Other deployment methods -->
+            <div class="mt-24 max-w-4xl mx-auto animate-on-scroll">
+                <div
+                    class="bg-gray-900 rounded-3xl p-10 text-white overflow-hidden relative shadow-2xl"
+                >
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-payflo-purple/20 blur-3xl rounded-full translate-x-32 -translate-y-32"
+                    >
+                    </div>
+                    <div class="relative z-10">
+                        <h2 class="text-3xl font-bold mb-6">
+                            Other Deployment Options
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                            <div>
+                                <h3
+                                    class="text-xl font-semibold mb-3 flex items-center"
+                                >
+                                    <svg
+                                        class="w-6 h-6 mr-3 text-payflo-blue"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
+                                        ></path>
+                                    </svg>
+                                    Git Clone
+                                </h3>
+                                <p class="text-gray-400 text-sm mb-4">
+                                    Deploy manually on any server with Git and
+                                    Node.js installed.
+                                </p>
+                                <code
+                                    class="block bg-black/50 p-3 rounded-lg text-xs font-mono text-payflo-blue"
+                                >
+                                    git clone {repoUrl}
+                                </code>
+                            </div>
+                            <div>
+                                <h3
+                                    class="text-xl font-semibold mb-3 flex items-center"
+                                >
+                                    <svg
+                                        class="w-6 h-6 mr-3 text-payflo-purple"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            d="M13.983 11.078c0 .495-.394.904-.883.904H11.12v1.147l2.862-2.051zm-2.862-5.748l4.004 2.87-4.004 2.87V5.33zM3.997 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8zm2.182 0c0 3.213 2.605 5.818 5.818 5.818s5.818-2.605 5.818-5.818-2.605-5.818-5.818-5.818-5.818 2.605-5.818 5.818z"
+                                        ></path>
+                                    </svg>
+                                    Docker Image
+                                </h3>
+                                <p class="text-gray-400 text-sm mb-4">
+                                    Pull the pre-built image from Docker Hub and
+                                    run it anywhere.
+                                </p>
+                                <code
+                                    class="block bg-black/50 p-3 rounded-lg text-xs font-mono text-payflo-purple"
+                                >
+                                    docker pull laravelmail/platform:latest
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
