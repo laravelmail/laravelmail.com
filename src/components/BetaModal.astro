@@ -103,6 +103,32 @@
 </div>
 
 <script>
+    function trackBetaModalEvent(action: string, label: string) {
+        if (typeof window !== "undefined") {
+            try {
+                // @ts-ignore
+                if (typeof window.gtag !== "undefined") {
+                    // @ts-ignore
+                    window.gtag("event", action, {
+                        event_category: "beta_modal",
+                        event_label: label,
+                    });
+                } else if (typeof (window as any).dataLayer !== "undefined") {
+                    // @ts-ignore
+                    (window as any).dataLayer.push({
+                        event: "beta_modal_event",
+                        event_action: action,
+                        event_category: "beta_modal",
+                        event_label: label,
+                    });
+                }
+                console.log(`Tracked: ${action} - ${label}`);
+            } catch (e) {
+                console.warn("Tracking error", e);
+            }
+        }
+    }
+
     function setupBetaModal() {
         const modal = document.getElementById("beta-modal");
         const content = document.getElementById("beta-modal-content");
@@ -120,9 +146,10 @@
             content?.classList.remove("scale-95");
             content?.classList.add("scale-100");
             document.body.style.overflow = "hidden";
+            trackBetaModalEvent("open", "Beta Modal View");
         };
 
-        const closeModal = () => {
+        const closeModal = (redirect = false) => {
             modal?.classList.remove("opacity-100");
             modal?.classList.add("opacity-0");
             content?.classList.remove("scale-100");
@@ -132,6 +159,9 @@
                 modal?.classList.remove("flex");
                 modal?.classList.add("hidden");
                 document.body.style.overflow = "";
+                if (redirect) {
+                    window.location.href = "https://app.laravelmail.com/";
+                }
             }, 300);
         };
 
@@ -143,15 +173,18 @@
         });
 
         closeBtn?.addEventListener("click", () => {
-            closeModal();
-            setTimeout(() => {
-                window.location.href = "https://app.laravelmail.com/";
-            }, 300);
+            trackBetaModalEvent("click_confirm", "Got it, thanks!");
+            closeModal(true);
         });
-        closeBtnX?.addEventListener("click", closeModal);
+
+        closeBtnX?.addEventListener("click", () => {
+            trackBetaModalEvent("click_close", "X Button");
+            closeModal();
+        });
 
         modal?.addEventListener("click", (e) => {
             if (e.target === modal) {
+                trackBetaModalEvent("click_outside", "Overlay Click");
                 closeModal();
             }
         });
