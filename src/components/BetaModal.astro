@@ -1,0 +1,162 @@
+---
+
+---
+
+<div
+    id="beta-modal"
+    class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-gray-900/60 backdrop-blur-sm transition-all duration-300 opacity-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+>
+    <div
+        id="beta-modal-content"
+        class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden transform scale-95 transition-all duration-300"
+    >
+        <div class="px-6 py-8 text-center">
+            <div
+                class="inline-flex items-center justify-center w-16 h-16 bg-payflo-purple/10 text-payflo-purple rounded-full mb-6"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-8 h-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+
+            <h2 id="modal-title" class="text-2xl font-bold text-gray-900 mb-4">
+                We're in Beta!
+            </h2>
+
+            <p class="text-gray-600 mb-8">
+                Thank you for your interest in <strong>Laravel Mail</strong>. We
+                are currently in private beta, fine-tuning the platform for the
+                best possible experience.
+            </p>
+
+            <div class="bg-gray-50 rounded-xl p-6 mb-8 text-left">
+                <p
+                    class="text-sm text-gray-500 mb-2 uppercase tracking-wide font-semibold"
+                >
+                    Want early access?
+                </p>
+                <p class="text-gray-700">
+                    If you'd like to get access to a live version of the
+                    platform, please get in contact with us:
+                </p>
+                <a
+                    href="mailto:info@laravelmail.com"
+                    class="mt-3 inline-flex items-center text-payflo-purple font-semibold hover:text-payflo-dark transition-colors"
+                >
+                    info@laravelmail.com
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 ml-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <button
+                id="close-beta-modal"
+                class="w-full py-3 px-6 bg-payflo-dark text-white rounded-xl font-semibold hover:bg-gray-800 transition-all duration-300 shadow-lg shadow-gray-200"
+            >
+                Got it, thanks!
+            </button>
+        </div>
+        <div
+            class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+        >
+            <button id="close-beta-modal-x" aria-label="Close modal">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setupBetaModal() {
+        const modal = document.getElementById("beta-modal");
+        const content = document.getElementById("beta-modal-content");
+        const closeBtn = document.getElementById("close-beta-modal");
+        const closeBtnX = document.getElementById("close-beta-modal-x");
+        const triggerBtns = document.querySelectorAll(".trigger-beta-modal");
+
+        const openModal = () => {
+            modal?.classList.remove("hidden");
+            modal?.classList.add("flex");
+            // Force reflow
+            void modal?.offsetWidth;
+            modal?.classList.remove("opacity-0");
+            modal?.classList.add("opacity-100");
+            content?.classList.remove("scale-95");
+            content?.classList.add("scale-100");
+            document.body.style.overflow = "hidden";
+        };
+
+        const closeModal = () => {
+            modal?.classList.remove("opacity-100");
+            modal?.classList.add("opacity-0");
+            content?.classList.remove("scale-100");
+            content?.classList.add("scale-95");
+
+            setTimeout(() => {
+                modal?.classList.remove("flex");
+                modal?.classList.add("hidden");
+                document.body.style.overflow = "";
+            }, 300);
+        };
+
+        triggerBtns.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                openModal();
+            });
+        });
+
+        closeBtn?.addEventListener("click", () => {
+            closeModal();
+            setTimeout(() => {
+                window.location.href = "https://app.laravelmail.com/";
+            }, 300);
+        });
+        closeBtnX?.addEventListener("click", closeModal);
+
+        modal?.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+
+    // Initialize on load and after view transitions
+    document.addEventListener("astro:page-load", setupBetaModal);
+</script>

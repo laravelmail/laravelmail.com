@@ -4,6 +4,7 @@ import { fade } from "astro:transitions";
 import { getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BetaModal from "../components/BetaModal.astro";
 import "../styles/global.css";
 import favIcon from "src/assets/favicon.png";
 
@@ -136,7 +137,6 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
     <Header transition:persist="header" />
 
     <main
@@ -148,6 +148,7 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
     </main>
 
     <Footer transition:persist="footer" />
+    <BetaModal />
 
     <!-- Enhanced Intersection Observer for animations -->
     <script>
