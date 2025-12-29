@@ -4,23 +4,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        'payflo-purple': '#C270C8', // Updated to primary
-        'payflo-blue': '#4b1e4e',   // Updated to blue (dark purple)
-        'payflo-pink': '#f66D9b',
-        'payflo-gray': '#eaeaea',   // Updated to white/light for contrast
-        'payflo-dark': '#4b1e4e',   // Updated to dark gray
+        'payflo-purple': '#7c3aed',
+        'payflo-blue': '#0a92dd',
+        'payflo-pink': '#ec4899',
+        'payflo-gray': '#f1f5f9',
+        'payflo-dark': '#0f172a',
 
-        // Leadscaptain Palette
-        'leadscaptain-purple': '#C270C8',
-        'leadscaptain-blue': '#4b1e4e',
-        'leadscaptain-gray': '#F9FAFB', // Optimized for light sections
+        // Leadscaptain Palette (Muted/Dark)
+        'leadscaptain-purple': '#7c3aed',
+        'leadscaptain-blue': '#0a92dd',
+        'leadscaptain-gray': '#cbd5e1',
 
-        // Add new palette directly
-        'custom-primary': '#C270C8',
-        'custom-bg': '#4b1e4e',
-        'custom-red': '#B42583',
-        'custom-orange': '#EEB55A',
-        'custom-yellow': '#F58140',
+        // Brand Palette from SCSS
+        'brand-primary': '#7c3aed',
+        'brand-accent': '#ec4899',
+        'brand-blue': '#0a92dd',
+        'brand-bg': '#0f172a',
+        'brand-bg-darker': '#0a0e27',
+        'brand-bg-card': '#1e293b',
+        'brand-success': '#10b981',
       },
       fontFamily: {
         sans: ['Nunito', 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],

@@ -110,14 +110,14 @@ const allCompanies = Array.from(
 
 <Layout title="Jobs - Find Your Next Opportunity" description="Discover exciting job opportunities from top companies. Find remote work, full-time positions, and career opportunities that match your skills.">
     <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 bg-gradient-to-b from-payflo-gray/50 to-white overflow-hidden">
+    <section class="relative py-20 md:py-32 bg-transparent overflow-hidden">
         <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" aria-hidden="true"></div>
         <div class="container-custom relative">
             <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 animate-on-scroll">
                     Find Your Next <span class="gradient-text">Opportunity</span>
                 </h1>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-on-scroll delay-1">
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto animate-on-scroll delay-1">
                     Discover exciting career opportunities from top companies around the world. Start your journey today.
                 </p>
 
@@ -128,11 +128,11 @@ const allCompanies = Array.from(
                             id="keyword-search"
                             name="keyword"
                             placeholder="Search for jobs (e.g. developer, marketing)"
-                            class="flex-1 px-6 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-payflo-purple focus:border-payflo-purple focus:outline-none text-lg"
+                            class="flex-1 px-6 py-4 rounded-xl border border-white/20 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none text-lg"
                     />
                     <button
                             type="submit"
-                            class="px-8 py-4 bg-payflo-purple text-white font-semibold rounded-xl hover:bg-payflo-purple/90 focus:bg-payflo-purple/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                            class="px-8 py-4 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                     >
                         Search Jobs
                     </button>
@@ -143,14 +143,14 @@ const allCompanies = Array.from(
 
     <!-- Featured Job -->
     {featuredJob && (
-            <section class="py-16 bg-white">
+            <section class="py-16 bg-[#1e293b]/40 backdrop-blur-md">
                 <div class="container-custom">
                     <div class="mb-12">
                         <h2 class="text-2xl font-bold mb-4 animate-on-scroll">Featured Opportunity</h2>
                     </div>
 
                     <article class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll delay-1">
-                        <div class="hover-zoom rounded-2xl overflow-hidden shadow-lg bg-gray-100 flex items-center justify-center min-h-[300px]">
+                        <div class="hover-zoom rounded-2xl overflow-hidden shadow-lg bg-[#1e293b]/30 flex items-center justify-center min-h-[300px]">
                             <img
                                     src={getCompanyLogo(featuredJob)}
                                     alt={`${featuredJob.company} logo`}
@@ -160,7 +160,7 @@ const allCompanies = Array.from(
 
                         <div>
                             <div class="flex flex-wrap items-center gap-3 mb-4">
-                            <span class="bg-payflo-purple/10 text-payflo-purple px-3 py-1 rounded-full text-sm font-medium">
+                            <span class="bg-brand-primary/10 text-brand-primary px-3 py-1 rounded-full text-sm font-medium">
                                 {getJobType(featuredJob)}
                             </span>
                                 {isRemoteJob(featuredJob) && (
@@ -179,21 +179,21 @@ const allCompanies = Array.from(
                                 {featuredJob.title}
                             </h3>
 
-                            <p class="text-lg text-payflo-purple font-semibold mb-4">
+                            <p class="text-lg text-brand-primary font-semibold mb-4">
                                 {featuredJob.company}
                             </p>
 
-                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            <p class="text-lg text-gray-400 mb-6 leading-relaxed">
                                 {getJobDescription(featuredJob)}
                             </p>
 
                             <div class="flex flex-wrap items-center gap-6 mb-8">
-                                <div class="flex items-center text-gray-600 text-sm">
+                                <div class="flex items-center text-gray-400 text-sm">
                                     <span class="mr-2">📍</span>
                                     <span>{featuredJob.location}</span>
                                 </div>
 
-                                <div class="flex items-center text-gray-600 text-sm">
+                                <div class="flex items-center text-gray-400 text-sm">
                                     <span class="mr-2">📅</span>
                                     <time datetime={getJobDate(featuredJob)}>
                                         {new Date(getJobDate(featuredJob)).toLocaleDateString('en-US', {
@@ -204,7 +204,7 @@ const allCompanies = Array.from(
                                     </time>
                                 </div>
 
-                                <div class="flex items-center text-gray-600 text-sm">
+                                <div class="flex items-center text-gray-400 text-sm">
                                     <span class="mr-2">⏱️</span>
                                     <span>{calculateReadingTime(featuredJob)} min read</span>
                                 </div>
@@ -212,7 +212,7 @@ const allCompanies = Array.from(
 
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <button
-                                        class="btn btn-primary inline-flex items-center group focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                        class="btn btn-primary inline-flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                         onclick="openApplicationModal('${featuredJob.job_url}', '${featuredJob.title}', '${featuredJob.company}', 'apply')"
                                         aria-label={`Apply for ${featuredJob.title} at ${featuredJob.company}`}
                                 >
@@ -222,7 +222,7 @@ const allCompanies = Array.from(
 
                                 {featuredJob.job_url_direct && (
                                         <button
-                                                class="btn bg-gray-100 text-gray-700 hover:bg-gray-200 focus:bg-gray-200 inline-flex items-center"
+                                                class="btn bg-[#1e293b]/30 text-gray-300 hover:bg-gray-200 focus:bg-gray-200 inline-flex items-center"
                                                 onclick="openApplicationModal('${featuredJob.job_url_direct}', '${featuredJob.title}', '${featuredJob.company}', 'direct')"
                                         >
                                             Direct Apply
@@ -237,13 +237,13 @@ const allCompanies = Array.from(
 
     <!-- Filters Section -->
     {(allLocations.length > 0 || allCompanies.length > 0) && (
-            <section class="py-8 bg-payflo-gray/50 border-t border-gray-200">
+            <section class="py-8 bg-[#0a0e27]/60 border-t border-white/10">
                 <div class="container-custom">
                     <div class="flex flex-wrap items-center gap-4 mb-4">
-                        <span class="text-sm font-medium text-gray-700">Filter by location:</span>
+                        <span class="text-sm font-medium text-gray-300">Filter by location:</span>
                         <div class="flex flex-wrap gap-2" role="group" aria-label="Filter jobs by location">
                             <button
-                                    class="filter-location px-3 py-1 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:bg-payflo-purple hover:text-white focus:bg-payflo-purple focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                    class="filter-location px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-location="all"
                                     aria-pressed="true"
                             >
@@ -251,7 +251,7 @@ const allCompanies = Array.from(
                             </button>
                             {allLocations.slice(0, 10).map((location: string) => (
                                     <button
-                                            class="filter-location px-3 py-1 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:bg-payflo-purple hover:text-white focus:bg-payflo-purple focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                            class="filter-location px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                             data-location={location}
                                             aria-pressed="false"
                                     >
@@ -262,24 +262,24 @@ const allCompanies = Array.from(
                     </div>
 
                     <div class="flex flex-wrap items-center gap-4">
-                        <span class="text-sm font-medium text-gray-700">Filter by type:</span>
+                        <span class="text-sm font-medium text-gray-300">Filter by type:</span>
                         <div class="flex flex-wrap gap-2" role="group" aria-label="Filter jobs by type">
                             <button
-                                    class="filter-type px-3 py-1 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:bg-payflo-purple hover:text-white focus:bg-payflo-purple focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                    class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-type="all"
                                     aria-pressed="true"
                             >
                                 All Types
                             </button>
                             <button
-                                    class="filter-type px-3 py-1 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:bg-payflo-purple hover:text-white focus:bg-payflo-purple focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                    class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-type="remote"
                                     aria-pressed="false"
                             >
                                 Remote Only
                             </button>
                             <button
-                                    class="filter-type px-3 py-1 bg-white text-gray-700 rounded-full text-sm border border-gray-200 hover:bg-payflo-purple hover:text-white focus:bg-payflo-purple focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                    class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-type="salary"
                                     aria-pressed="false"
                             >
@@ -299,8 +299,8 @@ const allCompanies = Array.from(
             </div>
 
             <div id="loading-indicator" class="hidden text-center py-16">
-                <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500">
-                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <div class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400">
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -318,9 +318,9 @@ const allCompanies = Array.from(
                                         data-is-remote={isRemoteJob(job)}
                                         data-has-salary={getSalaryRange(job) ? 'true' : 'false'}
                                 >
-                                    <div class="block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg focus-within:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                                    <div class="block bg-[#1e293b]/40 backdrop-blur-md rounded-xl overflow-hidden shadow-sm hover:shadow-lg focus-within:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-white/10">
                                         <!-- Company Logo -->
-                                        <div class="aspect-video overflow-hidden bg-gray-50 flex items-center justify-center p-6">
+                                        <div class="aspect-video overflow-hidden bg-[#1e293b]/20 flex items-center justify-center p-6">
                                             <img
                                                     src={getCompanyLogo(job)}
                                                     alt={`${job.company} logo`}
@@ -332,7 +332,7 @@ const allCompanies = Array.from(
                                         <div class="p-6">
                                             <!-- Job Type and Remote Badge -->
                                             <div class="flex flex-wrap gap-2 mb-4">
-                                        <span class="bg-payflo-purple/10 text-payflo-purple px-2 py-1 rounded text-xs font-medium">
+                                        <span class="bg-brand-primary/10 text-brand-primary px-2 py-1 rounded text-xs font-medium">
                                             {getJobType(job)}
                                         </span>
                                                 {isRemoteJob(job) && (
@@ -347,19 +347,19 @@ const allCompanies = Array.from(
                                                 )}
                                             </div>
 
-                                            <h3 class="font-semibold text-lg mb-2 group-hover:text-payflo-purple transition-colors duration-200 line-clamp-2">
+                                            <h3 class="font-semibold text-lg mb-2 group-hover:text-brand-primary transition-colors duration-200 line-clamp-2">
                                                 {job.title}
                                             </h3>
 
-                                            <p class="text-payflo-purple font-medium mb-3">
+                                            <p class="text-brand-primary font-medium mb-3">
                                                 {job.company}
                                             </p>
 
-                                            <p class="text-sm text-gray-600 mb-4 line-clamp-3">
+                                            <p class="text-sm text-gray-400 mb-4 line-clamp-3">
                                                 {getJobDescription(job)}
                                             </p>
 
-                                            <div class="flex flex-wrap items-center gap-4 text-xs text-gray-500 mb-4">
+                                            <div class="flex flex-wrap items-center gap-4 text-xs text-gray-400 mb-4">
                                                 <div class="flex items-center">
                                                     <span class="mr-1">📍</span>
                                                     <span>{job.location}</span>
@@ -379,14 +379,14 @@ const allCompanies = Array.from(
 
                                             <div class="flex flex-col sm:flex-row gap-2">
                                                 <button
-                                                        class="flex-1 text-center px-4 py-2 bg-payflo-purple text-white text-sm font-medium rounded-lg hover:bg-payflo-purple/90 focus:bg-payflo-purple/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-1"
+                                                        class="flex-1 text-center px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-1"
                                                         onclick={`openApplicationModal('${job.job_url}', '${job.title}', '${job.company}', 'apply')`}
                                                 >
                                                     Apply Now
                                                 </button>
                                                 {job.job_url_direct && (
                                                         <button
-                                                                class="flex-1 text-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-1"
+                                                                class="flex-1 text-center px-4 py-2 bg-[#1e293b]/30 text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-1"
                                                                 onclick={`openApplicationModal('${job.job_url_direct}', '${job.title}', '${job.company}', 'direct')`}
                                                         >
                                                             Direct Apply
@@ -402,8 +402,8 @@ const allCompanies = Array.from(
                     <div class="text-center py-16">
                         <div class="max-w-md mx-auto">
                             <Icon name="ph:briefcase-duotone" class="h-16 w-16 mx-auto text-gray-400 mb-4" aria-hidden="true" />
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">No jobs available</h3>
-                            <p class="text-gray-600">Try searching with different keywords or check back later for new opportunities.</p>
+                            <h3 class="text-lg font-semibold text-white mb-2">No jobs available</h3>
+                            <p class="text-gray-400">Try searching with different keywords or check back later for new opportunities.</p>
                         </div>
                     </div>
             )}
@@ -412,8 +412,8 @@ const allCompanies = Array.from(
             <div id="no-results" class="hidden text-center py-16">
                 <div class="max-w-md mx-auto">
                     <Icon name="ph:file-search" class="h-16 w-16 mx-auto text-gray-400 mb-4" aria-hidden="true" />
-                    <h3 class="text-lg font-semibold text-gray-900 mb-2">No jobs found</h3>
-                    <p class="text-gray-600">Try adjusting your filters or search with different keywords.</p>
+                    <h3 class="text-lg font-semibold text-white mb-2">No jobs found</h3>
+                    <p class="text-gray-400">Try adjusting your filters or search with different keywords.</p>
                 </div>
             </div>
         </div>
@@ -422,13 +422,13 @@ const allCompanies = Array.from(
 
     <!-- Application Modal -->
     <div id="application-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div class="bg-[#1e293b]/40 backdrop-blur-md rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-semibold text-gray-900">Apply for Position</h3>
+                    <h3 class="text-xl font-semibold text-white">Apply for Position</h3>
                     <button
                             onclick="closeApplicationModal()"
-                            class="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-payflo-purple rounded-lg p-1"
+                            class="text-gray-400 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg p-1"
                             aria-label="Close modal"
                     >
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -437,15 +437,15 @@ const allCompanies = Array.from(
                     </button>
                 </div>
 
-                <div class="mb-4 p-4 bg-gray-50 rounded-lg">
-                    <h4 id="modal-job-title" class="font-semibold text-gray-900 mb-1"></h4>
-                    <p id="modal-job-company" class="text-payflo-purple font-medium mb-2"></p>
-                    <p id="modal-application-type" class="text-sm text-gray-600"></p>
+                <div class="mb-4 p-4 bg-[#1e293b]/20 rounded-lg">
+                    <h4 id="modal-job-title" class="font-semibold text-white mb-1"></h4>
+                    <p id="modal-job-company" class="text-brand-primary font-medium mb-2"></p>
+                    <p id="modal-application-type" class="text-sm text-gray-400"></p>
                 </div>
 
                 <form id="application-form" class="space-y-4">
                     <div>
-                        <label for="applicant-name" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="applicant-name" class="block text-sm font-medium text-gray-300 mb-2">
                             Full Name <span class="text-red-500">*</span>
                         </label>
                         <input
@@ -453,13 +453,13 @@ const allCompanies = Array.from(
                                 id="applicant-name"
                                 name="name"
                                 required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payflo-purple focus:border-payflo-purple focus:outline-none"
+                                class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none"
                                 placeholder="Enter your full name"
                         />
                     </div>
 
                     <div>
-                        <label for="applicant-email" class="block text-sm font-medium text-gray-700 mb-2">
+                        <label for="applicant-email" class="block text-sm font-medium text-gray-300 mb-2">
                             Email Address <span class="text-red-500">*</span>
                         </label>
                         <input
@@ -467,7 +467,7 @@ const allCompanies = Array.from(
                                 id="applicant-email"
                                 name="email"
                                 required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-payflo-purple focus:border-payflo-purple focus:outline-none"
+                                class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none"
                                 placeholder="Enter your email address"
                         />
                     </div>
@@ -481,13 +481,13 @@ const allCompanies = Array.from(
                         <button
                                 type="button"
                                 onclick="closeApplicationModal()"
-                                class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 focus:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                class="flex-1 px-4 py-3 border border-white/20 text-gray-300 font-medium rounded-lg hover:bg-[#1e293b]/20 focus:bg-[#1e293b]/20 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
                         >
                             Cancel
                         </button>
                         <button
                                 type="submit"
-                                class="flex-1 px-4 py-3 bg-payflo-purple text-white font-medium rounded-lg hover:bg-payflo-purple/90 focus:bg-payflo-purple/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2"
+                                class="flex-1 px-4 py-3 bg-brand-primary text-white font-medium rounded-lg hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                         >
                             <span id="submit-text">Submit Application</span>
                             <span id="submit-loading" class="hidden">Submitting...</span>
@@ -661,13 +661,13 @@ const allCompanies = Array.from(
 
                 // Update active state
                 locationFilters.forEach(f => {
-                    f.classList.remove('bg-payflo-purple', 'text-white');
-                    f.classList.add('bg-white', 'text-gray-700');
+                    f.classList.remove('bg-brand-primary', 'text-white');
+                    f.classList.add('bg-[#1e293b]/40 backdrop-blur-md', 'text-gray-300');
                     f.setAttribute('aria-pressed', 'false');
                 });
 
-                filter.classList.remove('bg-white', 'text-gray-700');
-                filter.classList.add('bg-payflo-purple', 'text-white');
+                filter.classList.remove('bg-[#1e293b]/40 backdrop-blur-md', 'text-gray-300');
+                filter.classList.add('bg-brand-primary', 'text-white');
                 filter.setAttribute('aria-pressed', 'true');
 
                 filterJobs();
@@ -680,13 +680,13 @@ const allCompanies = Array.from(
 
                 // Update active state
                 typeFilters.forEach(f => {
-                    f.classList.remove('bg-payflo-purple', 'text-white');
-                    f.classList.add('bg-white', 'text-gray-700');
+                    f.classList.remove('bg-brand-primary', 'text-white');
+                    f.classList.add('bg-[#1e293b]/40 backdrop-blur-md', 'text-gray-300');
                     f.setAttribute('aria-pressed', 'false');
                 });
 
-                filter.classList.remove('bg-white', 'text-gray-700');
-                filter.classList.add('bg-payflo-purple', 'text-white');
+                filter.classList.remove('bg-[#1e293b]/40 backdrop-blur-md', 'text-gray-300');
+                filter.classList.add('bg-brand-primary', 'text-white');
                 filter.setAttribute('aria-pressed', 'true');
 
                 filterJobs();

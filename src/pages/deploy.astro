@@ -10,176 +10,151 @@ const deploymentPlatforms = [
         url: `https://deploy.cloud.run?git_repo=${repoUrl}`,
         description:
             "Deploy to Google Cloud Run (Serverless Docker) with one click.",
-        bgColor: "bg-blue-50",
-        borderColor: "border-blue-200",
+        accent: "from-[#4285F4] to-[#34A853]",
     },
     {
         name: "DigitalOcean",
-        logo: "https://www.deploytodo.com/do-btn.svg",
+        logo: "https://www.deploytodo.com/do-btn-blue.svg",
         url: `https://www.digitalocean.com/deploy?repository=${repoUrl}`,
         description:
             "Deploy to DigitalOcean App Platform with native Docker support.",
-        bgColor: "bg-blue-50",
-        borderColor: "border-blue-200",
+        accent: "from-[#0080FF] to-[#0069D9]",
     },
     {
         name: "Railway",
         logo: "https://railway.app/button.svg",
         url: `https://railway.app/new/import?repo=${repoUrl}`,
         description: "Zero-config Docker deployment on Railway.",
-        bgColor: "bg-purple-50",
-        borderColor: "border-purple-200",
-    },
-    {
-        name: "Render",
-        logo: "https://render.com/images/deploy-to-render-button.svg",
-        url: `https://render.com/deploy?repo=${repoUrl}`,
-        description: "Instant Docker-based web service deployment.",
-        bgColor: "bg-gray-50",
-        borderColor: "border-gray-200",
+        accent: "from-[#0B0D0E] to-[#1A1C1D]",
     },
     {
         name: "Heroku",
         logo: "https://www.herokucdn.com/deploy/button.svg",
         url: `https://heroku.com/deploy?template=${repoUrl}`,
         description: "Deploy your Docker implementation to Heroku.",
-        bgColor: "bg-indigo-50",
-        borderColor: "border-indigo-200",
+        accent: "from-[#430098] to-[#7673B0]",
     },
 ];
+
+// SEO Schema
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Laravel Mail Deployment",
+    operatingSystem: "Linux, Docker",
+    applicationCategory: "MarketingApplication",
+    offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+    },
+    description:
+        "Deploy Laravel Mail instantly using our one-click Docker deployment options for Google Cloud Run, DigitalOcean, Railway, and more.",
+    publisher: {
+        "@type": "Organization",
+        name: "Laravel Mail",
+        url: "https://laravelmail.com",
+    },
+};
 ---
 
 <Layout
-    title="Deploy - Laravel Mail"
-    description="One-click Docker deployment for Laravel Mail on Google Cloud, DigitalOcean, Railway, and more."
+    title="Deploy Laravel Mail | One-Click Docker Setup"
+    description="Set up your self-hosted marketing platform in seconds. One-click Docker deployment for Google Cloud Run, DigitalOcean, Railway, and Heroku. Free, open-source, and developer-friendly."
 >
-    <section
-        class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden bg-white"
-    >
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <!-- Tracking Script -->
+    <script is:inline>
+        function trackDeployClick(platform) {
+            if (typeof window.gtag !== "undefined") {
+                window.gtag("event", "deploy_click", {
+                    platform: platform,
+                    event_category: "deployment",
+                    event_label: platform,
+                });
+            }
+            if (typeof console !== "undefined") {
+                console.log("Tracking deploy click:", platform);
+            }
+        }
+    </script>
+
+    <section class="relative pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden">
+        <!-- Background Ornaments -->
+        <div
+            class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-30"
+        >
+            <div
+                class="absolute -top-24 -left-24 w-96 h-96 bg-brand-primary/20 blur-[120px] rounded-full"
+            >
+            </div>
+            <div
+                class="absolute top-1/2 -right-24 w-80 h-80 bg-brand-blue/20 blur-[100px] rounded-full"
+            >
+            </div>
+        </div>
+
         <div class="container-custom relative z-10">
-            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
-                <h1
-                    class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight"
+            <div class="max-w-4xl mx-auto text-center mb-20 animate-on-scroll">
+                <div
+                    class="inline-flex items-center space-x-2 bg-brand-primary/10 border border-brand-primary/20 text-brand-primary px-4 py-2 rounded-full text-sm font-bold mb-6"
                 >
-                    One-Click <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-payflo-purple to-payflo-blue"
-                        >Deployment</span
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"
+                        ></span>
+                        <span
+                            class="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"
+                        ></span>
+                    </span>
+                    <span>Ready for Production</span>
+                </div>
+                <h1
+                    class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight"
+                >
+                    Deploy in <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue"
+                        >Seconds</span
                     >
                 </h1>
                 <p
-                    class="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto"
+                    class="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto"
                 >
-                    Choose your favorite cloud platform and deploy <strong
-                        >Laravel Mail</strong
-                    > instantly. Zero configuration required to get started.
+                    Pick a platform, click a button, and watch your <strong
+                        class="text-white">Laravel Mail</strong
+                    > instance come to life.
                 </p>
             </div>
 
             <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
             >
                 {
                     deploymentPlatforms.map((platform) => (
-                        <div
-                            class={`group p-8 rounded-2xl border ${platform.borderColor} ${platform.bgColor} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 animate-on-scroll`}
-                        >
+                        <div class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col">
+                            <div
+                                class={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${platform.accent} opacity-0 group-hover:opacity-100 transition-opacity`}
+                            />
                             <div class="h-12 flex items-center mb-6">
-                                <h3 class="text-2xl font-bold text-gray-900">
+                                <h3 class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors">
                                     {platform.name}
                                 </h3>
                             </div>
-                            <p class="text-gray-600 mb-8 min-h-[3rem]">
+                            <p class="text-gray-400 text-sm mb-8 line-clamp-2">
                                 {platform.description}
                             </p>
-                            <a
-                                href={platform.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-block transition-transform duration-300 hover:scale-105 active:scale-95"
-                            >
-                                <img
-                                    src={platform.logo}
-                                    alt={`Deploy to ${platform.name}`}
-                                    class="h-10 w-auto"
-                                />
-                            </a>
-                        </div>
-                    ))
-                }
-            </div>
-
-            <!-- Other deployment methods -->
-            <div class="mt-24 max-w-4xl mx-auto animate-on-scroll">
-                <div
-                    class="bg-gray-900 rounded-3xl p-10 text-white overflow-hidden relative shadow-2xl"
-                >
-                    <div
-                        class="absolute top-0 right-0 w-64 h-64 bg-payflo-purple/20 blur-3xl rounded-full translate-x-32 -translate-y-32"
-                    >
-                    </div>
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-bold mb-6">
-                            Other Deployment Options
-                        </h2>
-                        <div
-                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-                        >
-                            <div>
-                                <h3
-                                    class="text-xl font-semibold mb-3 flex items-center"
+                            <div class="mt-auto">
+                                <a
+                                    href={platform.url}
+                                    target="_blank"
+                                    onclick={`trackDeployClick('${platform.name}')`}
+                                    class="inline-flex items-center justify-center w-full px-6 py-4 rounded-xl font-bold transition-all duration-300 bg-white/5 text-white hover:bg-brand-primary hover:scale-[1.02] active:scale-[0.98] border border-white/10 group"
                                 >
+                                    <span>Deploy Now</span>
                                     <svg
-                                        class="w-6 h-6 mr-3 text-payflo-blue"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                                        ></path>
-                                    </svg>
-                                    Git Clone
-                                </h3>
-                                <p class="text-gray-400 text-sm mb-4">
-                                    Deploy manually on any server with Git and
-                                    Node.js installed.
-                                </p>
-                                <code
-                                    class="block bg-black/50 p-3 rounded-lg text-xs font-mono text-payflo-blue"
-                                >
-                                    git clone {repoUrl}
-                                </code>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-xl font-semibold mb-3 flex items-center"
-                                >
-                                    <svg
-                                        class="w-6 h-6 mr-3 text-payflo-purple"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M13.983 11.078c0 .495-.394.904-.883.904H11.12v1.147l2.862-2.051zm-2.862-5.748l4.004 2.87-4.004 2.87V5.33zM3.997 12c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8zm2.182 0c0 3.213 2.605 5.818 5.818 5.818s5.818-2.605 5.818-5.818-2.605-5.818-5.818-5.818-5.818 2.605-5.818 5.818z"
-                                        ></path>
-                                    </svg>
-                                    Docker Image
-                                </h3>
-                                <p class="text-gray-400 text-sm mb-4">
-                                    Pull the pre-built image from Docker Hub and
-                                    run it anywhere.
-                                </p>
-                                <code
-                                    class="block bg-black/50 p-3 rounded-lg text-xs font-mono text-payflo-purple"
-                                >
-                                    docker pull laravelmail/platform:latest
-                                </code>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-xl font-semibold mb-3 flex items-center"
-                                >
-                                    <svg
-                                        class="w-6 h-6 mr-3 text-payflo-blue"
+                                        class="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -188,35 +163,127 @@ const deploymentPlatforms = [
                                             stroke-linecap="round"
                                             stroke-linejoin="round"
                                             stroke-width="2"
-                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                                        ></path>
+                                            d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                        />
                                     </svg>
-                                    Hetzner & OVH
-                                </h3>
-                                <p class="text-gray-400 text-sm mb-4">
-                                    Recommended for full control. Use One-Click
-                                    Docker Apps or dedicated instances.
-                                </p>
-                                <div class="flex space-x-3">
-                                    <a
-                                        href="https://console.hetzner.cloud/"
-                                        target="_blank"
-                                        class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
-                                    >
-                                        Hetzner Cloud
-                                    </a>
-                                    <a
-                                        href="https://www.ovhcloud.com/en/public-cloud/"
-                                        target="_blank"
-                                        class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
-                                    >
-                                        OVHcloud
-                                    </a>
-                                </div>
+                                </a>
                             </div>
                         </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0a0e27]/80">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-white mb-6">
+                    Infrastructure Control
+                </h2>
+                <p class="text-xl text-gray-400">
+                    Need more control? Install Laravel Mail on your own VPS or
+                    dedicated server.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <a
+                    href="https://github.com/laravelmail/laravelmail.com#self-hosted-vps"
+                    target="_blank"
+                    onclick="trackDeployClick('Hetzner/VPS')"
+                    class="group bg-[#1e293b]/50 p-10 rounded-3xl border border-white/10 hover:border-brand-primary/50 transition-all duration-500 hover:shadow-2xl"
+                >
+                    <div
+                        class="w-16 h-16 bg-brand-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform"
+                    >
+                        <svg
+                            class="w-8 h-8 text-brand-primary"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 12h14M5 12l4-4m-4 4l4 4"></path>
+                        </svg>
                     </div>
-                </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">
+                        VPS / Dedicated Server
+                    </h3>
+                    <p class="text-gray-400 mb-8">
+                        Full control over your sending infrastructure and
+                        scaling.
+                    </p>
+                    <span
+                        class="text-brand-primary font-bold inline-flex items-center group-hover:translate-x-2 transition-transform"
+                    >
+                        View VPS Guide
+                        <svg
+                            class="w-5 h-5 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </span>
+                </a>
+
+                <a
+                    href="https://github.com/laravelmail/laravelmail.com#docker-compose"
+                    target="_blank"
+                    onclick="trackDeployClick('Docker Compose')"
+                    class="group bg-[#1e293b]/50 p-10 rounded-3xl border border-white/10 hover:border-brand-blue/50 transition-all duration-500 hover:shadow-2xl"
+                >
+                    <div
+                        class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform"
+                    >
+                        <svg
+                            class="w-8 h-8 text-brand-blue"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                            ></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">
+                        Docker Compose
+                    </h3>
+                    <p class="text-gray-400 mb-8">
+                        Standardized environment that runs anywhere Docker is
+                        supported.
+                    </p>
+                    <span
+                        class="text-brand-blue font-bold inline-flex items-center group-hover:translate-x-2 transition-transform"
+                    >
+                        Get Compose File
+                        <svg
+                            class="w-5 h-5 ml-1"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                    </span>
+                </a>
             </div>
         </div>
     </section>

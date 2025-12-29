@@ -17,9 +17,9 @@ const navItems = [
 ];
 
 // small helper function for GA tracking
-function trackClick(label) {
-    if (typeof window !== "undefined" && window.gtag) {
-        window.gtag("event", "click", {
+function trackClick(label: string) {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "click", {
             event_category: "navigation",
             event_label: label,
         });
@@ -29,28 +29,28 @@ function trackClick(label) {
 ---
 
 <header
-    class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-100"
+    class="sticky top-0 z-50 w-full bg-[#0a0e27]/90 backdrop-blur-xl border-b border-white/5"
     role="banner"
 >
-    <div class="container-custom flex items-center justify-between">
+    <div class="container-custom flex items-center justify-between h-20">
         <a
             href="/"
-            onClick={() => trackClick("logo_home")}
+            onclick="trackClick('logo_home')"
             class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
             aria-label="self hosted social marketing platform with automation"
         >
             <Image
                 src={Logo}
                 alt="self hosted marketing platform"
-                width={120}
+                width={130}
                 height={40}
-                class="transition-all duration-300 hover:brightness-110 focus:brightness-110"
+                class="transition-all duration-300 hover:brightness-110 focus:brightness-110 brightness-0 invert"
             />
         </a>
 
         <!-- Desktop Nav -->
         <nav
-            class="hidden md:flex items-center space-x-8"
+            class="hidden md:flex items-center space-x-10"
             role="navigation"
             aria-label="Main navigation"
         >
@@ -59,8 +59,8 @@ function trackClick(label) {
                     <a
                         title={item.title}
                         href={item.href}
-                        onClick={() => trackClick(item.name)}
-                        class="text-gray-700 hover:text-payflo-dark focus:text-payflo-dark transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded px-2 py-1"
+                        onclick={`trackClick('${item.name}')`}
+                        class="text-sm font-bold text-white/70 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded px-2 py-1"
                     >
                         {item.name}
                     </a>
@@ -73,8 +73,8 @@ function trackClick(label) {
                 title="free marketing platform"
                 target="_blank"
                 href="https://app.laravelmail.com/"
-                onClick={() => trackClick("try_now")}
-                class="btn btn-primary focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 trigger-beta-modal"
+                onclick="trackClick('try_now')"
+                class="btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95 trigger-beta-modal"
             >
                 Try Now
             </a>
@@ -84,7 +84,7 @@ function trackClick(label) {
     <!-- Mobile Menu -->
     <nav
         id="mobile-menu"
-        class="hidden md:hidden bg-white w-full border-t border-gray-100"
+        class="hidden md:hidden bg-payflo-dark/95 w-full border-t border-white/5"
         role="navigation"
         aria-label="Mobile navigation"
     >
@@ -93,8 +93,8 @@ function trackClick(label) {
                 navItems.map((item, index) => (
                     <a
                         href={item.href}
-                        onClick={() => trackClick(`mobile_${item.name}`)}
-                        class="block py-2 px-2 text-gray-700 hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
+                        onclick={`trackClick('mobile_${item.name}')`}
+                        class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
                         style={`transition-delay: ${index * 50}ms;`}
                     >
                         {item.name}
@@ -103,8 +103,8 @@ function trackClick(label) {
             }
             <a
                 href="https://app.laravelmail.com/"
-                onClick={() => trackClick("mobile_try")}
-                class="block py-2 px-2 text-gray-700 hover:text-payflo-purple focus:text-payflo-purple transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded trigger-beta-modal"
+                onclick="trackClick('mobile_try')"
+                class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded trigger-beta-modal"
             >
                 View Demo
             </a>

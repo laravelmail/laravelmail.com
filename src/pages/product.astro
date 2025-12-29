@@ -319,25 +319,49 @@ const reasonsToOrder = [
         icon: "🏆",
     },
 ];
+
+const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Laravel Mail Marketing Platform",
+    applicationCategory: "BusinessApplication, MarketingApplication",
+    operatingSystem: "Linux, Docker",
+    description:
+        "Enterprise-grade self-hosted marketing platform for email automation, lead enrichment, and buyer intelligence.",
+    offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+    },
+    publisher: {
+        "@type": "Organization",
+        name: "Laravel Mail",
+        url: "https://laravelmail.com",
+    },
+};
 ---
 
 <Layout
-    title="Self hosted marketing platform"
-    description="Our platform provides enterprise-grade email marketing, lead enrichment APIs, campaign automation, email validation, and buyer intelligence"
+    title="Product Features - Laravel Mail | Self-Hosted Marketing Platform"
+    description="Explore enterprise-grade features: Real-time lead enrichment, GDPR-compliant automation, high-accuracy email validation, and advanced buyer intent signals. Control your marketing stack with Laravel Mail."
 >
-    <section
-        class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden bg-gray-900"
-    >
+    <!-- Structured Data -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(productSchema)}
+    />
+
+    <section class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden">
         <!-- Background decorative elements -->
         <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden"
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden opacity-50"
         >
             <div
-                class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-leadscaptain-purple/20 blur-[120px] rounded-full"
+                class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-primary/20 blur-[120px] rounded-full"
             >
             </div>
             <div
-                class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-leadscaptain-blue/20 blur-[120px] rounded-full"
+                class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-blue/20 blur-[120px] rounded-full"
             >
             </div>
         </div>
@@ -349,12 +373,12 @@ const reasonsToOrder = [
                         class="text-5xl md:text-7xl text-white font-extrabold leading-[1.1] tracking-tight"
                     >
                         Complete <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue"
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue"
                             >AI Marketing</span
                         > Platform
                     </h1>
                     <p
-                        class="mt-8 text-xl text-gray-300 leading-relaxed max-w-lg"
+                        class="mt-8 text-xl text-gray-400 leading-relaxed max-w-lg"
                     >
                         Our platform combines lead enrichment, campaign
                         automation, AI marketing using Ollama, and buyer
@@ -363,13 +387,13 @@ const reasonsToOrder = [
                     <div class="mt-10 flex flex-col sm:flex-row gap-5">
                         <a
                             href="https://app.laravelmail.com/"
-                            class="btn btn-primary px-10 py-4 text-lg font-bold shadow-lg shadow-leadscaptain-purple/20"
+                            class="btn bg-brand-primary text-white px-10 py-4 text-lg font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
                         >
                             Start Free Trial
                         </a>
                         <a
                             href="https://app.laravelmail.com/docs"
-                            class="btn btn-secondary px-10 py-4 text-lg font-bold border-gray-700 text-white hover:bg-gray-800"
+                            class="btn border-brand-primary/30 text-white px-10 py-4 text-lg font-bold hover:bg-brand-primary/10 hover:border-brand-primary/50 transition-all"
                         >
                             View Documentation
                         </a>

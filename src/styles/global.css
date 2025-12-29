@@ -5,22 +5,18 @@
 @tailwind utilities;
 
 :root {
-  --bg-body: #4b1e4e;
-  --color-primary: #C270C8;
-  --color-blue: #4b1e4e;
-  --color-indigo: #6574cd;
-  --color-purple: #9561e2;
-  --color-pink: #f66D9b;
-  --color-red: #B42583;
-  --color-orange: #EEB55A;
-  --color-yellow: #F58140;
-  --color-green: #38c172;
-  --color-teal: #4dc0b5;
-  --color-cyan: #6cb2eb;
-  --color-white: #eaeaea;
-  --color-dark-gray: #4b1e4e;
+  --bg-body: #0f172a;
+  --bg-darker: #0a0e27;
+  --bg-card: #1e293b;
+  --color-primary: #7c3aed;
+  --color-blue: #0a92dd;
+  --color-accent: #ec4899;
+  --color-white: #f1f5f9;
+  --color-gray-300: #cbd5e1;
+  --color-gray-600: #475569;
 
-  --gradient-purple-blue: linear-gradient(135deg, var(--color-primary) 0%, var(--color-blue) 100%);
+  --gradient-brand: linear-gradient(135deg, var(--bg-body) 0%, #2a1030 100%);
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
 
   /* Reduced motion preference */
   --transition-duration: 0.3s;
@@ -47,18 +43,17 @@ html {
   scroll-behavior: smooth;
   font-family: 'Nunito', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 1.2rem;
-  /* Ensure sufficient line height for readability */
   line-height: 1.6;
 }
 
 body {
-  background-color: var(--bg-body);
+  background: var(--gradient-brand) !important;
   color: var(--color-white);
   line-height: 1.6;
   position: relative;
-  /* Minimum touch target size */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 /* ===== Accessibility & Selection ===== */
@@ -499,7 +494,12 @@ nav a:focus-visible {
 }
 
 /* ===== Headings for Better Hierarchy ===== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   line-height: 1.2;
   margin-bottom: 0.5em;
   color: var(--color-dark-gray);
@@ -521,7 +521,8 @@ h3 {
 }
 
 /* ===== Lists for Better Readability ===== */
-ul, ol {
+ul,
+ol {
   margin: 1rem 0;
   padding-left: 2rem;
 }
