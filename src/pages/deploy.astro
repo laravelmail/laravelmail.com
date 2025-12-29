@@ -5,34 +5,20 @@ const repoUrl = "https://github.com/laravelmail/laravelmail.com";
 
 const deploymentPlatforms = [
     {
-        name: "AWS Amplify",
-        logo: "https://oneclick.amplifyapp.com/deploy-to-amplify.svg",
-        url: `https://console.aws.amazon.com/amplify/home#/deploy?repo=${repoUrl}`,
-        description: "Deploy to AWS Amplify Console with one click.",
-        bgColor: "bg-orange-50",
-        borderColor: "border-orange-200",
-    },
-    {
-        name: "Vercel",
-        logo: "https://vercel.com/button",
-        url: `https://vercel.com/new/clone?repository-url=${repoUrl}`,
-        description: "Deploy to Vercel in seconds.",
-        bgColor: "bg-gray-50",
-        borderColor: "border-gray-200",
-    },
-    {
-        name: "Netlify",
-        logo: "https://www.netlify.com/img/deploy/button.svg",
-        url: `https://app.netlify.com/start/deploy?repository=${repoUrl}`,
-        description: "Push to Netlify for seamless deployment.",
-        bgColor: "bg-cyan-50",
-        borderColor: "border-cyan-200",
+        name: "Google Cloud",
+        logo: "https://deploy.cloud.run/button.svg",
+        url: `https://deploy.cloud.run?git_repo=${repoUrl}`,
+        description:
+            "Deploy to Google Cloud Run (Serverless Docker) with one click.",
+        bgColor: "bg-blue-50",
+        borderColor: "border-blue-200",
     },
     {
         name: "DigitalOcean",
         logo: "https://www.deploytodo.com/do-btn.svg",
         url: `https://www.digitalocean.com/deploy?repository=${repoUrl}`,
-        description: "Deploy to DigitalOcean App Platform.",
+        description:
+            "Deploy to DigitalOcean App Platform with native Docker support.",
         bgColor: "bg-blue-50",
         borderColor: "border-blue-200",
     },
@@ -40,15 +26,23 @@ const deploymentPlatforms = [
         name: "Railway",
         logo: "https://railway.app/button.svg",
         url: `https://railway.app/new/import?repo=${repoUrl}`,
-        description: "Deploy to Railway with one click.",
+        description: "Zero-config Docker deployment on Railway.",
         bgColor: "bg-purple-50",
         borderColor: "border-purple-200",
+    },
+    {
+        name: "Render",
+        logo: "https://render.com/images/deploy-to-render-button.svg",
+        url: `https://render.com/deploy?repo=${repoUrl}`,
+        description: "Instant Docker-based web service deployment.",
+        bgColor: "bg-gray-50",
+        borderColor: "border-gray-200",
     },
     {
         name: "Heroku",
         logo: "https://www.herokucdn.com/deploy/button.svg",
         url: `https://heroku.com/deploy?template=${repoUrl}`,
-        description: "Deploy to Heroku Cloud.",
+        description: "Deploy your Docker implementation to Heroku.",
         bgColor: "bg-indigo-50",
         borderColor: "border-indigo-200",
     },
@@ -57,7 +51,7 @@ const deploymentPlatforms = [
 
 <Layout
     title="Deploy - Laravel Mail"
-    description="One-click deployment for Laravel Mail on various cloud platforms including AWS Amplify, DigitalOcean, Vercel, and more."
+    description="One-click Docker deployment for Laravel Mail on Google Cloud, DigitalOcean, Railway, and more."
 >
     <section
         class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden bg-white"
@@ -127,7 +121,9 @@ const deploymentPlatforms = [
                         <h2 class="text-3xl font-bold mb-6">
                             Other Deployment Options
                         </h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+                        >
                             <div>
                                 <h3
                                     class="text-xl font-semibold mb-3 flex items-center"
@@ -177,6 +173,46 @@ const deploymentPlatforms = [
                                 >
                                     docker pull laravelmail/platform:latest
                                 </code>
+                            </div>
+                            <div>
+                                <h3
+                                    class="text-xl font-semibold mb-3 flex items-center"
+                                >
+                                    <svg
+                                        class="w-6 h-6 mr-3 text-payflo-blue"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                        ></path>
+                                    </svg>
+                                    Hetzner & OVH
+                                </h3>
+                                <p class="text-gray-400 text-sm mb-4">
+                                    Recommended for full control. Use One-Click
+                                    Docker Apps or dedicated instances.
+                                </p>
+                                <div class="flex space-x-3">
+                                    <a
+                                        href="https://console.hetzner.cloud/"
+                                        target="_blank"
+                                        class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
+                                    >
+                                        Hetzner Cloud
+                                    </a>
+                                    <a
+                                        href="https://www.ovhcloud.com/en/public-cloud/"
+                                        target="_blank"
+                                        class="text-xs bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded-md transition-colors"
+                                    >
+                                        OVHcloud
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
