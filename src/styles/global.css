@@ -17,6 +17,7 @@
 
   --gradient-brand: linear-gradient(135deg, var(--bg-body) 0%, #2a1030 100%);
   --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+  --gradient-purple-blue: linear-gradient(135deg, #7c3aed 0%, #0a92dd 100%);
 
   /* Reduced motion preference */
   --transition-duration: 0.3s;

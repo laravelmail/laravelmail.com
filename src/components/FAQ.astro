@@ -2,134 +2,148 @@
 const faqs = [
     {
         question: "How quickly can I send campaigns with Laravel Mail?",
-        answer:
-            "You can launch <b>email campaigns</b> instantly after setup. With our streamlined onboarding process, most users are fully integrated and sending their first emails within just 1–2 business days. Unlike SaaS platforms, there's no waiting for approval or account verification; you're in full control of your sending."
+        answer: "You can launch <b>email campaigns</b> instantly after setup. With our streamlined onboarding process, most users are fully integrated and sending their first emails within just 1–2 business days. Unlike SaaS platforms, there's no waiting for approval or account verification; you're in full control of your sending.",
     },
     {
         question: "Does Laravel Mail support high deliverability?",
-        answer:
-            "Yes, absolutely. High deliverability is a core feature. We provide and guide you through the essential setup for domain warm-up, DKIM/SPF/DMARC, and IP reputation monitoring. This ensures your campaigns reliably land in the inbox, not the spam folder. With Laravel Mail, you own your sending infrastructure, giving you a level of control over deliverability that is often not possible with shared SaaS platforms."
+        answer: "Yes, absolutely. High deliverability is a core feature. We provide and guide you through the essential setup for domain warm-up, DKIM/SPF/DMARC, and IP reputation monitoring. This ensures your campaigns reliably land in the inbox, not the spam folder. With Laravel Mail, you own your sending infrastructure, giving you a level of control over deliverability that is often not possible with shared SaaS platforms.",
     },
     {
         question: "Can I integrate Laravel Mail with my CRM?",
-        answer:
-            "Definitely. <b>Laravel Mail</b> integrates natively with popular CRMs like HubSpot, Salesforce, and Pipedrive. For custom workflows, we also support powerful webhooks and API connections, making it easy to sync data with any system you use."
+        answer: "Definitely. <b>Laravel Mail</b> integrates natively with popular CRMs like HubSpot, Salesforce, and Pipedrive. For custom workflows, we also support powerful webhooks and API connections, making it easy to sync data with any system you use.",
     },
     {
         question: "What kind of email types can I send?",
-        answer:
-            "Our platform is versatile. It supports everything from <i>transactional emails</i> (like order confirmations and password resets) and marketing campaigns to advanced drip automations and custom workflows for B2B lead nurturing. This comprehensive feature set allows you to manage all your email needs from a single, integrated platform."
+        answer: "Our platform is versatile. It supports everything from <i>transactional emails</i> (like order confirmations and password resets) and marketing campaigns to advanced drip automations and custom workflows for B2B lead nurturing. This comprehensive feature set allows you to manage all your email needs from a single, integrated platform.",
     },
     {
         question: "How does pricing work?",
-        answer:
-            "Pricing is based on email volume, sending domains, and advanced features like automation. Unlike many SaaS platforms that charge per contact, which can become prohibitively expensive as your list grows, our self-hosted model provides a significant long-term cost advantage. This is a key benefit when comparing us to alternatives like Mailchimp or MailerLite. <a href='https://laravelmail.com/pricing' class='text-purple-600 hover:underline'>Check our pricing</a> or request a custom quote for large-volume needs."
+        answer: "Pricing is based on email volume, sending domains, and advanced features like automation. Unlike many SaaS platforms that charge per contact, which can become prohibitively expensive as your list grows, our self-hosted model provides a significant long-term cost advantage. This is a key benefit when comparing us to alternatives like Mailchimp or MailerLite. <a href='https://laravelmail.com/pricing' class='text-purple-600 hover:underline'>Check our pricing</a> or request a custom quote for large-volume needs.",
     },
     {
         question: "Do you provide support for setup?",
-        answer:
-            "Yes, we do. We offer comprehensive support and guide you through the full onboarding process. This includes complex technical tasks like DNS setup (SPF, DKIM, DMARC) and creating your first campaign templates. For assistance, simply <a href='https://laravelmail.com/contact' class='text-purple-600 hover:underline'>get in touch</a> with our dedicated support team."
+        answer: "Yes, we do. We offer comprehensive support and guide you through the full onboarding process. This includes complex technical tasks like DNS setup (SPF, DKIM, DMARC) and creating your first campaign templates. For assistance, simply <a href='https://laravelmail.com/contact' class='text-purple-600 hover:underline'>get in touch</a> with our dedicated support team.",
     },
     {
         question: "Is Laravel Mail GDPR and CCPA compliant?",
-        answer:
-            "Definitely. Because you are self-hosting and own your data, compliance is much easier. We provide built-in tools to comply with global data privacy laws like GDPR and CCPA, including unsubscribe management and secure data handling practices. You have complete sovereignty over your customer data."
+        answer: "Definitely. Because you are self-hosting and own your data, compliance is much easier. We provide built-in tools to comply with global data privacy laws like GDPR and CCPA, including unsubscribe management and secure data handling practices. You have complete sovereignty over your customer data.",
     },
     {
         question: "Can I import my own B2B lead lists?",
-        answer:
-            "Yes, you can. We support multiple import methods, including uploading CSV, Excel, or connecting via API. Our system automatically validates and deduplicates leads to ensure your list quality remains high."
+        answer: "Yes, you can. We support multiple import methods, including uploading CSV, Excel, or connecting via API. Our system automatically validates and deduplicates leads to ensure your list quality remains high.",
     },
     {
         question: "What reporting features are included?",
-        answer:
-            "We provide real-time analytics on key metrics such as opens, clicks, bounce rates, and conversions. You can export detailed reports or sync with your business intelligence (BI) tools for deeper analysis."
+        answer: "We provide real-time analytics on key metrics such as opens, clicks, bounce rates, and conversions. You can export detailed reports or sync with your business intelligence (BI) tools for deeper analysis.",
     },
     {
-        question: "How does Laravel Mail compare to other self-hosted solutions like Mailcoach or SendPortal?",
-        answer:
-            "While platforms like Mailcoach and SendPortal are excellent choices within the Laravel ecosystem, Laravel Mail is built to be a turnkey solution for businesses rather than just a developer's tool. We focus on a seamless user experience, a comprehensive feature set for B2B lead nurturing and marketing campaigns, and dedicated onboarding support. Our platform is designed to get you up and running quickly with powerful tools, without requiring a deep dive into the code."
+        question:
+            "How does Laravel Mail compare to other self-hosted solutions like Mailcoach or SendPortal?",
+        answer: "While platforms like Mailcoach and SendPortal are excellent choices within the Laravel ecosystem, Laravel Mail is built to be a turnkey solution for businesses rather than just a developer's tool. We focus on a seamless user experience, a comprehensive feature set for B2B lead nurturing and marketing campaigns, and dedicated onboarding support. Our platform is designed to get you up and running quickly with powerful tools, without requiring a deep dive into the code.",
     },
     {
         question: "Do you offer a free trial?",
-        answer:
-            "Yes. We offer a 7-day free trial with 500 email credits. This allows you to fully test deliverability and all our features before committing, so you can be confident that <a href='https://laravelmail.com' class='text-purple-600 hover:underline'>Laravel Mail</a> is the right solution for your business."
-    }
+        answer: "Yes. We offer a 7-day free trial with 500 email credits. This allows you to fully test deliverability and all our features before committing, so you can be confident that <a href='https://laravelmail.com' class='text-purple-600 hover:underline'>Laravel Mail</a> is the right solution for your business.",
+    },
 ];
 
 const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
         "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
+        name: faq.question,
+        acceptedAnswer: {
             "@type": "Answer",
-            "text": faq.answer
-        }
-    }))
+            text: faq.answer,
+        },
+    })),
 };
 ---
 
-<section class="py-20 bg-gray-50 relative overflow-hidden">
+<section class="py-20 bg-brand-bg-darker/40 relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <!-- Header -->
         <div class="text-center max-w-3xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 class="text-3xl md:text-4xl font-bold text-white">
                 Frequently Asked Questions
             </h2>
-            <p class="mt-4 text-xl text-gray-600">
-                Everything you need to know about the Laravel Mail platform, our self-hosted marketing tools, and B2B
-                lead management.
+            <p class="mt-4 text-xl text-gray-400">
+                Everything you need to know about the Laravel Mail platform, our
+                self-hosted marketing tools, and B2B lead management.
             </p>
         </div>
 
         <!-- FAQ Items -->
         <div class="mt-12 max-w-3xl mx-auto">
-            {faqs.map((faq, index) => (
-                    <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300">
+            {
+                faqs.map((faq, index) => (
+                    <div class="mb-6 bg-brand-bg-card/40 backdrop-blur-md rounded-lg shadow-sm border border-white/10 overflow-hidden hover:shadow-md transition-all duration-300">
                         <details class="group">
-                            <summary
-                                    class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-gray-50 list-none">
-                                <h3 title={faq.question}
-                                    class="text-lg font-medium text-gray-900 group-open:text-purple-600 transition-colors duration-300">
+                            <summary class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-white/5 list-none">
+                                <h3
+                                    title={faq.question}
+                                    class="text-lg font-medium text-white group-open:text-brand-primary transition-colors duration-300"
+                                >
                                     {faq.question}
                                 </h3>
                                 <div class="flex-shrink-0 ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="h-5 w-5 text-gray-500 group-open:rotate-180 transition-transform duration-300"
-                                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7"/>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform duration-300"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"
+                                        />
                                     </svg>
                                 </div>
                             </summary>
                             <div class="px-6 pb-6 animate-fade-in">
-                                <div class="text-gray-900 leading-relaxed text-base" set:html={faq.answer}></div>
+                                <div
+                                    class="text-gray-900 leading-relaxed text-base"
+                                    set:html={faq.answer}
+                                />
                             </div>
                         </details>
                     </div>
-            ))}
+                ))
+            }
         </div>
 
         <!-- Contact CTA -->
         <div class="mt-12 text-center">
-            <p class="text-gray-600">Still have questions? 🚀 We're here to help.</p>
-            <a title="self hosted laravel mail platform"
-               href="/contact"
-               class="mt-4 inline-flex items-center text-purple-600 font-medium hover:underline group">
+            <p class="text-gray-400">
+                Still have questions? 🚀 We're here to help.
+            </p>
+            <a
+                title="self hosted laravel mail platform"
+                href="/contact"
+                class="mt-4 inline-flex items-center text-brand-primary font-medium hover:underline group"
+            >
                 Contact Us
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
-                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>
             </a>
         </div>
     </div>
 </section>
-
 
 <style>
     details summary::-webkit-details-marker {
@@ -156,12 +170,12 @@ const faqSchema = {
     }
 
     details p {
-        color: #111827 !important;
+        color: #d1d5db !important;
         font-size: 16px;
         line-height: 1.6;
     }
 
     details:hover summary {
-        background-color: #f9fafb;
+        background-color: rgba(255, 255, 255, 0.05);
     }
 </style>

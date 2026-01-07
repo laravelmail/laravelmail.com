@@ -372,10 +372,7 @@ const productSchema = {
                     <h1
                         class="text-5xl md:text-7xl text-white font-extrabold leading-[1.1] tracking-tight"
                     >
-                        Complete <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue"
-                            >AI Marketing</span
-                        > Platform
+                        Complete <span class="gradient-text">AI Marketing</span> Platform
                     </h1>
                     <p
                         class="mt-8 text-xl text-gray-400 leading-relaxed max-w-lg"
@@ -443,7 +440,7 @@ const productSchema = {
                         </div>
                         <div class="flex items-center gap-3">
                             <div
-                                class="flex-shrink-0 w-10 h-10 bg-purple-500/10 rounded-full flex items-center justify-center"
+                                class="flex-shrink-0 w-10 h-10 bg-brand-blue/20 rounded-full flex items-center justify-center text-brand-blue"
                             >
                                 <svg
                                     class="w-5 h-5 text-purple-500"
@@ -471,18 +468,18 @@ const productSchema = {
                 >
                     <div class="relative group">
                         <div
-                            class="absolute -inset-1 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"
+                            class="absolute -inset-1 bg-gradient-to-r from-brand-primary to-brand-blue rounded-2xl blur opacity-40 group-hover:opacity-60 transition duration-1000 group-hover:duration-200"
                         >
                         </div>
                         <div
-                            class="relative bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-800"
+                            class="relative bg-brand-bg-darker rounded-2xl shadow-2xl overflow-hidden border border-white/10"
                         >
                             <Image
                                 width={600}
                                 height={400}
                                 src="/screens/dashboard.png"
                                 alt="Marketing dashboard showing campaigns analytics"
-                                class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-500"
+                                class="w-full h-auto transform group-hover:scale-[1.02] transition-transform duration-500 brightness-90 group-hover:brightness-100"
                             />
                         </div>
                     </div>
@@ -492,19 +489,19 @@ const productSchema = {
     </section>
 
     <!-- Workspaces Section -->
-    <section class="py-24 bg-gray-50">
+    <section class="py-24 bg-brand-bg-darker/60">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2
-                    class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900"
+                    class="text-4xl md:text-5xl font-bold tracking-tight text-white"
                 >
                     Organize your marketing
                 </h2>
                 <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full"
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
                 >
                 </div>
-                <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                <p class="mt-6 text-xl text-gray-400 leading-relaxed">
                     Centralize your marketing operations with powerful
                     integrations that scale with your organization.
                 </p>
@@ -514,16 +511,16 @@ const productSchema = {
                 {
                     workspaceFeatures.map((feature, index) => (
                         <div
-                            class="group bg-white rounded-2xl p-10 animate-on-scroll shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:translate-y-[-4px]"
+                            class="group bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-10 animate-on-scroll shadow-sm hover:shadow-xl transition-all duration-300 border border-white/10 hover:border-brand-primary/30 hover:translate-y-[-4px]"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
                             <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300 inline-block">
                                 {feature.icon}
                             </div>
-                            <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-leadscaptain-blue transition-colors">
+                            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-brand-blue transition-colors">
                                 {feature.title}
                             </h3>
-                            <p class="text-gray-600 leading-relaxed text-lg">
+                            <p class="text-gray-400 leading-relaxed text-lg">
                                 {feature.description}
                             </p>
                         </div>
@@ -534,16 +531,16 @@ const productSchema = {
     </section>
 
     <!-- Campaigns Section -->
-    <section class="py-24 bg-gray-900 overflow-hidden relative">
+    <section class="py-24 bg-brand-bg-darker overflow-hidden relative">
         <div
             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none"
         >
             <div
-                class="absolute top-0 right-0 w-1/3 h-1/3 bg-leadscaptain-blue/10 blur-[100px] rounded-full"
+                class="absolute top-0 right-0 w-1/3 h-1/3 bg-brand-blue/10 blur-[100px] rounded-full"
             >
             </div>
             <div
-                class="absolute bottom-0 left-0 w-1/3 h-1/3 bg-leadscaptain-purple/10 blur-[100px] rounded-full"
+                class="absolute bottom-0 left-0 w-1/3 h-1/3 bg-brand-primary/10 blur-[100px] rounded-full"
             >
             </div>
         </div>
@@ -556,7 +553,7 @@ const productSchema = {
                     Powerful Campaign Automation
                 </h2>
                 <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full"
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
                 >
                 </div>
                 <p class="mt-6 text-xl text-gray-400 leading-relaxed">
@@ -570,16 +567,16 @@ const productSchema = {
                 {
                     campaignFeatures.map((feature, index) => (
                         <div
-                            class="group bg-gray-800/50 backdrop-blur-sm rounded-2xl p-10 animate-on-scroll border border-gray-700 hover:border-leadscaptain-blue/50 transition-all duration-300 shadow-2xl"
+                            class="group bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-10 animate-on-scroll border border-white/10 hover:border-brand-blue/50 transition-all duration-300 shadow-2xl"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
-                            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-leadscaptain-blue transition-colors">
+                            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-brand-blue transition-colors">
                                 {feature.title}
                             </h3>
                             <p class="text-gray-400 mb-8 leading-relaxed text-lg">
                                 {feature.description}
                             </p>
-                            <div class="inline-flex items-center px-4 py-2 bg-leadscaptain-blue/10 rounded-full text-sm font-bold text-leadscaptain-blue border border-leadscaptain-blue/20">
+                            <div class="inline-flex items-center px-4 py-2 bg-brand-blue/10 rounded-full text-sm font-bold text-brand-blue border border-brand-blue/20">
                                 <svg
                                     class="w-4 h-4 mr-2"
                                     fill="currentColor"
@@ -601,19 +598,17 @@ const productSchema = {
     </section>
 
     <!-- Email Validation Section -->
-    <section class="py-24 bg-white overflow-hidden">
+    <section class="py-24 bg-brand-bg-darker/40 overflow-hidden">
         <div class="container-custom">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="animate-on-scroll">
                     <h2
-                        class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900"
+                        class="text-4xl md:text-5xl font-bold tracking-tight text-white"
                     >
-                        <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue"
-                            >Email Validation</span
-                        > That Protects Your Reputation
+                        <span class="gradient-text">Email Validation</span> That Protects
+                        Your Reputation
                     </h2>
-                    <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                    <p class="mt-6 text-xl text-gray-400 leading-relaxed">
                         Maintain pristine sender reputation with
                         enterprise-grade email validation. Our real-time
                         verification engine checks every contact before sending,
@@ -625,7 +620,7 @@ const productSchema = {
                         {
                             validationFeatures.map((feature) => (
                                 <div class="flex items-start group">
-                                    <div class="flex-shrink-0 h-12 w-12 rounded-xl bg-gradient-to-br from-leadscaptain-purple to-leadscaptain-blue flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <div class="flex-shrink-0 h-12 w-12 rounded-xl bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
                                         <svg
                                             class="w-6 h-6"
                                             fill="none"
@@ -641,14 +636,14 @@ const productSchema = {
                                         </svg>
                                     </div>
                                     <div class="ml-6">
-                                        <h4 class="text-xl font-bold text-gray-900">
+                                        <h4 class="text-xl font-bold text-white">
                                             {feature.title}
                                         </h4>
-                                        <p class="text-gray-600 mt-2 leading-relaxed">
+                                        <p class="text-gray-400 mt-2 leading-relaxed">
                                             {feature.description}
                                         </p>
-                                        <div class="mt-3 inline-flex items-center text-sm font-bold text-leadscaptain-purple uppercase tracking-widest">
-                                            <span class="w-2 h-2 bg-leadscaptain-purple rounded-full mr-2" />
+                                        <div class="mt-3 inline-flex items-center text-sm font-bold text-brand-primary uppercase tracking-widest">
+                                            <span class="w-2 h-2 bg-brand-primary rounded-full mr-2" />
                                             {feature.accuracy} Accuracy
                                         </div>
                                     </div>
@@ -673,24 +668,24 @@ const productSchema = {
                     </div>
 
                     <div
-                        class="relative bg-white rounded-3xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] p-10 border border-gray-100"
+                        class="relative bg-brand-bg-card/40 backdrop-blur-md rounded-3xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] p-10 border border-white/10"
                     >
                         <div class="space-y-6">
                             <div
-                                class="flex items-center justify-between mb-8 pb-6 border-b border-gray-100"
+                                class="flex items-center justify-between mb-8 pb-6 border-b border-white/10"
                             >
-                                <h3 class="font-bold text-gray-900">
+                                <h3 class="font-bold text-white">
                                     Live Verification
                                 </h3>
                                 <div
-                                    class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-wider"
+                                    class="px-3 py-1 bg-green-500/10 text-green-400 rounded-full text-xs font-bold uppercase tracking-wider"
                                 >
                                     System Active
                                 </div>
                             </div>
 
                             <div
-                                class="flex items-center justify-between p-5 bg-green-50 rounded-2xl border border-green-100 transform hover:scale-[1.02] transition-transform duration-300"
+                                class="flex items-center justify-between p-5 bg-green-500/10 rounded-2xl border border-green-500/20 transform hover:scale-[1.02] transition-transform duration-300"
                             >
                                 <div class="flex items-center">
                                     <div
@@ -698,18 +693,18 @@ const productSchema = {
                                     >
                                     </div>
                                     <span
-                                        class="font-mono text-sm text-gray-700 font-medium"
+                                        class="font-mono text-sm text-gray-300 font-medium"
                                         >john@apple.com</span
                                     >
                                 </div>
                                 <span
-                                    class="text-green-600 font-bold text-sm bg-white px-3 py-1 rounded-lg shadow-sm"
+                                    class="text-green-400 font-bold text-sm bg-brand-bg-darker/60 px-3 py-1 rounded-lg shadow-sm"
                                     >VALID</span
                                 >
                             </div>
 
                             <div
-                                class="flex items-center justify-between p-5 bg-red-50 rounded-2xl border border-red-100 transform hover:scale-[1.02] transition-transform duration-300"
+                                class="flex items-center justify-between p-5 bg-red-500/10 rounded-2xl border border-red-500/20 transform hover:scale-[1.02] transition-transform duration-300"
                             >
                                 <div class="flex items-center">
                                     <div
@@ -717,18 +712,18 @@ const productSchema = {
                                     >
                                     </div>
                                     <span
-                                        class="font-mono text-sm text-gray-700 font-medium"
+                                        class="font-mono text-sm text-gray-300 font-medium"
                                         >info@fake.xyz</span
                                     >
                                 </div>
                                 <span
-                                    class="text-red-600 font-bold text-sm bg-white px-3 py-1 rounded-lg shadow-sm"
+                                    class="text-red-400 font-bold text-sm bg-brand-bg-darker/60 px-3 py-1 rounded-lg shadow-sm"
                                     >INVALID</span
                                 >
                             </div>
 
                             <div
-                                class="flex items-center justify-between p-5 bg-amber-50 rounded-2xl border border-amber-100 transform hover:scale-[1.02] transition-transform duration-300"
+                                class="flex items-center justify-between p-5 bg-amber-500/10 rounded-2xl border border-amber-500/20 transform hover:scale-[1.02] transition-transform duration-300"
                             >
                                 <div class="flex items-center">
                                     <div
@@ -736,12 +731,12 @@ const productSchema = {
                                     >
                                     </div>
                                     <span
-                                        class="font-mono text-sm text-gray-700 font-medium"
+                                        class="font-mono text-sm text-gray-300 font-medium"
                                         >trap@honeypot.org</span
                                     >
                                 </div>
                                 <span
-                                    class="text-amber-600 font-bold text-sm bg-white px-3 py-1 rounded-lg shadow-sm"
+                                    class="text-amber-400 font-bold text-sm bg-brand-bg-darker/60 px-3 py-1 rounded-lg shadow-sm"
                                     >SPAM TRAP</span
                                 >
                             </div>
@@ -788,19 +783,19 @@ const productSchema = {
     </section>
 
     <!-- Buyer Intelligence Section -->
-    <section class="py-24 bg-gray-50 overflow-hidden relative">
+    <section class="py-24 bg-brand-bg-darker/60 overflow-hidden relative">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2
-                    class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900"
+                    class="text-4xl md:text-5xl font-bold tracking-tight text-white"
                 >
                     Buyer Intelligence That Closes Deals
                 </h2>
                 <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full"
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
                 >
                 </div>
-                <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                <p class="mt-6 text-xl text-gray-400 leading-relaxed">
                     Transform raw contact data into actionable buyer insights.
                     Our intelligence platform reveals who is ready to buy, what
                     they care about, and when to reach out for maximum impact.
@@ -811,19 +806,19 @@ const productSchema = {
                 {
                     intelligenceFeatures.map((feature, index) => (
                         <div
-                            class="group relative bg-white rounded-3xl p-10 animate-on-scroll shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-300"
+                            class="group relative bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-10 animate-on-scroll shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white/10 hover:border-brand-primary/50 transition-all duration-300"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-leadscaptain-purple/5 to-leadscaptain-blue/5 rounded-bl-[100px] pointer-events-none" />
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-brand-blue/5 rounded-bl-[100px] pointer-events-none" />
                             <div class="relative z-10">
-                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-leadscaptain-purple transition-colors">
+                                <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-brand-primary transition-colors">
                                     {feature.title}
                                 </h3>
-                                <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                                <p class="text-gray-400 mb-6 leading-relaxed text-lg">
                                     {feature.description}
                                 </p>
-                                <div class="flex items-center text-leadscaptain-purple font-black text-xl tracking-tight">
-                                    <span class="w-8 h-px bg-leadscaptain-purple mr-3" />
+                                <div class="flex items-center text-brand-primary font-black text-xl tracking-tight">
+                                    <span class="w-8 h-px bg-brand-primary mr-3" />
                                     {feature.metric}
                                 </div>
                             </div>
@@ -835,19 +830,19 @@ const productSchema = {
     </section>
 
     <!-- Mail Management Section -->
-    <section class="py-24 bg-white relative">
+    <section class="py-24 bg-brand-bg-darker/40 relative">
         <div class="container-custom relative z-10">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2
-                    class="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight"
+                    class="text-4xl md:text-5xl font-bold text-white tracking-tight"
                 >
                     Complete Mail Infrastructure
                 </h2>
                 <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full"
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
                 >
                 </div>
-                <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                <p class="mt-6 text-xl text-gray-400 leading-relaxed">
                     Everything you need to send, track, and optimize email
                     campaigns. From warm-up to deliverability monitoring, we
                     handle the technical complexity so you can focus on results.
@@ -858,17 +853,17 @@ const productSchema = {
                 {
                     mailFeatures.map((feature, index) => (
                         <div
-                            class="group bg-gray-50 rounded-2xl p-10 animate-on-scroll hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-300 border border-transparent hover:border-gray-100"
+                            class="group bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-10 animate-on-scroll hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-300 border border-white/10 hover:border-brand-primary/50"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
-                            <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-leadscaptain-blue transition-colors">
+                            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-brand-blue transition-colors">
                                 {feature.title}
                             </h3>
-                            <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                            <p class="text-gray-400 mb-8 leading-relaxed text-lg">
                                 {feature.description}
                             </p>
-                            <div class="inline-flex items-center px-5 py-2 bg-white rounded-full text-sm font-bold text-leadscaptain-blue border border-leadscaptain-blue shadow-sm">
-                                <span class="w-2 h-2 bg-leadscaptain-blue rounded-full mr-2 animate-pulse" />
+                            <div class="inline-flex items-center px-5 py-2 bg-brand-blue/10 rounded-full text-sm font-bold text-brand-blue border border-brand-blue shadow-sm">
+                                <span class="w-2 h-2 bg-brand-blue rounded-full mr-2 animate-pulse" />
                                 {feature.highlight}
                             </div>
                         </div>
@@ -879,10 +874,10 @@ const productSchema = {
     </section>
 
     <!-- API Features Section -->
-    <section class="py-24 bg-gray-900 overflow-hidden relative">
+    <section class="py-24 bg-brand-bg-darker overflow-hidden relative">
         <!-- Glow effects -->
         <div
-            class="absolute top-0 left-0 w-1/2 h-1/2 bg-leadscaptain-purple/10 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2"
+            class="absolute top-0 left-0 w-1/2 h-1/2 bg-brand-primary/10 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2"
         >
         </div>
 
@@ -894,7 +889,7 @@ const productSchema = {
                     REST API Integration
                 </h2>
                 <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full"
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
                 >
                 </div>
                 <p class="mt-6 text-xl text-gray-400 leading-relaxed">
@@ -908,15 +903,15 @@ const productSchema = {
                 {
                     apiFeatures.map((feature, index) => (
                         <div
-                            class="group bg-gray-800/80 backdrop-blur-md rounded-2xl p-8 animate-on-scroll border border-gray-700 hover:border-leadscaptain-purple/50 transition-all duration-300"
+                            class="group bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 animate-on-scroll border border-white/10 hover:border-brand-primary/50 transition-all duration-300"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
                             <div class="flex items-start justify-between">
                                 <div class="flex-1">
                                     <div class="flex items-center mb-4">
-                                        <div class="w-10 h-10 rounded-lg bg-leadscaptain-purple/20 flex items-center justify-center mr-4">
+                                        <div class="w-10 h-10 rounded-lg bg-brand-primary/20 flex items-center justify-center mr-4">
                                             <svg
-                                                class="w-5 h-5 text-leadscaptain-purple"
+                                                class="w-5 h-5 text-brand-primary"
                                                 fill="none"
                                                 stroke="currentColor"
                                                 viewBox="0 0 24 24"
@@ -929,7 +924,7 @@ const productSchema = {
                                                 />
                                             </svg>
                                         </div>
-                                        <h3 class="text-2xl font-bold text-white group-hover:text-leadscaptain-purple transition-colors">
+                                        <h3 class="text-2xl font-bold text-white group-hover:text-brand-primary transition-colors">
                                             {feature.title}
                                         </h3>
                                     </div>
@@ -939,8 +934,8 @@ const productSchema = {
                                     </p>
 
                                     <div class="relative group/code">
-                                        <div class="absolute -inset-0.5 bg-gradient-to-r from-leadscaptain-purple/20 to-leadscaptain-blue/20 rounded-xl blur opacity-0 group-hover/code:opacity-100 transition duration-500" />
-                                        <code class="relative block text-sm bg-gray-950 border border-gray-800 px-5 py-3 rounded-xl text-leadscaptain-purple font-mono overflow-x-auto whitespace-nowrap">
+                                        <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-primary/20 to-brand-blue/20 rounded-xl blur opacity-0 group-hover/code:opacity-100 transition duration-500" />
+                                        <code class="relative block text-sm bg-gray-950 border border-white/10 px-5 py-3 rounded-xl text-brand-primary font-mono overflow-x-auto whitespace-nowrap">
                                             <span class="text-gray-500 mr-2">
                                                 GET
                                             </span>
@@ -957,19 +952,19 @@ const productSchema = {
     </section>
 
     <!-- Key Features Grid -->
-    <section class="py-24 bg-white">
+    <section class="py-24 bg-brand-bg-darker/60">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
                 <h2
-                    class="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight"
+                    class="text-4xl md:text-5xl font-bold text-white tracking-tight"
                 >
                     Enterprise Features Built In
                 </h2>
                 <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full"
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
                 >
                 </div>
-                <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                <p class="mt-6 text-xl text-gray-400 leading-relaxed">
                     Every feature you need to run professional marketing
                     campaigns at scale, using open source tools. From compliance
                     to customization, our platform has you covered.
@@ -982,18 +977,18 @@ const productSchema = {
                 {
                     features.map((feature, index) => (
                         <div
-                            class="group bg-white rounded-2xl p-8 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-300 animate-on-scroll border border-gray-100 flex flex-col items-center text-center"
+                            class="group bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 animate-on-scroll border border-white/10 flex flex-col items-center text-center hover:border-brand-primary/30 transition-all duration-300"
                             style={`animation-delay: ${index * 0.1}s`}
                         >
-                            <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-leadscaptain-purple to-leadscaptain-blue p-px mb-8 transition-transform duration-500 group-hover:rotate-6">
-                                <div class="w-full h-full bg-white rounded-[15px] flex items-center justify-center">
-                                    <div class="h-8 w-8 bg-gradient-to-br from-leadscaptain-purple to-leadscaptain-blue rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
+                            <div class="h-16 w-16 rounded-2xl bg-gradient-to-br from-brand-primary to-brand-blue p-px mb-8 transition-transform duration-500 group-hover:rotate-6">
+                                <div class="w-full h-full bg-brand-bg-darker rounded-[15px] flex items-center justify-center">
+                                    <div class="h-8 w-8 bg-gradient-to-br from-brand-primary to-brand-blue rounded-lg opacity-80 group-hover:opacity-100 transition-opacity" />
                                 </div>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                            <h3 class="text-2xl font-bold text-white mb-4">
                                 {feature.title}
                             </h3>
-                            <p class="text-gray-600 leading-relaxed">
+                            <p class="text-gray-400 leading-relaxed">
                                 {feature.description}
                             </p>
                         </div>
@@ -1004,19 +999,18 @@ const productSchema = {
     </section>
 
     <!-- Scale & Compliance Section -->
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
+    <section class="py-24 bg-brand-bg-darker/40 relative overflow-hidden">
         <div class="container-custom">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="animate-on-scroll">
                     <h2
-                        class="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight"
+                        class="text-4xl md:text-5xl font-bold text-white tracking-tight"
                     >
-                        Built for <span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue"
+                        Built for <span class="gradient-text"
                             >Scale & Compliance</span
                         >
                     </h2>
-                    <p class="mt-6 text-xl text-gray-600 leading-relaxed">
+                    <p class="mt-6 text-xl text-gray-400 leading-relaxed">
                         Process millions of emails and lead enrichment requests
                         with enterprise-grade security and regulatory
                         compliance. Our infrastructure is designed for
@@ -1026,7 +1020,7 @@ const productSchema = {
                     <div class="mt-10 space-y-6">
                         <div class="flex items-start group">
                             <div
-                                class="mt-1 flex-shrink-0 w-10 h-10 bg-leadscaptain-blue/10 rounded-full flex items-center justify-center text-leadscaptain-blue group-hover:bg-leadscaptain-blue group-hover:text-white transition-all duration-300"
+                                class="mt-1 flex-shrink-0 w-10 h-10 bg-brand-blue/10 rounded-full flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-all duration-300"
                             >
                                 <svg
                                     class="w-5 h-5"
@@ -1042,10 +1036,10 @@ const productSchema = {
                                 >
                             </div>
                             <div class="ml-5">
-                                <h4 class="text-xl font-bold text-gray-900">
+                                <h4 class="text-xl font-bold text-white">
                                     Enterprise Security
                                 </h4>
-                                <p class="text-gray-600 leading-relaxed">
+                                <p class="text-gray-400 leading-relaxed">
                                     SOC 2 Type II, GDPR & CCPA compliant
                                     infrastructure with encryption at rest and
                                     in transit.
@@ -1055,7 +1049,7 @@ const productSchema = {
 
                         <div class="flex items-start group">
                             <div
-                                class="mt-1 flex-shrink-0 w-10 h-10 bg-leadscaptain-purple/10 rounded-full flex items-center justify-center text-leadscaptain-purple group-hover:bg-leadscaptain-purple group-hover:text-white transition-all duration-300"
+                                class="mt-1 flex-shrink-0 w-10 h-10 bg-brand-primary/10 rounded-full flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-300"
                             >
                                 <svg
                                     class="w-5 h-5"
@@ -1071,10 +1065,10 @@ const productSchema = {
                                 >
                             </div>
                             <div class="ml-5">
-                                <h4 class="text-xl font-bold text-gray-900">
+                                <h4 class="text-xl font-bold text-white">
                                     Smart Rate Limiting
                                 </h4>
-                                <p class="text-gray-600 leading-relaxed">
+                                <p class="text-gray-400 leading-relaxed">
                                     Intelligent throttling and queueing systems
                                     ensure optimal performance under any load.
                                 </p>
@@ -1083,7 +1077,7 @@ const productSchema = {
 
                         <div class="flex items-start group">
                             <div
-                                class="mt-1 flex-shrink-0 w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:text-white transition-all duration-300"
+                                class="mt-1 flex-shrink-0 w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 group-hover:bg-green-500 group-hover:text-white transition-all duration-300"
                             >
                                 <svg
                                     class="w-5 h-5"
@@ -1099,10 +1093,10 @@ const productSchema = {
                                 >
                             </div>
                             <div class="ml-5">
-                                <h4 class="text-xl font-bold text-gray-900">
+                                <h4 class="text-xl font-bold text-white">
                                     WhatsApp Integration
                                 </h4>
-                                <p class="text-gray-600 leading-relaxed">
+                                <p class="text-gray-400 leading-relaxed">
                                     Communicate with customers directly through
                                     our enterprise-grade WhatsApp Business API.
                                 </p>
@@ -1115,12 +1109,12 @@ const productSchema = {
                     <div class="relative group">
                         <!-- Code editor decoration -->
                         <div
-                            class="absolute -inset-1 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"
+                            class="absolute -inset-1 bg-gradient-to-r from-brand-primary to-brand-blue rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"
                         >
                         </div>
 
                         <div
-                            class="relative bg-gray-900 rounded-2xl p-8 border border-gray-800 shadow-2xl"
+                            class="relative bg-brand-bg-darker rounded-2xl p-8 border border-white/10 shadow-2xl"
                         >
                             <div class="flex items-center justify-between mb-8">
                                 <div class="flex space-x-2">
@@ -1148,9 +1142,9 @@ const productSchema = {
 {`{
   "status": "`}<span class="text-green-400">success</span>{`",
   "contact": {
-    "email": "`}<span class="text-leadscaptain-purple">info@laravelmail.com</span>{`",
-    "phone": "`}<span class="text-leadscaptain-purple">+1-555-123-4567</span>{`",
-    "company": "`}<span class="text-leadscaptain-purple">Laravel Company</span>{`",
+    "email": "`}<span class="text-brand-primary">info@laravelmail.com</span>{`",
+    "phone": "`}<span class="text-brand-primary">+1-555-123-4567</span>{`",
+    "company": "`}<span class="text-brand-primary">Laravel Company</span>{`",
     "confidence": `}<span class="text-amber-400">0.95</span>{`
   },
   "company": {
@@ -1168,7 +1162,7 @@ const productSchema = {
     </section>
 
     <!-- Reasons to Order Section -->
-    <section class="py-32 bg-gray-900 overflow-hidden relative">
+    <section class="py-32 bg-brand-bg-darker overflow-hidden relative">
         <!-- Subtle grid background -->
         <div
             class="absolute inset-0 opacity-[0.03]"
@@ -1182,12 +1176,12 @@ const productSchema = {
                     class="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter"
                 >
                     21 Reasons to Order <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue"
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue"
                         >Email Server</span
                     > Now
                 </h2>
                 <div
-                    class="w-32 h-2 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full mb-8"
+                    class="w-32 h-2 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full mb-8"
                 >
                 </div>
                 <p class="text-2xl text-gray-400 font-medium leading-relaxed">
@@ -1201,18 +1195,18 @@ const productSchema = {
                 {
                     reasonsToOrder.map((reason, index) => (
                         <div
-                            class="group relative bg-gray-800/40 backdrop-blur-md border border-gray-700/50 rounded-3xl p-10 hover:border-leadscaptain-purple/50 transition-all duration-500 animate-on-scroll flex flex-col items-start"
+                            class="group relative bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-3xl p-10 hover:border-brand-primary/50 transition-all duration-500 animate-on-scroll flex flex-col items-start"
                             style={`animation-delay: ${index * 0.05}s`}
                         >
-                            <div class="absolute -top-4 -left-4 w-12 h-12 bg-gray-800 rounded-2xl flex items-center justify-center text-xs font-black text-gray-500 border border-gray-700 shadow-xl group-hover:border-leadscaptain-purple/50 group-hover:text-leadscaptain-purple transition-all duration-300">
+                            <div class="absolute -top-4 -left-4 w-12 h-12 bg-brand-bg-darker rounded-2xl flex items-center justify-center text-xs font-black text-gray-500 border border-white/10 shadow-xl group-hover:border-brand-primary/50 group-hover:text-brand-primary transition-all duration-300">
                                 {String(index + 1).padStart(2, "0")}
                             </div>
 
-                            <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl flex items-center justify-center text-4xl mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-inner">
+                            <div class="w-16 h-16 bg-gradient-to-br from-white/5 to-white/10 rounded-2xl flex items-center justify-center text-4xl mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-inner">
                                 {reason.icon}
                             </div>
 
-                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-leadscaptain-purple group-hover:to-leadscaptain-blue transition-all duration-300">
+                            <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-primary group-hover:to-brand-blue transition-all duration-300">
                                 {reason.title}
                             </h3>
 
@@ -1236,7 +1230,7 @@ const productSchema = {
                             >Get Your Server Started</span
                         >
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+                            class="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-blue opacity-0 group-hover:opacity-10 transition-opacity duration-300"
                         >
                         </div>
                     </a>
@@ -1255,15 +1249,15 @@ const productSchema = {
 
     <!-- Social Proof Section -->
     <section
-        class="py-32 bg-gray-900 overflow-hidden relative border-t border-gray-800"
+        class="py-32 bg-brand-bg-darker overflow-hidden relative border-t border-white/5"
     >
         <!-- Background decorative elements -->
         <div
-            class="absolute top-0 right-0 w-1/3 h-full bg-leadscaptain-purple/5 blur-[120px] rounded-full pointer-events-none"
+            class="absolute top-0 right-0 w-1/3 h-full bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none"
         >
         </div>
         <div
-            class="absolute bottom-0 left-0 w-1/3 h-full bg-leadscaptain-blue/5 blur-[120px] rounded-full pointer-events-none"
+            class="absolute bottom-0 left-0 w-1/3 h-full bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none"
         >
         </div>
 
@@ -1272,13 +1266,12 @@ const productSchema = {
                 <h2
                     class="text-5xl md:text-7xl font-black text-white tracking-tighter mb-8 italic uppercase"
                 >
-                    Used by Developers <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue"
+                    Used by Developers <span class="gradient-text"
                         >Worldwide.</span
                     >
                 </h2>
                 <div
-                    class="w-32 h-2 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full mb-10"
+                    class="w-32 h-2 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full mb-10"
                 >
                 </div>
                 <p
@@ -1293,10 +1286,10 @@ const productSchema = {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
                 <!-- Side Card 1 -->
                 <div
-                    class="group relative text-center p-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-[40px] hover:border-leadscaptain-purple/30 hover:bg-white/10 transition-all duration-500"
+                    class="group relative text-center p-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-[40px] hover:border-brand-primary/30 hover:bg-white/10 transition-all duration-500"
                 >
                     <div
-                        class="text-6xl font-black text-white group-hover:text-leadscaptain-purple transition-colors mb-4 tracking-tighter"
+                        class="text-6xl font-black text-white group-hover:text-brand-primary transition-colors mb-4 tracking-tighter"
                     >
                         2,500+
                     </div>
@@ -1313,10 +1306,10 @@ const productSchema = {
 
                 <!-- Center Card (Highlighted) -->
                 <div
-                    class="group text-center p-16 bg-gray-800 rounded-[50px] scale-110 shadow-2xl relative overflow-hidden border border-white/10 ring-4 ring-leadscaptain-purple/10"
+                    class="group text-center p-16 bg-brand-bg-card rounded-[50px] scale-110 shadow-2xl relative overflow-hidden border border-white/10 ring-4 ring-brand-primary/10"
                 >
                     <div
-                        class="absolute inset-0 bg-gradient-to-br from-leadscaptain-purple/20 to-transparent"
+                        class="absolute inset-0 bg-gradient-to-br from-brand-primary/20 to-transparent"
                     >
                     </div>
                     <div class="relative z-10">
@@ -1331,7 +1324,7 @@ const productSchema = {
                             Emails Sent Monthly
                         </div>
                         <div
-                            class="mt-8 w-16 h-1.5 bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue mx-auto rounded-full shadow-[0_0_20px_rgba(194,112,200,0.5)]"
+                            class="mt-8 w-16 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full shadow-[0_0_20px_rgba(194,112,200,0.5)]"
                         >
                         </div>
                     </div>
@@ -1339,10 +1332,10 @@ const productSchema = {
 
                 <!-- Side Card 2 -->
                 <div
-                    class="group relative text-center p-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-[40px] hover:border-leadscaptain-blue/30 hover:bg-white/10 transition-all duration-500"
+                    class="group relative text-center p-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-[40px] hover:border-brand-blue/30 hover:bg-white/10 transition-all duration-500"
                 >
                     <div
-                        class="text-6xl font-black text-white group-hover:text-leadscaptain-blue transition-colors mb-4 tracking-tighter"
+                        class="text-6xl font-black text-white group-hover:text-brand-blue transition-colors mb-4 tracking-tighter"
                     >
                         99.5%
                     </div>
@@ -1352,7 +1345,7 @@ const productSchema = {
                         Accuracy Rate
                     </div>
                     <div
-                        class="mt-6 w-12 h-1 bg-payflo-blue mx-auto rounded-full group-hover:w-24 transition-all duration-500 shadow-[0_0_10px_rgba(75,30,78,0.5)]"
+                        class="mt-6 w-12 h-1 bg-brand-blue mx-auto rounded-full group-hover:w-24 transition-all duration-500 shadow-[0_0_10px_rgba(75,30,78,0.5)]"
                     >
                     </div>
                 </div>

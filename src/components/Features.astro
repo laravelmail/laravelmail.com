@@ -1,79 +1,95 @@
-
 ---
-import FeatureCard from './FeatureCard.astro';
-import UIImprovementsBanner from './UIImprovementsBanner.astro';
+import FeatureCard from "./FeatureCard.astro";
+import UIImprovementsBanner from "./UIImprovementsBanner.astro";
 
-const features = [
-{
-    title: "Gmail Inbox Management",
-    description: "Seamlessly manage your Gmail inbox directly from Laravel Mail. Sync contacts, organize conversations, and trigger automated workflows based on incoming email interactions—all within a unified dashboard.",
-    icon: "mail",
-    benefits: [
-    "Native Gmail API integration",
-    "Smart inbox synchronization",
-    "Email-triggered automations"
-    ]
+interface Feature {
+    title: string;
+    description: string;
+    icon: "mail" | "lightbulb" | "chat" | "message";
+    benefits: string[];
+}
+
+const features: Feature[] = [
+    {
+        title: "Gmail Inbox Management",
+        description:
+            "Seamlessly manage your Gmail inbox directly from Laravel Mail. Sync contacts, organize conversations, and trigger automated workflows based on incoming email interactions—all within a unified dashboard.",
+        icon: "mail",
+        benefits: [
+            "Native Gmail API integration",
+            "Smart inbox synchronization",
+            "Email-triggered automations",
+        ],
     },
-{
-    title: "Ollama AI Integration",
-    description: "Leverage local AI models through Ollama to generate intelligent email copy, personalize content at scale, and create dynamic subject lines—all without external API costs or data leaving your servers.",
-    icon: "lightbulb",
-    benefits: [
-    "Local AI model support",
-    "AI-powered content generation",
-    "Zero external dependencies"
-    ]
+    {
+        title: "Ollama AI Integration",
+        description:
+            "Leverage local AI models through Ollama to generate intelligent email copy, personalize content at scale, and create dynamic subject lines—all without external API costs or data leaving your servers.",
+        icon: "lightbulb",
+        benefits: [
+            "Local AI model support",
+            "AI-powered content generation",
+            "Zero external dependencies",
+        ],
     },
-{
-    title: "WhatsApp Campaigns",
-    description: "Reach customers on WhatsApp with native campaign support. Send notifications, promotions, and personalized messages with delivery tracking, automated responses, and segmented audience targeting.",
-    icon: "chat",
-    benefits: [
-    "WhatsApp Business API integration",
-    "Segmented audience targeting",
-    "Delivery tracking & analytics"
-    ]
+    {
+        title: "WhatsApp Campaigns",
+        description:
+            "Reach customers on WhatsApp with native campaign support. Send notifications, promotions, and personalized messages with delivery tracking, automated responses, and segmented audience targeting.",
+        icon: "chat",
+        benefits: [
+            "WhatsApp Business API integration",
+            "Segmented audience targeting",
+            "Delivery tracking & analytics",
+        ],
     },
-{
-    title: "Facebook Messenger Campaigns",
-    description: "Automate customer engagement through Facebook Messenger with broadcast campaigns, chatbot integrations, and conversation-triggered workflows—building lasting relationships on the platforms your audience uses daily.",
-    icon: "message",
-    benefits: [
-    "Facebook Messenger API integration",
-    "Broadcast & conversation automation",
-    "Chatbot & NLP-powered responses"
-    ]
-    }
+    {
+        title: "Facebook Messenger Campaigns",
+        description:
+            "Automate customer engagement through Facebook Messenger with broadcast campaigns, chatbot integrations, and conversation-triggered workflows—building lasting relationships on the platforms your audience uses daily.",
+        icon: "message",
+        benefits: [
+            "Facebook Messenger API integration",
+            "Broadcast & conversation automation",
+            "Chatbot & NLP-powered responses",
+        ],
+    },
 ];
 ---
 
-<section class="py-24 bg-gradient-to-b from-gray-900 via-gray-900 to-gray-800">
+<section class="py-24 bg-brand-bg-darker/60 overflow-hidden">
     <div class="container mx-auto px-4">
         <!-- Header -->
         <div class="max-w-3xl mx-auto text-center mb-20">
             <div class="inline-block mb-4">
-        <span class="px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-semibold">
-          ✨ Latest Release
-        </span>
+                <span
+                    class="px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/30 text-brand-primary text-sm font-semibold"
+                >
+                    ✨ Latest Release
+                </span>
             </div>
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">
                 Expanded Beyond Email
             </h2>
             <p class="text-xl text-gray-300">
-                Laravel Mail now powers omnichannel marketing campaigns with integrated Gmail management, AI-powered messaging, and multi-platform campaign automation—all on your infrastructure.
+                Laravel Mail now powers omnichannel marketing campaigns with
+                integrated Gmail management, AI-powered messaging, and
+                multi-platform campaign automation—all on your infrastructure.
             </p>
         </div>
 
         <!-- Feature Grid -->
         <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-12">
-            {features.map(feature => (
+            {
+                features.map((feature) => (
                     <FeatureCard
-                            title={feature.title}
-                            description={feature.description}
-                            icon={feature.icon}
-                            benefits={feature.benefits}
+                        title={feature.title}
+                        description={feature.description}
+                        icon={feature.icon}
+                        benefits={feature.benefits}
                     />
-            ))}
+                ))
+            }
         </div>
 
         <!-- UI Improvements Banner -->
@@ -96,18 +112,22 @@ const features = [
 
     @keyframes pulse-ring {
         0% {
-            box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+            box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
         }
         50% {
-            box-shadow: 0 0 0 10px rgba(168, 85, 247, 0);
+            box-shadow: 0 0 0 10px rgba(124, 58, 237, 0);
         }
         100% {
-            box-shadow: 0 0 0 0 rgba(168, 85, 247, 0);
+            box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
         }
     }
 
     :global(.icon-box) {
-        background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
-        border: 1px solid rgba(168, 85, 247, 0.2);
+        background: linear-gradient(
+            135deg,
+            rgba(124, 58, 237, 0.1) 0%,
+            rgba(236, 72, 153, 0.1) 100%
+        );
+        border: 1px solid rgba(124, 58, 237, 0.2);
     }
 </style>

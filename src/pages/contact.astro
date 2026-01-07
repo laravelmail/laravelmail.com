@@ -1,79 +1,130 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Logo from 'src/assets/logo.svg'
-import { Image } from 'astro:assets';
+import Layout from "../layouts/Layout.astro";
+import Logo from "src/assets/logo.svg";
+import { Image } from "astro:assets";
 import logoSrc from "@/assets/logo.svg";
 
 const contactMethods = [
     {
         title: "Sales",
-        description: "Discuss lead generation solutions and pricing for your business growth.",
+        description:
+            "Discuss lead generation solutions and pricing for your business growth.",
     },
     {
         title: "Support",
-        description: "Get help with your lead generation campaigns and technical questions.",
+        description:
+            "Get help with your lead generation campaigns and technical questions.",
     },
     {
         title: "Partnerships",
-        description: "Explore referral programs and strategic partnership opportunities.",
-    }
+        description:
+            "Explore referral programs and strategic partnership opportunities.",
+    },
 ];
 ---
 
 <Layout
-        title="Contact Us"
-        description="Get in touch with our lead generation experts for sales inquiries, campaign support, or partnership opportunities."
+    title="Contact Us"
+    description="Get in touch with our lead generation experts for sales inquiries, campaign support, or partnership opportunities."
 >
-    <section class="pt-20 pb-16 md:pt-28 md:pb-24">
+    <!-- Background decorative elements -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-primary/10 blur-[120px] rounded-full"
+        >
+        </div>
+        <div
+            class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-blue/10 blur-[120px] rounded-full"
+        >
+        </div>
+    </div>
+
+    <section class="pt-20 pb-16 md:pt-28 md:pb-24 bg-brand-bg-darker/40">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h1 class="text-4xl md:text-5xl font-bold leading-tight">
+                <h1
+                    class="text-4xl md:text-5xl font-bold leading-tight text-white"
+                >
                     Ready to <span class="gradient-text">Email</span> Your Growth?
                 </h1>
-                <p class="mt-6 text-xl text-gray-600">
-                    Let's discuss how we can generate high-quality leads and accelerate your business growth.
-                    info@laravelcompany.com
+                <p class="mt-6 text-xl text-gray-400">
+                    Let's discuss how we can generate high-quality leads and
+                    accelerate your business growth.
+                    <br />
+                    <span class="text-brand-primary font-bold"
+                        >info@laravelcompany.com</span
+                    >
                 </p>
             </div>
 
             <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-                {contactMethods.map((method, index) => (
+                {
+                    contactMethods.map((method, index) => (
                         <div
-                                class="bg-white rounded-xl p-8 shadow-lg border border-gray-100 text-center animate-on-scroll hover:shadow-xl transition-shadow duration-300"
-                                style={`animation-delay: ${index * 0.15}s`}
+                            class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-xl border border-white/10 text-center animate-on-scroll hover:border-brand-primary/50 transition-all duration-500 hover:-translate-y-2 group"
+                            style={`animation-delay: ${index * 0.15}s`}
                         >
-                            <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-blue-600/10 text-blue-600 mb-6">
-                                <div class="h-8 w-8 bg-blue-600/20 rounded"></div>
-                                <Image src={Logo} alt="Laravel Mail Logo" width={140} height={45} />
+                            <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-primary/20 text-brand-primary mb-6 group-hover:scale-110 transition-transform duration-500">
+                                <Image
+                                    src={Logo}
+                                    alt="Laravel Mail Logo"
+                                    width={140}
+                                    height={45}
+                                />
                             </div>
-                            <h3 title="email marketing company london" class="text-xl font-semibold text-gray-900">{method.title}</h3>
-                            <p class="mt-3 text-gray-600">{method.description}</p>
-                            <a href={`mailto:${method.email}`} class="mt-4 block text-blue-600 font-medium hover:text-blue-700 hover:underline transition-colors">
-                                {method.email}
+                            <h3
+                                title="email marketing company london"
+                                class="text-xl font-bold text-white group-hover:text-brand-primary transition-colors"
+                            >
+                                {method.title}
+                            </h3>
+                            <p class="mt-3 text-gray-400">
+                                {method.description}
+                            </p>
+                            <a
+                                href={`mailto:info@laravelmail.com`}
+                                class="mt-4 block text-brand-primary font-bold hover:underline transition-colors"
+                            >
+                                Contact Now
                             </a>
                         </div>
-                ))}
+                    ))
+                }
             </div>
         </div>
     </section>
 
-
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-brand-bg-darker/60">
         <div class="container-custom">
             <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Our Office</h2>
-                <p class="mt-4 text-xl text-gray-600">
-                    Laravel Mail headquarters - where lead generation strategies come to life.
+                <h2 class="text-3xl md:text-4xl font-bold text-white">
+                    Our Office
+                </h2>
+                <div
+                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
+                >
+                </div>
+                <p class="mt-6 text-xl text-gray-400">
+                    Laravel Mail headquarters - where lead generation strategies
+                    come to life.
                 </p>
-                <address class="mt-6 not-italic text-gray-600">
-                    The Workspace
-                    7 High Street
-                    Basildon,
-                    United Kingdom
+                <address
+                    class="mt-8 not-italic text-gray-300 bg-brand-bg-card/40 backdrop-blur-sm p-6 rounded-2xl border border-white/5 inline-block"
+                >
+                    <span class="block font-bold text-white mb-2"
+                        >The Workspace</span
+                    >
+                    7 High Street<br />
+                    Basildon, United Kingdom
                 </address>
-                <div class="mt-6 flex justify-center space-x-6 text-gray-600">
-                    <div class="flex items-center">
-                        <div class="h-5 w-5 mr-2 bg-blue-600 rounded"></div>
+                <div class="mt-8 flex justify-center space-x-6 text-gray-400">
+                    <div
+                        class="flex items-center px-4 py-2 bg-brand-bg-card/30 rounded-full border border-white/5"
+                    >
+                        <div
+                            class="h-2 w-2 mr-3 bg-brand-primary rounded-full animate-pulse"
+                        >
+                        </div>
                         <span>Mon-Fri 9AM-6PM GMT</span>
                     </div>
                 </div>
@@ -81,13 +132,25 @@ const contactMethods = [
         </div>
     </section>
 
-    <section class="py-16 bg-blue-600">
-        <div class="container-custom">
-            <div class="text-center text-white">
-                <h2 class="text-2xl md:text-3xl font-bold mb-4">Ready to Generate More Leads?</h2>
-                <p class="text-xl text-blue-100 mb-8">Join 500+ businesses that trust Laravel Mail to drive their growth.</p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="mailto:info@laravelmail.com" class="bg-white text-blue-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors">
+    <section class="py-20 relative overflow-hidden">
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-blue opacity-10"
+        >
+        </div>
+        <div class="container-custom relative">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">
+                    Ready to Generate More Leads?
+                </h2>
+                <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                    Join 500+ businesses that trust <b>Laravel Mail</b> to drive their
+                    growth through enterprise-grade automation.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a
+                        href="mailto:info@laravelmail.com"
+                        class="btn bg-white text-brand-primary font-bold py-4 px-10 rounded-xl hover:scale-105 transition-all shadow-lg shadow-white/10"
+                    >
                         Start Your Free Consultation
                     </a>
                 </div>

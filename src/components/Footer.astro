@@ -6,6 +6,7 @@ const companyLinks = [
     { name: "About Us", href: "/about-us" },
     { name: "Contact", href: "/contact" },
     { name: "Deploy", href: "/deploy" },
+    { name: "Templates", href: "/templates" },
 ];
 
 const legalLinks = [
@@ -87,7 +88,7 @@ const organizationSchema = {
                         alt="Laravel Mail Logo"
                         width={140}
                         height={45}
-                        class="brightness-0 invert"
+                        class="hover:brightness-110 transition-all duration-300"
                     />
                 </a>
                 <p class="mt-4 text-gray-400 max-w-md">
@@ -145,7 +146,7 @@ const organizationSchema = {
                 <h3 class="text-lg font-semibold mb-4 text-white/90">
                     Company
                 </h3>
-                <ul class="space-y-3">
+                <ul class="space-y-3" style="padding: 0px;">
                     {
                         companyLinks.map((link, index) => {
                             const titles = {
@@ -161,7 +162,7 @@ const organizationSchema = {
                                 <li class="transform transition-all duration-300 hover:translate-x-1">
                                     <a
                                         href={link.href}
-                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
+                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block py-2"
                                         style={`transition-delay: ${index * 50}ms;`}
                                         title={link.name}
                                         onclick={`window.trackFooterClick && window.trackFooterClick('Footer Navigation', 'Company - ${link.name}')`}
@@ -177,7 +178,7 @@ const organizationSchema = {
 
             <div>
                 <h3 class="text-lg font-semibold mb-4 text-white/90">Legal</h3>
-                <ul class="space-y-3">
+                <ul class="space-y-3 no-padding" style="padding:0px">
                     {
                         legalLinks.map((link, index) => {
                             const titles = {
@@ -192,7 +193,7 @@ const organizationSchema = {
                                 <li class="transform transition-all duration-300 hover:translate-x-1">
                                     <a
                                         href={link.href}
-                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block"
+                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block py-2"
                                         style={`transition-delay: ${index * 50}ms;`}
                                         title={link.name}
                                         onclick={`window.trackFooterClick && window.trackFooterClick('Footer Navigation', 'Legal - ${link.name}')`}
