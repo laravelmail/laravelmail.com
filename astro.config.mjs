@@ -1,15 +1,12 @@
-import {defineConfig} from 'astro/config';
+import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
-import icon from "astro-icon";
-import cloudflare from '@astrojs/cloudflare';
+import icon from 'astro-icon';
 
-// https://astro.build/config
 export default defineConfig({
     site: 'https://laravelmail.com',
     output: 'static',
     prefetch: true,
-    adapter: cloudflare(),
     integrations: [
         tailwind(),
         sitemap(),
@@ -50,11 +47,6 @@ export default defineConfig({
                     "handshake-duotone"
                 ]
             }
-        }),
-    ],
-    image: {
-        service: {
-            entrypoint: 'astro/assets/services/sharp'
-        }
-    }
+        })
+    ]
 });
