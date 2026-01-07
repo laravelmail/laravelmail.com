@@ -33,4 +33,3 @@ jobs:
           cloudflare-project-name: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
           directory: dist
           github-token: ${{ secrets.GH_TOKEN }}
-          github-environment: ${{ secrets.CLOUDFLARE_PROJECT_NAME }} ${{ (github.ref == 'refs/heads/main' && '(Production)') || '(Preview)' }}
