@@ -1,8 +1,11 @@
 {
   "name": "laravel-mail",
+  "author": "Stefan Bogdan",
+  "license": "MIT",
+  "homepage": "https://laravelmail.com",
   "type": "module",
   "version": "0.0.1",
-  "description": "Welcome to **Laravel Mail**, your go-to solution for self hosting marketing campaigns",
+  "description": "Welcome to Laravel Mail, your go-to solution for self hosting marketing campaigns",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -15,6 +18,7 @@
     "@astrojs/sitemap": "^3.0.3",
     "@astrojs/tailwind": "^5.0.3",
     "@fontsource-variable/inter": "^5.0.15",
+    "@fontsource/nunito": "^5.2.7",
     "@iconify-json/ph": "^1.2.2",
     "astro": "^5.7.0",
     "astro-icon": "^1.0.0",

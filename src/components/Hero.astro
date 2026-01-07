@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import heroImage from "../assets/logo.svg";
+import dashboardImage from "../assets/dashboard.png";
 ---
 
 <section
@@ -47,7 +48,7 @@ import heroImage from "../assets/logo.svg";
                         class="btn btn-primary trigger-beta-modal"
                         aria-label="Start your own marketing campaign today"
                         title="Start your lead generation journey"
-                        >Get Started</a
+                        >Get Started with Laravel Mail</a
                     >
                 </div>
             </div>
@@ -64,11 +65,12 @@ import heroImage from "../assets/logo.svg";
                     </div>
                     <div class="relative rounded-xl shadow-xl overflow-hidden">
                         <Image
-                            src="/screens/dashboard.png"
-                            alt=" provides marketing automation software available to everyone"
+                            src={dashboardImage}
+                            alt="Laravel Mail provides marketing automation software available to everyone"
                             class="w-full h-auto transition-all duration-500"
-                            width={700}
-                            height={500}
+                            widths={[400, 700, 1024]}
+                            sizes="(max-width: 768px) 100vw, 700px"
+                            format="avif"
                         />
                     </div>
                 </div>

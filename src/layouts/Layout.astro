@@ -6,6 +6,10 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BetaModal from "../components/BetaModal.astro";
 import "../styles/global.css";
+import "@fontsource/nunito/400.css";
+import "@fontsource/nunito/500.css";
+import "@fontsource/nunito/600.css";
+import "@fontsource/nunito/700.css";
 import favIcon from "src/assets/favicon.png";
 
 interface Props {
@@ -33,12 +37,13 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
 
     <title>{title}</title>
 
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="robots" content="index, follow" />
+
     <!-- Enhanced View Transitions with fallback -->
     <ViewTransitions fallback="none" />
 
     <!-- Preload critical resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta
       name="facebook-domain-verification"
       content="decnmc05wnft14fdjzsonqefn3vgos"
@@ -59,13 +64,19 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content={favicon.src} />
+    <meta
+      property="og:image"
+      content={new URL("/screens/dashboard.png", Astro.site)}
+    />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={favicon.src} />
+    <meta
+      name="twitter:image"
+      content={new URL("/screens/dashboard.png", Astro.site)}
+    />
 
     <!-- View Transitions CSS Animations -->
     <style is:global>
