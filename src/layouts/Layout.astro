@@ -44,10 +44,13 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
     <ViewTransitions fallback="none" />
 
     <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://analytics.ahrefs.com" crossorigin />
     <meta
       name="facebook-domain-verification"
       content="decnmc05wnft14fdjzsonqefn3vgos"
     />
+    <meta name="author" content="Laravel Mail Team" />
+
     <!-- Structured data -->
     <script type="application/ld+json">
       {
@@ -236,6 +239,7 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
     <script
       async
       src="https://analytics.ahrefs.com/analytics.js"
-      data-key="VVrN3f8rO7LVfHMX67813A"></script>
+      data-key="VVrN3f8rO7LVfHMX67813A"
+      crossorigin="anonymous"></script>
   </body>
 </html>
