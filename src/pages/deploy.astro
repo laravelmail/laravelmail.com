@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import BetaModal from "../components/BetaModal.astro";
 
 const repoUrl = "https://github.com/laravelmail/laravelmail.com";
 
@@ -150,7 +151,7 @@ const schema = {
                                     href={platform.url}
                                     target="_blank"
                                     onclick={`trackDeployClick('${platform.name}')`}
-                                    class="inline-flex items-center justify-center w-full px-6 py-4 rounded-xl font-bold transition-all duration-300 bg-white/5 text-white hover:bg-brand-primary hover:scale-[1.02] active:scale-[0.98] border border-white/10 group"
+                                    class="trigger-beta-modal inline-flex items-center justify-center w-full px-6 py-4 rounded-xl font-bold transition-all duration-300 bg-white/5 text-white hover:bg-brand-primary hover:scale-[1.02] active:scale-[0.98] border border-white/10 group"
                                 >
                                     <span>Deploy Now</span>
                                     <svg
@@ -287,4 +288,6 @@ const schema = {
             </div>
         </div>
     </section>
+
+    <BetaModal />
 </Layout>

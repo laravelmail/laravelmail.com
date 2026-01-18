@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
+import preact from '@astrojs/preact';
 
 export default defineConfig({
     site: 'https://laravelmail.com',
@@ -10,6 +11,7 @@ export default defineConfig({
     integrations: [
         tailwind(),
         sitemap(),
+        preact(),
         icon({
             include: {
                 ph: [

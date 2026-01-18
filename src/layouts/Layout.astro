@@ -23,6 +23,20 @@ const {
 } = Astro.props;
 
 const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
+
+import ChatWidget from "../components/ChatWidget";
+
+const chatConf = {
+  chatServer: "https://laravelmail.com/api/chat",
+  userId: "guest",
+  introMessage: "Hi there! How can we help you today with Laravel Mail?",
+  placeholderText: "Type your message...",
+  mainColor: "#4B5563",
+  bubbleBackground: "#4F46E5",
+  headerTitle: "Laravel Mail Support",
+  vrmModelUrl:
+    "https://pixiv.github.io/three-vrm/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm",
+};
 ---
 
 <!doctype html>
@@ -163,6 +177,7 @@ const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
 
     <Footer transition:persist="footer" />
     <BetaModal />
+    <ChatWidget client:only="preact" userId="guest" conf={chatConf} />
 
     <!-- Enhanced Intersection Observer for animations -->
     <script>
