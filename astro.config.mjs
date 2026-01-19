@@ -7,7 +7,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     site: 'https://laravelmail.com',
-    output: 'server',
+    output: 'hybrid',
     adapter: cloudflare(),
     prefetch: true,
     integrations: [
