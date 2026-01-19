@@ -1,5 +1,5 @@
-import {botman} from './../botman';
-import { IButton, IMessage, IMessageTypeProps } from '../../typings';
+import { botman } from './../botman';
+import type { IButton, IMessage, IMessageTypeProps } from '../../typings';
 import MessageType from "./messagetype";
 
 export default class ButtonsType extends MessageType {
@@ -27,7 +27,7 @@ export default class ButtonsType extends MessageType {
 
     performAction(button: IButton) {
         botman.callAPI(button.payload, true, null, (msg: IMessage) => {
-            this.setState({ attachmentsVisible : false});
+            this.setState({ attachmentsVisible: false });
             this.props.messageHandler({
                 text: msg.text,
                 type: msg.type,
@@ -36,6 +36,6 @@ export default class ButtonsType extends MessageType {
                 additionalParameters: msg.additionalParameters,
                 from: 'chatbot'
             });
-        }, () => {});
+        }, () => { });
     }
 }

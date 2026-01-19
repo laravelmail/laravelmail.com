@@ -1,5 +1,5 @@
 import { Component } from 'preact';
-import {IMessageTypeProps, IMessageTypeState} from '../../typings';
+import type { IMessageTypeProps, IMessageTypeState } from '../../typings';
 
 export default abstract class MessageType extends Component<IMessageTypeProps, IMessageTypeState> {
 
@@ -12,16 +12,16 @@ export default abstract class MessageType extends Component<IMessageTypeProps, I
         };
     }
 
-    onVisibilityChange = () => {};
+    onVisibilityChange = () => { };
 
     /**
      * Check if we have a timeout
      */
     componentDidMount() {
         setTimeout(() => {
-            this.setState({ 
-                visible: true, 
-                visibilityChanged: true 
+            this.setState({
+                visible: true,
+                visibilityChanged: true
             }, () => {
                 // This callback function will be called after the state has been updated
                 this.onVisibilityChange();

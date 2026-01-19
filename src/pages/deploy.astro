@@ -132,159 +132,81 @@ const schema = {
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
             >
-                {
-                    deploymentPlatforms.map((platform) => (
-                        <div class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col">
-                            <div
-                                class={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${platform.accent} opacity-0 group-hover:opacity-100 transition-opacity`}
-                            />
-                            <div class="h-12 flex items-center mb-6">
-                                <h3 class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors">
-                                    {platform.name}
-                                </h3>
-                            </div>
-                            <p class="text-gray-400 text-sm mb-8 line-clamp-2">
-                                {platform.description}
-                            </p>
-                            <div class="mt-auto">
-                                <a
-                                    href={platform.url}
-                                    target="_blank"
-                                    onclick={`trackDeployClick('${platform.name}')`}
-                                    class="trigger-beta-modal inline-flex items-center justify-center w-full px-6 py-4 rounded-xl font-bold transition-all duration-300 bg-white/5 text-white hover:bg-brand-primary hover:scale-[1.02] active:scale-[0.98] border border-white/10 group"
-                                >
-                                    <span>Deploy Now</span>
-                                    <svg
-                                        class="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                                        />
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 bg-[#0a0e27]/80">
-        <div class="container-custom">
-            <div class="max-w-4xl mx-auto text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-black text-white mb-6">
-                    Infrastructure Control
-                </h2>
-                <p class="text-xl text-gray-400">
-                    Need more control? Install Laravel Mail on your own VPS or
-                    dedicated server.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <a
-                    href="https://github.com/laravelmail/laravelmail.com#self-hosted-vps"
-                    target="_blank"
-                    onclick="trackDeployClick('Hetzner/VPS')"
-                    class="group bg-[#1e293b]/50 p-10 rounded-3xl border border-white/10 hover:border-brand-primary/50 transition-all duration-500 hover:shadow-2xl"
+                <div
+                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
                 >
                     <div
-                        class="w-16 h-16 bg-brand-primary/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform"
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#4285F4] to-[#34A853] opacity-0 group-hover:opacity-100 transition-opacity"
                     >
-                        <svg
-                            class="w-8 h-8 text-brand-primary"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 12h14M5 12l4-4m-4 4l4 4"></path>
-                        </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">
-                        VPS / Dedicated Server
-                    </h3>
-                    <p class="text-gray-400 mb-8">
-                        Full control over your sending infrastructure and
-                        scaling.
-                    </p>
-                    <span
-                        class="text-brand-primary font-bold inline-flex items-center group-hover:translate-x-2 transition-transform"
-                    >
-                        View VPS Guide
-                        <svg
-                            class="w-5 h-5 ml-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                    <div class="h-12 flex items-center mb-6">
+                        <h3
+                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
                         >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </span>
-                </a>
-
-                <a
-                    href="https://github.com/laravelmail/laravelmail.com#docker-compose"
-                    target="_blank"
-                    onclick="trackDeployClick('Docker Compose')"
-                    class="group bg-[#1e293b]/50 p-10 rounded-3xl border border-white/10 hover:border-brand-blue/50 transition-all duration-500 hover:shadow-2xl"
+                            Google Cloud
+                        </h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
+                        Deploy to Google Cloud Run (Serverless Docker) with one
+                        click.
+                    </p>
+                    <div class="mt-auto"></div>
+                </div><div
+                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
                 >
                     <div
-                        class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform"
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0080FF] to-[#0069D9] opacity-0 group-hover:opacity-100 transition-opacity"
                     >
-                        <svg
-                            class="w-8 h-8 text-brand-blue"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                            ></path>
-                        </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">
-                        Docker Compose
-                    </h3>
-                    <p class="text-gray-400 mb-8">
-                        Standardized environment that runs anywhere Docker is
-                        supported.
-                    </p>
-                    <span
-                        class="text-brand-blue font-bold inline-flex items-center group-hover:translate-x-2 transition-transform"
-                    >
-                        Get Compose File
-                        <svg
-                            class="w-5 h-5 ml-1"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                    <div class="h-12 flex items-center mb-6">
+                        <h3
+                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
                         >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </span>
-                </a>
+                            DigitalOcean
+                        </h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
+                        Deploy to DigitalOcean App Platform with native Docker
+                        support.
+                    </p>
+                    <div class="mt-auto"></div>
+                </div><div
+                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
+                >
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0B0D0E] to-[#1A1C1D] opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                    </div>
+                    <div class="h-12 flex items-center mb-6">
+                        <h3
+                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
+                        >
+                            Railway
+                        </h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
+                        Zero-config Docker deployment on Railway.
+                    </p>
+                    <div class="mt-auto"></div>
+                </div><div
+                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
+                >
+                    <div
+                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#430098] to-[#7673B0] opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                    </div>
+                    <div class="h-12 flex items-center mb-6">
+                        <h3
+                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
+                        >
+                            Heroku
+                        </h3>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
+                        Deploy your Docker implementation to Heroku.
+                    </p>
+                    <div class="mt-auto"></div>
+                </div>
             </div>
         </div>
     </section>

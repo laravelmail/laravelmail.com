@@ -1,5 +1,5 @@
 import MessageType from "./messagetype";
-import { IMessageTypeProps } from "../../typings";
+import type { IMessageTypeProps } from "../../typings";
 
 export default class TextType extends MessageType {
     render(props: IMessageTypeProps) {

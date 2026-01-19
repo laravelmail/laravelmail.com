@@ -1,5 +1,5 @@
 import { Component } from 'preact';
-import {IMessage, IMessageHolderProps, IMessageTypeState} from '../typings';
+import type { IMessage, IMessageHolderProps, IMessageTypeState } from '../typings';
 import TextType from "./messages/text";
 import ActionType from "./messages/action";
 import TypingIndicator from "./messages/typing-indicator";
@@ -66,22 +66,22 @@ export default class MessageHolder extends Component<IMessageHolderProps, any> {
 
         return (
             <li data-message-id={message.id} className={message.from} style={styles}>
-                    { (message.type as string) === 'typing_indicator'
-                        ? (<MessageComponent onVisibilityChange={this.messageVisibilityChange}
+                {(message.type as string) === 'typing_indicator'
+                    ? (<MessageComponent onVisibilityChange={this.messageVisibilityChange}
+                        message={message}
+                        timeout={calculatedTimeout}
+                        messageHandler={messageHandler}
+                        conf={conf}
+                    />)
+                    : (<div className="msg">
+                        <MessageComponent onVisibilityChange={this.messageVisibilityChange}
                             message={message}
                             timeout={calculatedTimeout}
                             messageHandler={messageHandler}
                             conf={conf}
-                            />)
-                        :(<div className="msg">
-                            <MessageComponent onVisibilityChange={this.messageVisibilityChange}
-                                            message={message}
-                                            timeout={calculatedTimeout}
-                                            messageHandler={messageHandler}
-                                            conf={conf}
-                            />
-                        </div>)
-                    }
+                        />
+                    </div>)
+                }
             </li>
         );
 

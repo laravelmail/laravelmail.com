@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { IAttachment, IMessage } from './../typings';
+import type { IAttachment, IMessage } from './../typings';
 
 class BotMan {
 
-	private static instance: BotMan;
+    private static instance: BotMan;
 
-	public static getInstance(): BotMan {
+    public static getInstance(): BotMan {
         if (!BotMan.instance) {
             BotMan.instance = new BotMan();
         }
@@ -27,7 +27,7 @@ class BotMan {
 
     subscribeLoadingChange(listener: (loading: boolean) => void) {
         this.listeners.push(listener);
-        listener(this.loading); 
+        listener(this.loading);
 
         return () => {
             this.listeners = this.listeners.filter(l => l !== listener);
@@ -50,13 +50,13 @@ class BotMan {
         this.setLoading(true);
         let data = new FormData();
         const headers = typeof this.requestHeaders === 'string' ? JSON.parse(this.requestHeaders) : this.requestHeaders;
-    	const postData: { [index: string] : string|Blob } = {
-    		driver: 'web',
-    		userId: this.userId,
-    		message: text,
-    		attachment: attachment as Blob,
-    		interactive: interactive ? '1' : '0'
-    	};
+        const postData: { [index: string]: string | Blob } = {
+            driver: 'web',
+            userId: this.userId,
+            message: text,
+            attachment: attachment as Blob,
+            interactive: interactive ? '1' : '0'
+        };
 
         Object.keys(postData).forEach(key => data.append(key, postData[key]));
 

@@ -1,5 +1,5 @@
 import { Component } from 'preact';
-import { IConfiguration, IMessage } from '../typings';
+import type { IConfiguration, IMessage } from '../typings';
 import MessageHolder from "./message-holder";
 import { useEffect, useState } from 'preact/hooks';
 import { botman } from './botman';

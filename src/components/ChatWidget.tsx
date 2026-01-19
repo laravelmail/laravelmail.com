@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import Chat from '../chat/chat';
-import { IConfiguration } from '../typings';
+import type { IConfiguration } from '../typings';
 
 interface ChatWidgetProps {
     userId: string;
@@ -35,15 +35,15 @@ export default function ChatWidget({ userId, conf }: ChatWidgetProps) {
     if (!isLoaded) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-end pointer-events-none">
+        <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end pointer-events-none">
             {/* Chat Window Container */}
             <div
                 className={`
-                    w-[90vw] md:w-[400px] h-[80vh] md:h-[600px] 
-                    bg-white dark:bg-gray-900 
+                    w-[95vw] md:w-[900px] h-[85vh] md:h-[800px] 
+                    bg-white dark:bg-slate-900 
                     shadow-2xl rounded-2xl overflow-hidden 
                     transition-all duration-300 origin-bottom-right 
-                    pointer-events-auto mb-4 border border-gray-200 dark:border-gray-800
+                    pointer-events-auto mb-4 border border-gray-200 dark:border-slate-800
                     ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-90 opacity-0 translate-y-10 invisible'}
                 `}
             >
@@ -59,12 +59,12 @@ export default function ChatWidget({ userId, conf }: ChatWidgetProps) {
                 className={`
                     pointer-events-auto
                     w-14 h-14 rounded-full 
-                    bg-gradient-to-r from-indigo-600 to-purple-600 
-                    hover:from-indigo-500 hover:to-purple-500
+                    bg-gradient-to-r from-slate-900 to-blue-600 
+                    hover:from-slate-800 hover:to-blue-500
                     text-white shadow-lg hover:shadow-xl hover:scale-105
                     flex items-center justify-center 
                     transition-all duration-300
-                    focus:outline-none focus:ring-4 focus:ring-indigo-500/30
+                    focus:outline-none focus:ring-4 focus:ring-blue-500/30
                 `}
                 aria-label={isOpen ? "Close chat" : "Open chat"}
             >

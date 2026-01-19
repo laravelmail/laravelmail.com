@@ -1,6 +1,6 @@
-import {botman} from '../botman';
+import { botman } from '../botman';
 import MessageType from "./messagetype";
-import { IButton, IMessage, IMessageTypeProps } from '../../typings';
+import type { IButton, IMessage, IMessageTypeProps } from '../../typings';
 
 export default class ListType extends MessageType {
 
@@ -204,6 +204,6 @@ export default class ListType extends MessageType {
                 additionalParameters: msg.additionalParameters,
                 from: 'chatbot'
             });
-        }, () => {});
+        }, () => { });
     }
 }

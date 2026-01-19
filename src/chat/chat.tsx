@@ -1,7 +1,7 @@
 import { Component, type RenderableProps } from "preact";
 import MessageArea from "./message-area";
 import { botman } from "./botman";
-import { IMessage, IConfiguration, IFileAttachment } from "../typings";
+import type { IMessage, IConfiguration, IFileAttachment } from "../typings";
 
 enum ReplyType {
     Text = "text",
@@ -296,6 +296,9 @@ export default class Chat extends Component<IChatProps, IChatState> {
             this.vrmRenderer.setSize(width, height);
             this.vrmRenderer.setPixelRatio(window.devicePixelRatio);
             this.vrmRenderer.outputColorSpace = THREE.SRGBColorSpace;
+            // Explicitly set clear color to transparent
+            this.vrmRenderer.setClearColor(0x000000, 0);
+
             this.vrmCamera = new THREE.PerspectiveCamera(30.0, width / height, 0.1, 20.0);
             this.vrmCamera.position.set(0.0, 1.0, 5.0);
             this.vrmControls = new OrbitControls(this.vrmCamera, this.vrmCanvas);
@@ -305,14 +308,15 @@ export default class Chat extends Component<IChatProps, IChatState> {
             this.vrmControls.dampingFactor = 0.05;
             this.vrmControls.update();
             this.vrmScene = new THREE.Scene();
+
+            // Ensure scene background is null for transparency
             this.vrmScene.background = null;
+
             this.vrmScene.add(new THREE.AmbientLight(0xffffff, 0.5));
             const directionalLight = new THREE.DirectionalLight(0xffffff, Math.PI);
             directionalLight.position.set(1.0, 1.0, 1.0).normalize();
             this.vrmScene.add(directionalLight);
-            const gridHelper = new THREE.GridHelper(10, 10, 0xC270C8, 0x59079E);
-            gridHelper.position.y = -0.01;
-            this.vrmScene.add(gridHelper);
+            // Removed GridHelper for cleaner look
             const loader = new GLTFLoader();
             loader.crossOrigin = 'anonymous';
             loader.register((parser: any) => new VRMLoaderPlugin(parser));
@@ -417,9 +421,12 @@ export default class Chat extends Component<IChatProps, IChatState> {
         canvas.width = maxWidth;
         canvas.height = textHeight + padding * 2;
 
-        context.fillStyle = isBot ? 'rgba(179, 136, 216, 0.9)' : 'rgba(108, 92, 231, 0.9)';
+        // Brand Palette: #7c3aed (Purple), #ec4899 (Pink), #0f172a (Dark BG), #1e293b (Card BG)
+        // Bot: Dark Card BG with Purple Border
+        // User: Purple BG with Pink Border
+        context.fillStyle = isBot ? 'rgba(30, 41, 59, 0.95)' : 'rgba(124, 58, 237, 0.95)';
         context.fillRect(0, 0, canvas.width, canvas.height);
-        context.strokeStyle = isBot ? 'rgba(214, 122, 177, 0.8)' : 'rgba(253, 121, 168, 0.8)';
+        context.strokeStyle = isBot ? 'rgba(124, 58, 237, 0.8)' : 'rgba(236, 72, 153, 0.8)';
         context.lineWidth = 4;
         context.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
 
@@ -842,29 +849,29 @@ export default class Chat extends Component<IChatProps, IChatState> {
         const chatHeight = isMobile ? conf.mobileHeight : conf.desktopHeight;
         const effectiveHeight = conf.wrapperHeight || chatHeight;
 
-        // Brand colors (Agentic Theme)
+        // Brand colors (Dark Blue Theme)
         const lightColors = {
             darkPurple: '#f8f9fa',
-            purple: '#6c5ce7',
+            purple: '#0a92dd', // Brand Blue
             darkestPurple: '#ffffff',
-            redPink: '#fd79a8',
-            orange: '#fdcb6e',
-            lightText: '#2d3436',
-            mutedPurple: '#a29bfe',
-            softBackground: '#f1f3f5',
+            redPink: '#38bdf8', // Light Blue
+            orange: '#f59e0b',
+            lightText: '#0f172a', // Slate 900
+            mutedPurple: '#94a3b8', // Slate 400
+            softBackground: '#f1f5f9', // Slate 100
             cardBg: '#ffffff'
         };
 
         const darkColors = {
-            darkPurple: '#2d1b3d',
-            purple: '#b388d8',
-            darkestPurple: '#1a0f2e',
-            redPink: '#d67ab1',
-            orange: '#f5a962',
-            lightText: '#f0f0f0',
-            mutedPurple: '#8b6fa8',
-            softBackground: '#1f1533',
-            cardBg: '#2a1f3d'
+            darkPurple: '#1e293b', // Slate 800
+            purple: '#0a92dd', // Brand Blue
+            darkestPurple: '#0f172a', // Slate 900
+            redPink: '#38bdf8', // Light Blue accent
+            orange: '#f59e0b',
+            lightText: '#f8fafc', // Slate 50
+            mutedPurple: '#64748b', // Slate 500
+            softBackground: '#020617', // Slate 950
+            cardBg: '#1e293b' // Slate 800
         };
 
         const brandColors = darkMode ? darkColors : lightColors;
@@ -877,14 +884,12 @@ export default class Chat extends Component<IChatProps, IChatState> {
                 display: 'flex',
                 flexDirection: 'column' as const,
                 overflow: 'hidden',
-                background: darkMode
-                    ? `linear-gradient(135deg, ${brandColors.darkestPurple} 0%, ${brandColors.darkPurple} 100%)`
-                    : `linear-gradient(135deg, ${brandColors.darkestPurple} 0%, ${brandColors.softBackground} 100%)`,
+                background: `url('/garden_background.png') no-repeat center center / cover`,
                 borderRadius: '0px',
                 border: `1px solid ${brandColors.mutedPurple}`,
                 boxShadow: darkMode
-                    ? `0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(179, 136, 216, 0.1)`
-                    : `0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(162, 155, 254, 0.2)`,
+                    ? `0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(14, 165, 233, 0.1)`
+                    : `0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(148, 163, 184, 0.2)`,
                 transition: 'height 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
             },
             header: {
@@ -896,8 +901,8 @@ export default class Chat extends Component<IChatProps, IChatState> {
                     ? `linear-gradient(135deg, ${brandColors.darkestPurple} 0%, ${brandColors.cardBg} 100%)`
                     : `linear-gradient(135deg, ${brandColors.darkestPurple} 0%, ${brandColors.cardBg} 100%)`,
                 borderBottom: darkMode
-                    ? `1px solid rgba(179, 136, 216, 0.2)`
-                    : `1px solid rgba(162, 155, 254, 0.3)`,
+                    ? `1px solid rgba(14, 165, 233, 0.2)`
+                    : `1px solid rgba(148, 163, 184, 0.3)`,
                 color: brandColors.lightText,
                 backdropFilter: 'blur(10px)',
                 minHeight: '60px',
@@ -919,11 +924,11 @@ export default class Chat extends Component<IChatProps, IChatState> {
             },
             iconButton: {
                 background: darkMode
-                    ? 'rgba(179, 136, 216, 0.1)'
-                    : 'rgba(162, 155, 254, 0.15)',
+                    ? 'rgba(14, 165, 233, 0.1)'
+                    : 'rgba(148, 163, 184, 0.15)',
                 border: darkMode
-                    ? `1px solid rgba(179, 136, 216, 0.2)`
-                    : `1px solid rgba(162, 155, 254, 0.3)`,
+                    ? `1px solid rgba(14, 165, 233, 0.2)`
+                    : `1px solid rgba(148, 163, 184, 0.3)`,
                 cursor: 'pointer',
                 padding: '10px',
                 borderRadius: '12px',
@@ -942,17 +947,11 @@ export default class Chat extends Component<IChatProps, IChatState> {
                 margin: '20px auto',
                 borderRadius: '20px',
                 position: 'relative' as const,
-                background: darkMode
-                    ? `linear-gradient(135deg, ${brandColors.cardBg} 0%, rgba(58, 26, 61, 0.6) 100%)`
-                    : `linear-gradient(135deg, ${brandColors.cardBg} 0%, rgba(241, 243, 245, 0.6) 100%)`,
+                background: 'transparent',
                 maxWidth: '90%',
-                border: darkMode
-                    ? `1px solid rgba(179, 136, 216, 0.2)`
-                    : `1px solid rgba(162, 155, 254, 0.3)`,
-                boxShadow: darkMode
-                    ? `0 8px 32px rgba(0, 0, 0, 0.3)`
-                    : `0 8px 32px rgba(0, 0, 0, 0.1)`,
-                backdropFilter: 'blur(10px)'
+                border: 'none',
+                boxShadow: 'none',
+                backdropFilter: 'none'
             },
             vrmContainer: {
                 width: '100%',
@@ -961,15 +960,9 @@ export default class Chat extends Component<IChatProps, IChatState> {
                 borderRadius: '16px',
                 overflow: 'hidden',
                 position: 'relative' as const,
-                background: darkMode
-                    ? 'rgba(26, 15, 46, 0.4)'
-                    : 'rgba(241, 243, 245, 0.6)',
-                border: darkMode
-                    ? `1px solid rgba(179, 136, 216, 0.2)`
-                    : `1px solid rgba(162, 155, 254, 0.3)`,
-                boxShadow: darkMode
-                    ? 'inset 0 2px 20px rgba(0, 0, 0, 0.3)'
-                    : 'inset 0 2px 20px rgba(0, 0, 0, 0.05)'
+                background: 'transparent',
+                border: 'none',
+                boxShadow: 'none'
             },
             enlargeButton: {
                 position: 'absolute' as const,
@@ -984,8 +977,8 @@ export default class Chat extends Component<IChatProps, IChatState> {
                 fontWeight: '700',
                 cursor: 'pointer',
                 boxShadow: darkMode
-                    ? '0 4px 16px rgba(179, 136, 216, 0.4)'
-                    : '0 4px 16px rgba(108, 92, 231, 0.3)',
+                    ? '0 4px 16px rgba(14, 165, 233, 0.4)'
+                    : '0 4px 16px rgba(10, 146, 221, 0.3)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
@@ -1117,7 +1110,24 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
                 {/* Header */}
                 <div style={styles.header}>
-                    <h2 style={styles.headerTitle}>{conf.title || 'AI Assistant'}</h2>
+                    <div>
+                        <h2 style={styles.headerTitle}>{conf.title || 'Virtual Assistant'}</h2>
+                        <a
+                            href="https://laravelgpt.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                fontSize: '12px',
+                                color: brandColors.mutedPurple,
+                                textDecoration: 'none',
+                                display: 'block',
+                                marginTop: '2px',
+                                opacity: 0.8
+                            }}
+                        >
+                            <span style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Powered by</span> <span style={{ color: brandColors.purple, fontWeight: '600' }}>Laravel GPT</span>
+                        </a>
+                    </div>
                     <div style={styles.headerButtons}>
                         <button
                             onClick={this.toggleDarkMode}
@@ -1208,16 +1218,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
                             </svg>
                         </button>
                     </div>
-                    <div style={styles.poweredBy}>
-                        <span>Powered by </span>
-                        <span style={{
-                            fontWeight: '700',
-                            background: `linear-gradient(135deg, ${brandColors.purple} 0%, ${brandColors.redPink} 100%)`,
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent',
-                            backgroundClip: 'text'
-                        }}>Laravel GPT</span>
-                    </div>
+
                 </div>
 
                 {/* Enlarged VRM Modal */}
