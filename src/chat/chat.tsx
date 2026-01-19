@@ -119,6 +119,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
     private currentAudio: HTMLAudioElement | null = null;
     private isSpeaking: boolean = false;
     private vrmContainerElement: HTMLElement | null = null;
+    private vrmEnlargedContainerElement: HTMLElement | null = null;
     private messageObjects: Map<string, any> = new Map();
     private textMeshes: Map<string, any> = new Map();
     private backgroundMeshes: Map<string, any> = new Map();
@@ -148,6 +149,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
 
     private getVRMContainer(): HTMLElement | null {
         if (this.state.isVrmEnlarged) {
+            if (this.vrmEnlargedContainerElement) return this.vrmEnlargedContainerElement;
             const enlargedContainer = document.getElementById('vrm-container-enlarged');
             if (enlargedContainer) return enlargedContainer;
         }
@@ -237,6 +239,12 @@ export default class Chat extends Component<IChatProps, IChatState> {
         if (element && !this.vrmInitialized) {
             this.vrmContainerElement = element;
             setTimeout(() => { if (!this.vrmInitialized) this.initializeVRM(); }, 200);
+        }
+    }
+
+    private vrmEnlargedContainerRef = (element: HTMLDivElement | null) => {
+        if (element) {
+            this.vrmEnlargedContainerElement = element;
         }
     }
 
@@ -1025,7 +1033,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
                 overflowY: 'auto' as const,
                 overflowX: 'hidden' as const,
                 padding: '24px',
-                background: darkMode ? '#2d1b3d' : '#f8f9fa',
+                background: 'transparent',
                 position: 'relative' as const,
                 zIndex: 1,
                 display: 'flex',
@@ -1224,13 +1232,13 @@ export default class Chat extends Component<IChatProps, IChatState> {
                 {/* Enlarged VRM Modal */}
                 {state.isVrmEnlarged && (
                     <div style={{
-                        position: 'fixed',
+                        position: 'absolute',
                         top: 0,
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        width: '100vw',
-                        height: '100vh',
+                        width: '100%',
+                        height: '100%',
                         zIndex: 999999,
                         background: darkMode ? 'rgba(0, 0, 0, 0.96)' : 'rgba(0, 0, 0, 0.85)',
                         display: 'flex',
@@ -1241,14 +1249,12 @@ export default class Chat extends Component<IChatProps, IChatState> {
                         boxSizing: 'border-box' as const
                     }} onClick={this.toggleVrmEnlarge}>
                         <div style={{
-                            width: 'min(95vw, 1400px)',
-                            height: 'min(95vh, 900px)',
+                            width: '95%',
+                            height: '95%',
                             borderRadius: '24px',
                             overflow: 'hidden',
                             position: 'relative',
-                            background: darkMode
-                                ? `linear-gradient(135deg, ${brandColors.darkestPurple} 0%, ${brandColors.darkPurple} 100%)`
-                                : `linear-gradient(135deg, ${brandColors.darkestPurple} 0%, ${brandColors.softBackground} 100%)`,
+                            background: `url('/garden_background.png') no-repeat center center / cover`,
                             boxShadow: darkMode
                                 ? `0 30px 90px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(179, 136, 216, 0.3)`
                                 : `0 30px 90px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(162, 155, 254, 0.4)`,
@@ -1256,6 +1262,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
                         }} onClick={(e) => e.stopPropagation()}>
                             <div
                                 id="vrm-container-enlarged"
+                                ref={this.vrmEnlargedContainerRef}
                                 style={{
                                     width: '100%',
                                     height: '100%',
