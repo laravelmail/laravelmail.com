@@ -3,10 +3,12 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 import preact from '@astrojs/preact';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     site: 'https://laravelmail.com',
-    output: 'static',
+    output: 'server',
+    adapter: cloudflare(),
     prefetch: true,
     integrations: [
         tailwind(),
