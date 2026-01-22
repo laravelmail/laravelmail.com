@@ -1,6 +1,6 @@
 {
-  "name": "Laravel Mail ",
-  "short_name": "LM",
+  "name": "Mail",
+  "short_name": "Mail",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#565a5e",
-  "background_color": "#9d38c7",
+  "theme_color": "#ffffff",
+  "background_color": "#101527",
   "display": "standalone"
 }

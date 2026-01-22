@@ -1,116 +1,221 @@
-<section class="py-20">
-    <!-- Removed bg-white to reveal dark body -->
-    <div class="container mx-auto px-4">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">
-                Why Marketing Teams Choose Our for Marketing Automation
-            </h2>
-            <p class="text-xl text-gray-300">
-                A comprehensive, self-hosted marketing automation solution that
-                gives you complete control over your marketing campaigns,
-                customer data, and marketing infrastructure without a monthly
-                subscription fees.
-            </p>
-        </div>
+---
+// src/components/MarketingAutomation.astro
+// SEO-optimized email marketing platform component
+// Keywords: best email marketing service, email marketing platform, email marketing for small business,
+// best email marketing softwares, automated email marketing, email marketing solutions,
+// free email marketing services, email marketing agency
 
-        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div
-                class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors duration-300"
-            >
-                <div
-                    class="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-4"
-                >
-                    <svg
-                        class="w-6 h-6 text-brand-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                        ></path>
-                    </svg>
-                </div>
-                <h3
-                    class="text-xl font-bold mb-3 text-white"
-                    title="laravel mail platform data ownership"
-                >
-                    Data Ownership
-                </h3>
-                <p class="text-gray-400">
-                    Your customer data stays on your own servers with full GDPR
-                    compliance. No third-party access, no data sharing, complete
-                    privacy control for your subscribers and marketing lists.
-                </p>
-            </div>
+interface Props {
+  title?: string;
+  description?: string;
+}
 
-            <div
-                class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors duration-300"
-            >
-                <div
-                    class="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-4"
-                >
-                    <svg
-                        class="w-6 h-6 text-brand-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                        ></path>
-                    </svg>
-                </div>
-                <h3
-                    class="text-xl font-bold mb-3 text-white"
-                    title="laravel mail zero recurring costs"
-                >
-                    Zero Recurring Costs
-                </h3>
-                <p class="text-gray-400">
-                    Eliminate expensive monthly subscriptions. Deploy <strong
-                        >Laravel Mail</strong
-                    > on your existing infrastructure and scale unlimited contacts,
-                    campaigns, and email sends without per-contact pricing or hidden
-                    fees.
-                </p>
-            </div>
+const { 
+  title = "Marketing Automation Platform Across Every Channel",
+  description = "The best email marketing service and platform for small business automation"
+} = Astro.props;
 
-            <div
-                class="bg-white/5 border border-white/10 p-8 rounded-lg hover:bg-white/10 transition-colors duration-300"
-            >
-                <div
-                    class="w-12 h-12 bg-brand-primary/20 rounded-lg flex items-center justify-center mb-4"
-                >
-                    <svg
-                        class="w-6 h-6 text-brand-primary"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                    </svg>
-                </div>
-                <h3
-                    class="text-xl font-bold mb-3 text-white"
-                    title="laravel mail developer friendly architecture"
-                >
-                    Developer-Friendly Architecture
-                </h3>
-                <p class="text-gray-400">
-                    Built on Laravel framework with Setup documentation.
-                </p>
-            </div>
-        </div>
+const solutions = [
+  {
+    id: "whatsapp-instagram",
+    icon: "whatsapp",
+    title: "WhatsApp + Instagram",
+    subtitle: "Smart Messaging Automation",
+    description: "Official Facebook Partner Login — run WhatsApp Business campaigns, Instagram DM automation, comment replies, and story mentions from one dashboard.",
+    gradient: "from-green-500 to-emerald-600",
+    accentGradient: "from-green-500/10 to-emerald-600/10",
+    badgeColor: "bg-green-500/20 text-green-400",
+    features: [
+      "WhatsApp Broadcasts & Flows",
+      "Instagram Auto-Replies & Mentions",
+      "Shared Team Inbox"
+    ],
+    keywords: ["automated email marketing", "marketing automation platform"]
+  },
+  {
+    id: "google-marketplace",
+    icon: "chart",
+    title: "Google Marketplace & Products",
+    subtitle: "Product-Driven Email Campaigns",
+    description: "List your SaaS on Google Workspace Marketplace and sell digital/physical products directly inside your email & WhatsApp flows. Perfect email marketing solution for product businesses.",
+    gradient: "from-blue-500 to-indigo-600",
+    accentGradient: "from-blue-500/10 to-indigo-600/10",
+    badgeColor: "bg-blue-500/20 text-blue-400",
+    features: [
+      "One-click Google Marketplace deployment",
+      "Product catalog + checkout in emails",
+      "Dynamic pricing & inventory sync"
+    ],
+    keywords: ["email marketing platform", "email marketing solutions"]
+  },
+  {
+    id: "saas-agencies",
+    icon: "lightning",
+    title: "SaaS & Agencies",
+    subtitle: "White-Label Email Marketing Software",
+    description: "Multi-tenant workspaces, white-label templates, client billing, and the most beautiful automation builder for email marketing agencies and resellers.",
+    gradient: "from-purple-500 to-pink-500",
+    accentGradient: "from-purple-500/10 to-pink-500/10",
+    badgeColor: "bg-purple-500/20 text-purple-400",
+    features: [
+      "Drag-and-drop visual automation builder",
+      "Unlimited clients & workspaces",
+      "White-label + custom domains"
+    ],
+    keywords: ["best email marketing softwares", "email marketing agency"]
+  },
+  {
+    id: "education-nonprofits",
+    icon: "academic",
+    title: "Education & Nonprofits",
+    subtitle: "Free Email Marketing for Organizations",
+    description: "GDPR-compliant, self-hosted, unlimited contacts — perfect for universities, schools, NGOs, membership organizations seeking free email marketing services.",
+    gradient: "from-orange-500 to-red-600",
+    accentGradient: "from-orange-500/10 to-red-600/10",
+    badgeColor: "bg-orange-500/20 text-orange-400",
+    features: [
+      "Unlimited contacts & sending volume",
+      "Full data ownership & privacy",
+      "Free for registered nonprofits"
+    ],
+    keywords: ["free email marketing services", "email marketing for small business"]
+  }
+];
+
+const iconMap: Record<string, string> = {
+  whatsapp: `<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.884 3.488"></path>
+  </svg>`,
+  chart: `<svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+  </svg>`,
+  lightning: `<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+  </svg>`,
+  academic: `<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5c-2.694 0-5.092-.884-7.16-2.422L12 14z"></path>
+  </svg>`
+};
+---
+
+<section class="py-24 bg-[#0a0e27]/40 overflow-hidden">
+  <div class="container mx-auto px-6 lg:px-8">
+    <!-- Hero Section with SEO Keywords -->
+    <div class="text-center max-w-4xl mx-auto mb-20">
+      <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+        {title}
+        <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500">
+          Across Every Channel
+        </span>
+      </h1>
+      
+      <p class="text-xl text-gray-400 leading-relaxed mb-6">
+        From WhatsApp marketing broadcasts and Instagram DM automation to Google Marketplace listings and smart product-driven campaigns — <strong class="text-white">Laravel Mail</strong> is the <strong class="text-white">best email marketing service</strong> and <strong class="text-white">email marketing platform</strong> for every business size.
+      </p>
+
+      <!-- SEO Keyword Integration Paragraph -->
+      <div class="bg-gradient-to-r from-blue-500/10 to-pink-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
+        <p class="text-gray-300 leading-relaxed">
+          Whether you need <span class="text-blue-300 font-semibold">email marketing for small business</span>, the <span class="text-pink-300 font-semibold">best email marketing softwares</span> for enterprise, or <span class="text-blue-300 font-semibold">free email marketing services</span> — our <span class="text-pink-300 font-semibold">automated email marketing</span> platform combines powerful <span class="text-blue-300 font-semibold">email marketing solutions</span> with an <span class="text-pink-300 font-semibold">email marketing agency</span> toolkit.
+        </p>
+      </div>
     </div>
+
+    <!-- Solutions Grid -->
+    <div class="grid lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
+      {solutions.map((solution) => (
+        <div
+          class="group relative bg-[#1e293b]/40 backdrop-blur-md rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/10 overflow-hidden"
+          id={solution.id}
+        >
+          <!-- Gradient Overlay on Hover -->
+          <div
+            class={`absolute inset-0 bg-gradient-to-br ${solution.accentGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+          />
+          
+          <div class="relative p-10">
+            <!-- Icon Header -->
+            <div class="flex items-center gap-4 mb-6">
+              <div class={`p-4 bg-gradient-to-br ${solution.gradient} rounded-2xl shadow-lg`}>
+                <Fragment set:html={iconMap[solution.icon]} />
+              </div>
+              <div>
+                <h3 class="text-3xl font-bold text-white">{solution.title}</h3>
+                <p class="text-sm text-gray-400 font-medium">{solution.subtitle}</p>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-lg text-gray-400 mb-8">
+              {solution.description}
+            </p>
+
+            <!-- Features List -->
+            <ul class="space-y-4">
+              {solution.features.map((feature) => (
+                <li class="flex items-center text-gray-300">
+                  <span class={`w-8 h-8 ${solution.badgeColor} rounded-full flex items-center justify-center font-bold mr-3 flex-shrink-0`}>
+                    ✓
+                  </span>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- SEO Keywords Meta (hidden but crawlable) -->
+            <div class="mt-6 pt-6 border-t border-white/10 text-xs text-gray-500">
+              <p class="opacity-60">
+                {solution.keywords.join(" • ")}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional SEO Content Section -->
+    <div class="mt-20 max-w-4xl mx-auto bg-gradient-to-r from-purple-500/5 to-blue-500/5 border border-white/10 rounded-2xl p-8">
+      <h2 class="text-2xl font-bold text-white mb-4">Why Choose Our Email Marketing Platform?</h2>
+      <div class="grid md:grid-cols-2 gap-6 text-gray-300">
+        <div>
+          <h3 class="font-semibold text-white mb-2">🎯 Best Email Marketing Service</h3>
+          <p>Powerful automation tools designed for modern businesses of all sizes.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white mb-2">💼 Email Marketing for Small Business</h3>
+          <p>Affordable, scalable solutions that grow with your business needs.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white mb-2">🚀 Automated Email Marketing</h3>
+          <p>Intelligent workflows that save time and increase conversion rates.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-white mb-2">📊 Email Marketing Solutions</h3>
+          <p>Complete suite of tools from campaigns to analytics and compliance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  section {
+    animation: fadeIn 0.6s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .group:hover {
+    transform: translateY(-8px);
+  }
+</style>
