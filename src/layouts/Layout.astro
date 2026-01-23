@@ -10,7 +10,7 @@ import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
 import "@fontsource/nunito/600.css";
 import "@fontsource/nunito/700.css";
-import favIcon from "src/assets/favicon.png";
+import favIcon from "../assets/favicon.png";
 
 interface Props {
   title: string;
@@ -21,22 +21,6 @@ const {
   title = "Self Hosted Marketing Platform",
   description = "Powerful self-hosted marketing automation platform — free, open-source, and designed to deliver real results. Access free email marketing, lead generation, and lead management tools for businesses of all sizes.",
 } = Astro.props;
-
-const favicon = await getImage({ src: favIcon, width: 32, height: 32 });
-
-import ChatWidget from "../components/ChatWidget";
-
-const chatConf = {
-  chatServer: "https://api.laravelmail.com/chat",
-  userId: "guest",
-  introMessage: "Hi there! How can we help you today with Laravel Mail?",
-  placeholderText: "Type your message...",
-  mainColor: "#4B5563",
-  bubbleBackground: "#4F46E5",
-  headerTitle: "Laravel Mail Support",
-  vrmModelUrl:
-    "https://pixiv.github.io/three-vrm/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm",
-};
 ---
 
 <!doctype html>
@@ -45,14 +29,12 @@ const chatConf = {
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" href={favicon.src} />
-    <link rel="shortcut icon" href={favicon.src} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-
-
-
-
-
 
     <title>{title}</title>
 
@@ -86,10 +68,7 @@ const chatConf = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta
-      property="og:image"
-      content={new URL("/screens/dashboard.png", Astro.site)}
-    />
+    <meta property="og:image" content={new URL("/og-image.png", Astro.site)} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -97,7 +76,7 @@ const chatConf = {
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content={new URL("/screens/dashboard.png", Astro.site)}
+      content={new URL("/twitter-image.png", Astro.site)}
     />
 
     <!-- View Transitions CSS Animations -->
@@ -182,7 +161,6 @@ const chatConf = {
 
     <Footer transition:persist="footer" />
     <BetaModal />
-    <ChatWidget client:only="preact" userId="guest" conf={chatConf} />
 
     <!-- Enhanced Intersection Observer for animations -->
     <script>
