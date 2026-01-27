@@ -9,9 +9,9 @@ const navItems = [
         title: "Free self hosted marketing platform",
     },
     {
-        name: "Deploy",
-        href: "/deploy",
-        title: "One-click deployment to various platforms",
+        name: "Buy",
+        href: "/buy",
+        title: "Purchase email credits",
     },
     { name: "Careers", href: "/careers", title: "Careers in email marketing" },
 ];
@@ -71,13 +71,12 @@ const navItems = [
 
         <div class="flex items-center space-x-4">
             <a
-                title="free marketing platform"
-                target="_blank"
-                href="https://app.laravelmail.com/"
-                onclick="trackClick('try_now')"
-                class="btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95 trigger-beta-modal"
+                title="Login to Laravel Mail"
+                href="https://app.laravelmail.com/login"
+                onclick="trackClick('login')"
+                class="btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
             >
-                Try Now
+                Login
             </a>
         </div>
     </div>
@@ -103,11 +102,11 @@ const navItems = [
                 ))
             }
             <a
-                href="https://app.laravelmail.com/"
-                onclick="trackClick('mobile_try')"
-                class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded trigger-beta-modal"
+                href="https://app.laravelmail.com/login"
+                onclick="trackClick('mobile_login')"
+                class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
             >
-                View Demo
+                Login
             </a>
         </div>
     </nav>
