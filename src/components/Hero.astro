@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import heroImage from "../assets/logo.svg";
-import dashboardImage from "../assets/dashboard.png";
 ---
 
 <section
@@ -65,12 +64,9 @@ import dashboardImage from "../assets/dashboard.png";
                     </div>
                     <div class="relative rounded-xl shadow-xl overflow-hidden">
                         <Image
-                            src={dashboardImage}
-                            alt="Laravel Mail provides marketing automation software available to everyone"
-                            class="w-full h-auto transition-all duration-500"
-                            widths={[400, 700, 1024]}
-                            sizes="(max-width: 768px) 100vw, 700px"
-                            format="avif"
+                            src={heroImage}
+                            alt="Laravel Mail Logo"
+                            class="w-full max-w-md mx-auto h-auto transition-all duration-500 hover:scale-110"
                             loading="eager"
                             fetchpriority="high"
                         />
