@@ -122,7 +122,7 @@
                         event_label: label,
                     });
                 }
-                console.log(`Tracked: ${action} - ${label}`);
+                // Tracked: ${action} - ${label}
             } catch (e) {
                 console.warn("Tracking error", e);
             }
@@ -160,7 +160,7 @@
                 modal?.classList.add("hidden");
                 document.body.style.overflow = "";
                 if (redirect) {
-                    window.location.href = "https://app.laravelmail.com/";
+                    window.location.href = "/buy";
                 }
             }, 300);
         };

@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
-const title = "Laravel Mail Buy";
+const title = "Buy Email Credits - Laravel Mail | Self-Hosted Platform";
 const description =
     "Purchase 10,000 email credits and get full access to the platform source code.";
 ---
@@ -98,10 +98,10 @@ const description =
                                     <h3
                                         class="text-lg font-semibold text-white m-0"
                                     >
-                                        First 10,000 Free Bonus
+                                        Introductory Offer
                                     </h3>
                                     <p class="text-sm text-white/50 mt-1">
-                                        Limited time introductory offer
+                                        Get started today
                                     </p>
                                 </div>
                                 <span class="text-brand-success font-bold"
@@ -227,9 +227,9 @@ const description =
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="text-white font-bold m-0">
+                                <h3 class="text-white font-bold m-0">
                                     Secure Transaction
-                                </h4>
+                                </h3>
                                 <p class="text-sm text-white/50 m-0">
                                     Bank-grade 256-bit SSL encryption
                                 </p>
@@ -338,11 +338,10 @@ const description =
                             <div class="text-2xl">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    20,000 Total Email Credits
+                                    10,000 Total Email Credits
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    10,000 credits you purchase + 10,000 bonus
-                                    credits for new customers
+                                    Use across any of your agents
                                 </p>
                             </div>
                         </div>
@@ -430,10 +429,9 @@ const description =
                                     </h4>
                                     <p class="text-white/70">
                                         Complete your secure PayPal transaction
-                                        and receive instant access to 20,000
-                                        email credits (10,000 purchased + 10,000
-                                        bonus). You'll also get immediate access
-                                        to download the full Laravel Mail
+                                        and receive instant access to 10,000
+                                        email credits. You'll also get immediate
+                                        access to download the full Laravel Mail
                                         platform source code.
                                     </p>
                                 </div>
@@ -697,8 +695,7 @@ const description =
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
                                 <span
-                                    >How does the 10,000 bonus credits promotion
-                                    work?</span
+                                    >What is included in the Introductory Offer?</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -707,11 +704,11 @@ const description =
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
                                 This is a limited-time introductory offer for
-                                new customers. When you purchase your first
-                                10,000 credits for £10, we automatically add an
-                                additional 10,000 bonus credits to your account,
-                                giving you 20,000 total credits to start your
-                                email marketing journey.
+                                new customers. When you purchase 10,000 credits
+                                for £10, we automatically set up your account
+                                with full platform access and your first batch
+                                of credits to start your email marketing
+                                journey.
                             </p>
                         </details>
                     </div>
@@ -777,7 +774,7 @@ const description =
                     <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
                         Join thousands of businesses who have taken control of
                         their email marketing with Laravel Mail. Get started
-                        today with 20,000 credits for just £10.
+                        today with 10,000 credits for just £10.
                     </p>
                     <a
                         href="https://www.paypal.com/ncp/links/R2MN2C7WVVNW8"
@@ -818,7 +815,7 @@ const description =
                 items: [
                     {
                         item_id: "email_credits_10k",
-                        item_name: "10,000 Email Credits + 10,000 Bonus",
+                        item_name: "10,000 Email Credits",
                         item_category: "Email Credits",
                         item_variant: "Introductory Offer",
                         price: 10.0,
@@ -834,7 +831,7 @@ const description =
                 items: [
                     {
                         item_id: "email_credits_10k",
-                        item_name: "10,000 Email Credits + 10,000 Bonus",
+                        item_name: "10,000 Email Credits",
                         item_category: "Email Credits",
                         item_variant: "Introductory Offer",
                         price: 10.0,
@@ -843,7 +840,7 @@ const description =
                 ],
             });
 
-            console.log("GA4 Ecommerce: begin_checkout event sent");
+            // GA4 Ecommerce: begin_checkout event sent
         }
 
         // Track PayPal button clicks
@@ -860,8 +857,7 @@ const description =
                         items: [
                             {
                                 item_id: "email_credits_10k",
-                                item_name:
-                                    "10,000 Email Credits + 10,000 Bonus",
+                                item_name: "10,000 Email Credits",
                                 item_category: "Email Credits",
                                 item_variant: "Introductory Offer",
                                 price: 10.0,
@@ -877,9 +873,7 @@ const description =
                         value: 10.0,
                     });
 
-                    console.log(
-                        "GA4 Ecommerce: add_to_cart and click events sent",
-                    );
+                    // GA4 Ecommerce: add_to_cart and click events sent
                 }
             });
         });
@@ -897,7 +891,7 @@ const description =
                 items: [
                     {
                         item_id: "email_credits_10k",
-                        item_name: "10,000 Email Credits + 10,000 Bonus",
+                        item_name: "10,000 Email Credits",
                         item_category: "Email Credits",
                         item_variant: "Introductory Offer",
                         price: 10.0,
@@ -905,10 +899,7 @@ const description =
                     },
                 ],
             });
-            console.log(
-                "GA4 Ecommerce: purchase event sent for transaction",
-                transactionId,
-            );
+            // GA4 Ecommerce: purchase event sent
         }
     }
 

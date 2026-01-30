@@ -13,6 +13,11 @@ const navItems = [
         href: "/buy",
         title: "Purchase email credits",
     },
+    {
+        name: "Solutions",
+        href: "/solutions",
+        title: "Marketing solutions for industries",
+    },
     { name: "Careers", href: "/careers", title: "Careers in email marketing" },
 ];
 ---
@@ -24,7 +29,7 @@ const navItems = [
                 event_category: "navigation",
                 event_label: label,
             });
-            console.log("Clicked:", label);
+            // Clicked
         }
     }
 </script>
@@ -71,12 +76,12 @@ const navItems = [
 
         <div class="flex items-center space-x-4">
             <a
-                title="Login to Laravel Mail"
-                href="https://app.laravelmail.com/login"
-                onclick="trackClick('login')"
+                title="Get Started with Laravel Mail"
+                href="/buy"
+                onclick="trackClick('get_started')"
                 class="btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
             >
-                Login
+                Get Started
             </a>
         </div>
     </div>
@@ -102,11 +107,11 @@ const navItems = [
                 ))
             }
             <a
-                href="https://app.laravelmail.com/login"
-                onclick="trackClick('mobile_login')"
+                href="/buy"
+                onclick="trackClick('mobile_get_started')"
                 class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
             >
-                Login
+                Get Started
             </a>
         </div>
     </nav>

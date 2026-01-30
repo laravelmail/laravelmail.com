@@ -1,160 +1,95 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CTASection from '../components/CTASection.astro';
+import Layout from "../layouts/Layout.astro";
+import CTASection from "../components/CTASection.astro";
+import UseCases from "../components/UseCases.astro";
+import Testimonials from "../components/Testimonials.astro";
 
 const solutions = [
     {
-        title: "CRM Platforms",
-        description: "Enhance your CRM with real-time lead enrichment and scoring. Transform basic contact records into comprehensive prospect profiles with verified data and insights.",
-        features: [
-            "Contact data enrichment",
-            "Lead scoring integration",
-            "Automated data updates",
-            "Pipeline intelligence"
-        ]
+        title: "E-commerce & Retail",
+        description:
+            "Drive sales with automated cart recovery, personalized product recommendations, and multi-channel post-purchase sequences.",
+        icon: "🛍️",
     },
     {
-        title: "Sales Automation Tools",
-        description: "Power your sales automation platform with accurate prospect data. Enable personalized outreach at scale with enriched contact details and company intelligence.",
-        features: [
-            "Email & phone verification",
-            "Company intelligence data",
-            "Intent signal detection",
-            "Personalization triggers"
-        ]
+        title: "SaaS & Tech",
+        description:
+            "Scale your user onboarding, feature adoption, and retention strategies with behavioral triggers and unified team inboxes.",
+        icon: "💻",
     },
     {
-        title: "Marketing Platforms",
-        description: "Build better campaigns with enriched audience data. From account-based marketing to lead nurturing, get the data quality needed for effective targeting.",
-        features: [
-            "Account-based marketing data",
-            "Behavioral insights",
-            "Demographic enrichment",
-            "Campaign attribution"
-        ]
-    }
+        title: "Agencies",
+        description:
+            "Manage multiple client brands from a single dashboard with workspace isolation and white-label reporting.",
+        icon: "🏢",
+    },
 ];
 ---
 
 <Layout
-        title="LeadsCaptain - Solutions"
-        description="Discover how LeadsCaptain's lead enrichment infrastructure can be customized for your specific industry and use case."
+    title="Marketing Solutions - Laravel Mail | Self-Hosted Platform"
+    description="Discover how Laravel Mail's marketing automation infrastructure can be customized for your specific industry and use case."
 >
-    <section class="pt-20 pb-16 md:pt-28 md:pb-24">
-        <div class="container-custom">
+    <!-- Header -->
+    <section
+        class="pt-20 pb-16 md:pt-32 md:pb-24 bg-brand-bg-darker relative overflow-hidden"
+    >
+        <div class="absolute inset-0 opacity-5">
+            <div
+                class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-primary to-transparent"
+            >
+            </div>
+        </div>
+
+        <div class="container-custom relative">
             <div class="text-center max-w-4xl mx-auto">
-                <h1 class="animate-on-scroll delay-0 text-4xl md:text-5xl font-bold leading-tight">
-                    Tailored <span class="gradient-text">Solutions</span> for Every Platform
+                <h1
+                    class="animate-on-scroll delay-0 text-5xl md:text-7xl font-extrabold leading-tight text-white mb-8"
+                >
+                    Smart <span class="gradient-text">Solutions</span> for Growth
                 </h1>
-                <p class="animate-on-scroll delay-1 mt-6 text-xl text-gray-600">
-                    Whether you're building a CRM, sales automation tool, or marketing platform,
-                    LeadsCaptain's lead enrichment infrastructure adapts to your specific needs.
+                <p
+                    class="animate-on-scroll delay-1 mt-6 text-xl text-gray-400 max-w-2xl mx-auto"
+                >
+                    Whether you're a high-growth startup, a scaling agency, or
+                    an established e-commerce brand, Laravel Mail provides the
+                    infrastructure to dominate your market.
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="py-20 bg-leadscaptain-gray">
+    <!-- Industry Grid -->
+    <section class="py-24 bg-brand-bg-darker/40">
         <div class="container-custom">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {solutions.map((solution, index) => (
-                        <div class={`bg-white rounded-xl p-8 shadow-lg animate-on-scroll delay-${index + 2}`}>
-                            <div class="h-12 w-12 rounded-lg bg-gradient-to-r from-leadscaptain-purple to-leadscaptain-blue flex items-center justify-center text-white">
-                                <div class="h-6 w-6 bg-white/30 rounded"></div>
-                            </div>
-                            <h3 class="mt-6 text-2xl font-semibold">{solution.title}</h3>
-                            <p class="mt-4 text-gray-600">{solution.description}</p>
-                            <ul class="mt-6 space-y-3">
-                                {solution.features.map(feature => (
-                                        <li class="flex items-center text-gray-700">
-                                            <div class="h-5 w-5 bg-leadscaptain-purple rounded mr-2"></div>
-                                            {feature}
-                                        </li>
-                                ))}
-                            </ul>
+                {
+                    solutions.map((solution, index) => (
+                        <div
+                            class={`bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-10 shadow-lg border border-white/10 animate-on-scroll delay-${index + 2} hover:border-brand-primary/30 transition-all`}
+                        >
+                            <div class="text-5xl mb-6">{solution.icon}</div>
+                            <h3 class="text-2xl font-bold text-white mb-4">
+                                {solution.title}
+                            </h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                {solution.description}
+                            </p>
                         </div>
-                ))}
+                    ))
+                }
             </div>
         </div>
     </section>
 
-    <section class="py-20">
-        <div class="container-custom">
-            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold">
-                    Built for Your Success
-                </h2>
-                <p class="mt-4 text-xl text-gray-600">
-                    Our flexible infrastructure means you can build exactly what your customers need,
-                    without compromising on data quality or compliance.
-                </p>
-            </div>
-
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center animate-on-scroll">
-                    <div class="text-3xl font-bold text-leadscaptain-purple">99.5%</div>
-                    <div class="text-gray-600">Data Accuracy</div>
-                </div>
-                <div class="text-center animate-on-scroll">
-                    <div class="text-3xl font-bold text-leadscaptain-purple">50ms</div>
-                    <div class="text-gray-600">Avg Response Time</div>
-                </div>
-                <div class="text-center animate-on-scroll">
-                    <div class="text-3xl font-bold text-leadscaptain-purple">500+</div>
-                    <div class="text-gray-600">Active Customers</div>
-                </div>
-                <div class="text-center animate-on-scroll">
-                    <div class="text-3xl font-bold text-leadscaptain-purple">24/7</div>
-                    <div class="text-gray-600">Support</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 bg-leadscaptain-gray">
-        <div class="container-custom">
-            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold">
-                    Industry-Specific Features
-                </h2>
-                <p class="mt-4 text-xl text-gray-600">
-                    LeadsCaptain adapts to your industry's unique lead generation requirements.
-                </p>
-            </div>
-
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-8 shadow-sm animate-on-scroll">
-                    <h4 class="text-lg font-semibold text-leadscaptain-purple mb-3">SaaS & Technology</h4>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li>• Technographic data enrichment</li>
-                        <li>• Software usage insights</li>
-                        <li>• IT decision maker identification</li>
-                        <li>• Product adoption signals</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-xl p-8 shadow-sm animate-on-scroll">
-                    <h4 class="text-lg font-semibold text-leadscaptain-purple mb-3">Financial Services</h4>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li>• Compliance-first data collection</li>
-                        <li>• Financial health indicators</li>
-                        <li>• Risk assessment data</li>
-                        <li>• Regulatory reporting support</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-xl p-8 shadow-sm animate-on-scroll">
-                    <h4 class="text-lg font-semibold text-leadscaptain-purple mb-3">Real Estate</h4>
-                    <ul class="space-y-2 text-gray-600 text-sm">
-                        <li>• Property ownership data</li>
-                        <li>• Market timing signals</li>
-                        <li>• Investment profile insights</li>
-                        <li>• Local market intelligence</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Detailed Use Cases -->
+    <UseCases />
 
     <CTASection />
 </Layout>
+
+<style>
+    .gradient-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-blue;
+    }
+</style>

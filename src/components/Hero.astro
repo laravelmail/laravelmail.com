@@ -43,9 +43,8 @@ import dashboardImage from "../assets/dashboard.png";
                     class="animate-on-scroll delay-2 mt-8 flex flex-col sm:flex-row gap-4"
                 >
                     <a
-                        href="https://app.laravelmail.com/"
-                        target="_blank"
-                        class="btn btn-primary trigger-beta-modal"
+                        href="/buy"
+                        class="btn btn-primary"
                         aria-label="Start your own marketing campaign today"
                         title="Start your lead generation journey"
                         >Get Started with Laravel Mail</a
@@ -71,6 +70,8 @@ import dashboardImage from "../assets/dashboard.png";
                             widths={[400, 700, 1024]}
                             sizes="(max-width: 768px) 100vw, 700px"
                             format="avif"
+                            loading="eager"
+                            fetchpriority="high"
                         />
                     </div>
                 </div>

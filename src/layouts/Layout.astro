@@ -39,6 +39,11 @@ const {
     <title>{title}</title>
 
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL(Astro.url.pathname, Astro.site)}
+    />
     <meta name="robots" content="index, follow" />
 
     <!-- Enhanced View Transitions with fallback -->
@@ -46,6 +51,13 @@ const {
 
     <!-- Preload critical resources -->
     <link rel="preconnect" href="https://analytics.ahrefs.com" crossorigin />
+    <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <meta
       name="facebook-domain-verification"
       content="decnmc05wnft14fdjzsonqefn3vgos"
@@ -187,11 +199,11 @@ const {
 
       // Handle view transition events
       document.addEventListener("astro:before-preparation", () => {
-        console.log("Preparing for navigation...");
+        // Preparing for navigation...
       });
 
       document.addEventListener("astro:after-swap", () => {
-        console.log("Content swapped!");
+        // Content swapped!
       });
 
       // Smooth scroll restoration
