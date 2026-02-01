@@ -4,12 +4,12 @@ import Logo from "src/assets/logo.svg";
 
 const navItems = [
     {
-        name: "Product",
+        name: "Platform",
         href: "/product",
         title: "Free self hosted marketing platform",
     },
     {
-        name: "Buy",
+        name: "Pricing",
         href: "/buy",
         title: "Purchase email credits",
     },
@@ -17,6 +17,11 @@ const navItems = [
         name: "Solutions",
         href: "/solutions",
         title: "Marketing solutions for industries",
+    },
+    {
+        name: "Tutorial",
+        href: "/create-campaign",
+        title: "Learn how to build a campaign",
     },
     { name: "Careers", href: "/careers", title: "Careers in email marketing" },
 ];
@@ -32,13 +37,25 @@ const navItems = [
             // Clicked
         }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.toggle("mobile-menu-open");
+                menuToggle.classList.toggle("menu-open");
+            });
+        }
+    });
 </script>
 
 <header
     class="sticky top-0 z-50 w-full bg-[#0a0e27]/90 backdrop-blur-xl border-b border-white/5"
     role="banner"
 >
-    <div class="container-custom flex items-center justify-between h-20">
+    <div class="container-custom flex items-center justify-between h-20 px-4">
         <a
             href="/"
             onclick="trackClick('logo_home')"
@@ -76,43 +93,88 @@ const navItems = [
 
         <div class="flex items-center space-x-4">
             <a
-                title="Get Started with Laravel Mail"
+                title="Purchase Now - £10.00"
                 href="/buy"
                 onclick="trackClick('get_started')"
-                class="btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
+                class="hidden sm:inline-flex btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
             >
-                Get Started
+                Purchase Now - £10.00
             </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button
+                id="menu-toggle"
+                class="md:hidden flex flex-col justify-center items-center w-10 h-10 space-y-1.5 focus:outline-none bg-white/5 rounded-lg border border-white/10"
+                aria-label="Toggle Menu"
+            >
+                <span
+                    class="block w-6 h-0.5 bg-white transition-all duration-300 transform origin-center"
+                ></span>
+                <span
+                    class="block w-6 h-0.5 bg-white transition-opacity duration-300"
+                ></span>
+                <span
+                    class="block w-6 h-0.5 bg-white transition-all duration-300 transform origin-center"
+                ></span>
+            </button>
         </div>
     </div>
 
     <!-- Mobile Menu -->
     <nav
         id="mobile-menu"
-        class="hidden md:hidden bg-payflo-dark/95 w-full border-t border-white/5"
+        class="md:hidden bg-[#0a0e27] border-t border-white/5"
         role="navigation"
         aria-label="Mobile navigation"
     >
-        <div class="container-custom py-4 space-y-4">
+        <div class="container-custom py-6 px-4 space-y-4">
             {
                 navItems.map((item, index) => (
                     <a
                         href={item.href}
                         onclick={`trackClick('mobile_${item.name}')`}
-                        class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
+                        class="block py-3 px-4 text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 focus:text-white transition-all duration-300 rounded-xl border border-transparent hover:border-white/10"
                         style={`transition-delay: ${index * 50}ms;`}
                     >
                         {item.name}
                     </a>
                 ))
             }
-            <a
-                href="/buy"
-                onclick="trackClick('mobile_get_started')"
-                class="block py-2 px-2 text-white/80 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
-            >
-                Get Started
-            </a>
+            <div class="pt-4 border-t border-white/5">
+                <a
+                    href="/buy"
+                    onclick="trackClick('mobile_get_started')"
+                    class="block text-center py-4 px-4 bg-payflo-purple text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-payflo-purple/20"
+                >
+                    Purchase Now - £10.00
+                </a>
+            </div>
         </div>
     </nav>
 </header>
+
+<style>
+    /* Mobile Menu Toggle Animation */
+    #menu-toggle.menu-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    #menu-toggle.menu-open span:nth-child(2) {
+        opacity: 0;
+    }
+    #menu-toggle.menu-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    #mobile-menu {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #mobile-menu.mobile-menu-open {
+        max-height: 600px;
+        opacity: 1;
+        padding-bottom: 2rem;
+    }
+</style>

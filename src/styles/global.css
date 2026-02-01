@@ -397,13 +397,7 @@ nav a:focus-visible {
   opacity: 0;
 }
 
-/* Hamburger to X animation */
 #menu-toggle {
-  min-height: 48px;
-  min-width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 }
 
