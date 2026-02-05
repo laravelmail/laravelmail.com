@@ -60,8 +60,8 @@ const schema = {
 ---
 
 <Layout
-    title="Deploy Laravel Mail | One-Click Docker Setup"
-    description="Set up your self-hosted marketing platform in seconds. One-click Docker deployment for Google Cloud Run, DigitalOcean, Railway, and Heroku. Free, open-source, and developer-friendly."
+    title="Deploy Laravel Mail | One-Click & Self-Hosted Setup"
+    description="Set up your self-hosted marketing platform in seconds. One-click Docker deployment or custom self-hosting with Docker Compose. Free, open-source, and developer-friendly."
 >
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -82,7 +82,7 @@ const schema = {
         }
     </script>
 
-    <section class="relative pt-20 pb-20 md:pt-32 md:pb-32 overflow-hidden">
+    <section class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
         <!-- Background Ornaments -->
         <div
             class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-30"
@@ -123,89 +123,263 @@ const schema = {
                 <p
                     class="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto"
                 >
-                    Pick a platform, click a button, and watch your <strong
-                        class="text-white">Laravel Mail</strong
-                    > instance come to life.
+                    Pick a platform for one-click deployment or use our Docker
+                    Compose setup for full control over your infrastructure.
                 </p>
             </div>
 
+            <!-- One-Click Grid -->
             <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-32"
             >
+                {
+                    deploymentPlatforms.map((platform) => (
+                        <a
+                            href={platform.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onclick={`trackDeployClick('${platform.name}')`}
+                            class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
+                        >
+                            <div
+                                class={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${platform.accent} opacity-0 group-hover:opacity-100 transition-opacity`}
+                            ></div>
+                            <div class="h-12 flex items-center mb-6">
+                                <img
+                                    src={platform.logo}
+                                    alt={platform.name}
+                                    class="h-8 w-auto grayscale group-hover:grayscale-0 transition-all duration-300"
+                                />
+                            </div>
+                            <h3 class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors mb-4">
+                                {platform.name}
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-8 line-clamp-2">
+                                {platform.description}
+                            </p>
+                            <div class="mt-auto flex items-center text-brand-primary font-bold text-sm">
+                                Deploy Now
+                                <svg
+                                    class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="3"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                    />
+                                </svg>
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <!-- Manual Setup / Docker Compose -->
+            <div class="max-w-5xl mx-auto">
                 <div
-                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
+                    class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-[2.5rem] border border-white/10 p-8 md:p-16 shadow-3xl relative overflow-hidden"
                 >
-                    <div
-                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#4285F4] to-[#34A853] opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                    </div>
-                    <div class="h-12 flex items-center mb-6">
-                        <h3
-                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
+                    <!-- Decor -->
+                    <div class="absolute top-0 right-0 p-8 opacity-10">
+                        <svg
+                            class="w-32 h-32 text-brand-primary"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
                         >
-                            Google Cloud
-                        </h3>
+                            <path
+                                d="M13.983 7.1L12 1.9l-1.983 5.2H4.42l4.45 3.233-1.7 5.2L12 12.3l4.83 3.233-1.7-5.2 4.45-3.233h-5.597z"
+                            ></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
-                        Deploy to Google Cloud Run (Serverless Docker) with one
-                        click.
-                    </p>
-                    <div class="mt-auto"></div>
-                </div><div
-                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
-                >
-                    <div
-                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0080FF] to-[#0069D9] opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                    </div>
-                    <div class="h-12 flex items-center mb-6">
-                        <h3
-                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
+
+                    <div class="relative z-10">
+                        <h2
+                            class="text-3xl md:text-5xl font-black text-white mb-6"
                         >
-                            DigitalOcean
-                        </h3>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
-                        Deploy to DigitalOcean App Platform with native Docker
-                        support.
-                    </p>
-                    <div class="mt-auto"></div>
-                </div><div
-                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
-                >
-                    <div
-                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#0B0D0E] to-[#1A1C1D] opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                    </div>
-                    <div class="h-12 flex items-center mb-6">
-                        <h3
-                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
+                            Self-Host with <span class="text-brand-primary"
+                                >Docker Compose</span
+                            >
+                        </h2>
+                        <p class="text-xl text-gray-400 mb-12 max-w-3xl">
+                            For maximum control and privacy, you can run Laravel
+                            Mail on your own hardware or VPS using our
+                            production-ready Docker configuration.
+                        </p>
+
+                        <!-- Step by Step -->
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
                         >
-                            Railway
-                        </h3>
-                    </div>
-                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
-                        Zero-config Docker deployment on Railway.
-                    </p>
-                    <div class="mt-auto"></div>
-                </div><div
-                    class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
-                >
-                    <div
-                        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#430098] to-[#7673B0] opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                    </div>
-                    <div class="h-12 flex items-center mb-6">
-                        <h3
-                            class="text-xl font-extrabold text-white group-hover:text-brand-primary transition-colors"
+                            <div class="space-y-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-xl"
+                                >
+                                    1
+                                </div>
+                                <h4 class="text-white font-bold text-lg">
+                                    Clone Repository
+                                </h4>
+                                <p class="text-gray-400 text-sm">
+                                    Download the core application source code to
+                                    your server.
+                                </p>
+                            </div>
+                            <div class="space-y-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-brand-blue/20 flex items-center justify-center text-brand-blue font-black text-xl"
+                                >
+                                    2
+                                </div>
+                                <h4 class="text-white font-bold text-lg">
+                                    Configure Environment
+                                </h4>
+                                <p class="text-gray-400 text-sm">
+                                    Copy .env.example to .env and set your app
+                                    keys and database credentials.
+                                </p>
+                            </div>
+                            <div class="space-y-4">
+                                <div
+                                    class="w-12 h-12 rounded-2xl bg-pink-500/20 flex items-center justify-center text-pink-500 font-black text-xl"
+                                >
+                                    3
+                                </div>
+                                <h4 class="text-white font-bold text-lg">
+                                    Launch Container
+                                </h4>
+                                <p class="text-gray-400 text-sm">
+                                    Run docker-compose up -d and your platform
+                                    is live on port 13000.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Code Block -->
+                        <div class="relative group">
+                            <div
+                                class="absolute -inset-2 bg-gradient-to-r from-brand-primary/20 to-brand-blue/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"
+                            >
+                            </div>
+                            <div
+                                class="relative bg-black/60 rounded-2xl border border-white/10 overflow-hidden shadow-2xl"
+                            >
+                                <div
+                                    class="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/5"
+                                >
+                                    <div class="flex space-x-2">
+                                        <div
+                                            class="w-3 h-3 rounded-full bg-red-500/50"
+                                        >
+                                        </div>
+                                        <div
+                                            class="w-3 h-3 rounded-full bg-yellow-500/50"
+                                        >
+                                        </div>
+                                        <div
+                                            class="w-3 h-3 rounded-full bg-green-500/50"
+                                        >
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="text-xs font-mono text-gray-500"
+                                        >docker-compose.yml</span
+                                    >
+                                </div>
+                                <div
+                                    class="p-6 overflow-x-auto custom-scrollbar"
+                                >
+                                    <pre
+                                        class="text-sm font-mono text-blue-300 leading-relaxed"><code>{`services:
+  app.laravelmail.com:
+    image: izdrail/app.laravelmail.com:latest
+    container_name: app.laravelmail.com
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '13000:13000'
+      - '5173:5173'
+    volumes:
+      - '.:/var/www'
+    networks:
+      - sail
+    depends_on:
+      - mysql
+      - mailpit
+      - redis
+  
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    networks:
+      - sail
+
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - sail
+
+  temporal:
+    image: temporalio/auto-setup:1.29.2
+    ports:
+      - "7233:7233"
+    environment:
+      - DB=mysql8
+      - MYSQL_USER=root
+      - MYSQL_PWD=root_password
+      - MYSQL_SEEDS=mysql
+    networks:
+      - sail
+
+  mailserver:
+    image: mailserver/docker-mailserver:latest
+    container_name: mailserver
+    hostname: mail
+    domainname: laravelmail.com
+    ports:
+      - "25:25"
+      - "587:587"
+    networks:
+      - sail
+    restart: always
+
+# view full config at github.com/laravelmail/laravelmail.com`}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-12 flex flex-col sm:flex-row items-center gap-6"
                         >
-                            Heroku
-                        </h3>
+                            <a
+                                href="https://app.laravelmail.com/docs"
+                                target="_blank"
+                                class="btn btn-primary px-8 py-4 w-full sm:w-auto text-center font-bold"
+                            >
+                                Read Full Documentation
+                            </a>
+                            <p class="text-gray-500 text-sm italic">
+                                Need help? Join our <a
+                                    href="#"
+                                    class="text-brand-primary hover:underline"
+                                    >Discord community</a
+                                >.
+                            </p>
+                        </div>
                     </div>
-                    <p class="text-gray-400 text-sm mb-8 line-clamp-2">
-                        Deploy your Docker implementation to Heroku.
-                    </p>
-                    <div class="mt-auto"></div>
                 </div>
             </div>
         </div>
@@ -213,3 +387,19 @@ const schema = {
 
     <BetaModal />
 </Layout>
+
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+</style>
