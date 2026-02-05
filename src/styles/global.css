@@ -276,8 +276,7 @@ header {
 }
 
 header.scrolled {
-  @apply shadow-md bg-white/95;
-  backdrop-filter: blur(8px);
+  @apply shadow-2xl bg-brand-bg-darker/90 backdrop-blur-xl border-b border-white/10;
 }
 
 /* ===== Navigation Link Effects ===== */
@@ -440,7 +439,7 @@ nav a:focus-visible {
 
 /* ===== Testimonial Card Effects ===== */
 .testimonial-card {
-  @apply bg-payflo-gray rounded-xl p-8 transition-all;
+  @apply bg-brand-bg-card/40 rounded-[2rem] p-8 transition-all border border-white/10 backdrop-blur-md;
   transition-duration: var(--transition-duration);
   transition-timing-function: var(--transition-timing);
   min-height: 200px;
@@ -448,8 +447,8 @@ nav a:focus-visible {
 
 .testimonial-card:hover,
 .testimonial-card:focus-within {
-  @apply bg-white shadow-lg;
-  transform: translateY(-5px);
+  @apply border-brand-primary/30 shadow-2xl bg-brand-bg-card/60;
+  transform: translateY(-8px);
 }
 
 /* ===== Focus Indicators ===== */
