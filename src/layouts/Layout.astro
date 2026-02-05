@@ -5,6 +5,8 @@ import { getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BetaModal from "../components/BetaModal.astro";
+import UrgencyBanner from "../components/UrgencyBanner.astro";
+import PurchaseToast from "../components/PurchaseToast.astro";
 import "../styles/global.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
@@ -150,7 +152,7 @@ const {
       }
     </style>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col bg-brand-bg text-white">
     <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe
@@ -161,6 +163,7 @@ const {
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
+    <UrgencyBanner />
     <Header transition:persist="header" />
 
     <main
@@ -173,6 +176,7 @@ const {
 
     <Footer transition:persist="footer" />
     <BetaModal />
+    <PurchaseToast />
 
     <!-- Enhanced Intersection Observer for animations -->
     <script>

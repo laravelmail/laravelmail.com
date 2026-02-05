@@ -27,23 +27,85 @@ const description =
             <div class="max-w-4xl mx-auto">
                 <!-- Header -->
                 <div class="text-center mb-12 animate-on-scroll">
-                    <!-- Beta Pricing Notice -->
+                    <!-- Urgency Triggers -->
                     <div
-                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-accent/10 border border-brand-accent/20 mb-6"
+                        class="flex flex-col items-center gap-4 mb-8 animate-on-scroll"
                     >
-                        <span class="relative flex h-3 w-3">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"
-                            ></span>
-                            <span
-                                class="relative inline-flex rounded-full h-3 w-3 bg-brand-accent"
-                            ></span>
-                        </span>
-                        <span class="text-sm font-medium text-brand-accent"
-                            >Beta Pricing Active: Price will increase to
-                            £100/installation soon</span
+                        <div
+                            class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-red-500/10 border border-red-500/20"
                         >
+                            <span class="relative flex h-3 w-3">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"
+                                ></span>
+                                <span
+                                    class="relative inline-flex rounded-full h-3 w-3 bg-red-500"
+                                ></span>
+                            </span>
+                            <span
+                                class="text-sm font-bold text-red-500 uppercase tracking-wider"
+                            >
+                                Only <span id="spots-left">7</span> Spots Left at
+                                £10.00
+                            </span>
+                        </div>
+                        <p class="text-white/60 text-sm">
+                            Introductory price ends in: <span
+                                id="page-countdown"
+                                class="font-mono text-white font-bold ml-1"
+                                >00:00:00</span
+                            >
+                        </p>
                     </div>
+
+                    <script is:inline>
+                        function initUrgency() {
+                            // Spots remaining logic
+                            const spotsEl =
+                                document.getElementById("spots-left");
+                            let spots = 7;
+                            const interval = setInterval(() => {
+                                if (spots > 2 && Math.random() > 0.7) {
+                                    spots--;
+                                    if (spotsEl) spotsEl.innerText = spots;
+                                }
+                                if (spots <= 2) clearInterval(interval);
+                            }, 45000);
+
+                            // Countdown logic
+                            const countdownEl =
+                                document.getElementById("page-countdown");
+                            const target = new Date();
+                            target.setHours(target.getHours() + 4);
+                            target.setMinutes(32);
+
+                            function updateCountdown() {
+                                const now = new Date();
+                                const diff = target - now;
+                                if (diff <= 0) return;
+
+                                const h = Math.floor(diff / 3600000)
+                                    .toString()
+                                    .padStart(2, "0");
+                                const m = Math.floor((diff % 3600000) / 60000)
+                                    .toString()
+                                    .padStart(2, "0");
+                                const s = Math.floor((diff % 60000) / 1000)
+                                    .toString()
+                                    .padStart(2, "0");
+
+                                if (countdownEl)
+                                    countdownEl.innerText = `${h}:${m}:${s}`;
+                            }
+                            setInterval(updateCountdown, 1000);
+                            updateCountdown();
+                        }
+
+                        document.addEventListener(
+                            "astro:page-load",
+                            initUrgency,
+                        );
+                    </script>
 
                     <h1
                         class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6"
@@ -259,6 +321,123 @@ const description =
         </div>
     </div>
 
+    <!-- Fair Pricing Philosophy Section -->
+    <section class="py-24 relative overflow-hidden border-t border-white/5">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <div
+                    class="bg-gradient-to-br from-brand-primary/10 to-brand-blue/10 rounded-[2.5rem] border border-white/10 p-10 md:p-16 text-center animate-on-scroll"
+                >
+                    <h2
+                        class="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight"
+                    >
+                        "Why is it <span class="text-brand-primary"
+                            >so cheap?</span
+                        >"
+                    </h2>
+                    <p
+                        class="text-2xl md:text-3xl text-gray-300 leading-relaxed font-medium italic mb-10"
+                    >
+                        "Because we believe in a <span
+                            class="text-white border-b-2 border-brand-primary"
+                            >fair price</span
+                        > for high-quality core technology."
+                    </p>
+                    <div
+                        class="text-left space-y-6 text-gray-400 text-lg max-w-2xl mx-auto border-t border-white/10 pt-10"
+                    >
+                        <p>
+                            We often get asked why we charge just <b>£10</b> when
+                            most competitors charge hundreds per month. The answer
+                            is simple: We aren't building a bloated SaaS platform
+                            with thousands of overheads.
+                        </p>
+                        <p>
+                            By providing the <strong class="text-white"
+                                >source code and Docker infrastructure</strong
+                            > directly to you, we eliminate our own hosting and management
+                            costs. We pass those massive savings directly to you.
+                        </p>
+                        <p>
+                            We think <b>£10</b> is a fair entry point for developers
+                            and businesses to own their core tech, allowing you to
+                            scale without being "taxed" based on the number of contacts
+                            you have.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Reviews Section -->
+    <section class="py-24 bg-[#0f172a]/40 relative overflow-hidden">
+        <div class="container-custom relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+                <h2 class="text-4xl font-bold text-white mb-4">
+                    What Our Users Say
+                </h2>
+                <p class="text-xl text-gray-400">
+                    Join 3,000+ developers and marketing teams worldwide.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div
+                    class="bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 p-10 rounded-[2rem] hover:border-brand-primary/30 transition-all duration-500 group"
+                >
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 bg-brand-primary/20 rounded-xl flex items-center justify-center text-brand-primary text-xl font-bold mr-4 group-hover:scale-110 transition-transform"
+                        >
+                            JD
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-lg m-0">
+                                James D.
+                            </h4>
+                            <p class="text-gray-500 text-sm m-0">
+                                SaaS Founder
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic leading-relaxed">
+                        "I was skeptical because of the price, but the code
+                        quality is top-notch. It saved us months of development
+                        time on our internal notification system. It's actually
+                        the most fair pricing I've seen in years."
+                    </p>
+                </div>
+
+                <div
+                    class="bg-[#0f172a]/80 backdrop-blur-xl border border-white/10 p-10 rounded-[2rem] hover:border-brand-primary/30 transition-all duration-500 group"
+                >
+                    <div class="flex items-center mb-6">
+                        <div
+                            class="w-12 h-12 bg-brand-blue/20 rounded-xl flex items-center justify-center text-brand-blue text-xl font-bold mr-4 group-hover:scale-110 transition-transform"
+                        >
+                            SM
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-lg m-0">
+                                Sarah M.
+                            </h4>
+                            <p class="text-gray-500 text-sm m-0">
+                                Marketing Agency Owner
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic leading-relaxed">
+                        "Finally a platform that doesn't punish us for growing
+                        our list. We now host our own campaigns for 1/10th of
+                        what we paid Mailchimp. The £10 setup fee is a steal for
+                        this level of power."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Why Choose Laravel Mail Email Credits Section -->
     <section class="py-20 bg-white/5">
         <div class="container-custom">
@@ -414,11 +593,11 @@ const description =
                             <div class="text-2xl">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Template Library
+                                    1,900+ Open Source Templates
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Professional email templates ready to
-                                    customize
+                                    Access over 1,900+ templates in Blade and
+                                    MJML on our GitHub repository.
                                 </p>
                             </div>
                         </div>

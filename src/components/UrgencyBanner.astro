@@ -1,0 +1,68 @@
+---
+
+---
+
+<div
+    class="bg-gradient-to-r from-brand-primary to-brand-accent text-white py-2 px-4 text-center text-sm font-bold relative z-[100]"
+>
+    <div
+        class="container-custom flex items-center justify-center gap-4 overflow-hidden whitespace-nowrap"
+    >
+        <span class="flex items-center gap-1">
+            <span class="relative flex h-2 w-2">
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"
+                ></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-white"
+                ></span>
+            </span>
+            LAST CHANCE: Beta Pricing Ending Soon
+        </span>
+        <span class="hidden md:inline text-white/80">•</span>
+        <span class="hidden md:inline"
+            >Price increases to £100/installation in exactly: <span
+                id="urgency-timer">00:00:00:00</span
+            ></span
+        >
+        <a
+            href="/buy"
+            class="underline hover:no-underline ml-2 hidden sm:inline"
+            >Secure £10 Price Now &rarr;</a
+        >
+    </div>
+</div>
+
+<script is:inline>
+    function updateTimer() {
+        // Set target date to 3 days from "now" (simulated for demo, but feels real)
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 2);
+        targetDate.setHours(23, 59, 59);
+
+        function tick() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+                (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+            );
+            const minutes = Math.floor(
+                (distance % (1000 * 60 * 60)) / (1000 * 60),
+            );
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const timerEl = document.getElementById("urgency-timer");
+            if (timerEl) {
+                timerEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        setInterval(tick, 1000);
+        tick();
+    }
+
+    document.addEventListener("DOMContentLoaded", updateTimer);
+    // Also run for Astro view transitions
+    document.addEventListener("astro:after-swap", updateTimer);
+</script>

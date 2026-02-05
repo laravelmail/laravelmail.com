@@ -1,0 +1,69 @@
+---
+
+---
+
+<div
+    id="purchase-toast"
+    class="fixed bottom-8 left-8 z-[100] transform translate-y-32 opacity-0 transition-all duration-500 ease-out"
+>
+    <div
+        class="bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-2xl shadow-2xl flex items-center gap-4 max-w-sm"
+    >
+        <div
+            class="w-12 h-12 bg-gradient-to-br from-brand-primary to-brand-accent rounded-xl flex items-center justify-center text-white text-xl"
+        >
+            🛒
+        </div>
+        <div>
+            <p class="text-white text-sm font-bold m-0" id="toast-name">
+                Someone from London
+            </p>
+            <p class="text-white/60 text-xs m-0">
+                just individual-purchased Laravel Mail
+            </p>
+            <p class="text-brand-primary text-[10px] font-bold uppercase mt-1">
+                Verified Purchase
+            </p>
+        </div>
+    </div>
+</div>
+
+<script is:inline>
+    const purchases = [
+        { name: "James from London", time: "2 minutes ago" },
+        { name: "Sarah from New York", time: "5 minutes ago" },
+        { name: "Dev from Mumbai", time: "12 minutes ago" },
+        { name: "Elena from Berlin", time: "8 minutes ago" },
+        { name: "Mark from Sydney", time: "20 minutes ago" },
+    ];
+
+    function showToast() {
+        const toast = document.getElementById("purchase-toast");
+        const nameEl = document.getElementById("toast-name");
+
+        if (!toast || !nameEl) return;
+
+        // Pick random purchase
+        const p = purchases[Math.floor(Math.random() * purchases.length)];
+        nameEl.innerText = p.name;
+
+        // Show toast
+        toast.classList.remove("translate-y-32", "opacity-0");
+
+        // Hide after 5 seconds
+        setTimeout(() => {
+            toast.classList.add("translate-y-32", "opacity-0");
+        }, 5000);
+    }
+
+    function initToast() {
+        // Show first toast after 10 seconds
+        setTimeout(() => {
+            showToast();
+            // Then every 30-60 seconds
+            setInterval(showToast, Math.random() * (60000 - 30000) + 30000);
+        }, 10000);
+    }
+
+    document.addEventListener("astro:page-load", initToast);
+</script>

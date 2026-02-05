@@ -2,37 +2,35 @@
 import Layout from "../layouts/Layout.astro";
 import BetaModal from "../components/BetaModal.astro";
 
-const repoUrl = "https://github.com/laravelmail/laravelmail.com";
-
 const deploymentPlatforms = [
     {
         name: "Google Cloud",
         logo: "https://deploy.cloud.run/button.svg",
-        url: `https://deploy.cloud.run?git_repo=${repoUrl}`,
+        url: "/buy",
         description:
-            "Deploy to Google Cloud Run (Serverless Docker) with one click.",
+            "Ready for production with Google Cloud Run (Serverless Docker).",
         accent: "from-[#4285F4] to-[#34A853]",
     },
     {
         name: "DigitalOcean",
         logo: "https://www.deploytodo.com/do-btn-blue.svg",
-        url: `https://www.digitalocean.com/deploy?repository=${repoUrl}`,
+        url: "/buy",
         description:
-            "Deploy to DigitalOcean App Platform with native Docker support.",
+            "Scale seamlessly on DigitalOcean App Platform with native Docker.",
         accent: "from-[#0080FF] to-[#0069D9]",
     },
     {
         name: "Railway",
         logo: "https://railway.app/button.svg",
-        url: `https://railway.app/new/import?repo=${repoUrl}`,
-        description: "Zero-config Docker deployment on Railway.",
+        url: "/buy",
+        description: "Zero-config enterprise deployment on Railway.",
         accent: "from-[#0B0D0E] to-[#1A1C1D]",
     },
     {
         name: "Heroku",
         logo: "https://www.herokucdn.com/deploy/button.svg",
-        url: `https://heroku.com/deploy?template=${repoUrl}`,
-        description: "Deploy your Docker implementation to Heroku.",
+        url: "/buy",
+        description: "Professional Docker implementation for Heroku.",
         accent: "from-[#430098] to-[#7673B0]",
     },
 ];
@@ -136,14 +134,12 @@ const schema = {
                     deploymentPlatforms.map((platform) => (
                         <a
                             href={platform.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             onclick={`trackDeployClick('${platform.name}')`}
                             class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
                         >
                             <div
                                 class={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${platform.accent} opacity-0 group-hover:opacity-100 transition-opacity`}
-                            ></div>
+                            />
                             <div class="h-12 flex items-center mb-6">
                                 <img
                                     src={platform.logo}
@@ -205,9 +201,10 @@ const schema = {
                             >
                         </h2>
                         <p class="text-xl text-gray-400 mb-12 max-w-3xl">
-                            For maximum control and privacy, you can run Laravel
-                            Mail on your own hardware or VPS using our
-                            production-ready Docker configuration.
+                            Gain full control over your customer data. After
+                            purchase, you'll receive immediate access to our <strong
+                                >Private Docker Repository</strong
+                            > and complete source code for self-hosted production.
                         </p>
 
                         <!-- Step by Step -->
@@ -221,11 +218,11 @@ const schema = {
                                     1
                                 </div>
                                 <h4 class="text-white font-bold text-lg">
-                                    Clone Repository
+                                    Clone Private Repository
                                 </h4>
                                 <p class="text-gray-400 text-sm">
-                                    Download the core application source code to
-                                    your server.
+                                    Get access to the private Git repository
+                                    after your purchase.
                                 </p>
                             </div>
                             <div class="space-y-4">
@@ -356,7 +353,7 @@ const schema = {
       - sail
     restart: always
 
-# view full config at github.com/laravelmail/laravelmail.com`}</code></pre>
+# purchase access at laravelmail.com/buy to view full configuration`}</code></pre>
                                 </div>
                             </div>
                         </div>
