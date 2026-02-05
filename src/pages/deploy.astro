@@ -135,7 +135,7 @@ const schema = {
                         <a
                             href={platform.url}
                             onclick={`trackDeployClick('${platform.name}')`}
-                            class="group relative bg-[#1e293b]/40 backdrop-blur-md p-8 rounded-3xl border border-white/5 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
+                            class="group relative bg-brand-bg-card/40 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-sm hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 animate-on-scroll overflow-hidden flex flex-col"
                         >
                             <div
                                 class={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${platform.accent} opacity-0 group-hover:opacity-100 transition-opacity`}
@@ -252,109 +252,6 @@ const schema = {
                                     Run docker-compose up -d and your platform
                                     is live on port 13000.
                                 </p>
-                            </div>
-                        </div>
-
-                        <!-- Code Block -->
-                        <div class="relative group">
-                            <div
-                                class="absolute -inset-2 bg-gradient-to-r from-brand-primary/20 to-brand-blue/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500"
-                            >
-                            </div>
-                            <div
-                                class="relative bg-black/60 rounded-2xl border border-white/10 overflow-hidden shadow-2xl"
-                            >
-                                <div
-                                    class="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/5"
-                                >
-                                    <div class="flex space-x-2">
-                                        <div
-                                            class="w-3 h-3 rounded-full bg-red-500/50"
-                                        >
-                                        </div>
-                                        <div
-                                            class="w-3 h-3 rounded-full bg-yellow-500/50"
-                                        >
-                                        </div>
-                                        <div
-                                            class="w-3 h-3 rounded-full bg-green-500/50"
-                                        >
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="text-xs font-mono text-gray-500"
-                                        >docker-compose.yml</span
-                                    >
-                                </div>
-                                <div
-                                    class="p-6 overflow-x-auto custom-scrollbar"
-                                >
-                                    <pre
-                                        class="text-sm font-mono text-blue-300 leading-relaxed"><code>{`services:
-  app.laravelmail.com:
-    image: izdrail/app.laravelmail.com:latest
-    container_name: app.laravelmail.com
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
-    ports:
-      - '13000:13000'
-      - '5173:5173'
-    volumes:
-      - '.:/var/www'
-    networks:
-      - sail
-    depends_on:
-      - mysql
-      - mailpit
-      - redis
-  
-  redis:
-    image: redis:alpine
-    restart: unless-stopped
-    volumes:
-      - redis_data:/data
-    networks:
-      - sail
-
-  mysql:
-    image: mysql:8.0
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: laravel
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: laravel_password
-    volumes:
-      - mysql_data:/var/lib/mysql
-    networks:
-      - sail
-
-  temporal:
-    image: temporalio/auto-setup:1.29.2
-    ports:
-      - "7233:7233"
-    environment:
-      - DB=mysql8
-      - MYSQL_USER=root
-      - MYSQL_PWD=root_password
-      - MYSQL_SEEDS=mysql
-    networks:
-      - sail
-
-  mailserver:
-    image: mailserver/docker-mailserver:latest
-    container_name: mailserver
-    hostname: mail
-    domainname: laravelmail.com
-    ports:
-      - "25:25"
-      - "587:587"
-    networks:
-      - sail
-    restart: always
-
-# purchase access at laravelmail.com/buy to view full configuration`}</code></pre>
-                                </div>
                             </div>
                         </div>
 

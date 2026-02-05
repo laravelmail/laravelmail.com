@@ -33,19 +33,23 @@ const socialLinks = [
 const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Laravel Mail",
+    name: "Laravel Company",
     url: "https://laravelmail.com",
     logo: "https://laravelmail.com/logo.svg",
     description:
         "Laravel Mail is a self hosted email marketing platform that delivers verified, curated B2B leads across industries. We help businesses grow faster with data you can trust.",
     contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+44-744-821-88-99",
+        telephone: "+44 744 821 8899",
         contactType: "customer service",
         url: "https://laravelmail.com/contact",
     },
     address: {
         "@type": "PostalAddress",
+        streetAddress: "7 High Street",
+        addressLocality: "Basildon",
+        addressRegion: "Essex",
+        postalCode: "SS14 1AB",
         addressCountry: "GB",
     },
     sameAs: ["https://www.linkedin.com/company/laravelmail"],
@@ -309,7 +313,7 @@ const organizationSchema = {
 
         <div class="pt-8 text-center text-gray-400 text-sm">
             <p class="hover:text-gray-300 transition-colors duration-300">
-                &copy; {new Date().getFullYear()} Laravel Mail. All rights reserved.
+                &copy; {new Date().getFullYear()} Laravel Company. All rights reserved.
             </p>
             <div
                 class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6"
