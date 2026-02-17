@@ -1,26 +1,77 @@
 ---
-const steps = [
+const purchaseSteps = [
+    {
+        step: "1",
+        title: "Purchase Your License",
+        description:
+            "Buy your self-hosted Laravel Mail Marketing platform license via PayPal. You'll receive an instant order confirmation with your transaction ID.",
+    },
+    {
+        step: "2",
+        title: "Receive Docker Image + Tutorial",
+        description:
+            "Within minutes, you'll get a secure download link containing: Pre-configured Docker image optimized for Laravel Mail, step-by-step installation tutorial (PDF + video), environment configuration templates, API documentation & best practices guide.",
+    },
+    {
+        step: "3",
+        title: "Submit Activation Details",
+        description:
+            "Visit your account dashboard and submit: Your PayPal transaction ID, server/domain details for license binding, admin contact information.",
+    },
+    {
+        step: "4",
+        title: "Activation Completed (24–48 Hours)",
+        description:
+            "Our team verifies your submission and activates your license. You'll receive an email confirmation with your activation key and access to premium support.",
+    },
+];
+
+const setupSteps = [
     {
         number: "01",
+        icon: "🔗",
         title: "Connect with Laravel Mail API",
         description:
-            "Easily integrate with our Laravel Mail API to power your self-hosted email marketing campaigns and manage your email infrastructure at scale.",
+            "Power your campaigns with a developer-friendly, scalable email infrastructure.",
+        bullets: [
+            "Seamless API Integration: Use RESTful endpoints to connect your Laravel app, CRM, or e-commerce platform in minutes.",
+            "Webhook Support: Trigger automated emails based on user behavior, purchases, or custom events.",
+            "Multi-Provider Flexibility: Route emails through Amazon SES, Mailgun, SendGrid, or your own SMTP – all managed from one dashboard.",
+            "Secure Authentication: OAuth2, API tokens, and IP whitelisting keep your email infrastructure protected.",
+        ],
     },
     {
         number: "02",
-        title: "Configure your Email Marketing Experience",
+        icon: "⚙️",
+        title: "Configure Your Email Marketing Experience",
         description:
-            "Customize the Laravel-based interface to match your brand, marketing goals, and automation workflows.",
+            "Customize everything to match your brand, workflow, and compliance needs.",
+        bullets: [
+            "White-Label Interface: Replace logos, colors, and domains to deliver a 100% branded experience to your team and clients.",
+            "Drag & Drop Campaign Builder: Create responsive emails without code – or use Blade templates for full developer control.",
+            "Automation Workflows: Build visual customer journeys with triggers, delays, conditions, and A/B testing.",
+            "GDPR & Compliance Ready: Built-in consent management, unsubscribe handling, and audit logs help you stay compliant globally.",
+            "Advanced Segmentation: Target subscribers by behavior, demographics, engagement, or custom attributes.",
+        ],
     },
     {
         number: "03",
+        icon: "📈",
         title: "Launch, Automate & Scale",
         description:
-            "Go live with your self-hosted email marketing platform, automate campaigns, and scale with growing customer demand.",
+            "Go live confidently and grow your email program without limits.",
+        bullets: [
+            "One-Click Campaign Deployment: Schedule or send immediately to segmented lists with real-time analytics.",
+            "Smart Delivery Optimization: AI-powered send-time optimization and inbox placement monitoring boost open rates.",
+            "Auto-Scaling Architecture: Docker-based deployment scales horizontally to handle millions of emails without downtime.",
+            "Performance Analytics: Track opens, clicks, conversions, bounces, and revenue attribution in real-time dashboards.",
+            "Team Collaboration Tools: Role-based access, approval workflows, and activity logs keep your marketing team aligned.",
+        ],
     },
 ];
 ---
 
+<!-- Section 1: Introduction & Quick Start -->
 <section class="py-20 bg-brand-bg-darker/40 relative overflow-hidden">
     <!-- Background -->
     <div class="absolute inset-0 opacity-5">
@@ -32,90 +83,56 @@ const steps = [
             <h2
                 class="animate-on-scroll delay-0 text-3xl md:text-4xl font-bold text-white"
             >
-                How Laravel Mail Marketing Works
+                How Laravel Mail Marketing Works – Self-Hosted Email Solution
             </h2>
             <p class="animate-on-scroll delay-1 mt-4 text-xl text-gray-400">
-                Set up your <b
-                    title="self hosted laravel mail marketing platform"
-                    class="text-white"
+                Set up your <b class="text-white"
                     >self-hosted Laravel Mail marketing solution</b
-                > in just three steps – connect, configure, and launch your campaigns.
+                > in just three simple steps – connect, configure, and launch high-converting
+                email campaigns with full control over your data and infrastructure.
             </p>
         </div>
 
-        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            <div
-                class="hidden md:block absolute top-16 left-1/6 right-1/6 h-0.5 bg-gradient-to-r from-brand-primary to-brand-blue"
-            >
-            </div>
-
-            {
-                steps.map((step, index) => (
-                    <article
-                        class={`bg-brand-bg-card/40 backdrop-blur-md rounded-xl p-8 shadow-lg border border-white/10 animate-on-scroll delay-${index + 2} group hover:shadow-xl transition-all duration-300 hover:-translate-y-2`}
-                    >
-                        <div class="flex items-center justify-center w-12 h-12 rounded-full bg-brand-primary/10 text-white font-semibold transition-all duration-300 group-hover:bg-brand-primary group-hover:text-white group-hover:scale-110">
-                            {step.number}
-                        </div>
-                        <h3
-                            title={step.title}
-                            class="mt-6 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-brand-primary"
+        <!-- Quick Start: Purchase & Activation Process -->
+        <div class="mt-20">
+            <h3 class="text-2xl font-bold text-white mb-8 flex items-center">
+                <span class="mr-2">🛒</span> Quick Start: Purchase & Activation Process
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    purchaseSteps.map((step, index) => (
+                        <div
+                            class={`bg-brand-bg-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10 animate-on-scroll delay-${index + 1}`}
                         >
-                            {step.title}
-                        </h3>
-                        <p class="mt-3 text-gray-400">{step.description}</p>
-
-                        {index < steps.length - 1 && (
-                            <div class="flex justify-center mt-4 md:hidden">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6 text-brand-primary animate-bounce"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                                    />
-                                </svg>
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-brand-primary/20 text-brand-primary font-bold mb-4">
+                                {step.step}
                             </div>
-                        )}
-                    </article>
-                ))
-            }
-        </div>
-
-        <div class="mt-16 text-center">
-            <div class="animate-on-scroll delay-5">
-                <a
-                    href="/buy"
-                    class="btn btn-primary group"
-                    title="Get Laravel Mail Marketing Platform"
-                >
-                    <span class="inline-flex items-center">
-                        Purchase Now - £10.00
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </span>
-                </a>
+                            <h4 class="text-lg font-semibold text-white mb-2">
+                                {step.title}
+                            </h4>
+                            <p class="text-sm text-gray-400">
+                                {step.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+            <div
+                class="mt-8 p-6 bg-brand-bg-card/20 rounded-lg border border-white/5"
+            >
+                <p class="text-gray-300">
+                    <span class="font-bold text-white"
+                        >✅ Why This Process?</span
+                    > This secure, manual activation ensures license authenticity,
+                    prevents unauthorized distribution, and allows our team to provide
+                    personalized onboarding support for your self-hosted deployment.
+                </p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Section 2: Detailed 3-Step Setup -->
 <section class="py-24 bg-brand-bg-darker/60 relative overflow-hidden">
     <!-- Subtle animated background -->
     <div class="absolute inset-0 opacity-10">
@@ -130,117 +147,60 @@ const steps = [
     </div>
 
     <div class="container-custom relative">
-        <!-- Headline -->
         <div class="text-center max-w-4xl mx-auto mb-20">
             <h2 class="text-5xl md:text-6xl font-black text-white mb-6">
-                Go Live in <span
+                <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent"
-                    >3 Simple Steps</span
+                    >3-Step Setup</span
                 >
             </h2>
             <p class="text-xl md:text-2xl text-gray-400 leading-relaxed">
-                From WhatsApp broadcasts to Instagram DM automation, Google
-                Marketplace listings, and product-driven campaigns — launch your
-                full-stack marketing engine in minutes.
+                From API connection to full-scale automation — here's how
+                Laravel Mail Marketing powers your email campaigns.
             </p>
         </div>
 
-        <!-- Steps -->
-        <div class="grid lg:grid-cols-3 gap-10 max-w-7xl mx-auto relative">
-            <!-- Connecting Line (Desktop) -->
-            <div
-                class="hidden lg:block absolute top-24 left-1/3 right-1/3 h-0.5 bg-gradient-to-r from-brand-primary/40 via-brand-accent/50 to-brand-primary/40 opacity-50"
-            >
-            </div>
-
-            <!-- Step 1 -->
-            <div
-                class="group relative bg-brand-bg-card/40 backdrop-blur-sm rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-brand-primary/30 hover:-translate-y-3"
-            >
-                <div
-                    class="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                >
-                </div>
-                <div class="relative z-10">
+        <div class="grid lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+            {
+                setupSteps.map((step, index) => (
                     <div
-                        class="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-brand-primary to-brand-accent text-white text-3xl font-black shadow-2xl mb-8"
+                        class={`group relative bg-brand-bg-card/40 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-brand-primary/30 hover:-translate-y-3 animate-on-scroll delay-${index + 2}`}
                     >
-                        01
+                        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-brand-primary to-brand-accent text-white text-3xl font-black shadow-2xl">
+                                    {step.icon}
+                                </div>
+                                <span class="text-6xl font-black text-white/10">
+                                    {step.number}
+                                </span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">
+                                {step.title}
+                            </h3>
+                            <p class="text-gray-400 mb-4">{step.description}</p>
+                            <ul class="space-y-2 text-sm text-gray-400">
+                                {step.bullets.map((bullet) => (
+                                    <li class="flex items-start">
+                                        <span class="text-brand-primary mr-2">
+                                            •
+                                        </span>
+                                        <span>{bullet}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="text-3xl font-bold text-white mb-4">
-                        Connect Your Channels
-                    </h3>
-                    <p class="text-lg text-gray-400 leading-relaxed">
-                        One-click <strong class="text-white"
-                            >Facebook Partner Login</strong
-                        > for WhatsApp Business API + Instagram.<br /><br />
-                        Connect your <strong class="text-white"
-                            >Google Workspace Marketplace</strong
-                        > app.<br /><br />
-                        Link your product catalog and payment gateways.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div
-                class="group relative bg-brand-bg-card/40 backdrop-blur-sm rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-brand-primary/30 hover:-translate-y-3"
-            >
-                <div
-                    class="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                >
-                </div>
-                <div class="relative z-10">
-                    <div
-                        class="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-brand-primary to-brand-accent text-white text-3xl font-black shadow-2xl mb-8"
-                    >
-                        02
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-4">
-                        Design Your Flows
-                    </h3>
-                    <p class="text-lg text-gray-400 leading-relaxed">
-                        Use our <strong class="text-white"
-                            >drag-and-drop visual automation builder</strong
-                        > (the most beautiful one ever built).<br /><br />
-                        Create WhatsApp sequences, Instagram DM funnels, email journeys,
-                        and product-driven campaigns — all in one canvas.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div
-                class="group relative bg-brand-bg-card/40 backdrop-blur-sm rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-brand-primary/30 hover:-translate-y-3"
-            >
-                <div
-                    class="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                >
-                </div>
-                <div class="relative z-10">
-                    <div
-                        class="flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-r from-brand-primary to-brand-accent text-white text-3xl font-black shadow-2xl mb-8"
-                    >
-                        03
-                    </div>
-                    <h3 class="text-3xl font-bold text-white mb-4">
-                        Launch & Dominate
-                    </h3>
-                    <p class="text-lg text-gray-400 leading-relaxed">
-                        Go live instantly.<br /><br />
-                        Watch real-time analytics across Email, WhatsApp, Instagram,
-                        and Google Marketplace.<br /><br />
-                        Scale to millions of messages — zero third-party limits.
-                    </p>
-                </div>
-            </div>
+                ))
+            }
         </div>
 
         <!-- CTA -->
         <div class="text-center mt-20">
             <a
                 href="/buy"
-                class="inline-flex items-center px-10 py-5 text-xl font-bold text-white bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl shadow-2xl hover:shadow-brand-primary/50 transform hover:scale-105 transition-all duration-300"
+                class="inline-flex items-center px-10 py-5 text-xl font-bold text-white bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl shadow-2xl hover:shadow-brand-primary/50 transform hover:scale-105 transition-all duration-300 group"
             >
                 Purchase Now - £10.00
                 <svg
