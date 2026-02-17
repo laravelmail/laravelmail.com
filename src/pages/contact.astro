@@ -9,23 +9,32 @@ const contactMethods = [
         title: "Sales",
         description:
             "Discuss lead generation solutions and pricing for your business growth.",
+        link: "mailto:info@laravelmail.com",
     },
     {
         title: "Support",
         description:
             "Get help with your lead generation campaigns and technical questions.",
+        link: "mailto:info@laravelmail.com",
     },
     {
         title: "Partnerships",
         description:
             "Explore referral programs and strategic partnership opportunities.",
+        link: "mailto:info@laravelmail.com",
+    },
+    {
+        title: "WhatsApp",
+        description:
+            "Join our community group for instant updates and support.",
+        link: "https://chat.whatsapp.com/FyyyBmuFBToFNUtD2UlWt2",
     },
 ];
 ---
 
 <Layout
-    title="Contact Us"
-    description="Get in touch with our lead generation experts for sales inquiries, campaign support, or partnership opportunities."
+    title="Contact Laravel Mail | Lead Generation & Platform Support"
+    description="Have questions about our self-hosted marketing platform or B2B leads database? Contact our sales, support, or partnership teams, or join our WhatsApp community."
 >
     <!-- Background decorative elements -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
@@ -54,23 +63,53 @@ const contactMethods = [
                     <span class="text-brand-primary font-bold"
                         >info@laravelmail.com</span
                     >
+                    <br />
+                    <a
+                        href="https://chat.whatsapp.com/FyyyBmuFBToFNUtD2UlWt2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 mt-4 text-[#25D366] hover:text-[#128C7E] transition-colors font-bold"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143l.353.21c1.511.891 3.242 1.36 5.023 1.361l.001-.001c5.62 0 10.194-4.574 10.196-10.196.001-2.723-1.06-5.284-2.983-7.208-1.923-1.922-4.484-2.982-7.208-2.982-5.621 0-10.196 4.575-10.199 10.196-.001 1.797.469 3.548 1.358 5.063l.228.388-.996 3.63 3.73-.979zm11.233-7.07c-.08-.133-.31-.213-.64-.378-.34-.165-2.01-.99-2.321-1.1s-.538-.165-.767.165-.89 1.102-1.089 1.334-.413.247-.743.083c-.33-.165-1.391-.513-2.641-1.628-1-.892-1.673-1.996-1.871-2.325-.198-.329-.022-.507.143-.671.149-.147.33-.378.495-.561.165-.183.22-.313.33-.52s.053-.393-.027-.561-.767-1.848-1.053-2.541c-.27-.648-.545-.558-.76-.57-.194-.01-.418-.011-.643-.011s-.594.082-.904.413c-.31.329-1.18 1.154-1.18 2.805s1.2 3.243 1.365 3.46c.165.215 2.36 3.6 5.717 5.047 3.357 1.447 3.357.965 3.965.904s1.96-.801 2.238-1.578c.277-.777.277-1.443.195-1.578z"
+                            ></path>
+                        </svg>
+                        Join our WhatsApp Community
+                    </a>
                 </p>
             </div>
 
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+                class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
                 {
                     contactMethods.map((method, index) => (
                         <div
-                            class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-xl border border-white/10 text-center animate-on-scroll hover:border-brand-primary/50 transition-all duration-500 hover:-translate-y-2 group"
+                            class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-xl border border-white/10 text-center animate-on-scroll hover:border-brand-primary/50 transition-all duration-500 hover:-translate-y-2 group flex flex-col"
                             style={`animation-delay: ${index * 0.15}s`}
                         >
                             <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-primary/20 text-brand-primary mb-6 group-hover:scale-110 transition-transform duration-500">
-                                <Image
-                                    src={Logo}
-                                    alt="Laravel Mail Logo"
-                                    width={140}
-                                    height={45}
-                                />
+                                {method.title === "WhatsApp" ? (
+                                    <svg
+                                        class="w-10 h-10"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143l.353.21c1.511.891 3.242 1.36 5.023 1.361l.001-.001c5.62 0 10.194-4.574 10.196-10.196.001-2.723-1.06-5.284-2.983-7.208-1.923-1.922-4.484-2.982-7.208-2.982-5.621 0-10.196 4.575-10.199 10.196-.001 1.797.469 3.548 1.358 5.063l.228.388-.996 3.63 3.73-.979zm11.233-7.07c-.08-.133-.31-.213-.64-.378-.34-.165-2.01-.99-2.321-1.1s-.538-.165-.767.165-.89 1.102-1.089 1.334-.413.247-.743.083c-.33-.165-1.391-.513-2.641-1.628-1-.892-1.673-1.996-1.871-2.325-.198-.329-.022-.507.143-.671.149-.147.33-.378.495-.561.165-.183.22-.313.33-.52s.053-.393-.027-.561-.767-1.848-1.053-2.541c-.27-.648-.545-.558-.76-.57-.194-.01-.418-.011-.643-.011s-.594.082-.904.413c-.31.329-1.18 1.154-1.18 2.805s1.2 3.243 1.365 3.46c.165.215 2.36 3.6 5.717 5.047 3.357 1.447 3.357.965 3.965.904s1.96-.801 2.238-1.578c.277-.777.277-1.443.195-1.578z" />
+                                    </svg>
+                                ) : (
+                                    <Image
+                                        src={Logo}
+                                        alt="Laravel Mail Logo"
+                                        width={140}
+                                        height={45}
+                                    />
+                                )}
                             </div>
                             <h3
                                 title="email marketing company london"
@@ -78,14 +117,26 @@ const contactMethods = [
                             >
                                 {method.title}
                             </h3>
-                            <p class="mt-3 text-gray-400">
+                            <p class="mt-3 text-gray-400 flex-grow">
                                 {method.description}
                             </p>
                             <a
-                                href={`mailto:info@laravelmail.com`}
-                                class="mt-4 block text-brand-primary font-bold hover:underline transition-colors"
+                                href={method.link}
+                                class="mt-6 block text-brand-primary font-bold hover:underline transition-colors"
+                                target={
+                                    method.title === "WhatsApp"
+                                        ? "_blank"
+                                        : undefined
+                                }
+                                rel={
+                                    method.title === "WhatsApp"
+                                        ? "noopener noreferrer"
+                                        : undefined
+                                }
                             >
-                                Contact Now
+                                {method.title === "WhatsApp"
+                                    ? "Join Group"
+                                    : "Contact Now"}
                             </a>
                         </div>
                     ))
