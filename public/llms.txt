@@ -36,10 +36,7 @@
 [get in touch](https://laravelmail.com/contact)
 
 ## Read Documentation
-[Read Documentation](https://laravelmail.com/documentation)
-
-## About Us
-[About Us](https://laravelmail.com/about-us)
+[Read Documentation](https://app.laravelmail.com/docs)
 
 ## Privacy Policy
 [Privacy Policy](https://laravelmail.com/privacy-policy)
