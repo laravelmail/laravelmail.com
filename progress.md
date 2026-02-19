@@ -22,3 +22,16 @@
   - Open Graph and Twitter Card tags should be consistent with main meta tags
   - The project structure follows standard Astro conventions
 ---
+
+## [2026-02-19 15:45:00] - US-004
+- Implemented comprehensive schema markup for SoftwareApplication type
+- Added structured data with properties: name, description, operatingSystem, applicationCategory, keywords, offers, hasPart (for AI agents and leads database), aggregateRating, screenshot, url, datePublished, publisher, and mainEntityOfPage
+- Kept existing Organization schema for compatibility
+- Files changed: src/layouts/Layout.astro
+- **Learnings for future iterations:**
+  - Schema markup should be placed in the Layout component for consistency across all pages
+  - Use SoftwareApplication type for software products with relevant properties like offers, hasPart, and aggregateRating
+  - Include mainEntityOfPage to connect the schema with the actual page content
+  - The schema markup is validated to be proper JSON-LD format
+  - Google's Rich Results Test can be used to validate the implementation
+---
