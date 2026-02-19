@@ -13,7 +13,7 @@ export default class TextType extends MessageType {
                 <p dangerouslySetInnerHTML={textObject} />
 
                 {attachment && attachment.type === "image" ? (
-                    <img src={attachment.url} style="max-width: 100%;" />
+                    <img src={attachment.url} style="max-width: 100%;" loading="lazy" />
                 ) : (
                     ""
                 )}

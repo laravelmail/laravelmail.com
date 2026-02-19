@@ -148,7 +148,7 @@ export default class ListType extends MessageType {
                     }}
                 >
                     {element.image_url && (
-                        <img src={element.image_url} style={imageStyle} alt={element.title} />
+                        <img src={element.image_url} style={imageStyle} alt={element.title} loading="lazy" />
                     )}
                     {element.title && (
                         <p style={titleStyle}>{element.title}</p>
