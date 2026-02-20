@@ -230,23 +230,46 @@ const description =
                             </div>
 
                             <div class="space-y-6">
-                                <a
-                                    href="https://www.paypal.com/ncp/links/R2MN2C7WVVNW8"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="w-full bg-[#ffc439] hover:bg-[#f4bb36] text-[#003087] font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-yellow-500/10 active:scale-[0.98] no-underline"
+                                <div
+                                    id="paypal-button-container-P-5JV683893N289793BNGMDYGA"
                                 >
-                                    <svg
-                                        class="h-6 w-auto"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            d="M20.067 8.178c-.622-2.316-2.583-3.611-5.322-3.611H7.88c-.538 0-.986.388-1.07.915L4.037 19.34c-.056.347.21.66.562.66h3.403c.484 0 .887-.35.962-.824l.034-.216.711-4.524.04-.216a.972.972 0 0 1 .962-.823h1.365c3.153 0 5.613-1.284 6.326-4.8c.32-1.579.167-2.784-.335-3.421zM11.77 12.355H9.667l.344-2.186h2.103c.962 0 1.638.169 2.01.503.243.218.375.568.303 1.018-.119.75-.688 1.411-1.638 1.411-1.019 0-1.019-.746-1.019-.746z"
-                                        ></path>
-                                    </svg>
-                                    Pay with PayPal
-                                </a>
+                                </div>
+                                <script
+                                    src="https://www.paypal.com/sdk/js?client-id=AddiC5z5vZl2wDBLbYo5Ef1a-1U48vvlDeTo1iIHvvrV-J3GgOHMaqwnDWmeCYVIhk3bodChdvIulLmb&vault=true&intent=subscription"
+                                    data-sdk-integration-source="button-factory"
+                                ></script>
+                                <script>
+                                    paypal
+                                        .Buttons({
+                                            style: {
+                                                shape: "rect",
+                                                color: "gold",
+                                                layout: "vertical",
+                                                label: "subscribe",
+                                            },
+                                            createSubscription: function (
+                                                data,
+                                                actions,
+                                            ) {
+                                                return actions.subscription.create(
+                                                    {
+                                                        /* Creates the subscription */
+                                                        plan_id:
+                                                            "P-5JV683893N289793BNGMDYGA",
+                                                    },
+                                                );
+                                            },
+                                            onApprove: function (
+                                                data,
+                                                actions,
+                                            ) {
+                                                alert(data.subscriptionID); // You can add optional success message for the subscriber here
+                                            },
+                                        })
+                                        .render(
+                                            "#paypal-button-container-P-5JV683893N289793BNGMDYGA",
+                                        ); // Renders the PayPal button
+                                </script>
 
                                 <p
                                     class="text-sm text-white/50 text-center px-4 leading-relaxed"
