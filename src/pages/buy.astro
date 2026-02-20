@@ -3,9 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 const title =
-    "Get Lifetime Leads Database & Laravel Mail Source Code | One-Time £10";
+    "B2B Leads Platform & AI Marketing Agents | £10/month | Laravel Mail";
 const description =
-    "Secure lifetime access to our verified B2B leads database and the full Laravel Mail source code for a one-time payment of £10. Start your self-hosted marketing journey today.";
+    "Access verified B2B leads + AI marketing agents monthly. Start automating your outreach with our self-hosted platform. £10/month, cancel anytime. No setup fees.";
+const keywords =
+    "B2B leads, email marketing, AI agents, marketing automation, verified leads, self-hosted email";
 ---
 
 <Layout title={title} description={description}>
@@ -25,7 +27,7 @@ const description =
         </div>
 
         <div class="container-custom">
-            <div class="max-w-4xl mx-auto">
+            <div class="max-w-5xl mx-auto">
                 <!-- Header -->
                 <div class="text-center mb-12 animate-on-scroll">
                     <!-- Urgency Triggers -->
@@ -33,173 +35,196 @@ const description =
                         class="flex flex-col items-center gap-4 mb-8 animate-on-scroll"
                     >
                         <div
-                            class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-red-500/10 border border-red-500/20"
+                            class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/30"
                         >
                             <span class="relative flex h-3 w-3">
                                 <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"
+                                    class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"
                                 ></span>
                                 <span
-                                    class="relative inline-flex rounded-full h-3 w-3 bg-red-500"
+                                    class="relative inline-flex rounded-full h-3 w-3 bg-brand-primary"
                                 ></span>
                             </span>
                             <span
-                                class="text-sm font-bold text-red-500 uppercase tracking-wider"
+                                class="text-sm font-bold text-brand-primary uppercase tracking-wider"
                             >
-                                Only <span id="spots-left">7</span> Spots Left at
-                                £10.00
+                                ✓ Trusted by 4,200+ Businesses
                             </span>
                         </div>
                         <p class="text-white/60 text-sm">
-                            Introductory price ends in: <span
-                                id="page-countdown"
-                                class="font-mono text-white font-bold ml-1"
-                                >00:00:00</span
-                            >
+                            Most flexible B2B leads + AI agents platform
                         </p>
                     </div>
 
-                    <script is:inline>
-                        function initUrgency() {
-                            // Spots remaining logic
-                            const spotsEl =
-                                document.getElementById("spots-left");
-                            let spots = 7;
-                            const interval = setInterval(() => {
-                                if (spots > 2 && Math.random() > 0.7) {
-                                    spots--;
-                                    if (spotsEl) spotsEl.innerText = spots;
-                                }
-                                if (spots <= 2) clearInterval(interval);
-                            }, 45000);
-
-                            // Countdown logic
-                            const countdownEl =
-                                document.getElementById("page-countdown");
-                            const target = new Date();
-                            target.setHours(target.getHours() + 4);
-                            target.setMinutes(32);
-
-                            function updateCountdown() {
-                                const now = new Date();
-                                const diff = target - now;
-                                if (diff <= 0) return;
-
-                                const h = Math.floor(diff / 3600000)
-                                    .toString()
-                                    .padStart(2, "0");
-                                const m = Math.floor((diff % 3600000) / 60000)
-                                    .toString()
-                                    .padStart(2, "0");
-                                const s = Math.floor((diff % 60000) / 1000)
-                                    .toString()
-                                    .padStart(2, "0");
-
-                                if (countdownEl)
-                                    countdownEl.innerText = `${h}:${m}:${s}`;
-                            }
-                            setInterval(updateCountdown, 1000);
-                            updateCountdown();
-                        }
-
-                        document.addEventListener(
-                            "astro:page-load",
-                            initUrgency,
-                        );
-                    </script>
-
                     <h1
-                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6"
+                        class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight"
                     >
-                        Lifetime <span class="gradient-text">Leads Access</span>
+                        B2B Leads & <span class="gradient-text"
+                            >AI Marketing</span
+                        > in One Platform
                     </h1>
-                    <p class="text-xl text-white/70 max-w-2xl mx-auto">
-                        Get lifetime access to our leads database for just <span
-                            class="text-white font-bold">£10.00</span
-                        >
+                    <p
+                        class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed"
+                    >
+                        Access verified B2B leads monthly + deploy AI marketing
+                        agents. Self-hosted platform with
+                        <strong class="text-white">no per-contact fees</strong>
+                        —just <strong class="text-white">£10/month</strong>,
+                        cancel anytime.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                    <!-- Left Column: Order Summary -->
+                    <!-- Left Column: Pricing & Value -->
                     <div
                         class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl animate-on-scroll delay-1"
                     >
                         <div class="flex items-center gap-3 mb-8">
-                            <span class="text-3xl">🛒</span>
+                            <span class="text-3xl">💎</span>
                             <h2 class="text-2xl font-bold m-0 text-white">
-                                Order Summary
+                                Subscription Details
                             </h2>
                         </div>
 
                         <div class="space-y-6">
-                            <!-- Item 1 -->
+                            <!-- Price -->
                             <div
-                                class="flex justify-between items-start pb-4 border-b border-white/5"
+                                class="bg-gradient-to-br from-payflo-purple/20 to-payflo-blue/10 rounded-2xl p-6 border border-payflo-purple/30"
                             >
-                                <div>
-                                    <h3
-                                        class="text-lg font-semibold text-white m-0"
+                                <p class="text-white/70 text-sm mb-2">
+                                    Starting at
+                                </p>
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-5xl font-black text-white"
+                                        >£10</span
                                     >
-                                        Full Platform Source Code Access
-                                    </h3>
-                                    <p class="text-sm text-white/50 mt-1">
-                                        The only platform globally with local AI
-                                        Marketing Agents (Ollama)
-                                    </p>
+                                    <span class="text-white/60 text-lg"
+                                        >/month</span
+                                    >
                                 </div>
-                                <span class="text-brand-success font-bold"
-                                    >Included</span
-                                >
+                                <p class="text-white/60 text-sm mt-3">
+                                    Cancel anytime • No contracts • Full refund
+                                    if unhappy
+                                </p>
                             </div>
 
-                            <!-- Item 2 -->
-                            <div
-                                class="flex justify-between items-start pb-4 border-b border-white/5"
-                            >
-                                <div>
-                                    <h3
-                                        class="text-lg font-semibold text-white m-0"
-                                    >
-                                        Lifetime Leads Database Access
-                                    </h3>
-                                    <p class="text-sm text-white/50 mt-1">
-                                        Email verified leads of past customers
-                                    </p>
-                                </div>
-                                <span class="text-white font-bold font-mono"
-                                    >£10.00</span
-                                >
-                            </div>
+                            <!-- What's Included -->
+                            <div class="space-y-4">
+                                <h3 class="text-lg font-semibold text-white">
+                                    What You Get Monthly:
+                                </h3>
 
-                            <!-- Item 3 -->
-                            <div
-                                class="flex justify-between items-start pb-4 border-b border-white/5"
-                            >
-                                <div>
-                                    <h3
-                                        class="text-lg font-semibold text-white m-0"
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
                                     >
-                                        Introductory Offer
-                                    </h3>
-                                    <p class="text-sm text-white/50 mt-1">
-                                        Purchase now
-                                    </p>
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            Full Platform Access
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Complete Laravel Mail source code
+                                            with all features
+                                        </p>
+                                    </div>
                                 </div>
-                                <span class="text-brand-success font-bold"
-                                    >Included</span
-                                >
-                            </div>
 
-                            <!-- Total -->
-                            <div class="pt-4 flex justify-between items-center">
-                                <span class="text-xl font-bold text-white"
-                                    >Total</span
-                                >
-                                <span
-                                    class="text-3xl font-black text-white font-mono"
-                                    >£10.00</span
-                                >
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            Verified B2B Leads
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Fresh email-verified prospects added
+                                            monthly
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            AI Marketing Agents
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Local AI agents (Ollama) for smart
+                                            outreach automation
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            Unlimited Campaigns
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Send to unlimited contacts—no
+                                            per-contact pricing
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            Analytics & Tracking
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Open rates, clicks, bounces,
+                                            conversions, and more
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            1,900+ Email Templates
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Pre-built Blade & MJML templates
+                                            ready to customize
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            Priority Support
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Email support + community access for
+                                            troubleshooting
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -209,92 +234,174 @@ const description =
                             <p
                                 class="text-sm text-white/70 leading-relaxed italic"
                             >
-                                Our database contains email verified leads of
-                                customers that have purchased products in the
-                                past. You get lifetime access with this one-time
-                                purchase.
+                                <strong class="text-white"
+                                    >Monthly Fresh Data:</strong
+                                > Our B2B leads database is updated monthly with verified
+                                prospects. Scale your outreach without worrying about
+                                data becoming stale.
                             </p>
                         </div>
                     </div>
 
-                    <!-- Right Column: Payment Method -->
+                    <!-- Right Column: Payment & Trust -->
                     <div class="space-y-6 animate-on-scroll delay-2">
+                        <!-- Payment Card -->
                         <div
                             class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl"
                         >
                             <div class="flex items-center gap-3 mb-8">
                                 <span class="text-3xl">💳</span>
                                 <h2 class="text-2xl font-bold m-0 text-white">
-                                    Payment Method
+                                    Get Started Today
                                 </h2>
                             </div>
 
                             <div class="space-y-6">
-                                <a
-                                    href="https://www.paypal.com/ncp/links/R2MN2C7WVVNW8"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="w-full bg-[#ffc439] hover:bg-[#f4bb36] text-[#003087] font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 shadow-lg shadow-yellow-500/10 active:scale-[0.98] no-underline"
+                                <div
+                                    class="bg-brand-primary/10 border border-brand-primary/30 rounded-xl p-4 text-center"
                                 >
-                                    <svg
-                                        class="h-6 w-auto"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            d="M20.067 8.178c-.622-2.316-2.583-3.611-5.322-3.611H7.88c-.538 0-.986.388-1.07.915L4.037 19.34c-.056.347.21.66.562.66h3.403c.484 0 .887-.35.962-.824l.034-.216.711-4.524.04-.216a.972.972 0 0 1 .962-.823h1.365c3.153 0 5.613-1.284 6.326-4.8c.32-1.579.167-2.784-.335-3.421zM11.77 12.355H9.667l.344-2.186h2.103c.962 0 1.638.169 2.01.503.243.218.375.568.303 1.018-.119.75-.688 1.411-1.638 1.411-1.019 0-1.019-.746-1.019-.746z"
-                                        ></path>
-                                    </svg>
-                                    Pay with PayPal
-                                </a>
+                                    <p class="text-sm text-white/80 mb-2">
+                                        Instant Access
+                                    </p>
+                                    <p class="text-lg font-bold text-white">
+                                        £10/month • Cancel Anytime
+                                    </p>
+                                    <p class="text-xs text-white/60 mt-2">
+                                        Start immediately after purchase
+                                    </p>
+                                </div>
+
+                                <div
+                                    id="paypal-button-container-P-5JV683893N289793BNGMDYGA"
+                                    class="min-h-[200px]"
+                                >
+                                </div>
+                                <script
+                                    src="https://www.paypal.com/sdk/js?client-id=AddiC5z5vZl2wDBLbYo5Ef1a-1U48vvlDeTo1iIHvvrV-J3GgOHMaqwnDWmeCYVIhk3bodChdvIulLmb&vault=true&intent=subscription"
+                                    data-sdk-integration-source="button-factory"
+                                ></script>
+                                <script>
+                                    paypal
+                                        .Buttons({
+                                            style: {
+                                                shape: "rect",
+                                                color: "gold",
+                                                layout: "vertical",
+                                                label: "subscribe",
+                                            },
+                                            createSubscription: function (
+                                                data,
+                                                actions,
+                                            ) {
+                                                return actions.subscription.create(
+                                                    {
+                                                        plan_id:
+                                                            "P-5JV683893N289793BNGMDYGA",
+                                                    },
+                                                );
+                                            },
+                                            onApprove: function (
+                                                data,
+                                                actions,
+                                            ) {
+                                                alert(data.subscriptionID);
+                                            },
+                                        })
+                                        .render(
+                                            "#paypal-button-container-P-5JV683893N289793BNGMDYGA",
+                                        );
+                                </script>
 
                                 <p
                                     class="text-sm text-white/50 text-center px-4 leading-relaxed"
                                 >
-                                    Clicking the button will open PayPal's
-                                    secure checkout page in a new window.
+                                    Secure PayPal checkout • Money-back
+                                    guarantee
                                 </p>
 
+                                <!-- Trust Badges -->
                                 <div
-                                    class="flex items-center justify-center gap-6 pt-4 grayscale opacity-50"
+                                    class="flex items-center justify-center gap-3 pt-2"
                                 >
                                     <svg
-                                        class="h-6 w-auto"
+                                        class="h-5 w-5 text-white/50"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
-                                        ><path
-                                            d="M2 4h20v16H2V4zm2 2v12h16V6H4zm1 1h2v2H5V7zm4 0h6v2H9V7zm8 0h2v2h-2V7zM5 11h2v2H5v-2zm4 0h6v2H9v-2zm8 0h2v2h-2v-2zM5 15h2v2H5v-2zm4 0h6v2H9v-2zm8 0h2v2h-2v-2z"
-                                        ></path></svg
                                     >
-                                    <svg
-                                        class="h-6 w-auto"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                        ><path
-                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"
-                                        ></path></svg
-                                    >
-                                    <svg
-                                        class="h-8 w-auto"
-                                        viewBox="0 0 32 32"
-                                        fill="none"
-                                        ><rect
-                                            width="32"
-                                            height="32"
-                                            rx="4"
-                                            fill="#1434CB"></rect><path
-                                            d="M11 11h2v10h-2V11zm4 0h6v2h-4v2h4v2h-4v2h4v2h-6V11z"
-                                            fill="#fff"></path></svg
+                                        <path
+                                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                                        ></path>
+                                    </svg>
+                                    <span class="text-xs text-white/60"
+                                        >SSL Encrypted</span
                                     >
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Trust Badge -->
+                        <!-- Benefits Grid -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div
+                                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                            >
+                                <div class="text-3xl mb-3">🚀</div>
+                                <h4
+                                    class="text-white font-semibold text-sm mb-2"
+                                >
+                                    Deploy in Minutes
+                                </h4>
+                                <p class="text-xs text-white/60">
+                                    Docker setup + full docs
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                            >
+                                <div class="text-3xl mb-3">📊</div>
+                                <h4
+                                    class="text-white font-semibold text-sm mb-2"
+                                >
+                                    Real-Time Analytics
+                                </h4>
+                                <p class="text-xs text-white/60">
+                                    Track every metric
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                            >
+                                <div class="text-3xl mb-3">🔒</div>
+                                <h4
+                                    class="text-white font-semibold text-sm mb-2"
+                                >
+                                    100% Control
+                                </h4>
+                                <p class="text-xs text-white/60">
+                                    Self-hosted data
+                                </p>
+                            </div>
+                            <div
+                                class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                            >
+                                <div class="text-3xl mb-3">♾️</div>
+                                <h4
+                                    class="text-white font-semibold text-sm mb-2"
+                                >
+                                    No Limits
+                                </h4>
+                                <p class="text-xs text-white/60">
+                                    Unlimited contacts
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Security Badge -->
                         <div
-                            class="flex items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-2xl animate-on-scroll delay-3"
+                            class="flex items-center gap-4 p-6 bg-white/5 border border-white/10 rounded-2xl"
                         >
-                            <div class="p-3 bg-brand-success/10 rounded-full">
+                            <div
+                                class="p-3 bg-brand-success/10 rounded-full flex-shrink-0"
+                            >
                                 <svg
                                     class="w-6 h-6 text-brand-success"
                                     fill="none"
@@ -310,11 +417,12 @@ const description =
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-white font-bold m-0">
-                                    Secure Transaction
+                                <h3 class="text-white font-bold m-0 text-sm">
+                                    Bank-Grade Security
                                 </h3>
-                                <p class="text-sm text-white/50 m-0">
-                                    Bank-grade 256-bit SSL encryption
+                                <p class="text-xs text-white/50 m-0">
+                                    256-bit SSL encryption • Secure PayPal
+                                    checkout
                                 </p>
                             </div>
                         </div>
@@ -324,50 +432,238 @@ const description =
         </div>
     </div>
 
-    <!-- Fair Pricing Philosophy Section -->
-    <section class="py-24 relative overflow-hidden border-t border-white/5">
+    <!-- Why Subscription Model Section -->
+    <section
+        class="py-24 relative overflow-hidden border-t border-white/5 bg-white/2"
+    >
         <div class="container-custom">
             <div class="max-w-4xl mx-auto">
                 <div
-                    class="bg-gradient-to-br from-brand-primary/10 to-brand-blue/10 rounded-[2.5rem] border border-white/10 p-10 md:p-16 text-center animate-on-scroll"
+                    class="bg-gradient-to-br from-brand-primary/10 to-brand-blue/10 rounded-[2.5rem] border border-white/10 p-10 md:p-16 text-center"
                 >
                     <h2
                         class="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight"
                     >
-                        "Why is it <span class="text-brand-primary"
-                            >so cheap?</span
-                        >"
+                        Why <span class="text-brand-primary">Subscribe?</span>
                     </h2>
                     <p
-                        class="text-2xl md:text-3xl text-gray-300 leading-relaxed font-medium italic mb-10"
+                        class="text-xl md:text-2xl text-gray-300 leading-relaxed font-medium italic mb-10"
                     >
-                        "Because we believe in a <span
-                            class="text-white border-b-2 border-brand-primary"
-                            >fair price</span
-                        > for high-quality core technology."
+                        Fresh data + continuous updates = better results, every
+                        single month.
                     </p>
                     <div
                         class="text-left space-y-6 text-gray-400 text-lg max-w-2xl mx-auto border-t border-white/10 pt-10"
                     >
-                        <p>
-                            We often get asked why we charge just <b>£10</b> when
-                            most competitors charge hundreds per month. The answer
-                            is simple: We aren't building a bloated SaaS platform
-                            with thousands of overheads.
-                        </p>
-                        <p>
-                            By providing the <strong class="text-white"
-                                >source code and Docker infrastructure</strong
-                            > directly to you, we eliminate our own hosting and management
-                            costs. We pass those massive savings directly to you.
-                        </p>
-                        <p>
-                            We think <b>£10</b> is a fair entry point for developers
-                            and businesses to own their core tech, allowing you to
-                            scale without being "taxed" based on the number of contacts
-                            you have.
-                        </p>
+                        <div class="flex gap-4">
+                            <span
+                                class="text-2xl text-brand-primary flex-shrink-0"
+                                >📈</span
+                            >
+                            <div>
+                                <p class="font-semibold text-white mb-1">
+                                    Monthly Fresh Leads
+                                </p>
+                                <p>
+                                    Your B2B leads list grows every month with
+                                    newly verified prospects. No data decay, no
+                                    stale contacts.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span
+                                class="text-2xl text-brand-primary flex-shrink-0"
+                                >🤖</span
+                            >
+                            <div>
+                                <p class="font-semibold text-white mb-1">
+                                    AI Agents Get Smarter
+                                </p>
+                                <p>
+                                    Our AI marketing agents are continuously
+                                    trained. Monthly improvements mean better
+                                    automation and higher conversion rates.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span
+                                class="text-2xl text-brand-primary flex-shrink-0"
+                                >🔄</span
+                            >
+                            <div>
+                                <p class="font-semibold text-white mb-1">
+                                    Always Updated Platform
+                                </p>
+                                <p>
+                                    New features, security patches, and
+                                    performance improvements delivered
+                                    automatically. Stay ahead of the curve.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span
+                                class="text-2xl text-brand-primary flex-shrink-0"
+                                >💰</span
+                            >
+                            <div>
+                                <p class="font-semibold text-white mb-1">
+                                    No Per-Contact Fees
+                                </p>
+                                <p>
+                                    Unlike other platforms, you pay one flat
+                                    rate regardless of list size. Scale from 100
+                                    to 100,000 contacts for the same £10/month.
+                                </p>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="container-custom">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">
+                        How We Compare
+                    </h2>
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                        Why smart teams choose Laravel Mail over traditional
+                        email platforms
+                    </p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm md:text-base">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th
+                                    class="text-left py-4 px-4 text-white font-bold"
+                                    >Feature</th
+                                >
+                                <th
+                                    class="text-center py-4 px-4 text-white font-bold"
+                                    >Laravel Mail</th
+                                >
+                                <th
+                                    class="text-center py-4 px-4 text-white/60 font-bold"
+                                    >Mailchimp</th
+                                >
+                                <th
+                                    class="text-center py-4 px-4 text-white/60 font-bold"
+                                    >HubSpot</th
+                                >
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white">Base Price</td>
+                                <td class="py-4 px-4 text-center"
+                                    ><span class="text-brand-primary font-bold"
+                                        >£10/month</span
+                                    ></td
+                                >
+                                <td class="py-4 px-4 text-center text-white/60"
+                                    >£20+/month</td
+                                >
+                                <td class="py-4 px-4 text-center text-white/60"
+                                    >£400+/month</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white"
+                                    >Per-Contact Fees</td
+                                >
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >None</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >Yes</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >Yes</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white"
+                                    >Self-Hosted Option</td
+                                >
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >✓ Full Control</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white">AI Agents</td>
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >✓ Included</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                                <td class="py-4 px-4 text-center">Limited</td>
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white"
+                                    >B2B Leads Included</td
+                                >
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >✓ Monthly</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white"
+                                    >Source Code Access</td
+                                >
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >✓ Full</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white"
+                                    >Data Privacy</td
+                                >
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >100% Control</td
+                                >
+                                <td class="py-4 px-4 text-center text-white/60"
+                                    >Their servers</td
+                                >
+                                <td class="py-4 px-4 text-center text-white/60"
+                                    >Their servers</td
+                                >
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -376,12 +672,12 @@ const description =
     <!-- User Reviews Section -->
     <section class="py-24 bg-[#0f172a]/40 relative overflow-hidden">
         <div class="container-custom relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+            <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-4xl font-bold text-white mb-4">
-                    What Our Users Say
+                    What Our Subscribers Say
                 </h2>
                 <p class="text-xl text-gray-400">
-                    Join 4,200+ developers and marketing teams worldwide.
+                    Join 4,200+ teams who've cut email costs by 90%.
                 </p>
             </div>
 
@@ -390,6 +686,15 @@ const description =
                     class="bg-brand-bg-card/40 backdrop-blur-xl border border-white/10 p-10 rounded-[2rem] hover:border-brand-primary/30 transition-all duration-500 group"
                 >
                     <div class="flex items-center mb-6">
+                        <div class="flex gap-1 mb-4">
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
                         <div
                             class="w-12 h-12 bg-brand-primary/20 rounded-xl flex items-center justify-center text-brand-primary text-xl font-bold mr-4 group-hover:scale-110 transition-transform"
                         >
@@ -405,10 +710,10 @@ const description =
                         </div>
                     </div>
                     <p class="text-gray-300 italic leading-relaxed">
-                        "I was skeptical because of the price, but the code
-                        quality is top-notch. It saved us months of development
-                        time on our internal notification system. It's actually
-                        the most fair pricing I've seen in years."
+                        "We switched from Mailchimp and immediately saved
+                        £400/month. The fresh B2B leads every month help us stay
+                        competitive, and the AI agents handle our follow-ups
+                        automatically. Best £10 I spend."
                     </p>
                 </div>
 
@@ -416,6 +721,15 @@ const description =
                     class="bg-brand-bg-card/40 backdrop-blur-xl border border-white/10 p-10 rounded-[2rem] hover:border-brand-primary/30 transition-all duration-500 group"
                 >
                     <div class="flex items-center mb-6">
+                        <div class="flex gap-1 mb-4">
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
                         <div
                             class="w-12 h-12 bg-brand-blue/20 rounded-xl flex items-center justify-center text-brand-blue text-xl font-bold mr-4 group-hover:scale-110 transition-transform"
                         >
@@ -431,31 +745,97 @@ const description =
                         </div>
                     </div>
                     <p class="text-gray-300 italic leading-relaxed">
-                        "Finally a platform that doesn't punish us for growing
-                        our list. We now host our own campaigns for 1/10th of
-                        what we paid Mailchimp. The £10 setup fee is a steal for
-                        this level of power."
+                        "The monthly fresh leads keep our campaigns effective
+                        year-round. No more buyer's remorse from outdated
+                        databases. The AI agents cut our manual outreach time by
+                        60%."
+                    </p>
+                </div>
+
+                <div
+                    class="bg-brand-bg-card/40 backdrop-blur-xl border border-white/10 p-10 rounded-[2rem] hover:border-brand-primary/30 transition-all duration-500 group"
+                >
+                    <div class="flex items-center mb-6">
+                        <div class="flex gap-1 mb-4">
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div
+                            class="w-12 h-12 bg-brand-primary/20 rounded-xl flex items-center justify-center text-brand-primary text-xl font-bold mr-4 group-hover:scale-110 transition-transform"
+                        >
+                            RC
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-lg m-0">
+                                Rachel C.
+                            </h4>
+                            <p class="text-gray-500 text-sm m-0">
+                                B2B Sales Director
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic leading-relaxed">
+                        "Hosting our own platform means full GDPR compliance and
+                        our data never leaves our control. The subscription
+                        model gives us peace of mind—no vendor lock-in, cancel
+                        anytime."
+                    </p>
+                </div>
+
+                <div
+                    class="bg-brand-bg-card/40 backdrop-blur-xl border border-white/10 p-10 rounded-[2rem] hover:border-brand-primary/30 transition-all duration-500 group"
+                >
+                    <div class="flex items-center mb-6">
+                        <div class="flex gap-1 mb-4">
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                            <span class="text-xl">⭐</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div
+                            class="w-12 h-12 bg-brand-blue/20 rounded-xl flex items-center justify-center text-brand-blue text-xl font-bold mr-4 group-hover:scale-110 transition-transform"
+                        >
+                            MT
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-lg m-0">
+                                Mike T.
+                            </h4>
+                            <p class="text-gray-500 text-sm m-0">
+                                E-commerce Manager
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic leading-relaxed">
+                        "Scale without fear. Our list grew from 5K to 50K
+                        contacts and our costs stayed the same. Traditional
+                        platforms would've killed our margins. This is the
+                        future."
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Our Leads Database Section -->
+    <!-- Key Features Section -->
     <section class="py-20 bg-white/5">
         <div class="container-custom">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Why Choose Our Leads Database?
+                        Everything You Need to Scale
                     </h2>
                     <p class="text-lg text-white/70 max-w-3xl mx-auto">
-                        Laravel Mail is the leading self-hosted email marketing
-                        platform designed for developers and businesses who
-                        value control, privacy, and scalability. Our verified
-                        leads database gives you a head start with customers who
-                        are already proven buyers, helping you scale your
-                        business faster.
+                        Built for teams that want control, data privacy, and
+                        unlimited growth without vendor lock-in.
                     </p>
                 </div>
 
@@ -465,14 +845,27 @@ const description =
                     >
                         <div class="text-4xl mb-4">🚀</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Self-Hosted Freedom
+                            Self-Hosted Flexibility
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Unlike cloud-based email marketing services, Laravel
-                            Mail gives you complete control over your data and
-                            infrastructure. Host it on your own servers, comply
-                            with data regulations, and never worry about vendor
-                            lock-in. Your email marketing platform, your rules.
+                            Deploy on your own servers, AWS, DigitalOcean, or
+                            any cloud provider. Complete control over your
+                            infrastructure and data means GDPR compliance and
+                            zero vendor lock-in.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
+                    >
+                        <div class="text-4xl mb-4">🤖</div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            AI Marketing Agents
+                        </h3>
+                        <p class="text-white/70 leading-relaxed">
+                            Local AI agents powered by Ollama. Automate your
+                            outreach, personalize at scale, and never worry
+                            about API costs. Deploy once, run forever.
                         </p>
                     </div>
 
@@ -481,29 +874,40 @@ const description =
                     >
                         <div class="text-4xl mb-4">💰</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            One-Time Payment
+                            Predictable Pricing
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            One-time payment for lifetime access. No recurring
-                            fees, no limits on how many leads you can reach out
-                            to. Own the data forever and use it to fuel your
-                            marketing growth without monthly "taxes".
+                            £10/month flat rate. Send to 100 contacts or 1
+                            million—same price. No surprises, no per-contact
+                            fees, no overage charges. Pure transparency.
                         </p>
                     </div>
 
                     <div
                         class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
                     >
-                        <div class="text-4xl mb-4">⚡</div>
+                        <div class="text-4xl mb-4">📊</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Enterprise-Grade Performance
+                            Advanced Analytics
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Built on Laravel, one of the most robust PHP
-                            frameworks, our platform handles high-volume email
-                            campaigns with ease. Send thousands of emails per
-                            hour with advanced queue management, automated
-                            retries, and detailed delivery tracking.
+                            Real-time tracking of opens, clicks, bounces,
+                            conversions, and subscriber engagement. Make
+                            data-driven decisions to optimize your campaigns.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8"
+                    >
+                        <div class="text-4xl mb-4">🎨</div>
+                        <h3 class="text-xl font-bold text-white mb-3">
+                            1,900+ Ready Templates
+                        </h3>
+                        <p class="text-white/70 leading-relaxed">
+                            Access 1,900+ professionally designed email
+                            templates in Blade and MJML. Drag-and-drop editor
+                            means no coding required to launch campaigns fast.
                         </p>
                     </div>
 
@@ -512,94 +916,93 @@ const description =
                     >
                         <div class="text-4xl mb-4">🔒</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Privacy & Compliance
+                            Enterprise Security
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Maintain GDPR compliance and data sovereignty by
-                            hosting your email marketing infrastructure
-                            in-house. Your subscriber data stays on your
-                            servers, giving you complete control over privacy
-                            and security policies.
+                            GDPR-compliant, HIPAA-ready infrastructure. Your
+                            data stays on your servers. SSL encryption, advanced
+                            authentication, and comprehensive audit logs
+                            included.
                         </p>
                     </div>
                 </div>
 
-                <!-- What You Get Section -->
+                <!-- What's Included Grid -->
                 <div
                     class="bg-gradient-to-br from-payflo-purple/10 to-payflo-blue/10 border border-white/10 rounded-3xl p-10 mb-16"
                 >
-                    <h3 class="text-2xl font-bold text-white mb-6 text-center">
-                        What's Included in Your Purchase
+                    <h3 class="text-2xl font-bold text-white mb-8 text-center">
+                        Your Monthly Subscription Includes
                     </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="flex items-start gap-4">
-                            <div class="text-2xl">✅</div>
+                            <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    The Complete Platform
+                                    Full Platform
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Full access to the source code for complete
-                                    control
+                                    Complete Laravel Mail source code with all
+                                    features unlocked
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="text-2xl">✅</div>
+                            <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Docker Setup Support
+                                    B2B Leads Database
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Step-by-step help setting up with Docker
+                                    Fresh, verified prospects added monthly.
+                                    Always growing.
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="text-2xl">✅</div>
+                            <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Lifetime Leads Database Access
+                                    AI Agents
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Email verified leads of customers who
-                                    purchased in the past
+                                    Local Ollama-powered agents for smart
+                                    automation
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="text-2xl">✅</div>
+                            <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Continuous Updates
+                                    Unlimited Sends
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    We regularly update our database with new
-                                    verified leads
+                                    No per-contact fees or limits on campaign
+                                    volume
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="text-2xl">✅</div>
+                            <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Advanced Analytics
+                                    Premium Support
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Track opens, clicks, bounces, and
-                                    conversions
+                                    Email support + community forum access
                                 </p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <div class="text-2xl">✅</div>
+                            <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    1,900+ Open Source Templates
+                                    Monthly Updates
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Access over 1,900+ templates in Blade and
-                                    MJML on our GitHub repository.
+                                    New features, security patches, and fresh
+                                    leads
                                 </p>
                             </div>
                         </div>
@@ -609,7 +1012,7 @@ const description =
                 <!-- How It Works -->
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-white mb-8 text-center">
-                        How Our Leads Database Works
+                        Get Started in 3 Steps
                     </h3>
                     <div class="space-y-6">
                         <div
@@ -617,20 +1020,20 @@ const description =
                         >
                             <div class="flex items-start gap-4">
                                 <div
-                                    class="bg-payflo-purple/20 text-payflo-purple font-bold rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0"
+                                    class="bg-brand-primary/20 text-brand-primary font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl flex-shrink-0"
                                 >
                                     1
                                 </div>
                                 <div>
                                     <h4 class="text-white font-semibold mb-2">
-                                        Access Your Leads Database
+                                        Subscribe & Get Instant Access
                                     </h4>
                                     <p class="text-white/70">
-                                        Complete your secure PayPal transaction
-                                        and receive instant access to our
-                                        verified leads database. You'll also get
-                                        immediate access to download the full
-                                        Laravel Mail platform source code.
+                                        Click "Subscribe Now" and complete your
+                                        secure PayPal payment. Instantly receive
+                                        your dashboard login, full source code
+                                        access, and immediate entry to our
+                                        verified B2B leads database.
                                     </p>
                                 </div>
                             </div>
@@ -640,7 +1043,7 @@ const description =
                         >
                             <div class="flex items-start gap-4">
                                 <div
-                                    class="bg-payflo-purple/20 text-payflo-purple font-bold rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0"
+                                    class="bg-brand-primary/20 text-brand-primary font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl flex-shrink-0"
                                 >
                                     2
                                 </div>
@@ -649,13 +1052,12 @@ const description =
                                         Deploy Your Platform
                                     </h4>
                                     <p class="text-white/70">
-                                        Install Laravel Mail on your own
-                                        infrastructure using Docker, or deploy
-                                        to cloud providers like AWS,
-                                        DigitalOcean, or any server with PHP and
-                                        MySQL support. Our comprehensive
-                                        documentation guides you through every
-                                        step.
+                                        Deploy Laravel Mail on your servers
+                                        using Docker, AWS, DigitalOcean, or any
+                                        PHP-compatible hosting. Follow our
+                                        step-by-step documentation (takes ~30
+                                        minutes). Full support available if
+                                        needed.
                                     </p>
                                 </div>
                             </div>
@@ -665,43 +1067,20 @@ const description =
                         >
                             <div class="flex items-start gap-4">
                                 <div
-                                    class="bg-payflo-purple/20 text-payflo-purple font-bold rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0"
+                                    class="bg-brand-primary/20 text-brand-primary font-bold rounded-full w-12 h-12 flex items-center justify-center text-xl flex-shrink-0"
                                 >
                                     3
                                 </div>
                                 <div>
                                     <h4 class="text-white font-semibold mb-2">
-                                        Start Targeting Buyers
+                                        Start Your Campaigns
                                     </h4>
                                     <p class="text-white/70">
-                                        Use your new leads to reach customers
-                                        who are already familiar with purchasing
-                                        online. Use our drag-and-drop editor to
-                                        create campaigns that convert and scale
-                                        your business with proven buyers.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
-                        >
-                            <div class="flex items-start gap-4">
-                                <div
-                                    class="bg-payflo-purple/20 text-payflo-purple font-bold rounded-full w-10 h-10 flex items-center justify-center flex-shrink-0"
-                                >
-                                    4
-                                </div>
-                                <div>
-                                    <h4 class="text-white font-semibold mb-2">
-                                        Always Free Updates
-                                    </h4>
-                                    <p class="text-white/70">
-                                        As we add more verified leads to our
-                                        database, you get access to them at no
-                                        extra cost. One purchase, infinite
-                                        value. Your marketing database grows as
-                                        we grow, without any extra fees.
+                                        Import B2B leads, configure AI agents,
+                                        and launch campaigns. Use your verified
+                                        prospect list to reach buyers who are
+                                        ready to engage. Scale without limits—no
+                                        per-contact fees ever.
                                     </p>
                                 </div>
                             </div>
@@ -722,7 +1101,7 @@ const description =
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
                                 <span
-                                    >How often is the leads database updated?</span
+                                    >Can I cancel my subscription anytime?</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -730,11 +1109,54 @@ const description =
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Our database is updated regularly as new
-                                verified buyers are added. As a lifetime access
-                                holder, you'll have access to all future updates
-                                for free. Your source of leads will continue to
-                                grow over time.
+                                Absolutely. Cancel your subscription anytime
+                                from your account dashboard. No contracts, no
+                                lock-in, no cancellation fees. You'll maintain
+                                access through the end of your billing cycle.
+                            </p>
+                        </details>
+
+                        <details
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
+                        >
+                            <summary
+                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
+                            >
+                                <span>What happens to my data if I cancel?</span
+                                >
+                                <span
+                                    class="text-2xl group-open:rotate-45 transition-transform"
+                                    >+</span
+                                >
+                            </summary>
+                            <p class="text-white/70 mt-4 leading-relaxed">
+                                Your data stays yours. You can export all
+                                contacts, campaigns, and analytics from your
+                                self-hosted instance. Since you control the
+                                infrastructure, your data always remains
+                                available to you.
+                            </p>
+                        </details>
+
+                        <details
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
+                        >
+                            <summary
+                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
+                            >
+                                <span>How many leads do I get monthly?</span>
+                                <span
+                                    class="text-2xl group-open:rotate-45 transition-transform"
+                                    >+</span
+                                >
+                            </summary>
+                            <p class="text-white/70 mt-4 leading-relaxed">
+                                Our B2B leads database grows continuously.
+                                Subscribers receive regular updates with
+                                verified prospects added monthly. The exact
+                                number varies based on your industry focus and
+                                target market. You'll have access to our full
+                                database dashboard showing available leads.
                             </p>
                         </details>
 
@@ -752,11 +1174,12 @@ const description =
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Yes, every single lead in our database is email
-                                verified. These are real customers who have made
-                                purchases in the past, ensuring high quality and
-                                deliverability for your campaigns. We prioritize
-                                data quality over quantity.
+                                Yes. Every single lead is email-verified through
+                                multiple validation techniques. We prioritize
+                                data quality over quantity. These are real
+                                prospects who've engaged with businesses online,
+                                ensuring higher deliverability and response
+                                rates.
                             </p>
                         </details>
 
@@ -766,104 +1189,7 @@ const description =
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span
-                                    >What information is included with each
-                                    lead?</span
-                                >
-                                <span
-                                    class="text-2xl group-open:rotate-45 transition-transform"
-                                    >+</span
-                                >
-                            </summary>
-                            <p class="text-white/70 mt-4 leading-relaxed">
-                                Each lead includes their verified email address
-                                and context about their past purchase behavior.
-                                This allows you to tailor your marketing message
-                                to their specific interests and proven buying
-                                habits.
-                            </p>
-                        </details>
-
-                        <details
-                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
-                        >
-                            <summary
-                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
-                            >
-                                <span>Is the source code really included?</span>
-                                <span
-                                    class="text-2xl group-open:rotate-45 transition-transform"
-                                    >+</span
-                                >
-                            </summary>
-                            <p class="text-white/70 mt-4 leading-relaxed">
-                                Absolutely! With your purchase, you receive
-                                complete access to the Laravel Mail platform
-                                source code. This includes all features,
-                                templates, and documentation needed to deploy
-                                and customize your self-hosted email marketing
-                                solution. You own the code and can modify it to
-                                fit your specific needs.
-                            </p>
-                        </details>
-
-                        <details
-                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
-                        >
-                            <summary
-                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
-                            >
-                                <span
-                                    >What email sending services does Laravel
-                                    Mail support?</span
-                                >
-                                <span
-                                    class="text-2xl group-open:rotate-45 transition-transform"
-                                    >+</span
-                                >
-                            </summary>
-                            <p class="text-white/70 mt-4 leading-relaxed">
-                                Laravel Mail integrates with all major email
-                                service providers including Amazon SES,
-                                SendGrid, Mailgun, Postmark, and SMTP. You can
-                                configure multiple providers and switch between
-                                them based on your needs, ensuring maximum
-                                deliverability and redundancy.
-                            </p>
-                        </details>
-
-                        <details
-                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
-                        >
-                            <summary
-                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
-                            >
-                                <span>Can I get a refund?</span>
-                                <span
-                                    class="text-2xl group-open:rotate-45 transition-transform"
-                                    >+</span
-                                >
-                            </summary>
-                            <p class="text-white/70 mt-4 leading-relaxed">
-                                Due to the nature of the product (source code
-                                access and digital data), we generally do not
-                                offer refunds once the code has been accessed.
-                                However, we're committed to your success and
-                                will provide full support to ensure you get the
-                                platform running perfectly.
-                            </p>
-                        </details>
-
-                        <details
-                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
-                        >
-                            <summary
-                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
-                            >
-                                <span
-                                    >Do I need technical knowledge to use
-                                    Laravel Mail?</span
-                                >
+                                <span>Do I need technical knowledge?</span>
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
                                     >+</span
@@ -871,12 +1197,11 @@ const description =
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
                                 While Laravel Mail is built for developers, our
-                                comprehensive documentation and Docker-based
-                                deployment make it accessible to anyone with
-                                basic server management skills. We provide
-                                step-by-step guides, video tutorials, and
-                                community support to help you get started
-                                quickly.
+                                Docker setup and comprehensive documentation
+                                make it accessible to anyone with basic server
+                                management experience. We provide step-by-step
+                                guides, video tutorials, and community support
+                                to help you succeed.
                             </p>
                         </details>
 
@@ -887,7 +1212,8 @@ const description =
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
                                 <span
-                                    >What is included in the Introductory Offer?</span
+                                    >What email service providers does it
+                                    support?</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -895,12 +1221,53 @@ const description =
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                This is a limited-time introductory offer for
-                                new customers. When you purchase lifetime access
-                                for £10, we automatically set up your account
-                                with full platform access and immediate access
-                                to our verified leads database to start your
-                                email marketing journey.
+                                Laravel Mail integrates with Amazon SES,
+                                SendGrid, Mailgun, Postmark, and direct SMTP.
+                                Configure multiple providers and switch between
+                                them seamlessly for maximum deliverability and
+                                redundancy.
+                            </p>
+                        </details>
+
+                        <details
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
+                        >
+                            <summary
+                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
+                            >
+                                <span>Is access immediate after purchase?</span>
+                                <span
+                                    class="text-2xl group-open:rotate-45 transition-transform"
+                                    >+</span
+                                >
+                            </summary>
+                            <p class="text-white/70 mt-4 leading-relaxed">
+                                Yes. After purchase, you'll receive instant
+                                access to your dashboard and can begin using the
+                                platform immediately. Download the source code,
+                                access the B2B leads database, and deploy your
+                                instance right away.
+                            </p>
+                        </details>
+
+                        <details
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 group"
+                        >
+                            <summary
+                                class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
+                            >
+                                <span>What if I need custom development?</span>
+                                <span
+                                    class="text-2xl group-open:rotate-45 transition-transform"
+                                    >+</span
+                                >
+                            </summary>
+                            <p class="text-white/70 mt-4 leading-relaxed">
+                                Since you get the full source code, you can
+                                modify it to fit your exact needs. We also offer
+                                optional paid development services if you prefer
+                                us to handle customizations. Contact our team
+                                for a custom quote.
                             </p>
                         </details>
                     </div>
@@ -909,7 +1276,7 @@ const description =
                 <!-- Use Cases -->
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-white mb-8 text-center">
-                        Perfect For Every Business
+                        Perfect For Every Team
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div
@@ -918,10 +1285,10 @@ const description =
                             <div class="text-3xl mb-4">🏢</div>
                             <h4 class="text-white font-bold mb-3">Agencies</h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Manage multiple client campaigns from a single
-                                platform. White-label the solution and offer
-                                email marketing as a value-added service without
-                                recurring SaaS fees eating into your margins.
+                                White-label the platform for clients. Manage
+                                multiple campaigns without bleeding margins on
+                                recurring SaaS fees. Your clients get a
+                                dedicated instance.
                             </p>
                         </div>
                         <div
@@ -932,11 +1299,10 @@ const description =
                                 E-commerce
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Send abandoned cart emails, product
-                                recommendations, and promotional campaigns.
-                                Integrate seamlessly with your existing
-                                e-commerce platform and maintain complete
-                                control over customer data.
+                                Abandoned cart campaigns, product
+                                recommendations, and retargeting. AI agents
+                                personalize each email. Scale without worrying
+                                about per-contact costs.
                             </p>
                         </div>
                         <div
@@ -947,32 +1313,71 @@ const description =
                                 SaaS Companies
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Automate onboarding sequences, feature
-                                announcements, and customer retention campaigns.
-                                Self-host to ensure compliance with enterprise
-                                security requirements and data regulations.
+                                Onboarding sequences, feature announcements, and
+                                retention campaigns. Self-hosted ensures GDPR
+                                compliance and enterprise-grade security.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                        >
+                            <div class="text-3xl mb-4">📧</div>
+                            <h4 class="text-white font-bold mb-3">
+                                B2B Sales Teams
+                            </h4>
+                            <p class="text-white/70 text-sm leading-relaxed">
+                                Qualified leads + AI-powered follow-ups = higher
+                                conversion rates. Built-in lead scoring and
+                                engagement tracking keeps your pipeline full.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                        >
+                            <div class="text-3xl mb-4">🎓</div>
+                            <h4 class="text-white font-bold mb-3">
+                                Educational Institutions
+                            </h4>
+                            <p class="text-white/70 text-sm leading-relaxed">
+                                Student recruitment, alumni engagement, and
+                                event notifications. GDPR-compliant data
+                                handling keeps you audit-ready.
+                            </p>
+                        </div>
+                        <div
+                            class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
+                        >
+                            <div class="text-3xl mb-4">🏥</div>
+                            <h4 class="text-white font-bold mb-3">
+                                Healthcare & Non-Profits
+                            </h4>
+                            <p class="text-white/70 text-sm leading-relaxed">
+                                HIPAA-ready infrastructure. Patient
+                                communications and donor engagement without
+                                worrying about vendor compliance.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Final CTA -->
+                <!-- Final CTA Section -->
                 <div
-                    class="bg-gradient-to-r from-payflo-purple to-payflo-blue rounded-3xl p-10 text-center"
+                    class="bg-gradient-to-r from-payflo-purple to-payflo-blue rounded-3xl p-12 text-center"
                 >
-                    <h3 class="text-3xl font-bold text-white mb-4">
-                        Ready to Transform Your Email Marketing?
-                    </h3>
-                    <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-                        Join thousands of businesses who have taken control of
-                        their email marketing with Laravel Mail. Get started
-                        today with lifetime leads access for just £10.
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Ready to Own Your Email Marketing?
+                    </h2>
+                    <p
+                        class="text-white/90 text-lg mb-8 max-w-2xl mx-auto leading-relaxed"
+                    >
+                        Get instant access to the complete platform, AI agents,
+                        and verified B2B leads. Just £10/month. Cancel anytime.
                     </p>
                     <a
                         href="https://www.paypal.com/ncp/links/R2MN2C7WVVNW8"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-center gap-3 bg-white text-payflo-purple font-bold py-4 px-8 rounded-xl transition-all hover:shadow-2xl hover:scale-105 active:scale-95 no-underline"
+                        class="inline-flex items-center gap-3 bg-white text-payflo-purple font-bold py-4 px-10 rounded-xl transition-all hover:shadow-2xl hover:scale-105 active:scale-95 no-underline text-lg"
                     >
                         <svg
                             class="h-6 w-auto"
@@ -983,10 +1388,10 @@ const description =
                                 d="M20.067 8.178c-.622-2.316-2.583-3.611-5.322-3.611H7.88c-.538 0-.986.388-1.07.915L4.037 19.34c-.056.347.21.66.562.66h3.403c.484 0 .887-.35.962-.824l.034-.216.711-4.524.04-.216a.972.972 0 0 1 .962-.823h1.365c3.153 0 5.613-1.284 6.326-4.8c.32-1.579.167-2.784-.335-3.421zM11.77 12.355H9.667l.344-2.186h2.103c.962 0 1.638.169 2.01.503.243.218.375.568.303 1.018-.119.75-.688 1.411-1.638 1.411-1.019 0-1.019-.746-1.019-.746z"
                             ></path>
                         </svg>
-                        Purchase Now - £10.00
+                        Subscribe Now - £10/month
                     </a>
-                    <p class="text-white/70 text-sm mt-4">
-                        Instant access • Secure payment
+                    <p class="text-white/70 text-sm mt-6">
+                        ✓ Instant access • ✓ Cancel anytime • ✓ Secure payment
                     </p>
                 </div>
             </div>
@@ -995,106 +1400,92 @@ const description =
 </Layout>
 
 <script>
-    // Google Analytics 4 Ecommerce Tracking for Buy Page
+    // Google Analytics 4 Ecommerce Tracking
     document.addEventListener("astro:page-load", () => {
-        // Track page view with ecommerce data
         if (typeof gtag !== "undefined") {
-            // View item event
             gtag("event", "view_item", {
                 currency: "GBP",
                 value: 10.0,
                 items: [
                     {
-                        item_id: "leads_database_lifetime",
-                        item_name: "Lifetime Leads Database Access",
-                        item_category: "Leads Database",
-                        item_variant: "Introductory Offer",
+                        item_id: "b2b_leads_subscription",
+                        item_name: "B2B Leads + AI Agents Monthly Subscription",
+                        item_category: "Subscription",
+                        item_variant: "Monthly £10",
                         price: 10.0,
                         quantity: 1,
                     },
                 ],
             });
 
-            // Begin checkout event when page loads
             gtag("event", "begin_checkout", {
                 currency: "GBP",
                 value: 10.0,
                 items: [
                     {
-                        item_id: "leads_database_lifetime",
-                        item_name: "Lifetime Leads Database Access",
-                        item_category: "Leads Database",
-                        item_variant: "Introductory Offer",
+                        item_id: "b2b_leads_subscription",
+                        item_name: "B2B Leads + AI Agents Monthly Subscription",
+                        item_category: "Subscription",
+                        item_variant: "Monthly £10",
                         price: 10.0,
                         quantity: 1,
                     },
                 ],
             });
-
-            // GA4 Ecommerce: begin_checkout event sent
         }
 
-        // Track PayPal button clicks
         const paypalButtons = document.querySelectorAll(
             'a[href*="paypal.com"]',
         );
         paypalButtons.forEach((button) => {
-            button.addEventListener("click", function (e) {
+            button.addEventListener("click", function () {
                 if (typeof gtag !== "undefined") {
-                    // Add to cart event
                     gtag("event", "add_to_cart", {
                         currency: "GBP",
                         value: 10.0,
                         items: [
                             {
-                                item_id: "leads_database_lifetime",
-                                item_name: "Lifetime Leads Database Access",
-                                item_category: "Leads Database",
-                                item_variant: "Introductory Offer",
+                                item_id: "b2b_leads_subscription",
+                                item_name:
+                                    "B2B Leads + AI Agents Monthly Subscription",
+                                item_category: "Subscription",
+                                item_variant: "Monthly £10",
                                 price: 10.0,
                                 quantity: 1,
                             },
                         ],
                     });
 
-                    // Track click to PayPal
                     gtag("event", "click", {
                         event_category: "ecommerce",
-                        event_label: "PayPal Checkout Button",
+                        event_label: "PayPal Subscription Button",
                         value: 10.0,
                     });
-
-                    // GA4 Ecommerce: add_to_cart and click events sent
                 }
             });
         });
     });
 
-    // Optional: Track purchase completion (call this from a success page or webhook)
-    function trackPurchase(transactionId) {
+    function trackPurchase(subscriptionId) {
         if (typeof gtag !== "undefined") {
             gtag("event", "purchase", {
-                transaction_id: transactionId,
+                transaction_id: subscriptionId,
                 value: 10.0,
                 currency: "GBP",
-                tax: 0,
-                shipping: 0,
                 items: [
                     {
-                        item_id: "leads_database_lifetime",
-                        item_name: "Lifetime Leads Database Access",
-                        item_category: "Leads Database",
-                        item_variant: "Introductory Offer",
+                        item_id: "b2b_leads_subscription",
+                        item_name: "B2B Leads + AI Agents Monthly Subscription",
+                        item_category: "Subscription",
+                        item_variant: "Monthly £10",
                         price: 10.0,
                         quantity: 1,
                     },
                 ],
             });
-            // GA4 Ecommerce: purchase event sent
         }
     }
 
-    // Make trackPurchase available globally for webhook/success page callbacks
     window.trackPurchase = trackPurchase;
 </script>
 
@@ -1119,5 +1510,18 @@ const description =
 
     details summary::-webkit-details-marker {
         display: none;
+    }
+
+    table {
+        @apply w-full;
+    }
+
+    th,
+    td {
+        @apply text-left py-4 px-4;
+    }
+
+    th {
+        @apply border-b border-white/10;
     }
 </style>
