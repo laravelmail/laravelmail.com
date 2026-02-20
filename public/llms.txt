@@ -24,7 +24,7 @@
 [Try](https://laravelmail.com/try)
 
 ## Get Started
-[Get Started](https://app.laravelmail.com/docs/demo)
+[Get Started](https://docs.laravelmail.com/demo)
 
 ## Laravel Mail
 [Laravel Mail](https://laravelmail.com)
@@ -36,7 +36,7 @@
 [get in touch](https://laravelmail.com/contact)
 
 ## Read Documentation
-[Read Documentation](https://app.laravelmail.com/docs)
+[Read Documentation](https://docs.laravelmail.com)
 
 ## Privacy Policy
 [Privacy Policy](https://laravelmail.com/privacy-policy)
