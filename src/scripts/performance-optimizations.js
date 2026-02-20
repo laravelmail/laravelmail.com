@@ -1,7 +1,29 @@
 // Performance optimizations for Laravel Mail
 
+// Set performance budget
+const PERFORMANCE_BUDGET = {
+  js: 100, // kb
+  css: 100, // kb
+  images: 500 // kb
+};
+
+// Track resource loading
+const loadedResources = {
+  js: 0,
+  css: 0,
+  images: 0
+};
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Preload critical resources
+  // Performance monitoring and budget tracking
+  function trackResourceLoad(resourceType, size) {
+    loadedResources[resourceType] += size;
+    
+    // Log warning if budget is exceeded
+    if (loadedResources[resourceType] > PERFORMANCE_BUDGET[resourceType]) {
+      console.warn(`Performance budget exceeded for ${resourceType}: ${loadedResources[resourceType]}kb (limit: ${PERFORMANCE_BUDGET[resourceType]}kb)`);
+    }
+  }
   if ('requestIdleCallback' in window) {
     requestIdleCallback(function() {
       // Preload hero image
