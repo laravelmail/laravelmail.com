@@ -10,24 +10,28 @@ const contactMethods = [
         description:
             "Discuss lead generation solutions and pricing for your business growth.",
         link: "mailto:info@laravelmail.com",
+        icon: "mail",
     },
     {
         title: "Support",
         description:
             "Get help with your lead generation campaigns and technical questions.",
         link: "mailto:info@laravelmail.com",
+        icon: "support",
     },
     {
         title: "Partnerships",
         description:
             "Explore referral programs and strategic partnership opportunities.",
         link: "mailto:info@laravelmail.com",
+        icon: "handshake",
     },
     {
         title: "WhatsApp",
         description:
             "Join our community group for instant updates and support.",
         link: "https://chat.whatsapp.com/FyyyBmuFBToFNUtD2UlWt2",
+        icon: "whatsapp",
     },
 ];
 ---
@@ -48,175 +52,183 @@ const contactMethods = [
         </div>
     </div>
 
-    <section class="pt-20 pb-16 md:pt-28 md:pb-24 bg-brand-bg-darker/40">
+    <section class="pt-20 pb-16 md:pt-28 md:pb-20">
         <div class="container-custom">
-            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
+            <!-- Hero Section -->
+            <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
                 <h1
                     class="text-4xl md:text-5xl font-bold leading-tight text-white"
                 >
-                    Ready to <span class="gradient-text">Email</span> Your Growth?
+                    Get in <span class="gradient-text">Touch</span>
                 </h1>
                 <p class="mt-6 text-xl text-gray-400">
-                    Let's discuss how we can generate high-quality leads and
-                    accelerate your business growth.
-                    <br />
-                    <span class="text-brand-primary font-bold"
-                        >info@laravelmail.com</span
-                    >
-                    <br />
-                    <a
-                        href="https://chat.whatsapp.com/FyyyBmuFBToFNUtD2UlWt2"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-2 mt-4 text-[#25D366] hover:text-[#128C7E] transition-colors font-bold"
-                    >
-                        <svg
-                            class="w-6 h-6"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143l.353.21c1.511.891 3.242 1.36 5.023 1.361l.001-.001c5.62 0 10.194-4.574 10.196-10.196.001-2.723-1.06-5.284-2.983-7.208-1.923-1.922-4.484-2.982-7.208-2.982-5.621 0-10.196 4.575-10.199 10.196-.001 1.797.469 3.548 1.358 5.063l.228.388-.996 3.63 3.73-.979zm11.233-7.07c-.08-.133-.31-.213-.64-.378-.34-.165-2.01-.99-2.321-1.1s-.538-.165-.767.165-.89 1.102-1.089 1.334-.413.247-.743.083c-.33-.165-1.391-.513-2.641-1.628-1-.892-1.673-1.996-1.871-2.325-.198-.329-.022-.507.143-.671.149-.147.33-.378.495-.561.165-.183.22-.313.33-.52s.053-.393-.027-.561-.767-1.848-1.053-2.541c-.27-.648-.545-.558-.76-.57-.194-.01-.418-.011-.643-.011s-.594.082-.904.413c-.31.329-1.18 1.154-1.18 2.805s1.2 3.243 1.365 3.46c.165.215 2.36 3.6 5.717 5.047 3.357 1.447 3.357.965 3.965.904s1.96-.801 2.238-1.578c.277-.777.277-1.443.195-1.578z"
-                            ></path>
-                        </svg>
-                        Join our WhatsApp Community
-                    </a>
+                    Have questions about our B2B lead generation platform? We're here to help you find the perfect solution for your business.
                 </p>
             </div>
 
+            <!-- Contact Methods Grid -->
             <div
-                class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
             >
                 {
                     contactMethods.map((method, index) => (
-                        <div
-                            class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-xl border border-white/10 text-center animate-on-scroll hover:border-brand-primary/50 transition-all duration-500 hover:-translate-y-2 group flex flex-col"
-                            style={`animation-delay: ${index * 0.15}s`}
+                        <a
+                            href={method.link}
+                            target={method.title === "WhatsApp" ? "_blank" : undefined}
+                            rel={method.title === "WhatsApp" ? "noopener noreferrer" : undefined}
+                            class="group bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center hover:border-brand-primary/50 transition-all duration-300 hover:-translate-y-1 block"
+                            style={`animation-delay: ${index * 0.1}s`}
                         >
-                            <div class="mx-auto flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-primary/20 text-brand-primary mb-6 group-hover:scale-110 transition-transform duration-500">
-                                {method.title === "WhatsApp" ? (
-                                    <svg
-                                        class="w-10 h-10"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
+                            <div class="mx-auto flex items-center justify-center w-14 h-14 rounded-xl bg-brand-primary/20 text-brand-primary mb-4 group-hover:scale-110 transition-transform duration-300">
+                                {method.icon === "whatsapp" ? (
+                                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.143l.353.21c1.511.891 3.242 1.36 5.023 1.361l.001-.001c5.62 0 10.194-4.574 10.196-10.196.001-2.723-1.06-5.284-2.983-7.208-1.923-1.922-4.484-2.982-7.208-2.982-5.621 0-10.196 4.575-10.199 10.196-.001 1.797.469 3.548 1.358 5.063l.228.388-.996 3.63 3.73-.979zm11.233-7.07c-.08-.133-.31-.213-.64-.378-.34-.165-2.01-.99-2.321-1.1s-.538-.165-.767.165-.89 1.102-1.089 1.334-.413.247-.743.083c-.33-.165-1.391-.513-2.641-1.628-1-.892-1.673-1.996-1.871-2.325-.198-.329-.022-.507.143-.671.149-.147.33-.378.495-.561.165-.183.22-.313.33-.52s.053-.393-.027-.561-.767-1.848-1.053-2.541c-.27-.648-.545-.558-.76-.57-.194-.01-.418-.011-.643-.011s-.594.082-.904.413c-.31.329-1.18 1.154-1.18 2.805s1.2 3.243 1.365 3.46c.165.215 2.36 3.6 5.717 5.047 3.357 1.447 3.357.965 3.965.904s1.96-.801 2.238-1.578c.277-.777.277-1.443.195-1.578z" />
                                     </svg>
+                                ) : method.icon === "mail" ? (
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                ) : method.icon === "support" ? (
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
                                 ) : (
-                                    <Image
-                                        src={Logo}
-                                        alt="Laravel Mail Logo"
-                                        width={140}
-                                        height={45}
-                                    />
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
                                 )}
                             </div>
-                            <h3
-                                title="email marketing company london"
-                                class="text-xl font-bold text-white group-hover:text-brand-primary transition-colors"
-                            >
+                            <h3 class="text-lg font-bold text-white group-hover:text-brand-primary transition-colors">
                                 {method.title}
                             </h3>
-                            <p class="mt-3 text-gray-400 flex-grow">
+                            <p class="mt-2 text-sm text-gray-400">
                                 {method.description}
                             </p>
-                            <a
-                                href={method.link}
-                                class="mt-6 block text-brand-primary font-bold hover:underline transition-colors"
-                                target={
-                                    method.title === "WhatsApp"
-                                        ? "_blank"
-                                        : undefined
-                                }
-                                rel={
-                                    method.title === "WhatsApp"
-                                        ? "noopener noreferrer"
-                                        : undefined
-                                }
-                            >
-                                {method.title === "WhatsApp"
-                                    ? "Join Group"
-                                    : "Contact Now"}
-                            </a>
-                        </div>
+                            <span class="mt-4 inline-flex items-center text-sm font-semibold text-brand-primary">
+                                {method.title === "WhatsApp" ? "Join Group" : "Contact Now"}
+                                <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </span>
+                        </a>
                     ))
                 }
             </div>
-        </div>
-    </section>
 
-    <section class="py-20 bg-brand-bg-darker/60">
-        <div class="container-custom">
-            <div class="text-center max-w-3xl mx-auto animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold text-white">
-                    Our Office
-                </h2>
-                <div
-                    class="mt-4 w-24 h-1.5 bg-gradient-to-r from-brand-primary to-brand-blue mx-auto rounded-full"
-                >
-                </div>
-                <p class="mt-6 text-xl text-gray-400">
-                    Laravel Mail headquarters - where lead generation strategies
-                    come to life.
-                </p>
-                <address
-                    class="mt-8 not-italic text-gray-300 bg-brand-bg-card/40 backdrop-blur-sm p-6 rounded-2xl border border-white/5 inline-block"
-                >
-                    <span class="block font-bold text-white mb-2"
-                        >Laravel Company</span
-                    >
-                    7 High Street<br />
-                    Basildon, Essex<br />
-                    SS14 1AB<br />
-                    United Kingdom<br />
-                    <span class="block mt-4 text-brand-primary font-bold">
-                        📞 Phone: +44 744 821 8899
-                    </span>
-                </address>
-                <div
-                    class="mt-8 flex flex-col items-center gap-4 text-gray-400"
-                >
-                    <div
-                        class="flex items-center px-4 py-2 bg-brand-bg-card/30 rounded-full border border-white/5"
-                    >
-                        <div
-                            class="h-2 w-2 mr-3 bg-brand-primary rounded-full animate-pulse"
-                        >
+            <!-- Contact Form & Office Info -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- Office Info -->
+                <div class="space-y-6">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-brand-primary/20 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Our Office</h3>
+                                <p class="text-gray-400 text-sm">Laravel Mail headquarters</p>
+                            </div>
                         </div>
-                        <span>Monday - Friday: 9:00 AM - 6:00 PM GMT</span>
+                        
+                        <address class="not-italic text-gray-300">
+                            <p class="font-semibold text-white mb-1">Laravel Company</p>
+                            <p>7 High Street</p>
+                            <p>Basildon, Essex</p>
+                            <p>SS14 1AB</p>
+                            <p>United Kingdom</p>
+                        </address>
+                        
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <a href="tel:+44748218299" class="flex items-center gap-3 text-gray-300 hover:text-brand-primary transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                <span class="font-medium">+44 744 821 8899</span>
+                            </a>
+                            <a href="mailto:info@laravelmail.com" class="flex items-center gap-3 mt-3 text-gray-300 hover:text-brand-primary transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span class="font-medium">info@laravelmail.com</span>
+                            </a>
+                        </div>
                     </div>
-                    <div
-                        class="flex items-center px-4 py-2 bg-brand-bg-card/30 rounded-full border border-white/5 opacity-60"
-                    >
-                        <div class="h-2 w-2 mr-3 bg-gray-500 rounded-full">
+
+                    <!-- Business Hours -->
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-6">Business Hours</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-400">Monday - Friday</span>
+                                <span class="text-white font-medium">9:00 AM - 6:00 PM GMT</span>
+                            </div>
+                            <div class="flex items-center justify-between opacity-50">
+                                <span class="text-gray-400">Saturday - Sunday</span>
+                                <span class="text-gray-400 font-medium">Closed</span>
+                            </div>
                         </div>
-                        <span>Saturday - Sunday: Closed</span>
+                        
+                        <div class="mt-6 pt-6 border-t border-white/10">
+                            <div class="flex items-center gap-2">
+                                <span class="h-2.5 w-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                                <span class="text-gray-300 text-sm">We typically respond within 24 hours</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="/buy" class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium">
+                                Pricing Plans
+                            </a>
+                            <a href="/demo" class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium">
+                                Request Demo
+                            </a>
+                            <a href="https://docs.laravelmail.com" class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium">
+                                Documentation
+                            </a>
+                            <a href="/affiliate" class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium">
+                                Affiliate Program
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 relative overflow-hidden">
+    <!-- CTA Section -->
+    <section class="py-16 relative overflow-hidden">
         <div
             class="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-blue opacity-10"
         >
         </div>
         <div class="container-custom relative">
-            <div class="text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">
-                    Ready to Generate More Leads?
+            <div class="text-center max-w-2xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">
+                    Ready to Grow Your Business?
                 </h2>
-                <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                    Join 500+ businesses that trust <b>Laravel Mail</b> to drive their
-                    growth through enterprise-grade automation.
+                <p class="text-lg text-gray-400 mb-8">
+                    Join 500+ businesses that trust Laravel Mail to drive their growth through enterprise-grade email marketing and automation.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a
-                        href="mailto:info@laravelmail.com"
+                        href="/buy"
                         class="btn bg-white text-brand-primary font-bold py-4 px-10 rounded-xl hover:scale-105 transition-all shadow-lg shadow-white/10"
                     >
-                        Start Your Free Consultation
+                        Get Started - £10.00
+                    </a>
+                    <a
+                        href="/demo"
+                        class="btn bg-transparent border-2 border-white/20 text-white font-bold py-4 px-10 rounded-xl hover:bg-white/10 transition-all"
+                    >
+                        Request Demo
                     </a>
                 </div>
             </div>
