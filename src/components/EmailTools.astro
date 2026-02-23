@@ -1,0 +1,73 @@
+---
+const tools = [
+  {
+    title: "Email Templates",
+    description: "Professionally designed email templates for marketing campaigns, product launches, and customer engagement. Fully customizable and mobile-responsive.",
+    icon: "📧",
+    keyword: "email templates",
+  },
+  {
+    title: "Newsletter Templates",
+    description: "Beautiful newsletter templates that engage your audience. Perfect for weekly updates, announcements, and content marketing campaigns.",
+    icon: "📰",
+    keyword: "newsletter templates",
+  },
+  {
+    title: "Email Checker",
+    description: "Built-in email validator ensures your lists are clean and verified. Improve deliverability and reduce bounce rates with our powerful email checker tool.",
+    icon: "✅",
+    keyword: "email checker",
+  },
+  {
+    title: "Email Signature Generator",
+    description: "Create professional email signatures that represent your brand. Customizable templates for teams and individuals.",
+    icon: "✍️",
+    keyword: "email signature",
+  },
+  {
+    title: "Marketing Automation",
+    description: "Automate your email campaigns with triggers, sequences, and personalized workflows. Save time while increasing engagement and conversions.",
+    icon: "⚡",
+    keyword: "marketing automation",
+  },
+  {
+    title: "Email Marketing Services",
+    description: "Complete email marketing services including strategy, design, and execution. Everything you need for successful B2B campaigns.",
+    icon: "🎯",
+    keyword: "email marketing services",
+  },
+];
+---
+
+<section class="py-16 md:py-24 bg-brand-bg" itemscope itemtype="https://schema.org/ItemList">
+    <div class="container-custom">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                Complete <span class="gradient-text">Email Marketing</span> Toolkit
+            </h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                Everything you need for successful email marketing campaigns. From <strong>email templates</strong> to <strong>marketing automation</strong>, we've got you covered.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {tools.map((tool, index) => (
+                <div 
+                    class="group p-6 rounded-xl bg-brand-dark/50 border border-brand-primary/20 hover:border-brand-primary/50 transition-all duration-300 hover:-translate-y-1"
+                    itemprop="itemListElement" 
+                    itemtype="https://schema.org/ListItem"
+                >
+                    <meta itemprop="position" content={String(index + 1)} />
+                    <div class="text-4xl mb-4">{tool.icon}</div>
+                    <h3 class="text-xl font-bold text-white mb-2" itemprop="name">
+                        {tool.title}
+                    </h3>
+                    <p class="text-gray-300" itemprop="description">
+                        {tool.description}
+                    </p>
+                    <meta itemprop="keywords" content={tool.keyword} />
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
