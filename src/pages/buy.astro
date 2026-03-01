@@ -1428,70 +1428,160 @@ const keywords =
 </Layout>
 
 <script>
-    // Google Analytics 4 Ecommerce Tracking
-    document.addEventListener("astro:page-load", () => {
-        if (typeof gtag !== "undefined") {
-            gtag("event", "view_item", {
-                currency: "GBP",
-                value: 10.0,
-                items: [
-                    {
-                        item_id: "b2b_leads_subscription",
-                        item_name: "B2B Leads + AI Agents Monthly Subscription",
-                        item_category: "Subscription",
-                        item_variant: "Monthly £10",
-                        price: 10.0,
-                        quantity: 1,
-                    },
-                ],
-            });
-
-            gtag("event", "begin_checkout", {
-                currency: "GBP",
-                value: 10.0,
-                items: [
-                    {
-                        item_id: "b2b_leads_subscription",
-                        item_name: "B2B Leads + AI Agents Monthly Subscription",
-                        item_category: "Subscription",
-                        item_variant: "Monthly £10",
-                        price: 10.0,
-                        quantity: 1,
-                    },
-                ],
-            });
+    declare global {
+        function gtag(...args: any[]): void;
+        interface Window {
+            paypal: any;
+            trackPurchase: (subscriptionId: string) => void;
         }
+    }
 
+    // Google Analytics 4 Ecommerce & Interaction Tracking
+    document.addEventListener("astro:page-load", () => {
+        if (typeof gtag === "undefined") return;
+
+        // --- Core Ecommerce Events ---
+        gtag("event", "view_item", {
+            currency: "GBP",
+            value: 10.0,
+            items: [
+                {
+                    item_id: "b2b_leads_subscription",
+                    item_name: "B2B Leads + AI Agents Monthly Subscription",
+                    item_category: "Subscription",
+                    item_variant: "Monthly £10",
+                    price: 10.0,
+                    quantity: 1,
+                },
+            ],
+        });
+
+        gtag("event", "begin_checkout", {
+            currency: "GBP",
+            value: 10.0,
+            items: [
+                {
+                    item_id: "b2b_leads_subscription",
+                    item_name: "B2B Leads + AI Agents Monthly Subscription",
+                    item_category: "Subscription",
+                    item_variant: "Monthly £10",
+                    price: 10.0,
+                    quantity: 1,
+                },
+            ],
+        });
+
+        // --- PayPal Button Tracking ---
         const paypalButtons = document.querySelectorAll(
             'a[href*="paypal.com"]',
         );
         paypalButtons.forEach((button) => {
             button.addEventListener("click", function () {
-                if (typeof gtag !== "undefined") {
-                    gtag("event", "add_to_cart", {
-                        currency: "GBP",
-                        value: 10.0,
-                        items: [
-                            {
-                                item_id: "b2b_leads_subscription",
-                                item_name:
-                                    "B2B Leads + AI Agents Monthly Subscription",
-                                item_category: "Subscription",
-                                item_variant: "Monthly £10",
-                                price: 10.0,
-                                quantity: 1,
-                            },
-                        ],
-                    });
+                gtag("event", "add_to_cart", {
+                    currency: "GBP",
+                    value: 10.0,
+                    items: [
+                        {
+                            item_id: "b2b_leads_subscription",
+                            item_name:
+                                "B2B Leads + AI Agents Monthly Subscription",
+                            item_category: "Subscription",
+                            item_variant: "Monthly £10",
+                            price: 10.0,
+                            quantity: 1,
+                        },
+                    ],
+                });
 
-                    gtag("event", "click", {
-                        event_category: "ecommerce",
-                        event_label: "PayPal Subscription Button",
-                        value: 10.0,
+                gtag("event", "click", {
+                    event_category: "ecommerce",
+                    event_label: "PayPal Subscription Button",
+                    value: 10.0,
+                });
+            });
+        });
+
+        // --- Section Visibility (Scroll Depth) Tracking ---
+        const sections = [
+            {
+                id: "comparison-section",
+                name: "Comparison Table",
+                el: document.querySelector("section:has(table)"),
+            },
+            {
+                id: "reviews-section",
+                name: "User Reviews",
+                el: document.querySelector(
+                    "section:has(.grid-cols-1.md\\:grid-cols-2)",
+                ),
+            },
+            {
+                id: "faq-section",
+                name: "FAQ Section",
+                el: document.querySelector("details")?.closest("div.mb-16"),
+            },
+            {
+                id: "final-cta",
+                name: "Final CTA",
+                el: document.querySelector(
+                    ".bg-gradient-to-r.from-payflo-purple",
+                ),
+            },
+        ];
+
+        const observerOptions = { threshold: 0.5 };
+        const visibilityObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const section = sections.find((s) => s.el === entry.target);
+                    if (section) {
+                        gtag("event", "section_view", {
+                            section_id: section.id,
+                            section_name: section.name,
+                        });
+                        visibilityObserver.unobserve(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((s) => s.el && visibilityObserver.observe(s.el));
+
+        // --- FAQ Interaction Tracking ---
+        document.querySelectorAll("details").forEach((faq) => {
+            faq.addEventListener("toggle", (e) => {
+                if (faq.open) {
+                    const question =
+                        faq.querySelector("summary span")?.textContent;
+                    gtag("event", "faq_open", {
+                        question: question,
                     });
                 }
             });
         });
+
+        // --- Time on Page Tracking ---
+        const timeMilestones = [30, 60, 120, 300]; // seconds
+        timeMilestones.forEach((seconds) => {
+            setTimeout(() => {
+                gtag("event", "time_on_page", {
+                    seconds: seconds,
+                });
+            }, seconds * 1000);
+        });
+
+        // --- Interaction with Benefit Items ---
+        document
+            .querySelectorAll(
+                ".flex.items-start.gap-4 .text-white.font-semibold",
+            )
+            .forEach((benefit) => {
+                benefit.parentElement?.addEventListener("click", () => {
+                    gtag("event", "benefit_click", {
+                        benefit_name: benefit.textContent?.trim(),
+                    });
+                });
+            });
     });
 
     function trackPurchase(subscriptionId) {
