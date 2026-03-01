@@ -8,6 +8,7 @@ const description =
     "Access verified B2B leads + AI marketing agents monthly. Start automating your outreach with our self-hosted platform. £10/month, cancel anytime. No setup fees.";
 const keywords =
     "B2B leads, email marketing, AI agents, marketing automation, verified leads, self-hosted email";
+import CommunitySlack from "../components/CommunitySlack.astro";
 ---
 
 <Layout title={title} description={description}>
@@ -297,8 +298,8 @@ const keywords =
                                                     },
                                                     createSubscription:
                                                         function (
-                                                            data,
-                                                            actions,
+                                                            data: any,
+                                                            actions: any,
                                                         ) {
                                                             return actions.subscription.create(
                                                                 {
@@ -308,8 +309,8 @@ const keywords =
                                                             );
                                                         },
                                                     onApprove: function (
-                                                        data,
-                                                        actions,
+                                                        data: any,
+                                                        actions: any,
                                                     ) {
                                                         if (
                                                             typeof window.trackPurchase ===
@@ -1388,6 +1389,8 @@ const keywords =
                     </div>
                 </div>
 
+                <CommunitySlack />
+
                 <!-- Final CTA Section -->
                 <div
                     class="bg-gradient-to-r from-payflo-purple to-payflo-blue rounded-3xl p-12 text-center"
@@ -1584,7 +1587,7 @@ const keywords =
             });
     });
 
-    function trackPurchase(subscriptionId) {
+    function trackPurchase(subscriptionId: string) {
         if (typeof gtag !== "undefined") {
             gtag("event", "purchase", {
                 transaction_id: subscriptionId,

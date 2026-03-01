@@ -8,14 +8,19 @@ const navItems = [
         href: "/buy",
         title: "Buy Laravel Mail",
     },
+    {
+        name: "Templates",
+        href: "https://templates.laravelmail.com",
+        title: "Laravel Mail Templates",
+    },
+    {
+        name: "Documentation",
+        href: "https://docs.laravelmail.com",
+        title: "Laravel Mail Documentation",
+    },
 ];
 
 const socialLinks = [
-    {
-        name: "GitHub",
-        href: "https://github.com/laravelmail",
-        icon: "github",
-    },
     {
         name: "LinkedIn",
         href: "https://www.linkedin.com/company/laravelmail",
@@ -75,16 +80,21 @@ const socialLinks = [
             aria-label="Main navigation"
         >
             {
-                navItems.map((item) => (
-                    <a
-                        title={item.title}
-                        href={item.href}
-                        onclick={`trackClick('${item.name}')`}
-                        class="text-sm font-bold text-white/70 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded px-2 py-1"
-                    >
-                        {item.name}
-                    </a>
-                ))
+                navItems.map((item) => {
+                    const isExternal = item.href.startsWith("http");
+                    return (
+                        <a
+                            title={item.title}
+                            href={item.href}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
+                            onclick={`trackClick('${item.name}')`}
+                            class="text-sm font-bold text-white/70 hover:text-white focus:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded px-2 py-1"
+                        >
+                            {item.name}
+                        </a>
+                    );
+                })
             }
         </nav>
 
@@ -163,16 +173,21 @@ const socialLinks = [
     >
         <div class="container-custom py-6 px-4 space-y-4">
             {
-                navItems.map((item, index) => (
-                    <a
-                        href={item.href}
-                        onclick={`trackClick('mobile_${item.name}')`}
-                        class="block py-3 px-4 text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 focus:text-white transition-all duration-300 rounded-xl border border-transparent hover:border-white/10"
-                        style={`transition-delay: ${index * 50}ms;`}
-                    >
-                        {item.name}
-                    </a>
-                ))
+                navItems.map((item, index) => {
+                    const isExternal = item.href.startsWith("http");
+                    return (
+                        <a
+                            href={item.href}
+                            target={isExternal ? "_blank" : undefined}
+                            rel={isExternal ? "noopener noreferrer" : undefined}
+                            onclick={`trackClick('mobile_${item.name}')`}
+                            class="block py-3 px-4 text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 focus:text-white transition-all duration-300 rounded-xl border border-transparent hover:border-white/10"
+                            style={`transition-delay: ${index * 50}ms;`}
+                        >
+                            {item.name}
+                        </a>
+                    );
+                })
             }
             <div
                 class="pt-4 border-t border-white/5 flex items-center justify-between"
