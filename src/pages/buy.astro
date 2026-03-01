@@ -3,9 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 const title =
-    "B2B Leads Platform & AI Marketing Agents | £10/month | Laravel Mail";
+    "B2B Leads Platform & AI Marketing Agents | £40 Setup + £10/mo | Laravel Mail";
 const description =
-    "Access verified B2B leads + AI marketing agents monthly. Start automating your outreach with our self-hosted platform. £10/month, cancel anytime. No setup fees.";
+    "Access verified B2B leads + AI marketing agents monthly. Start automating your outreach with our self-hosted platform. £40 setup fee + £10/month rolling, cancel anytime. Note: cancelling removes access to leads API.";
 const keywords =
     "B2B leads, email marketing, AI agents, marketing automation, verified leads, self-hosted email";
 import CommunitySlack from "../components/CommunitySlack.astro";
@@ -70,8 +70,11 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         Access verified B2B leads monthly + deploy AI marketing
                         agents. Self-hosted platform with
                         <strong class="text-white">no per-contact fees</strong>
-                        —just <strong class="text-white">£10/month</strong>,
-                        cancel anytime.
+                        — <strong class="text-white">£40 setup fee</strong> (includes
+                        platform & custom server) + <strong class="text-white"
+                            >£10/month</strong
+                        > rolling (for leads API). Cancel anytime, but you lose access
+                        to the leads API.
                     </p>
                 </div>
 
@@ -97,10 +100,18 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 </p>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-5xl font-black text-white"
-                                        >£10</span
+                                        >£40</span
                                     >
                                     <span class="text-white/60 text-lg"
-                                        >/month</span
+                                        >setup fee</span
+                                    >
+                                </div>
+                                <div class="flex items-baseline gap-2 mt-2">
+                                    <span class="text-2xl font-black text-white"
+                                        >+ £10</span
+                                    >
+                                    <span class="text-white/60 text-lg"
+                                        >/month (cancel anytime)</span
                                     >
                                 </div>
                                 <p class="text-white/60 text-sm mt-3">
@@ -138,11 +149,42 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                     >
                                     <div>
                                         <h4 class="text-white font-semibold">
-                                            Verified B2B Leads
+                                            One Domain
                                         </h4>
                                         <p class="text-sm text-white/60 mt-1">
-                                            Fresh email-verified prospects added
-                                            monthly
+                                            Your custom domain setup included
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            One Server Setup
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            One server with the platform
+                                            installed and configured
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start gap-3">
+                                    <span
+                                        class="text-2xl text-brand-success flex-shrink-0"
+                                        >✓</span
+                                    >
+                                    <div>
+                                        <h4 class="text-white font-semibold">
+                                            18M+ Verified B2B Leads
+                                        </h4>
+                                        <p class="text-sm text-white/60 mt-1">
+                                            Access over 18 million verified
+                                            leads across multiple industries
                                         </p>
                                     </div>
                                 </div>
@@ -157,8 +199,8 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                             AI Marketing Agents
                                         </h4>
                                         <p class="text-sm text-white/60 mt-1">
-                                            Local AI agents (Ollama) for smart
-                                            outreach automation
+                                            Local AI agents for smart outreach
+                                            automation
                                         </p>
                                     </div>
                                 </div>
@@ -191,22 +233,6 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                         <p class="text-sm text-white/60 mt-1">
                                             Open rates, clicks, bounces,
                                             conversions, and more
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <span
-                                        class="text-2xl text-brand-success flex-shrink-0"
-                                        >✓</span
-                                    >
-                                    <div>
-                                        <h4 class="text-white font-semibold">
-                                            1,900+ Email Templates
-                                        </h4>
-                                        <p class="text-sm text-white/60 mt-1">
-                                            Pre-built Blade & MJML templates
-                                            ready to customize
                                         </p>
                                     </div>
                                 </div>
@@ -265,7 +291,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                         Instant Access
                                     </p>
                                     <p class="text-lg font-bold text-white">
-                                        £10/month • Cancel Anytime
+                                        £40 Setup + £10/month • Cancel Anytime
                                     </p>
                                     <p class="text-xs text-white/60 mt-2">
                                         Start immediately after purchase
@@ -544,7 +570,8 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <p>
                                     Unlike other platforms, you pay one flat
                                     rate regardless of list size. Scale from 100
-                                    to 100,000 contacts for the same £10/month.
+                                    to 100,000 contacts for the same £10/month
+                                    rolling.
                                 </p>
                             </div>
                         </div>
@@ -595,7 +622,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <td class="py-4 px-4 text-white">Base Price</td>
                                 <td class="py-4 px-4 text-center"
                                     ><span class="text-brand-primary font-bold"
-                                        >£10/month</span
+                                        >£40 setup + £10/mo</span
                                     ></td
                                 >
                                 <td class="py-4 px-4 text-center text-white/60"
@@ -742,7 +769,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         "We switched from Mailchimp and immediately saved
                         £400/month. The fresh B2B leads every month help us stay
                         competitive, and the AI agents handle our follow-ups
-                        automatically. Best £10 I spend."
+                        automatically. Best investment I've made."
                     </p>
                 </div>
 
@@ -906,9 +933,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             Predictable Pricing
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            £10/month flat rate. Send to 100 contacts or 1
-                            million—same price. No surprises, no per-contact
-                            fees, no overage charges. Pure transparency.
+                            £40 setup + £10/month flat rate. Send to 100
+                            contacts or 1 million—same price. No surprises, no
+                            per-contact fees, no overage charges. Pure
+                            transparency.
                         </p>
                     </div>
 
@@ -1402,7 +1430,8 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         class="text-white/90 text-lg mb-8 max-w-2xl mx-auto leading-relaxed"
                     >
                         Get instant access to the complete platform, AI agents,
-                        and verified B2B leads. Just £10/month. Cancel anytime.
+                        and verified B2B leads. Just £40 setup + £10/mo. Cancel
+                        anytime (lose API access).
                     </p>
                     <a
                         href="https://www.paypal.com/ncp/links/R2MN2C7WVVNW8"
@@ -1419,7 +1448,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 d="M20.067 8.178c-.622-2.316-2.583-3.611-5.322-3.611H7.88c-.538 0-.986.388-1.07.915L4.037 19.34c-.056.347.21.66.562.66h3.403c.484 0 .887-.35.962-.824l.034-.216.711-4.524.04-.216a.972.972 0 0 1 .962-.823h1.365c3.153 0 5.613-1.284 6.326-4.8c.32-1.579.167-2.784-.335-3.421zM11.77 12.355H9.667l.344-2.186h2.103c.962 0 1.638.169 2.01.503.243.218.375.568.303 1.018-.119.75-.688 1.411-1.638 1.411-1.019 0-1.019-.746-1.019-.746z"
                             ></path>
                         </svg>
-                        Subscribe Now - £10/month
+                        Subscribe Now - £40 Setup + £10/mo
                     </a>
                     <p class="text-white/70 text-sm mt-6">
                         ✓ Instant access • ✓ Cancel anytime • ✓ Secure payment
