@@ -1,0 +1,89 @@
+---
+// VideoSection.astro - Embedded YouTube demo video for Laravel Mail
+const videoId = "OcrGNj5AkrU";
+---
+
+<section class="py-20 relative overflow-hidden" id="demo-video">
+    <!-- Background gradient -->
+    <div
+        class="absolute inset-0 bg-gradient-to-b from-brand-bg-darker/20 to-transparent pointer-events-none"
+    >
+    </div>
+    <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none"
+    >
+    </div>
+
+    <div class="container-custom relative z-10">
+        <!-- Section Header -->
+        <div
+            class="text-center max-w-3xl mx-auto mb-12 animate-on-scroll delay-0"
+        >
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-5"
+            >
+                🎬 See It In Action
+            </div>
+            <h2
+                class="text-3xl md:text-5xl font-black text-white leading-tight"
+            >
+                Watch Laravel Mail
+                <span
+                    class="block text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent mt-1"
+                >
+                    Transform Your Campaigns
+                </span>
+            </h2>
+            <p class="mt-5 text-lg text-gray-400 leading-relaxed">
+                See how easy it is to set up your self-hosted email marketing
+                platform, launch campaigns, and manage leads — all in a few
+                minutes.
+            </p>
+        </div>
+
+        <!-- Video Embed -->
+        <div class="animate-on-scroll delay-2 max-w-4xl mx-auto">
+            <div class="relative group">
+                <!-- Glow effect around video -->
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-brand-primary via-brand-blue to-brand-accent rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+                >
+                </div>
+
+                <!-- Video container -->
+                <div
+                    class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black aspect-video"
+                >
+                    <iframe
+                        src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&color=white`}
+                        title="Laravel Mail - Self-Hosted Email Marketing Platform Demo"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        loading="lazy"
+                        class="w-full h-full absolute inset-0"></iframe>
+                </div>
+            </div>
+
+            <!-- Below video CTA -->
+            <div
+                class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-center"
+            >
+                <a
+                    href="/buy"
+                    class="btn btn-primary px-8 py-3 text-base font-bold"
+                    aria-label="Get started with Laravel Mail"
+                >
+                    Get Started — £40 Setup + £10/mo
+                </a>
+                <a
+                    href="/demo"
+                    class="text-gray-400 hover:text-white transition-colors underline decoration-dotted underline-offset-4 text-sm"
+                >
+                    Request a live demo →
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

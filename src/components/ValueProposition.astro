@@ -120,25 +120,20 @@ const iconMap: Record<string, string> = {
 
 <section class="py-24 bg-[#0a0e27]/40 overflow-hidden">
   <div class="container-custom">
-    <!-- Hero Section with SEO Keywords -->
+    <!-- Section Header -->
     <div class="text-center max-w-4xl mx-auto mb-20">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-5">
+        🌐 Multi-Channel Marketing
+      </div>
       <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
         {title}
         <span class="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500">
           Across Every Channel
         </span>
       </h2>
-      
-      <p class="text-xl text-gray-400 leading-relaxed mb-6">
-        From WhatsApp marketing broadcasts and Instagram DM automation to Google Marketplace listings and smart product-driven campaigns — <strong class="text-white">Laravel Mail</strong> is the <strong class="text-white">best email marketing service</strong> and <strong class="text-white">email marketing platform</strong> for every business size. Our self-hosted <strong class="text-white">laravel email marketing</strong> solution provides complete control over your data while delivering powerful automation features.
+      <p class="text-xl text-gray-400 leading-relaxed">
+        From WhatsApp broadcasts and Instagram DMs to Google Marketplace and AI-powered automation — Laravel Mail gives you one unified platform to own your marketing stack, your data, and your results. <a href="/solutions" class="text-brand-primary hover:text-brand-accent transition-colors underline decoration-dotted underline-offset-4">Explore all solutions →</a>
       </p>
-
-      <!-- SEO Keyword Integration Paragraph -->
-      <div class="bg-gradient-to-r from-blue-500/10 to-pink-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
-        <p class="text-gray-300 leading-relaxed">
-          Whether you need <span class="text-blue-300 font-semibold">email marketing for small business</span>, the <span class="text-pink-300 font-semibold">best email marketing softwares</span> for enterprise, or <span class="text-blue-300 font-semibold">free email marketing services</span> — our <span class="text-pink-300 font-semibold">automated email marketing</span> platform combines powerful <span class="text-blue-300 font-semibold">email marketing solutions</span> with an <span class="text-pink-300 font-semibold">email marketing agency</span> toolkit. Learn more about our <a href="/solutions" class="text-brand-primary hover:text-brand-accent transition-colors underline decoration-dotted underline-offset-4">Laravel solutions</a>.
-        </p>
-      </div>
     </div>
 
     <!-- Solutions Grid -->
@@ -182,36 +177,29 @@ const iconMap: Record<string, string> = {
               ))}
             </ul>
 
-            <!-- SEO Keywords Meta (hidden but crawlable) -->
-            <div class="mt-6 pt-6 border-t border-white/10 text-xs text-gray-500">
-              <p class="opacity-60">
-                {solution.keywords.join(" • ")}
-              </p>
-            </div>
+
           </div>
         </div>
       ))}
     </div>
 
-    <!-- Additional SEO Content Section -->
-    <div class="mt-20 max-w-4xl mx-auto bg-gradient-to-r from-purple-500/5 to-blue-500/5 border border-white/10 rounded-2xl p-8">
-      <h2 class="text-2xl font-bold text-white mb-4">Why Choose Our Email Marketing Platform?</h2>
-      <div class="grid md:grid-cols-2 gap-6 text-gray-300">
-        <div>
-          <h3 class="font-semibold text-white mb-2">🎯 Best Email Marketing Service</h3>
-          <p>Powerful automation tools designed for modern businesses of all sizes.</p>
+    <!-- The Self-Hosted Advantage -->
+    <div class="mt-20 max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-8 bg-white/5 rounded-2xl border border-white/10 hover:border-brand-primary/30 transition-colors">
+          <div class="text-3xl mb-4">🔒</div>
+          <h3 class="text-xl font-bold text-white mb-2">Absolute Privacy</h3>
+          <p class="text-gray-400">Your customer data never leaves your server. No third-party tracking, no data sharing, just 100% data sovereignty.</p>
         </div>
-        <div>
-          <h3 class="font-semibold text-white mb-2">💼 Email Marketing for Small Business</h3>
-          <p>Affordable, scalable solutions that grow with your business needs.</p>
+        <div class="p-8 bg-white/5 rounded-2xl border border-white/10 hover:border-brand-primary/30 transition-colors">
+          <div class="text-3xl mb-4">💰</div>
+          <h3 class="text-xl font-bold text-white mb-2">Zero Monthly Tax</h3>
+          <p class="text-gray-400">Stop paying "subscriber taxes" to Mailchimp or HubSpot. Scale to millions of contacts without increasing your software costs.</p>
         </div>
-        <div>
-          <h3 class="font-semibold text-white mb-2">🚀 Automated Email Marketing</h3>
-          <p>Intelligent workflows that save time and increase conversion rates.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-white mb-2">📊 Email Marketing Solutions</h3>
-          <p>Complete suite of tools from campaigns to analytics and compliance.</p>
+        <div class="p-8 bg-white/5 rounded-2xl border border-white/10 hover:border-brand-primary/30 transition-colors">
+          <div class="text-3xl mb-4">🛠️</div>
+          <h3 class="text-xl font-bold text-white mb-2">Full Control</h3>
+          <p class="text-gray-400">Custom fields, unique automation logic, and landing pages that follow your rules. Built on Laravel for ultimate extensibility.</p>
         </div>
       </div>
     </div>
