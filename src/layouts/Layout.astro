@@ -17,11 +17,15 @@ import favIcon from "../assets/favicon.png";
 interface Props {
   title: string;
   description?: string;
+  keywords?: string;
+  ogImage?: string;
 }
 
 const {
   title = "Laravel Mail: Powerful Self-Hosted Email Marketing Platform",
   description = "Discover Laravel Mail - the ultimate self-hosted email marketing platform. Send automated campaigns, manage leads, and access a verified B2B database. Perfect for Laravel developers.",
+  keywords = "email marketing, email marketing platform, email templates, newsletter templates, marketing automation, email checker, email signature, email marketing services, self-hosted email marketing, laravel email marketing",
+  ogImage = "/logo.svg",
 } = Astro.props;
 ---
 
@@ -39,7 +43,7 @@ const {
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta
       name="keywords"
-      content="email marketing, email marketing platform, email templates, newsletter templates, marketing automation, email checker, email signature, email marketing services, self-hosted email marketing, laravel email marketing"
+      content={keywords}
     />
     <meta name="author" content="Laravel Mail Team" />
     <meta name="robots" content="index, follow" />
@@ -144,27 +148,27 @@ const {
     <!-- Open Graph -->
     <meta
       property="og:title"
-      content="Laravel Mail & Email Marketing Solutions | Self-Hosted Platform"
+      content={title}
     />
     <meta
       property="og:description"
-      content="Discover Laravel Mail - the ultimate self-hosted email marketing platform. Send automated campaigns, manage leads, and access a verified B2B database. Perfect for Laravel developers."
+      content={description}
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:image" content={new URL("/logo.svg", Astro.site)} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Laravel Mail & Email Marketing Solutions | Self-Hosted Platform"
+      content={title}
     />
     <meta
       name="twitter:description"
-      content="Discover Laravel Mail - the ultimate self-hosted email marketing platform. Send automated campaigns, manage leads, and access a verified B2B database. Perfect for Laravel developers."
+      content={description}
     />
-    <meta name="twitter:image" content={new URL("/logo.svg", Astro.site)} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site)} />
 
     <!-- View Transitions CSS Animations -->
     <style is:global>

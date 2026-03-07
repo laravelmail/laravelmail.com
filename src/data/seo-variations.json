@@ -1,0 +1,30 @@
+[
+    {
+        "slug": "digital-marketing-tools",
+        "title": "Top Digital Marketing Tools for Developers in 2026",
+        "description": "Examine the best digital marketing tools available for developers. From email automation to analytics, find the right stack for your marketing digital needs.",
+        "header": "Digital Marketing Tools",
+        "content": "The landscape of **digital marketing tools** is vast. For developers, the priority is often integration, speed, and data ownership. Our platform provides a suite of tools that replace traditional SaaS solutions, giving you full control over your **marketing digital** efforts. From server-side tracking to custom email builders, these **digital marketing marketing** tools are built for performance."
+    },
+    {
+        "slug": "digital-marketing-automation",
+        "title": "Mastering Digital Marketing Automation",
+        "description": "Learn how to automate your digital marketing workflows. Scale your marketing digital efforts without increasing your workload with Laravel Mail.",
+        "header": "Digital Marketing Automation",
+        "content": "Why do manually what can be automated? **Digital marketing automation** is the secret weapon of high-growth companies. By setting up automated workflows for your **marketing digital** campaigns, you ensure that every lead is nurtured. Laravel Mail makes **digital marketing marketing** automation simple yet powerful, allowing you to trigger actions based on real user behavior."
+    },
+    {
+        "slug": "digital-marketing-email",
+        "title": "The Role of Email in Modern Digital Marketing",
+        "description": "Email remains the king of digital marketing. Discover how to leverage email for your marketing digital strategy.",
+        "header": "Email for Digital Marketing",
+        "content": "In the world of **digital marketing**, email is often called the 'ultimate owned channel'. Unlike social media, you own your email list. This makes **marketing digital** via email incredibly resilient. Our platform's **digital marketing marketing** features are centered around delivering high-quality, relevant emails that convert."
+    },
+    {
+        "slug": "digital-marketing-for-developers",
+        "title": "Digital Marketing Strategies for Developers",
+        "description": "Digital marketing doesn't have to be hard. A guide to marketing digital specifically for the developer community.",
+        "header": "Marketing for Developers",
+        "content": "Developers have a unique advantage in **digital marketing**: they can build their own solutions. We created Laravel Mail to empower this specific advantage. Your **marketing digital** strategy should be as robust as your codebase. Use our **digital marketing marketing** platform to reach more developers and grow your software products."
+    }
+]
