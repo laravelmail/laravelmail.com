@@ -10,7 +10,25 @@ export async function getStaticPaths() {
   }));
 }
 
-const { page } = Astro.props;
+interface ComparisonRow {
+  item: string;
+  competitor: string;
+  laravel: string;
+}
+
+interface PageData {
+  slug: string;
+  title: string;
+  description: string;
+  header: string;
+  content: string;
+  comparison?: {
+    label?: string;
+    rows: ComparisonRow[];
+  };
+}
+
+const { page } = Astro.props as { page: PageData };
 ---
 
 <Layout title={page.title} description={page.description}>
@@ -20,7 +38,7 @@ const { page } = Astro.props;
                 <nav class="mb-12 flex items-center gap-2 text-sm text-gray-500">
                     <a href="/" class="hover:text-brand-primary">Home</a>
                     <span>/</span>
-                    <a href="/digital-marketing" class="hover:text-brand-primary">Digital Marketing</a>
+                    <a href="/email-marketing" class="hover:text-brand-primary">Email Marketing</a>
                     <span>/</span>
                     <span class="text-white">{page.header}</span>
                 </nav>
@@ -31,36 +49,59 @@ const { page } = Astro.props;
                 
                 <div class="prose prose-invert prose-xl max-w-none text-gray-300 mb-16">
                     <p class="text-2xl font-light italic text-brand-primary/80 mb-10 leading-relaxed">
-                        Part of our comprehensive <strong>digital marketing</strong> series.
+                        Part of our comprehensive <strong>email marketing</strong> series.
                     </p>
                     <div class="space-y-6">
                         {page.content.split('\n\n').map(para => (
                             <p>{para}</p>
                         ))}
                     </div>
+
+                    {page.comparison && (
+                        <div class="my-16 overflow-x-auto rounded-2xl border border-white/10 bg-white/5">
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="border-b border-white/10 bg-white/5">
+                                        <th class="p-6 font-bold text-white">{page.comparison.label || 'Feature'}</th>
+                                        <th class="p-6 font-bold text-white">Competitor</th>
+                                        <th class="p-6 font-bold text-brand-primary">Laravel Mail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {page.comparison.rows.map(row => (
+                                        <tr class="border-b border-white/5 last:border-0">
+                                            <td class="p-6 text-white font-medium">{row.item}</td>
+                                            <td class="p-6 text-gray-400">{row.competitor}</td>
+                                            <td class="p-6 text-brand-primary font-bold">{row.laravel}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                     <div class="p-8 rounded-2xl bg-white/5 border border-white/10">
-                        <h2 class="text-2xl font-bold text-white mb-4">Why it matters for Digital Marketing</h2>
+                        <h2 class="text-2xl font-bold text-white mb-4">Why it matters for Email Marketing</h2>
                         <p class="text-gray-400">
-                            In the competitive world of <strong>marketing digital</strong>, having a specialized approach to {page.header.toLowerCase()} 
-                            can set you apart from the competition. Our tools ensure your <strong>digital marketing marketing</strong> 
+                            In the competitive world of <strong>email marketing</strong>, having a specialized approach to {page.header.toLowerCase()} 
+                            can set you apart from the competition. Our tools ensure your <strong>email marketing systems</strong> 
                             is data-driven and scalable.
                         </p>
                     </div>
                     <div class="p-8 rounded-2xl bg-white/5 border border-white/10">
                         <h2 class="text-2xl font-bold text-white mb-4">How Laravel Mail Helps</h2>
                         <p class="text-gray-400">
-                            We provide the infrastructure required to implement a world-class <strong>digital marketing</strong> strategy. 
-                            From automation to analytics, we've got your <strong>marketing digital</strong> covered.
+                            We provide the infrastructure required to implement a world-class <strong>email marketing</strong> strategy. 
+                            From automation to analytics, we've got your <strong>email marketing systems</strong> covered.
                         </p>
                     </div>
                 </div>
 
                 <div class="text-center py-12 px-8 rounded-3xl bg-brand-primary/10 border border-brand-primary/20">
-                    <h3 class="text-2xl font-bold text-white mb-6">Want to learn more about Digital Marketing?</h3>
-                    <a href="/digital-marketing" class="btn btn-primary">Back to Pillar Page</a>
+                    <h3 class="text-2xl font-bold text-white mb-6">Want to learn more about Email Marketing?</h3>
+                    <a href="/email-marketing" class="btn btn-primary">Back to Pillar Page</a>
                 </div>
             </div>
         </div>

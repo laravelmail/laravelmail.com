@@ -4,10 +4,11 @@
  */
 export function injectSeoLinks(html: string): string {
     const links = [
-        { phrase: 'digital marketing', url: '/digital-marketing' },
-        { phrase: 'marketing digital', url: '/digital-marketing' },
-        { phrase: 'email marketing', url: '/digital-marketing-email' },
-        { phrase: 'marketing automation', url: '/digital-marketing-automation' }
+        { phrase: 'email marketing', url: '/email-marketing' },
+        { phrase: 'automated email marketing', url: '/email-automation' },
+        { phrase: 'mailchimp alternative', url: '/mailchimp-alternative' },
+        { phrase: 'email deliverability', url: '/email-deliverability' },
+        { phrase: 'marketing automation', url: '/email-automation' }
     ];
 
     let processedHtml = html;

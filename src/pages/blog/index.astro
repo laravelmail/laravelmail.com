@@ -7,8 +7,8 @@ const posts = await getCollection('blog');
 // Sort posts by date (this simple sort might need a more robust date parser if formats vary)
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
-const title = "Blog | Laravel Mail - Insights on Digital Marketing & Automation";
-const description = "Stay updated with the latest in digital marketing, email automation, and Laravel development. Expert tips and guides from the Laravel Mail team.";
+const title = "Email Marketing Blog | Laravel Mail - Insights & Automation Guides";
+const description = "Master email marketing, deliverability, and automation. Expert guides and technical insights for Laravel developers and SaaS founders.";
 ---
 
 <Layout title={title} description={description}>
@@ -18,9 +18,9 @@ const description = "Stay updated with the latest in digital marketing, email au
         </div>
         <div class="container-custom relative">
             <div class="max-w-3xl mx-auto text-center mb-16">
-                <h1 class="text-5xl md:text-6xl font-black text-white mb-6">Our <span class="gradient-text">Blog</span></h1>
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6">Email Marketing <span class="gradient-text">Insights</span></h1>
                 <p class="text-xl text-gray-400">
-                    Insights, tutorials, and strategies to help you master digital marketing and email automation.
+                    Master deliverability, automation, and growth with our technical guides.
                 </p>
             </div>
 
