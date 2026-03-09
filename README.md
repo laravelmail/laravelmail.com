@@ -2,6 +2,8 @@
 
 A powerful, self-hosted email marketing platform built with Laravel. Take full control of your customer relationships with privacy-first Local AI Marketing Agents, automated campaigns, and a verified B2B leads database.
 
+![Laravel Mail Dashboard](https://laravelmail.com/screens/dashboard.png)
+
 ## Features
 
 - **Self-Hosted** - Complete data sovereignty. Your data stays on your servers.
@@ -11,6 +13,16 @@ A powerful, self-hosted email marketing platform built with Laravel. Take full c
 - **Verified B2B Leads Database** - Access lifetime verified B2B leads
 - **Multi-Channel** - WhatsApp & Instagram integrations included
 - **No Monthly Fees** - One-time purchase, lifetime access
+
+## Screenshots
+
+| Dashboard | Campaigns | Subscribers |
+|-----------|-----------|-------------|
+| ![Dashboard](https://laravelmail.com/screens/dashboard.png) | ![Campaigns](https://laravelmail.com/screens/campaigns-2.png) | ![Subscribers](https://laravelmail.com/screens/subscribers-2.png) |
+
+| Automation | Email Templates | AI Marketing |
+|------------|-----------------|--------------|
+| ![Automation](https://laravelmail.com/screens/automation2.png) | ![Templates](https://laravelmail.com/screens/templates.png) | ![AI Marketing](https://laravelmail.com/screens/ai-email-marketing.png) |
 
 ## Tech Stack
 
