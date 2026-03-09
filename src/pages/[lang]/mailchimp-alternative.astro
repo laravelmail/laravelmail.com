@@ -1,0 +1,112 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTASection from "../../components/CTASection.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const title = t('mailchimp.title');
+const description = t('mailchimp.description');
+---
+
+<Layout title={title} description={description}>
+    <section class="pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden relative">
+        <div class="container-custom relative">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
+                    {t('mailchimp.badge')}
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black leading-tight text-white mb-8">
+                    {t('mailchimp.hero_1')} <br/><span class="gradient-text">{t('mailchimp.hero_2')}</span>
+                </h1>
+                <p class="text-xl text-gray-300 leading-relaxed mb-10">
+                    {t('mailchimp.subtitle')}
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href={getRelativeLocaleUrl(lang as string, "/buy")} class="btn btn-primary px-8 py-4 text-lg">{t('mailchimp.cta')}</a>
+                    <a href="#comparison" class="text-white hover:text-brand-primary transition-colors font-medium">{t('mailchimp.explore')} ↓</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="comparison" class="py-20 bg-brand-bg/50">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-12 text-center">{t('mailchimp.why_header')}</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <div class="p-8 rounded-2xl bg-white/5 border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">{t('mailchimp.feature1_title')}</h3>
+                        <p class="text-gray-400">
+                            {t('mailchimp.feature1_text')}
+                        </p>
+                    </div>
+                    <div class="p-8 rounded-2xl bg-white/5 border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">{t('mailchimp.feature2_title')}</h3>
+                        <p class="text-gray-400">
+                            {t('mailchimp.feature2_text')}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="prose prose-invert max-w-none text-gray-300">
+                    <h3>{t('mailchimp.table_header')}</h3>
+                    <div class="overflow-x-auto my-8">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="py-4 px-6 font-bold text-white">{t('mailchimp.col_feature')}</th>
+                                    <th class="py-4 px-6 font-bold text-white">Mailchimp</th>
+                                    <th class="py-4 px-6 font-bold text-brand-primary">Laravel Mail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-white/5">
+                                    <td class="py-4 px-6">{t('mailchimp.row_pricing')}</td>
+                                    <td class="py-4 px-6 text-red-400">{t('mailchimp.mc_pricing')}</td>
+                                    <td class="py-4 px-6 text-green-400">{t('mailchimp.lm_pricing')}</td>
+                                </tr>
+                                <tr class="border-b border-white/5">
+                                    <td class="py-4 px-6">{t('mailchimp.row_data')}</td>
+                                    <td class="py-4 px-6">{t('mailchimp.mc_data')}</td>
+                                    <td class="py-4 px-6">{t('mailchimp.lm_data')}</td>
+                                </tr>
+                                <tr class="border-b border-white/5">
+                                    <td class="py-4 px-6">{t('mailchimp.row_deliv')}</td>
+                                    <td class="py-4 px-6">{t('mailchimp.mc_deliv')}</td>
+                                    <td class="py-4 px-6">{t('mailchimp.lm_deliv')}</td>
+                                </tr>
+                                <tr class="border-b border-white/5">
+                                    <td class="py-4 px-6">{t('mailchimp.row_api')}</td>
+                                    <td class="py-4 px-6">{t('mailchimp.mc_api')}</td>
+                                    <td class="py-4 px-6">{t('mailchimp.lm_api')}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>
+                        {t('mailchimp.footer_text_1')}
+                    </p>
+                    
+                    <h3>{t('mailchimp.footer_header_2')}</h3>
+                    <p>
+                        {t('mailchimp.footer_text_2')}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <CTASection />
+</Layout>

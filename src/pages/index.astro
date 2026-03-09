@@ -9,11 +9,15 @@ import CTASection from "../components/CTASection.astro";
 import FAQ from "../components/FAQ.astro";
 import ValueProposition from "../components/ValueProposition.astro";
 import CommunitySlack from "../components/CommunitySlack.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout
-  title="Email Marketing Platform for Developers | Laravel Mail"
-  description="LaravelMail is a powerful email marketing platform for developers and businesses. Send automated campaigns, improve deliverability, and manage leads without SaaS lock-in."
+  title={t('hero.title')}
+  description={t('hero.subtitle')}
 >
   <Hero />
 

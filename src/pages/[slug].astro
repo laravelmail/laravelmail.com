@@ -2,6 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import CTASection from "../components/CTASection.astro";
 import seoData from "../data/seo-variations.json";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 export async function getStaticPaths() {
   return seoData.map(page => ({
@@ -36,9 +41,9 @@ const { page } = Astro.props as { page: PageData };
         <div class="container-custom relative">
             <div class="max-w-4xl mx-auto">
                 <nav class="mb-12 flex items-center gap-2 text-sm text-gray-500">
-                    <a href="/" class="hover:text-brand-primary">Home</a>
+                    <a href={getRelativeLocaleUrl(lang, "/")} class="hover:text-brand-primary">{t('nav.home')}</a>
                     <span>/</span>
-                    <a href="/email-marketing" class="hover:text-brand-primary">Email Marketing</a>
+                    <a href={getRelativeLocaleUrl(lang, "/email-marketing")} class="hover:text-brand-primary">Email Marketing</a>
                     <span>/</span>
                     <span class="text-white">{page.header}</span>
                 </nav>
@@ -101,7 +106,7 @@ const { page } = Astro.props as { page: PageData };
 
                 <div class="text-center py-12 px-8 rounded-3xl bg-brand-primary/10 border border-brand-primary/20">
                     <h3 class="text-2xl font-bold text-white mb-6">Want to learn more about Email Marketing?</h3>
-                    <a href="/email-marketing" class="btn btn-primary">Back to Pillar Page</a>
+                    <a href={getRelativeLocaleUrl(lang, "/email-marketing")} class="btn btn-primary">Back to Pillar Page</a>
                 </div>
             </div>
         </div>

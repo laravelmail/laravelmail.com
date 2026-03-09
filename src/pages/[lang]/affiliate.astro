@@ -1,0 +1,78 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+---
+
+<Layout
+    title={t('affiliate.title')}
+    description={t('affiliate.description')}
+>
+    <main class="py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div class="prose prose-slate max-w-3xl mx-auto prose-invert">
+            <h1 class="text-4xl font-bold mb-8 text-white">{t('affiliate.h1')}</h1>
+
+            <p class="text-gray-400 mb-6">
+                {t('affiliate.last_updated')}: {new Date().toLocaleDateString(lang)}
+            </p>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white">
+                    {t('affiliate.commission_title')}
+                </h2>
+                <p class="text-gray-300">
+                    {t('affiliate.commission_p')}
+                </p>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white">{t('affiliate.how_it_works_title')}</h2>
+                <ol class="list-decimal pl-6 mt-4 space-y-4 text-gray-300">
+                    <li>
+                        <strong>{t('affiliate.step1_title')}</strong> - {t('affiliate.step1_desc')}
+                    </li>
+                    <li>
+                        <strong>{t('affiliate.step2_title')}</strong> - {t('affiliate.step2_desc')}
+                    </li>
+                    <li>
+                        <strong>{t('affiliate.step3_title')}</strong> - {t('affiliate.step3_desc')}
+                    </li>
+                    <li>
+                        <strong>{t('affiliate.step4_title')}</strong> - {t('affiliate.step4_desc')}
+                    </li>
+                </ol>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white">{t('affiliate.why_promote_title')}</h2>
+                <ul class="list-disc pl-6 mt-4 space-y-2 text-gray-300">
+                    <li>{t('affiliate.why1')}</li>
+                    <li>{t('affiliate.why2')}</li>
+                    <li>{t('affiliate.why3')}</li>
+                    <li>{t('affiliate.why4')}</li>
+                    <li>{t('affiliate.why5')}</li>
+                </ul>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white">{t('affiliate.contact_title')}</h2>
+                <p class="text-gray-300">
+                    {t('affiliate.contact_p')}
+                </p>
+                <p class="mt-4">
+                    <a href={getRelativeLocaleUrl(lang as string, "/contact")} class="text-brand-primary hover:text-brand-primary/80 underline">{t('affiliate.contact_link')}</a> {t('affiliate.step1_desc')}
+                </p>
+            </section>
+        </div>
+    </main>
+</Layout>

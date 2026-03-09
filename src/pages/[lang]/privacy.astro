@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+---
+
+<Layout
+    title={t('footer.privacy') + " | Laravel Mail"}
+    description="Learn how Laravel Mail protects your personal data and ensures GDPR compliance. Our privacy policy outlines data collection, usage, and security practices."
+>
+    <main class="py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
+        <div class="prose prose-slate max-w-3xl mx-auto prose-invert">
+            <h1 class="text-4xl font-bold mb-8 text-white">{t('footer.privacy')}</h1>
+
+            <p class="text-gray-400 mb-6">
+                Last updated: {new Date().toLocaleDateString()}
+            </p>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white">1. Introduction</h2>
+                <p class="text-gray-300">
+                    Welcome to Laravel Mail. We respect your privacy and are
+                    committed to protecting your personal data. This privacy
+                    policy will inform you about how we look after your personal
+                    data when you use our website, services, and applications
+                    (collectively, the "Service").
+                </p>
+            </section>
+
+             <p class="text-gray-400 italic">Note: Privacy Policy is currently available in English as per legal requirements.</p>
+        </div>
+    </main>
+</Layout>

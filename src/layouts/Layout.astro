@@ -13,24 +13,29 @@ import "@fontsource/nunito/500.css";
 import "@fontsource/nunito/600.css";
 import "@fontsource/nunito/700.css";
 import favIcon from "../assets/favicon.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   keywords?: string;
   ogImage?: string;
+  lang?: "en" | "es" | "zh" | "ru";
 }
 
+const lang = Astro.props.lang || getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const {
-  title = "Laravel Mail: Powerful Self-Hosted Email Marketing Platform",
-  description = "Discover Laravel Mail - the ultimate self-hosted email marketing platform. Send automated campaigns, manage leads, and access a verified B2B database. Perfect for Laravel developers.",
+  title = t('hero.title'),
+  description = t('hero.subtitle'),
   keywords = "email marketing, email marketing platform, email templates, newsletter templates, marketing automation, email checker, email signature, email marketing services, self-hosted email marketing, laravel email marketing",
   ogImage = "/logo.svg",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <title>{title}</title>
@@ -47,7 +52,7 @@ const {
     />
     <meta name="author" content="Laravel Mail Team" />
     <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
+    <meta name="language" content={lang} />
     <meta name="revisit-after" content="7 days" />
 
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />

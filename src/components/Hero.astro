@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import heroImage from "../assets/logo.svg";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section
@@ -24,23 +28,19 @@ import heroImage from "../assets/logo.svg";
                 <div
                     class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6 animate-pulse"
                 >
-                    🔥 Early Bird Offer: Save 90% Today
+                    {t('hero.early_bird')}
                 </div>
                 <h1
                     class="animate-on-scroll text-white delay-0 text-4xl md:text-5xl lg:text-6xl font-black leading-tight"
                     itemprop="headline"
                 >
-                    <span class="gradient-text">Email Marketing Platform</span> Built for Laravel Developers
+                    {t('hero.pill')}
                 </h1>
                 <p
                     class="animate-on-scroll delay-1 mt-6 text-xl text-gray-200 max-w-lg"
                     itemprop="description"
                 >
-                    The <strong class="text-white"
-                        >API-first email marketing platform</strong
-                    > for SaaS founders and developers. Build robust <strong class="text-white"
-                        >email automation systems</strong
-                    > without the monthly "subscriber tax." Own your deliverability, your data, and your results.
+                    {t('hero.subtitle')}
                 </p>
                 <div
                     class="animate-on-scroll delay-2 mt-8 flex flex-col sm:flex-row items-center gap-4"
@@ -50,7 +50,7 @@ import heroImage from "../assets/logo.svg";
                         class="btn btn-primary w-full sm:w-auto text-center"
                         aria-label="Purchase Laravel Mail platform"
                         title="Get Laravel Mail — Self-Hosted Email Marketing"
-                        >Purchase Now — £40 Setup + £10/mo</a
+                        >{t('hero.buy_button')}</a
                     >
                     <a
                         href="#demo-video"
@@ -63,7 +63,7 @@ import heroImage from "../assets/logo.svg";
                         >
                             <path d="M8 5v14l11-7z"></path>
                         </svg>
-                        Watch Demo
+                        {t('hero.watch_demo')}
                     </a>
                 </div>
             </div>

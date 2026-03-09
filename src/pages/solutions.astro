@@ -3,32 +3,33 @@ import Layout from "../layouts/Layout.astro";
 import CTASection from "../components/CTASection.astro";
 import UseCases from "../components/UseCases.astro";
 import Testimonials from "../components/Testimonials.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const solutions = [
     {
-        title: "E-commerce & Retail",
-        description:
-            "Drive sales with automated cart recovery, personalized product recommendations, and multi-channel post-purchase sequences.",
+        title: t('solutions.ecommerce_title'),
+        description: t('solutions.ecommerce_desc'),
         icon: "🛍️",
     },
     {
-        title: "SaaS & Tech",
-        description:
-            "Scale your user onboarding, feature adoption, and retention strategies with behavioral triggers and unified team inboxes.",
+        title: t('solutions.saas_title'),
+        description: t('solutions.saas_desc'),
         icon: "💻",
     },
     {
-        title: "Agencies",
-        description:
-            "Manage multiple client brands from a single dashboard with workspace isolation and white-label reporting.",
+        title: t('solutions.agencies_title'),
+        description: t('solutions.agencies_desc'),
         icon: "🏢",
     },
 ];
 ---
 
 <Layout
-    title="Self-Hosted Marketing Solutions for SaaS, Agencies & E-commerce"
-    description="Tailored email marketing automation for high-growth startups, scaling agencies, and e-commerce brands. Scale your outreach with full data sovereignty."
+    title={t('solutions.title')}
+    description={t('solutions.description')}
 >
     <!-- Header -->
     <section
@@ -46,14 +47,12 @@ const solutions = [
                 <h1
                     class="animate-on-scroll delay-0 text-5xl md:text-7xl font-extrabold leading-tight text-white mb-8"
                 >
-                    Smart <span class="gradient-text">Solutions</span> for Growth
+                    {t('solutions.hero_1')}<span class="gradient-text">{t('solutions.hero_2')}</span>{t('solutions.hero_3')}
                 </h1>
                 <p
                     class="animate-on-scroll delay-1 mt-6 text-xl text-gray-400 max-w-2xl mx-auto"
                 >
-                    Whether you're a high-growth startup, a scaling agency, or
-                    an established e-commerce brand, Laravel Mail provides the
-                    infrastructure to dominate your market.
+                    {t('solutions.hero_subtitle')}
                 </p>
             </div>
         </div>

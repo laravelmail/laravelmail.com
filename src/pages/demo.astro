@@ -1,31 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const demos = [
 //   {
 //     id: "0pX9fSCyOn0",
-//     title: "Platform Overview & Core Features",
-//     description: "Learn how to navigate the Laravel Mail dashboard, manage your leads, and launch your first multi-channel campaign in minutes.",
-//     category: "Getting Started"
+//     title: t('demo.demo1_title'),
+//     description: t('demo.demo1_desc'),
+//     category: t('demo.cat_getting_started')
 //   },
 //   {
 //     id: "0pX9fSCyOn0",
-//     title: "Visual Automation Builder",
-//     description: "A deep dive into our drag-and-drop automation engine. See how to build complex customer journeys across Email, WhatsApp, and Instagram.",
-//     category: "Tutorial"
+//     title: t('demo.demo2_title'),
+//     description: t('demo.demo2_desc'),
+//     category: t('demo.cat_tutorial')
 //   },
 //   {
 //     id: "0pX9fSCyOn0",
-//     title: "Lead Intelligence & Scoring",
-//     description: "Discover how our AI-driven lead management system helps you prioritize high-intent customers and increase conversion rates.",
-//     category: "Advanced"
+//     title: t('demo.demo3_title'),
+//     description: t('demo.demo3_desc'),
+//     category: t('demo.cat_advanced')
 //   }
 ];
 ---
 
 <Layout 
-  title="Watch Product Demos & Tutorials | Laravel Mail Self-Hosted"
-  description="See Laravel Mail in action. Watch our product demonstrations, visual automation builder walkthroughs, and lead intelligence showcases. Experience the power of self-hosted marketing."
+  title={t('demo.title')}
+  description={t('demo.description')}
 >
   <section class="pt-32 pb-20 bg-brand-bg-darker relative overflow-hidden">
     <!-- Ambient Background Glows -->
@@ -35,10 +40,10 @@ const demos = [
     <div class="container-custom relative z-10">
       <div class="max-w-4xl mx-auto text-center mb-24 animate-on-scroll">
         <h1 class="text-6xl md:text-8xl font-black text-white mb-8 leading-none tracking-tight">
-          Product <span class="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent">Showcase</span>
+          {t('demo.hero_1')} <span class="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent">{t('demo.hero_2')}</span>
         </h1>
         <p class="text-xl md:text-2xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-          Experience the future of self-hosted email marketing. Watch how Laravel Mail transforms your communication infrastructure.
+          {t('demo.hero_subtitle')}
         </p>
       </div>
 
@@ -66,7 +71,7 @@ const demos = [
                 <span class="px-4 py-1.5 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-[10px] font-black uppercase tracking-[0.2em]">
                   {demo.category}
                 </span>
-                <span class="text-gray-500 text-sm font-medium">Coming Soon</span>
+                <span class="text-gray-500 text-sm font-medium">{t('demo.coming_soon')}</span>
               </div>
               
               <h3 class="text-3xl font-bold text-white mb-4 group-hover:text-brand-primary transition-colors duration-300">
@@ -88,16 +93,16 @@ const demos = [
       <div class="bg-gradient-to-br from-brand-bg-card/80 to-brand-bg/80 border border-white/5 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
         <div class="absolute inset-0 bg-brand-primary/5 blur-3xl rounded-full"></div>
         <div class="relative z-10">
-          <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">Ready to take control?</h2>
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">{t('demo.ready_header')}</h2>
           <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Join 4,200+ developers building their own marketing engines with Laravel Mail. Start your self-hosted journey today.
+            {t('demo.ready_subtitle')}
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href="/buy" class="btn btn-primary px-10 py-5 text-xl font-bold rounded-2xl w-full sm:w-auto shadow-2xl shadow-brand-primary/20">
-              Get Started Now
+            <a href={getRelativeLocaleUrl(lang, "/buy")} class="btn btn-primary px-10 py-5 text-xl font-bold rounded-2xl w-full sm:w-auto shadow-2xl shadow-brand-primary/20">
+              {t('demo.get_started')}
             </a>
-            <a href="/contact" class="text-white font-bold hover:text-brand-primary transition-colors flex items-center group">
-              Request a Custom Demo
+            <a href={getRelativeLocaleUrl(lang, "/contact")} class="text-white font-bold hover:text-brand-primary transition-colors flex items-center group">
+              {t('demo.request_custom')}
               <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

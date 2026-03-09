@@ -1,0 +1,187 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTASection from "../../components/CTASection.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const steps = [
+    {
+        title: "1. Define Your Audience",
+        description:
+            "Start by selecting the contacts you want to reach. You can filter by tags, segments, or previous activity to ensure your message reaches the right people.",
+        icon: "👥",
+    },
+    {
+        title: "2. Choose a Template",
+        description:
+            "Pick from our professionally designed library of responsive templates or start from scratch using our intuitive drag-and-drop editor.",
+        icon: "🎨",
+    },
+    {
+        title: "3. Craft Your Message",
+        description:
+            "Write compelling content personalized for your audience. Use dynamic merge tags to insert names, locations, and other custom data.",
+        icon: "✍️",
+    },
+    {
+        title: "4. Schedule & Send",
+        description:
+            "Set the perfect time for delivery. You can send immediately or schedule for a specific date and time to maximize engagement.",
+        icon: "🚀",
+    },
+];
+---
+
+<Layout
+    title="How to Launch an Email Campaign | Step-by-Step Guide"
+    description="Master email marketing with our comprehensive guide to creating campaigns in Laravel Mail. From audience segmentation to professional template design and scheduling."
+>
+    <!-- Header -->
+    <section
+        class="pt-20 pb-16 md:pt-32 md:pb-24 bg-[#0a0e27] relative overflow-hidden"
+    >
+        <div class="absolute inset-0 opacity-5">
+            <div
+                class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent"
+            >
+            </div>
+        </div>
+
+        <div class="container-custom relative px-4 mx-auto">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1
+                    class="animate-on-scroll delay-0 text-5xl md:text-7xl font-extrabold leading-tight text-white mb-8"
+                >
+                    Build Your <span class="gradient-text">Campaign</span>
+                </h1>
+                <p
+                    class="animate-on-scroll delay-1 mt-6 text-xl text-gray-400 max-w-2xl mx-auto"
+                >
+                    Follow this step-by-step guide to launch your first
+                    successful email marketing campaign with Laravel Mail.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Tutorial Section -->
+    <section class="pb-24 pt-10 bg-[#0a0e27]">
+        <div class="container-custom px-4 mx-auto">
+            <div
+                class="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl shadow-purple-900/20 border border-white/10 relative group"
+            >
+                <!-- Glow effect behind video -->
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 opacity-20 blur-lg group-hover:opacity-30 transition duration-1000"
+                >
+                </div>
+
+                <div class="relative aspect-video bg-black/80 backdrop-blur-sm">
+                    <iframe
+                        class="w-full h-full"
+                        src="https://www.youtube.com/embed/kXZdiwJz-T8"
+                        title="How to Create a Campaign"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Grid -->
+    <section class="py-24 bg-[#0f1235]">
+        <div class="container-custom px-4 mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {
+                    steps.map((step, index) => (
+                        <div
+                            class={`bg-white/5 backdrop-blur-md rounded-2xl p-10 shadow-lg border border-white/10 animate-on-scroll delay-${index} hover:border-purple-500/50 transition-all duration-300 group`}
+                        >
+                            <div class="text-5xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                                {step.icon}
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-4">
+                                {step.title}
+                            </h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                {step.description}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section class="py-20 bg-[#0a0e27]">
+        <div class="container-custom px-4 mx-auto">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+                    Pro Tips for Success
+                </h2>
+                <p class="text-gray-400 text-lg">
+                    Maximize your open rates and conversions with these best
+                    practices.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-gradient-to-br from-purple-900/20 to-blue-900/20 p-8 rounded-2xl border border-white/5"
+                >
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        Keep it Short
+                    </h3>
+                    <p class="text-gray-400">
+                        Respect your reader's time. Get straight to the point
+                        and have a clear call to action.
+                    </p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-purple-900/20 to-blue-900/20 p-8 rounded-2xl border border-white/5"
+                >
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        A/B Testing
+                    </h3>
+                    <p class="text-gray-400">
+                        Test different subject lines to see what generates the
+                        most opens.
+                    </p>
+                </div>
+                <div
+                    class="bg-gradient-to-br from-purple-900/20 to-blue-900/20 p-8 rounded-2xl border border-white/5"
+                >
+                    <h3 class="text-xl font-bold text-white mb-3">
+                        Analyze Results
+                    </h3>
+                    <p class="text-gray-400">
+                        Review your campaign analytics to improve future
+                        performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <CTASection />
+</Layout>
+
+<style>
+    .gradient-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400;
+    }
+    .container-custom {
+        @apply max-w-7xl mx-auto;
+    }
+</style>

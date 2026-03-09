@@ -1,6 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Icon } from 'astro-icon/components';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 // Fetch job listings from jobs.izdrail.com API
 async function fetchJobListings(keyword = 'marketing') {
@@ -43,7 +48,7 @@ function getJobDescription(job: any) {
         const description = job.description.replace(/<[^>]*>/g, '').trim();
         return description.length > 300 ? description.substring(0, 300) + '...' : description;
     }
-    return 'No description available.';
+    return t('careers.no_desc');
 }
 
 function getJobSlug(job: any) {
@@ -60,7 +65,7 @@ function getSalaryRange(job: any) {
 }
 
 function getJobType(job: any) {
-    return job.job_type || 'Full-time';
+    return job.job_type || t('careers.full_time');
 }
 
 function isRemoteJob(job: any) {
@@ -76,7 +81,7 @@ function calculateReadingTime(job: any): number {
     }
 
     const content = job.description.replace(/<[^>]*>/g, '').trim();
-    const words = content.split(/\s+/).filter(word => word.length > 0).length;
+    const words = content.split(/\s+/).filter((word: string) => word.length > 0).length;
     return Math.ceil(words / wordsPerMinute) || 1;
 }
 
@@ -84,7 +89,7 @@ function calculateReadingTime(job: any): number {
 const jobListings = await fetchJobListings('developer');
 
 // Sort jobs by date
-const sortedJobs = jobListings.sort((a, b) =>
+const sortedJobs = jobListings.sort((a: any, b: any) =>
     new Date(getJobDate(b)).getTime() - new Date(getJobDate(a)).getTime()
 );
 
@@ -95,30 +100,39 @@ const otherJobs = sortedJobs.slice(1);
 // Get all unique locations and companies for filtering
 const allLocations = Array.from(
     new Set(
-        jobListings.map(job => job.location)
-            .filter(location => location && location.trim() !== '')
+        jobListings.map((job: any) => job.location)
+            .filter((location: any) => location && location.trim() !== '')
     )
 ).sort();
 
 const allCompanies = Array.from(
     new Set(
-        jobListings.map(job => job.company)
-            .filter(company => company && company.trim() !== '')
+        jobListings.map((job: any) => job.company)
+            .filter((company: any) => company && company.trim() !== '')
     )
 ).sort();
+
+const translations = {
+    directApp: t('careers.direct_app'),
+    standardApp: t('careers.standard_app'),
+    successMsg: t('careers.success_msg'),
+    errorMsg: t('careers.error_msg'),
+    subscribing: t('careers.subscribing'),
+    subscribed: t('careers.subscribed')
+};
 ---
 
-<Layout title="Marketing & Developer Job Opportunities | Laravel Mail Careers" description="Find your next role in marketing or development at top tech companies. Browse full-time and remote job opportunities tailored to your skills and career growth.">
+<Layout title={t('careers.title')} description={t('careers.description')}>
     <!-- Hero Section -->
     <section class="relative py-20 md:py-32 bg-transparent overflow-hidden">
         <div class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5" aria-hidden="true"></div>
         <div class="container-custom relative">
             <div class="max-w-4xl mx-auto text-center">
                 <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8 animate-on-scroll">
-                    Find Your Next <span class="gradient-text">Opportunity</span>
+                    {t('careers.hero_title_1')} <span class="gradient-text">{t('careers.hero_title_2')}</span>
                 </h1>
                 <p class="text-xl text-gray-400 max-w-2xl mx-auto animate-on-scroll delay-1">
-                    Discover exciting career opportunities from top companies around the world. Start your journey today.
+                    {t('careers.hero_subtitle')}
                 </p>
 
                 <!-- Search Form -->
@@ -127,14 +141,14 @@ const allCompanies = Array.from(
                             type="text"
                             id="keyword-search"
                             name="keyword"
-                            placeholder="Search for jobs (e.g. developer, marketing)"
+                            placeholder={t('careers.search_placeholder')}
                             class="flex-1 px-6 py-4 rounded-xl border border-white/20 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none text-lg"
                     />
                     <button
                             type="submit"
                             class="px-8 py-4 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                     >
-                        Search Jobs
+                        {t('careers.search_button')}
                     </button>
                 </form>
             </div>
@@ -146,7 +160,7 @@ const allCompanies = Array.from(
             <section class="py-16 bg-[#1e293b]/40 backdrop-blur-md">
                 <div class="container-custom">
                     <div class="mb-12">
-                        <h2 class="text-2xl font-bold mb-4 animate-on-scroll">Featured Opportunity</h2>
+                        <h2 class="text-2xl font-bold mb-4 animate-on-scroll">{t('careers.featured_jobs')}</h2>
                     </div>
 
                     <article class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll delay-1">
@@ -206,26 +220,26 @@ const allCompanies = Array.from(
 
                                 <div class="flex items-center text-gray-400 text-sm">
                                     <span class="mr-2">⏱️</span>
-                                    <span>{calculateReadingTime(featuredJob)} min read</span>
+                                    <span>{calculateReadingTime(featuredJob)} {t('careers.min_read')}</span>
                                 </div>
                             </div>
 
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <button
                                         class="btn btn-primary inline-flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-                                        onclick="openApplicationModal('${featuredJob.job_url}', '${featuredJob.title}', '${featuredJob.company}', 'apply')"
+                                        onclick={`openApplicationModal('${featuredJob.job_url}', '${featuredJob.title}', '${featuredJob.company}', 'apply')`}
                                         aria-label={`Apply for ${featuredJob.title} at ${featuredJob.company}`}
                                 >
-                                    Apply Now
+                                    {t('careers.apply_now')}
                                     <span class="ml-2 group-hover:translate-x-1 group-focus:translate-x-1 transition-transform duration-200">→</span>
                                 </button>
 
                                 {featuredJob.job_url_direct && (
                                         <button
                                                 class="btn bg-[#1e293b]/30 text-gray-300 hover:bg-gray-200 focus:bg-gray-200 inline-flex items-center"
-                                                onclick="openApplicationModal('${featuredJob.job_url_direct}', '${featuredJob.title}', '${featuredJob.company}', 'direct')"
+                                                onclick={`openApplicationModal('${featuredJob.job_url_direct}', '${featuredJob.title}', '${featuredJob.company}', 'direct')`}
                                         >
-                                            Direct Apply
+                                            {t('careers.direct_apply')}
                                         </button>
                                 )}
                             </div>
@@ -240,16 +254,16 @@ const allCompanies = Array.from(
             <section class="py-8 bg-[#0a0e27]/60 border-t border-white/10">
                 <div class="container-custom">
                     <div class="flex flex-wrap items-center gap-4 mb-4">
-                        <span class="text-sm font-medium text-gray-300">Filter by location:</span>
+                        <span class="text-sm font-medium text-gray-300">{t('careers.filter_location')}</span>
                         <div class="flex flex-wrap gap-2" role="group" aria-label="Filter jobs by location">
                             <button
                                     class="filter-location px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-location="all"
                                     aria-pressed="true"
                             >
-                                All Locations
+                                {t('careers.all_locations')}
                             </button>
-                            {allLocations.slice(0, 10).map((location: string) => (
+                            {allLocations.slice(0, 10).map((location: any) => (
                                     <button
                                             class="filter-location px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                             data-location={location}
@@ -262,28 +276,28 @@ const allCompanies = Array.from(
                     </div>
 
                     <div class="flex flex-wrap items-center gap-4">
-                        <span class="text-sm font-medium text-gray-300">Filter by type:</span>
+                        <span class="text-sm font-medium text-gray-300">{t('careers.filter_type')}</span>
                         <div class="flex flex-wrap gap-2" role="group" aria-label="Filter jobs by type">
                             <button
                                     class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-type="all"
                                     aria-pressed="true"
                             >
-                                All Types
+                                {t('careers.all_types')}
                             </button>
                             <button
                                     class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-type="remote"
                                     aria-pressed="false"
                             >
-                                Remote Only
+                                {t('careers.remote_only')}
                             </button>
                             <button
                                     class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                                     data-type="salary"
                                     aria-pressed="false"
                             >
-                                With Salary
+                                {t('careers.with_salary')}
                             </button>
                         </div>
                     </div>
@@ -295,7 +309,7 @@ const allCompanies = Array.from(
     <section class="py-20">
         <div class="container-custom">
             <div class="mb-12">
-                <h2 class="text-2xl font-bold mb-4 animate-on-scroll">Latest Job Opportunities</h2>
+                <h2 class="text-2xl font-bold mb-4 animate-on-scroll">{t('careers.latest_opportunities')}</h2>
             </div>
 
             <div id="loading-indicator" class="hidden text-center py-16">
@@ -304,13 +318,13 @@ const allCompanies = Array.from(
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Searching for jobs...
+                    {t('careers.searching_msg')}
                 </div>
             </div>
 
             {otherJobs.length > 0 ? (
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="jobs-grid">
-                        {otherJobs.map((job, index) => (
+                        {otherJobs.map((job: any, index: number) => (
                                 <article
                                         class={`job-card group animate-on-scroll delay-${Math.min(index + 1, 5)}`}
                                         data-location={job.location}
@@ -337,7 +351,7 @@ const allCompanies = Array.from(
                                         </span>
                                                 {isRemoteJob(job) && (
                                                         <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
-                                                Remote
+                                                {t('careers.remote')}
                                             </span>
                                                 )}
                                                 {getSalaryRange(job) && (
@@ -382,14 +396,14 @@ const allCompanies = Array.from(
                                                         class="flex-1 text-center px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-1"
                                                         onclick={`openApplicationModal('${job.job_url}', '${job.title}', '${job.company}', 'apply')`}
                                                 >
-                                                    Apply Now
+                                                    {t('careers.apply_now')}
                                                 </button>
                                                 {job.job_url_direct && (
                                                         <button
                                                                 class="flex-1 text-center px-4 py-2 bg-[#1e293b]/30 text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-1"
                                                                 onclick={`openApplicationModal('${job.job_url_direct}', '${job.title}', '${job.company}', 'direct')`}
                                                         >
-                                                            Direct Apply
+                                                            {t('careers.direct_apply')}
                                                         </button>
                                                 )}
                                             </div>
@@ -402,8 +416,8 @@ const allCompanies = Array.from(
                     <div class="text-center py-16">
                         <div class="max-w-md mx-auto">
                             <Icon name="ph:briefcase-duotone" class="h-16 w-16 mx-auto text-gray-400 mb-4" aria-hidden="true" />
-                            <h3 class="text-lg font-semibold text-white mb-2">No jobs available</h3>
-                            <p class="text-gray-400">Try searching with different keywords or check back later for new opportunities.</p>
+                            <h3 class="text-lg font-semibold text-white mb-2">{t('careers.no_jobs_available')}</h3>
+                            <p class="text-gray-400">{t('careers.no_jobs_subtitle')}</p>
                         </div>
                     </div>
             )}
@@ -412,8 +426,8 @@ const allCompanies = Array.from(
             <div id="no-results" class="hidden text-center py-16">
                 <div class="max-w-md mx-auto">
                     <Icon name="ph:file-search" class="h-16 w-16 mx-auto text-gray-400 mb-4" aria-hidden="true" />
-                    <h3 class="text-lg font-semibold text-white mb-2">No jobs found</h3>
-                    <p class="text-gray-400">Try adjusting your filters or search with different keywords.</p>
+                    <h3 class="text-lg font-semibold text-white mb-2">{t('careers.no_jobs_found')}</h3>
+                    <p class="text-gray-400">{t('careers.no_jobs_found_subtitle')}</p>
                 </div>
             </div>
         </div>
@@ -425,7 +439,7 @@ const allCompanies = Array.from(
         <div class="bg-[#1e293b]/40 backdrop-blur-md rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div class="p-6">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xl font-semibold text-white">Apply for Position</h3>
+                    <h3 class="text-xl font-semibold text-white">{t('careers.apply_header')}</h3>
                     <button
                             onclick="closeApplicationModal()"
                             class="text-gray-400 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg p-1"
@@ -446,7 +460,7 @@ const allCompanies = Array.from(
                 <form id="application-form" class="space-y-4">
                     <div>
                         <label for="applicant-name" class="block text-sm font-medium text-gray-300 mb-2">
-                            Full Name <span class="text-red-500">*</span>
+                            {t('careers.full_name')} <span class="text-red-500">*</span>
                         </label>
                         <input
                                 type="text"
@@ -454,13 +468,13 @@ const allCompanies = Array.from(
                                 name="name"
                                 required
                                 class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none"
-                                placeholder="Enter your full name"
+                                placeholder={t('careers.name_placeholder')}
                         />
                     </div>
 
                     <div>
                         <label for="applicant-email" class="block text-sm font-medium text-gray-300 mb-2">
-                            Email Address <span class="text-red-500">*</span>
+                            {t('careers.email_address')} <span class="text-red-500">*</span>
                         </label>
                         <input
                                 type="email"
@@ -468,7 +482,7 @@ const allCompanies = Array.from(
                                 name="email"
                                 required
                                 class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none"
-                                placeholder="Enter your email address"
+                                placeholder={t('careers.email_placeholder')}
                         />
                     </div>
 
@@ -483,14 +497,14 @@ const allCompanies = Array.from(
                                 onclick="closeApplicationModal()"
                                 class="flex-1 px-4 py-3 border border-white/20 text-gray-300 font-medium rounded-lg hover:bg-[#1e293b]/20 focus:bg-[#1e293b]/20 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
                         >
-                            Cancel
+                            {t('careers.cancel')}
                         </button>
                         <button
                                 type="submit"
                                 class="flex-1 px-4 py-3 bg-brand-primary text-white font-medium rounded-lg hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
                         >
-                            <span id="submit-text">Submit Application</span>
-                            <span id="submit-loading" class="hidden">Submitting...</span>
+                            <span id="submit-text">{t('careers.submit_btn')}</span>
+                            <span id="submit-loading" class="hidden">{t('careers.submitting')}</span>
                         </button>
                     </div>
                 </form>
@@ -499,14 +513,16 @@ const allCompanies = Array.from(
     </div>
 </Layout>
 
-<script>
+<script define:vars={{ translations }}>
     document.addEventListener('astro:page-load', () => {
         // Modal functionality
-        window.openApplicationModal = function(jobLink, jobTitle, jobCompany, applicationType) {
+        (window).openApplicationModal = function(jobLink, jobTitle, jobCompany, applicationType) {
             const modal = document.getElementById('application-modal');
             const modalJobTitle = document.getElementById('modal-job-title');
             const modalJobCompany = document.getElementById('modal-job-company');
             const modalApplicationType = document.getElementById('modal-application-type');
+
+            if (!modal || !modalJobTitle || !modalJobCompany || !modalApplicationType) return;
 
             // Hidden form fields
             const jobLinkInput = document.getElementById('job-link');
@@ -514,10 +530,12 @@ const allCompanies = Array.from(
             const jobCompanyInput = document.getElementById('job-company-hidden');
             const applicationTypeInput = document.getElementById('application-type-hidden');
 
+            if (!jobLinkInput || !jobTitleInput || !jobCompanyInput || !applicationTypeInput) return;
+
             // Update modal content
             modalJobTitle.textContent = jobTitle;
             modalJobCompany.textContent = jobCompany;
-            modalApplicationType.textContent = applicationType === 'direct' ? 'Direct Application' : 'Standard Application';
+            modalApplicationType.textContent = applicationType === 'direct' ? translations.directApp : translations.standardApp;
 
             // Set hidden form values
             jobLinkInput.value = jobLink;
@@ -530,16 +548,18 @@ const allCompanies = Array.from(
             document.body.style.overflow = 'hidden';
 
             // Focus on first input
-            document.getElementById('applicant-name').focus();
+            const nameInput = document.getElementById('applicant-name');
+            if (nameInput) nameInput.focus();
         };
 
-        window.closeApplicationModal = function() {
+        (window).closeApplicationModal = function() {
             const modal = document.getElementById('application-modal');
-            modal.classList.add('hidden');
+            const form = document.getElementById('application-form');
+            if (modal) modal.classList.add('hidden');
             document.body.style.overflow = '';
 
             // Reset form
-            document.getElementById('application-form').reset();
+            if (form) form.reset();
         };
 
         // Handle form submission
@@ -548,9 +568,11 @@ const allCompanies = Array.from(
             applicationForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                const submitButton = e.target.querySelector('button[type="submit"]');
+                const submitButton = (e.target).querySelector('button[type="submit"]');
                 const submitText = document.getElementById('submit-text');
                 const submitLoading = document.getElementById('submit-loading');
+
+                if (!submitButton || !submitText || !submitLoading) return;
 
                 // Show loading state
                 submitText.classList.add('hidden');
@@ -580,16 +602,16 @@ const allCompanies = Array.from(
 
                     if (response.ok) {
                         // Success - show success message or close modal
-                        closeApplicationModal();
+                        (window).closeApplicationModal();
 
                         // Show success notification (you can customize this)
-                        alert('Application submitted successfully! We will be in touch soon.');
+                        alert(translations.successMsg);
                     } else {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                 } catch (error) {
                     console.error('Application submission error:', error);
-                    alert('There was an error submitting your application. Please try again.');
+                    alert(translations.errorMsg);
                 } finally {
                     // Reset loading state
                     submitText.classList.remove('hidden');
@@ -604,15 +626,15 @@ const allCompanies = Array.from(
         if (modal) {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
-                    closeApplicationModal();
+                    (window).closeApplicationModal();
                 }
             });
         }
 
         // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                closeApplicationModal();
+            if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                (window).closeApplicationModal();
             }
         });
 
@@ -723,11 +745,11 @@ const allCompanies = Array.from(
                 }
 
                 if (showCard) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.3s ease-in-out';
+                    (card).style.display = 'block';
+                    (card).style.animation = 'fadeIn 0.3s ease-in-out';
                     visibleCount++;
                 } else {
-                    card.style.display = 'none';
+                    (card).style.display = 'none';
                 }
             });
 
@@ -747,17 +769,17 @@ const allCompanies = Array.from(
             alertsForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                const emailInput = alertsForm.querySelector('input[type="email"]') as HTMLInputElement;
-                const submitButton = alertsForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+                const emailInput = alertsForm.querySelector('input[type="email"]');
+                const submitButton = alertsForm.querySelector('button[type="submit"]');
 
                 if (emailInput && submitButton) {
                     const originalText = submitButton.textContent;
-                    submitButton.textContent = 'Subscribing...';
+                    submitButton.textContent = translations.subscribing;
                     submitButton.disabled = true;
 
                     // Simulate API call (replace with actual implementation)
                     setTimeout(() => {
-                        submitButton.textContent = 'Subscribed!';
+                        submitButton.textContent = translations.subscribed;
                         emailInput.value = '';
 
                         setTimeout(() => {

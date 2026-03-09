@@ -1,28 +1,30 @@
 ---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const purchaseSteps = [
     {
         step: "1",
-        title: "Purchase Your License",
-        description:
-            'Buy your self-hosted <strong><a href="https://laravelmail.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors">Laravel Mail Marketing</a></strong> platform license via PayPal. You\'ll receive an instant order confirmation with your transaction ID.',
+        title: t('how.p_step1_title'),
+        description: t('how.p_step1_desc'),
     },
     {
         step: "2",
-        title: "Receive Docker Image + Tutorial",
-        description:
-            'Within minutes, you\'ll get a secure download link containing: Pre-configured Docker image optimized for <strong><a href="https://laravelmail.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors">Laravel Mail</a></strong>, step-by-step installation tutorial (PDF + video), environment configuration templates, API documentation & best practices guide.',
+        title: t('how.p_step2_title'),
+        description: t('how.p_step2_desc'),
     },
     {
         step: "3",
-        title: "Submit Activation Details",
-        description:
-            "Visit your account dashboard and submit: Your PayPal transaction ID, server/domain details for license binding, admin contact information.",
+        title: t('how.p_step3_title'),
+        description: t('how.p_step3_desc'),
     },
     {
         step: "4",
-        title: "Activation Completed (24–48 Hours)",
-        description:
-            "Our team verifies your submission and activates your license. You'll receive an email confirmation with your activation key and access to premium support.",
+        title: t('how.p_step4_title'),
+        description: t('how.p_step4_desc'),
     },
 ];
 
@@ -30,43 +32,36 @@ const setupSteps = [
     {
         number: "01",
         icon: "🔗",
-        title: 'Connect with <strong><a href="https://laravelmail.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors">Laravel Mail API</a></strong>',
-        description:
-            "Power your campaigns with a developer-friendly, scalable email infrastructure.",
+        title: t('value.sol2_title'),
+        description: t('how.setup_subtitle'),
         bullets: [
-            "Seamless API Integration: Use RESTful endpoints to connect your Laravel app, CRM, or e-commerce platform in minutes.",
-            "Webhook Support: Trigger automated emails based on user behavior, purchases, or custom events.",
-            "Multi-Provider Flexibility: Route emails through Amazon SES, Mailgun, SendGrid, or your own SMTP – all managed from one dashboard.",
-            "Secure Authentication: OAuth2, API tokens, and IP whitelisting keep your email infrastructure protected.",
+            t('value.sol2_desc'),
+            t('deploy.step1_desc')
         ],
     },
     {
         number: "02",
         icon: "⚙️",
-        title: 'Configure Your <strong><a href="https://laravelmail.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors">Laravel Email Marketing</a></strong> Experience',
-        description:
-            "Customize everything to match your brand, workflow, and compliance needs.",
+        title: t('value.sol3_subtitle'),
+        description: t('value.sol3_desc'),
         bullets: [
-            "White-Label Interface: Replace logos, colors, and domains to deliver a 100% branded experience to your team and clients.",
-            "Drag & Drop Campaign Builder: Create responsive emails without code – or use Blade templates for full developer control.",
-            "Automation Workflows: Build visual customer journeys with triggers, delays, conditions, and A/B testing.",
-            "GDPR & Compliance Ready: Built-in consent management, unsubscribe handling, and audit logs help you stay compliant globally.",
-            "Advanced Segmentation: Target subscribers by behavior, demographics, engagement, or custom attributes.",
+            t('deploy.step2_desc'),
+            t('deploy.docker_subtitle')
         ],
     },
     {
         number: "03",
         icon: "📈",
-        title: 'Launch, Automate & Scale with <strong><a href="https://laravelmail.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-brand-primary transition-colors">Laravel Mail</a></strong>',
-        description:
-            "Go live confidently and grow your email program without limits.",
+        title: t('value.sol1_subtitle'),
+        description: t('value.sol1_desc'),
         bullets: [
-            "One-Click Campaign Deployment: Schedule or send immediately to segmented lists with real-time analytics.",
-            "Smart Delivery Optimization: AI-powered send-time optimization and inbox placement monitoring boost open rates.",
-            "Auto-Scaling Architecture: Docker-based deployment scales horizontally to handle millions of emails without downtime.",
-            "Performance Analytics: Track opens, clicks, conversions, bounces, and revenue attribution in real-time dashboards.",
-            "Team Collaboration Tools: Role-based access, approval workflows, and activity logs keep your marketing team aligned.",
+            t('deploy.step3_desc'),
+            t('deploy.hero_subtitle')
         ],
+    },
+];
+---
+,
     },
 ];
 ---
@@ -83,34 +78,17 @@ const setupSteps = [
             <h2
                 class="animate-on-scroll delay-0 text-3xl md:text-4xl font-bold text-white"
             >
-                How <strong
-                    ><a
-                        href="https://laravelmail.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-white hover:text-brand-primary transition-colors"
-                        >Laravel Mail Marketing</a
-                    ></strong
-                > Works – Self-Hosted Email Solution
+                {t('how.title')}
             </h2>
             <p class="animate-on-scroll delay-1 mt-4 text-xl text-gray-400">
-                Set up your <b class="text-white"
-                    ><a
-                        href="https://laravelmail.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-white hover:text-brand-primary transition-colors"
-                        >self-hosted Laravel Mail marketing solution</a
-                    ></b
-                > in just three simple steps – connect, configure, and launch high-converting
-                email campaigns with full control over your data and infrastructure.
+                {t('how.subtitle')}
             </p>
         </div>
 
         <!-- Quick Start: Purchase & Activation Process -->
         <div class="mt-20">
             <h3 class="text-2xl font-bold text-white mb-8 flex items-center">
-                <span class="mr-2">🛒</span> Quick Start: Purchase & Activation Process
+                <span class="mr-2">🛒</span> {t('how.quick_start')}
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {
@@ -138,10 +116,8 @@ const setupSteps = [
             >
                 <p class="text-gray-300">
                     <span class="font-bold text-white"
-                        >✅ Why This Process?</span
-                    > This secure, manual activation ensures license authenticity,
-                    prevents unauthorized distribution, and allows our team to provide
-                    personalized onboarding support for your self-hosted deployment.
+                        >{t('how.why_process_title')}</span
+                    > {t('how.why_process_text')}
                 </p>
             </div>
         </div>
@@ -167,19 +143,11 @@ const setupSteps = [
             <h2 class="text-5xl md:text-6xl font-black text-white mb-6">
                 <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent"
-                    >3-Step Setup</span
+                    >{t('how.setup_header')}</span
                 >
             </h2>
             <p class="text-xl md:text-2xl text-gray-400 leading-relaxed">
-                From API connection to full-scale automation — here's how <strong
-                    ><a
-                        href="https://laravelmail.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="text-white hover:text-brand-primary transition-colors"
-                        >Laravel Mail Marketing</a
-                    ></strong
-                > powers your email campaigns.
+                {t('how.setup_subtitle')}
             </p>
         </div>
 
@@ -223,10 +191,10 @@ const setupSteps = [
         <!-- CTA -->
         <div class="text-center mt-20">
             <a
-                href="/buy"
+                href={getRelativeLocaleUrl(lang, "/buy")}
                 class="inline-flex items-center px-10 py-5 text-xl font-bold text-white bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl shadow-2xl hover:shadow-brand-primary/50 transform hover:scale-105 transition-all duration-300 group"
             >
-                Purchase Now — £40 Setup + £10/mo
+                {t('how.cta_btn')}
                 <svg
                     class="w-7 h-7 ml-3 group-hover:translate-x-2 transition-transform"
                     fill="none"
@@ -241,9 +209,7 @@ const setupSteps = [
                 </svg>
             </a>
             <p class="mt-4 text-gray-500">
-                One-time purchase • Full access to source code • Lifetime access
-                to our leads database, which are email verified leads of
-                customers that have purchased products in the past
+                {t('how.cta_p')}
             </p>
         </div>
     </div>

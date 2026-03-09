@@ -1,0 +1,1009 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+// Fetch job listings from jobs.izdrail.com API
+async function fetchJobListings(keyword = "marketing") {
+    try {
+        const response = await fetch("https://jobs.izdrail.com/api/v1/jobs", {
+            method: "POST",
+            headers: {
+                accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                keyword: "marketing",
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result.data || [];
+    } catch (error) {
+        console.error("Error fetching job listings:", error);
+        return [];
+    }
+}
+
+// Helper functions to handle job data
+function getJobDate(job: any) {
+    return job.date_posted || new Date().toISOString();
+}
+
+function getCompanyLogo(job: any) {
+    return job.logo_photo_url || "/logo.svg";
+}
+
+function getJobDescription(job: any) {
+    if (job.description) {
+        // Strip HTML tags and limit length
+        const description = job.description.replace(/<[^>]*>/g, "").trim();
+        return description.length > 300
+            ? description.substring(0, 300) + "..."
+            : description;
+    }
+    return "No description available.";
+}
+
+function getJobSlug(job: any) {
+    return (
+        job.title?.toLowerCase().replace(/[^a-z0-9]+/g, "-") +
+        "-" +
+        (job.company?.toLowerCase().replace(/[^a-z0-9]+/g, "-") || "job")
+    );
+}
+
+function getSalaryRange(job: any) {
+    if (job.min_amount && job.max_amount && job.currency) {
+        return `${job.currency} ${job.min_amount.toLocaleString()} - ${job.max_amount.toLocaleString()}`;
+    } else if (job.min_amount && job.currency) {
+        return `${job.currency} ${job.min_amount.toLocaleString()}+`;
+    }
+    return null;
+}
+
+function getJobType(job: any) {
+    return job.job_type || "Full-time";
+}
+
+function isRemoteJob(job: any) {
+    return job.is_remote || job.location?.toLowerCase().includes("remote");
+}
+
+// Calculate reading time for job description
+function calculateReadingTime(job: any): number {
+    const wordsPerMinute = 200;
+
+    if (!job.description) {
+        return 1;
+    }
+
+    const content = job.description.replace(/<[^>]*>/g, "").trim();
+    const words = content
+        .split(/\s+/)
+        .filter((word: string) => word.length > 0).length;
+    return Math.ceil(words / wordsPerMinute) || 1;
+}
+
+// Get job listings with default search
+const jobListings = await fetchJobListings("developer");
+
+// Sort jobs by date
+const sortedJobs = jobListings.sort(
+    (a: any, b: any) =>
+        new Date(getJobDate(b)).getTime() - new Date(getJobDate(a)).getTime(),
+);
+
+// Get featured job (most recent)
+const featuredJob = sortedJobs[0];
+const otherJobs = sortedJobs.slice(1);
+
+// Get all unique locations and companies for filtering
+const allLocations = Array.from(
+    new Set(
+        jobListings
+            .map((job: any) => job.location)
+            .filter((location: any) => location && location.trim() !== ""),
+    ),
+).sort();
+
+const allCompanies = Array.from(
+    new Set(
+        jobListings
+            .map((job: any) => job.company)
+            .filter((company: any) => company && company.trim() !== ""),
+    ),
+).sort();
+---
+
+<Layout
+    title={t('careers.title')}
+    description={t('careers.description')}
+>
+    <!-- Hero Section -->
+    <section class="relative py-20 md:py-32 bg-transparent overflow-hidden">
+        <div
+            class="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5"
+            aria-hidden="true"></div>
+        <div class="container-custom relative">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1
+                    class="text-4xl md:text-6xl font-bold leading-tight mb-8 animate-on-scroll"
+                >
+                    {t('careers.hero_title').split(' ').slice(0, -1).join(' ')} <span class="gradient-text">{t('careers.hero_title').split(' ').pop()}</span>
+                </h1>
+                <p
+                    class="text-xl text-gray-400 max-w-2xl mx-auto animate-on-scroll delay-1"
+                >
+                    {t('careers.hero_subtitle')}
+                </p>
+
+                <!-- Search Form -->
+                <form
+                    class="mt-10 flex flex-col sm:flex-row gap-4 max-w-lg mx-auto animate-on-scroll delay-2"
+                    id="job-search-form"
+                >
+                    <input
+                        type="text"
+                        id="keyword-search"
+                        name="keyword"
+                        placeholder={t('careers.search_placeholder')}
+                        class="flex-1 px-6 py-4 rounded-xl border border-white/20 focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none text-lg"
+                    />
+                    <button
+                        type="submit"
+                        class="px-8 py-4 bg-brand-primary text-white font-semibold rounded-xl hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                    >
+                        {t('careers.search_button')}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Job -->
+    {
+        featuredJob && (
+            <section class="py-16 bg-[#1e293b]/40 backdrop-blur-md">
+                <div class="container-custom">
+                    <div class="mb-12">
+                        <h2 class="text-2xl font-bold mb-4 animate-on-scroll">
+                            {t('careers.featured_opportunity')}
+                        </h2>
+                    </div>
+
+                    <article class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll delay-1">
+                        <div class="hover-zoom rounded-2xl overflow-hidden shadow-lg bg-[#1e293b]/30 flex items-center justify-center min-h-[300px]">
+                            <img
+                                src={getCompanyLogo(featuredJob)}
+                                alt={`${featuredJob.company} logo`}
+                                class="max-w-[200px] max-h-[100px] object-contain transition-all duration-500"
+                            />
+                        </div>
+
+                        <div>
+                            <div class="flex flex-wrap items-center gap-3 mb-4">
+                                <span class="bg-brand-primary/10 text-brand-primary px-3 py-1 rounded-full text-sm font-medium">
+                                    {getJobType(featuredJob)}
+                                </span>
+                                {isRemoteJob(featuredJob) && (
+                                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                                        {t('careers.remote')}
+                                    </span>
+                                )}
+                                {getSalaryRange(featuredJob) && (
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                                        {getSalaryRange(featuredJob)}
+                                    </span>
+                                )}
+                            </div>
+
+                            <h3
+                                title={featuredJob.title}
+                                class="text-3xl md:text-4xl font-bold mb-2 leading-tight"
+                            >
+                                {featuredJob.title}
+                            </h3>
+
+                            <p class="text-lg text-brand-primary font-semibold mb-4">
+                                {featuredJob.company}
+                            </p>
+
+                            <p class="text-lg text-gray-400 mb-6 leading-relaxed">
+                                {getJobDescription(featuredJob)}
+                            </p>
+
+                            <div class="flex flex-wrap items-center gap-6 mb-8">
+                                <div class="flex items-center text-gray-400 text-sm">
+                                    <span class="mr-2">📍</span>
+                                    <span>{featuredJob.location}</span>
+                                </div>
+
+                                <div class="flex items-center text-gray-400 text-sm">
+                                    <span class="mr-2">📅</span>
+                                    <time datetime={getJobDate(featuredJob)}>
+                                        {new Date(
+                                            getJobDate(featuredJob),
+                                        ).toLocaleDateString(lang, {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        })}
+                                    </time>
+                                </div>
+
+                                <div class="flex items-center text-gray-400 text-sm">
+                                    <span class="mr-2">⏱️</span>
+                                    <span>
+                                        {calculateReadingTime(featuredJob)} {t('careers.min_read')}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <button
+                                    class="btn btn-primary inline-flex items-center group focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                    onclick={`openApplicationModal('${featuredJob.job_url}', '${featuredJob.title}', '${featuredJob.company}', 'apply')`}
+                                    aria-label={`${t('careers.apply_now')} ${featuredJob.title} at ${featuredJob.company}`}
+                                >
+                                    {t('careers.apply_now')}
+                                    <span class="ml-2 group-hover:translate-x-1 group-focus:translate-x-1 transition-transform duration-200">
+                                        →
+                                    </span>
+                                </button>
+
+                                {featuredJob.job_url_direct && (
+                                    <button
+                                        class="btn bg-[#1e293b]/30 text-gray-300 hover:bg-gray-200 focus:bg-gray-200 inline-flex items-center"
+                                        onclick={`openApplicationModal('${featuredJob.job_url_direct}', '${featuredJob.title}', '${featuredJob.company}', 'direct')`}
+                                    >
+                                        {t('careers.direct_apply')}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- Filters Section -->
+    {
+        (allLocations.length > 0 || allCompanies.length > 0) && (
+            <section class="py-8 bg-[#0a0e27]/60 border-t border-white/10">
+                <div class="container-custom">
+                    <div class="flex flex-wrap items-center gap-4 mb-4">
+                        <span class="text-sm font-medium text-gray-300">
+                            {t('careers.filter_location')}
+                        </span>
+                        <div
+                            class="flex flex-wrap gap-2"
+                            role="group"
+                            aria-label="Filter jobs by location"
+                        >
+                            <button
+                                class="filter-location px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                data-location="all"
+                                aria-pressed="true"
+                            >
+                                {t('careers.all_locations')}
+                            </button>
+                            {allLocations.slice(0, 10).map((location: any) => (
+                                <button
+                                    class="filter-location px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                    data-location={location}
+                                    aria-pressed="false"
+                                >
+                                    {location}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <span class="text-sm font-medium text-gray-300">
+                            {t('careers.filter_type')}
+                        </span>
+                        <div
+                            class="flex flex-wrap gap-2"
+                            role="group"
+                            aria-label="Filter jobs by type"
+                        >
+                            <button
+                                class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                data-type="all"
+                                aria-pressed="true"
+                            >
+                                {t('careers.all_types')}
+                            </button>
+                            <button
+                                class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                data-type="remote"
+                                aria-pressed="false"
+                            >
+                                {t('careers.remote_only')}
+                            </button>
+                            <button
+                                class="filter-type px-3 py-1 bg-[#1e293b]/40 backdrop-blur-md text-gray-300 rounded-full text-sm border border-white/10 hover:bg-brand-primary hover:text-white focus:bg-brand-primary focus:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                                data-type="salary"
+                                aria-pressed="false"
+                            >
+                                {t('careers.with_salary')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    <!-- All Jobs Grid -->
+    <section class="py-20">
+        <div class="container-custom">
+            <div class="mb-12">
+                <h2 class="text-2xl font-bold mb-4 animate-on-scroll">
+                    {t('careers.latest_opportunities')}
+                </h2>
+            </div>
+
+            <div id="loading-indicator" class="hidden text-center py-16">
+                <div
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-400"
+                >
+                    <svg
+                        class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <circle
+                            class="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="4"></circle>
+                        <path
+                            class="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                    </svg>
+                    {t('careers.searching')}
+                </div>
+            </div>
+
+            {
+                otherJobs.length > 0 ? (
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                        id="jobs-grid"
+                    >
+                        {otherJobs.map((job: any, index: number) => (
+                            <article
+                                class={`job-card group animate-on-scroll delay-${Math.min(index + 1, 5)}`}
+                                data-location={job.location}
+                                data-company={job.company}
+                                data-is-remote={isRemoteJob(job)}
+                                data-has-salary={
+                                    getSalaryRange(job) ? "true" : "false"
+                                }
+                            >
+                                <div class="block bg-[#1e293b]/40 backdrop-blur-md rounded-xl overflow-hidden shadow-sm hover:shadow-lg focus-within:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-white/10">
+                                    {/* Company Logo */}
+                                    <div class="aspect-video overflow-hidden bg-[#1e293b]/20 flex items-center justify-center p-6">
+                                        <img
+                                            src={getCompanyLogo(job)}
+                                            alt={`${job.company} logo`}
+                                            class="max-w-full max-h-full object-contain transform group-hover:scale-105 transition-transform duration-300"
+                                            loading="lazy"
+                                        />
+                                    </div>
+
+                                    <div class="p-6">
+                                        {/* Job Type and Remote Badge */}
+                                        <div class="flex flex-wrap gap-2 mb-4">
+                                            <span class="bg-brand-primary/10 text-brand-primary px-2 py-1 rounded text-xs font-medium">
+                                                {getJobType(job)}
+                                            </span>
+                                            {isRemoteJob(job) && (
+                                                <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
+                                                    {t('careers.remote')}
+                                                </span>
+                                            )}
+                                            {getSalaryRange(job) && (
+                                                <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium">
+                                                    {getSalaryRange(job)}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <h3 class="font-semibold text-lg mb-2 group-hover:text-brand-primary transition-colors duration-200 line-clamp-2">
+                                            {job.title}
+                                        </h3>
+
+                                        <p class="text-brand-primary font-medium mb-3">
+                                            {job.company}
+                                        </p>
+
+                                        <p class="text-sm text-gray-400 mb-4 line-clamp-3">
+                                            {getJobDescription(job)}
+                                        </p>
+
+                                        <div class="flex flex-wrap items-center gap-4 text-xs text-gray-400 mb-4">
+                                            <div class="flex items-center">
+                                                <span class="mr-1">📍</span>
+                                                <span>{job.location}</span>
+                                            </div>
+
+                                            <div class="flex items-center">
+                                                <span class="mr-1">📅</span>
+                                                <time datetime={getJobDate(job)}>
+                                                    {new Date(
+                                                        getJobDate(job),
+                                                    ).toLocaleDateString(
+                                                        lang,
+                                                        {
+                                                            year: "numeric",
+                                                            month: "short",
+                                                            day: "numeric",
+                                                        },
+                                                    )}
+                                                </time>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col sm:flex-row gap-2">
+                                            <button
+                                                class="flex-1 text-center px-4 py-2 bg-brand-primary text-white text-sm font-medium rounded-lg hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-1"
+                                                onclick={`openApplicationModal('${job.job_url}', '${job.title}', '${job.company}', 'apply')`}
+                                            >
+                                                {t('careers.apply_now')}
+                                            </button>
+                                            {job.job_url_direct && (
+                                                <button
+                                                    class="flex-1 text-center px-4 py-2 bg-[#1e293b]/30 text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-200 focus:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-1"
+                                                    onclick={`openApplicationModal('${job.job_url_direct}', '${job.title}', '${job.company}', 'direct')`}
+                                                >
+                                                    {t('careers.direct_apply')}
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                ) : (
+                    <div class="text-center py-16">
+                        <div class="max-w-md mx-auto">
+                            <Icon
+                                name="ph:briefcase-duotone"
+                                class="h-16 w-16 mx-auto text-gray-400 mb-4"
+                                aria-hidden="true"
+                            />
+                            <h3 class="text-lg font-semibold text-white mb-2">
+                                No jobs available
+                            </h3>
+                            <p class="text-gray-400">
+                                Try searching with different keywords or check
+                                back later for new opportunities.
+                            </p>
+                        </div>
+                    </div>
+                )
+            }
+
+            <!-- No results message for filtering -->
+            <div id="no-results" class="hidden text-center py-16">
+                <div class="max-w-md mx-auto">
+                    <Icon
+                        name="ph:file-search"
+                        class="h-16 w-16 mx-auto text-gray-400 mb-4"
+                        aria-hidden="true"
+                    />
+                    <h3 class="text-lg font-semibold text-white mb-2">
+                        No jobs found
+                    </h3>
+                    <p class="text-gray-400">
+                        Try adjusting your filters or search with different
+                        keywords.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Modal -->
+    <div
+        id="application-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+    >
+        <div
+            class="bg-[#1e293b]/40 backdrop-blur-md rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+        >
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-semibold text-white">
+                        Apply for Position
+                    </h3>
+                    <button
+                        onclick="closeApplicationModal()"
+                        class="text-gray-400 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary rounded-lg p-1"
+                        aria-label="Close modal"
+                    >
+                        <svg
+                            class="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="mb-4 p-4 bg-[#1e293b]/20 rounded-lg">
+                    <h4 id="modal-job-title" class="font-semibold text-white mb-1">
+                    </h4>
+                    <p
+                        id="modal-job-company"
+                        class="text-brand-primary font-medium mb-2"
+                    >
+                    </p>
+                    <p id="modal-application-type" class="text-sm text-gray-400">
+                    </p>
+                </div>
+
+                <form id="application-form" class="space-y-4">
+                    <div>
+                        <label
+                            for="applicant-name"
+                            class="block text-sm font-medium text-gray-300 mb-2"
+                        >
+                            Full Name <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="applicant-name"
+                            name="name"
+                            required
+                            class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none"
+                            placeholder="Enter your full name"
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            for="applicant-email"
+                            class="block text-sm font-medium text-gray-300 mb-2"
+                        >
+                            Email Address <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="email"
+                            id="applicant-email"
+                            name="email"
+                            required
+                            class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary focus:outline-none"
+                            placeholder="Enter your email address"
+                        />
+                    </div>
+
+                    <input type="hidden" id="job-link" name="job_link" />
+                    <input type="hidden" id="job-title-hidden" name="job_title" />
+                    <input
+                        type="hidden"
+                        id="job-company-hidden"
+                        name="job_company"
+                    />
+                    <input
+                        type="hidden"
+                        id="application-type-hidden"
+                        name="application_type"
+                           <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                        <button
+                            type="button"
+                            onclick="closeApplicationModal()"
+                            class="flex-1 px-4 py-3 border border-white/20 text-gray-300 font-medium rounded-lg hover:bg-[#1e293b]/20 focus:bg-[#1e293b]/20 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300"
+                        >
+                            {t('careers.cancel')}
+                        </button>
+                        <button
+                            type="submit"
+                            class="flex-1 px-4 py-3 bg-brand-primary text-white font-medium rounded-lg hover:bg-brand-primary/90 focus:bg-brand-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                        >
+                            <span id="submit-text">{t('careers.submit')}</span>
+                            <span id="submit-loading" class="hidden"
+                                >{t('careers.submitting')}</span
+                            >
+                        </button>
+                    </div>
+           </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline>
+    document.addEventListener("astro:page-load", () => {
+        // Modal functionality
+        window.openApplicationModal = function (
+            jobLink,
+            jobTitle,
+            jobCompany,
+            applicationType,
+        ) {
+            const modal = document.getElementById("application-modal");
+            const modalJobTitle = document.getElementById("modal-job-title");
+            const modalJobCompany = document.getElementById("modal-job-company");
+            const modalApplicationType = document.getElementById(
+                "modal-application-type",
+            );
+
+            // Hidden form fields
+            const jobLinkInput = document.getElementById("job-link");
+            const jobTitleInput = document.getElementById("job-title-hidden");
+            const jobCompanyInput = document.getElementById("job-company-hidden");
+            const applicationTypeInput = document.getElementById(
+                "application-type-hidden",
+            );
+
+            // Update modal content
+            modalJobTitle.textContent = jobTitle;
+            modalJobCompany.textContent = jobCompany;
+            modalApplicationType.textContent =
+                applicationType === "direct"
+                    ? "Direct Application"
+                    : "Standard Application";
+
+            // Set hidden form values
+            jobLinkInput.value = jobLink;
+            jobTitleInput.value = jobTitle;
+            jobCompanyInput.value = jobCompany;
+            applicationTypeInput.value = applicationType;
+
+            // Show modal
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+
+            // Focus on first input
+            document.getElementById("applicant-name").focus();
+        };
+
+        window.closeApplicationModal = function () {
+            const modal = document.getElementById("application-modal");
+            modal.classList.add("hidden");
+            document.body.style.overflow = "";
+
+            // Reset form
+            document.getElementById("application-form").reset();
+        };
+
+        // Handle form submission
+        const applicationForm = document.getElementById("application-form");
+        if (applicationForm) {
+            applicationForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const submitButton = e.target.querySelector(
+                    'button[type="submit"]',
+                );
+                const submitText = document.getElementById("submit-text");
+                const submitLoading = document.getElementById("submit-loading");
+
+                // Show loading state
+                submitText.classList.add("hidden");
+                submitLoading.classList.remove("hidden");
+                submitButton.disabled = true;
+
+                try {
+                    const formData = new FormData(applicationForm);
+                    const applicationData = {
+                        name: formData.get("name"),
+                        email: formData.get("email"),
+                        job_link: formData.get("job_link"),
+                        job_title: formData.get("job_title"),
+                        job_company: formData.get("job_company"),
+                        application_type: formData.get("application_type"),
+                        timestamp: new Date().toISOString(),
+                    };
+
+                    // Replace with your actual endpoint
+                    const response = await fetch("/api/job-applications", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(applicationData),
+                    });
+
+                    if (response.ok) {
+                        // Success - show success message or close modal
+                        closeApplicationModal();
+
+                        // Show success notification (you can customize this)
+                        alert(
+                            "{t('careers.success_msg')}",
+                        );
+                    } else {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                } catch (error) {
+                    console.error("Application submission error:", error);
+                    alert(
+                        "{t('careers.error_msg')}",
+                    );
+                } finally {
+                    // Reset loading state
+                    submitText.classList.remove("hidden");
+                    submitLoading.classList.add("hidden");
+                    submitButton.disabled = false;
+                }
+            });
+        }
+
+        // Close modal when clicking outside
+        const modal = document.getElementById("application-modal");
+        if (modal) {
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    closeApplicationModal();
+                }
+            });
+        }
+
+        // Close modal with Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+                closeApplicationModal();
+            }
+        });
+
+        // Job search functionality
+        const searchForm = document.getElementById("job-search-form");
+        const loadingIndicator = document.getElementById("loading-indicator");
+        const jobsGrid = document.getElementById("jobs-grid");
+
+        if (searchForm) {
+            searchForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(searchForm);
+                const keyword = formData.get("keyword")?.toString() || "";
+
+                if (loadingIndicator && jobsGrid) {
+                    loadingIndicator.classList.remove("hidden");
+                    jobsGrid.style.opacity = "0.5";
+                }
+
+                try {
+                    // In a real implementation, you would make an API call here
+                    // For now, we'll simulate the search by reloading the page with a query parameter
+                    const url = new URL(window.location.href);
+                    url.searchParams.set("search", keyword);
+                    window.location.href = url.toString();
+                } catch (error) {
+                    console.error("Search error:", error);
+                    if (loadingIndicator && jobsGrid) {
+                        loadingIndicator.classList.add("hidden");
+                        jobsGrid.style.opacity = "1";
+                    }
+                }
+            });
+        }
+
+        // Location filtering functionality
+        const locationFilters = document.querySelectorAll(".filter-location");
+        const typeFilters = document.querySelectorAll(".filter-type");
+        const jobCards = document.querySelectorAll(".job-card");
+        const noResults = document.getElementById("no-results");
+
+        locationFilters.forEach((filter) => {
+            filter.addEventListener("click", () => {
+                const selectedLocation = filter.getAttribute("data-location");
+
+                // Update active state
+                locationFilters.forEach((f) => {
+                    f.classList.remove("bg-brand-primary", "text-white");
+                    f.classList.add(
+                        "bg-[#1e293b]/40 backdrop-blur-md",
+                        "text-gray-300",
+                    );
+                    f.setAttribute("aria-pressed", "false");
+                });
+
+                filter.classList.remove(
+                    "bg-[#1e293b]/40 backdrop-blur-md",
+                    "text-gray-300",
+                );
+                filter.classList.add("bg-brand-primary", "text-white");
+                filter.setAttribute("aria-pressed", "true");
+
+                filterJobs();
+            });
+        });
+
+        typeFilters.forEach((filter) => {
+            filter.addEventListener("click", () => {
+                const selectedType = filter.getAttribute("data-type");
+
+                // Update active state
+                typeFilters.forEach((f) => {
+                    f.classList.remove("bg-brand-primary", "text-white");
+                    f.classList.add(
+                        "bg-[#1e293b]/40 backdrop-blur-md",
+                        "text-gray-300",
+                    );
+                    f.setAttribute("aria-pressed", "false");
+                });
+
+                filter.classList.remove(
+                    "bg-[#1e293b]/40 backdrop-blur-md",
+                    "text-gray-300",
+                );
+                filter.classList.add("bg-brand-primary", "text-white");
+                filter.setAttribute("aria-pressed", "true");
+
+                filterJobs();
+            });
+        });
+
+        function filterJobs() {
+            const selectedLocation = document
+                .querySelector('.filter-location[aria-pressed="true"]')
+                ?.getAttribute("data-location");
+            const selectedType = document
+                .querySelector('.filter-type[aria-pressed="true"]')
+                ?.getAttribute("data-type");
+
+            let visibleCount = 0;
+
+            jobCards.forEach((card) => {
+                const cardLocation = card.getAttribute("data-location");
+                const cardIsRemote =
+                    card.getAttribute("data-is-remote") === "true";
+                const cardHasSalary =
+                    card.getAttribute("data-has-salary") === "true";
+
+                let showCard = true;
+
+                // Location filter
+                if (selectedLocation && selectedLocation !== "all") {
+                    if (cardLocation !== selectedLocation) {
+                        showCard = false;
+                    }
+                }
+
+                // Type filter
+                if (selectedType && selectedType !== "all") {
+                    if (selectedType === "remote" && !cardIsRemote) {
+                        showCard = false;
+                    } else if (selectedType === "salary" && !cardHasSalary) {
+                        showCard = false;
+                    }
+                }
+
+                if (showCard) {
+                    card.style.display = "block";
+                    card.style.animation = "fadeIn 0.3s ease-in-out";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Show/hide no results message
+            if (noResults) {
+                if (visibleCount === 0) {
+                    noResults.classList.remove("hidden");
+                } else {
+                    noResults.classList.add("hidden");
+                }
+            }
+        }
+
+        // Job alerts form handling
+        const alertsForm = document.querySelector('form[role="form"]');
+        if (alertsForm) {
+            alertsForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const emailInput = alertsForm.querySelector(
+                    'input[type="email"]',
+                );
+                const submitButton = alertsForm.querySelector(
+                    'button[type="submit"]',
+                );
+
+                if (emailInput && submitButton) {
+                    const originalText = submitButton.textContent;
+                    submitButton.textContent = "{t('careers.subscribing')}";
+                    submitButton.disabled = true;
+
+                    // Simulate API call (replace with actual implementation)
+                    setTimeout(() => {
+                        submitButton.textContent = "{t('careers.subscribed')}";
+                        emailInput.value = "";
+
+                        setTimeout(() => {
+                            submitButton.textContent = originalText;
+                            submitButton.disabled = false;
+                        }, 2000);
+                    }, 1000);
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    /* Screen reader only class */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    /* Line clamp utilities */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .gradient-text {
+        background: linear-gradient(
+            to right,
+            var(--color-brand-primary),
+            #60a5fa
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>

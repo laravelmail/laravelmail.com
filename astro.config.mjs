@@ -8,6 +8,15 @@ export default defineConfig({
     site: 'https://laravelmail.com',
     output: 'static',
     prefetch: true,
+    i18n: {
+        defaultLocale: 'en',
+        locales: ['en', 'es', 'zh', 'ru'],
+        routing: {
+            prefixDefaultLocale: false,
+        },
+    },
+    redirects: {
+    },
     integrations: [
         tailwind(),
         sitemap(),

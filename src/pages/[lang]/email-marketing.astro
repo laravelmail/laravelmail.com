@@ -1,0 +1,174 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CTASection from "../../components/CTASection.astro";
+import FAQ from "../../components/FAQ.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const title = t('pillar.title');
+const description = t('pillar.description');
+const keywords = "email marketing, email marketing platform, email marketing software, automated email marketing, email marketing for small business, email marketing systems, email marketing campaign";
+---
+
+<Layout title={title} description={description} keywords={keywords}>
+    <section class="pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden relative">
+        <div class="container-custom relative">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
+                    {t('pillar.badge')}
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-black leading-tight text-white mb-8">
+                    {t('pillar.hero_1')} <br/><span class="gradient-text">{t('pillar.hero_2')}</span>
+                </h1>
+                <p class="text-xl text-gray-300 leading-relaxed mb-10">
+                    {t('pillar.subtitle')}
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href={getRelativeLocaleUrl(lang as string, "/buy")} class="btn btn-primary px-8 py-4 text-lg">{t('pillar.cta')}</a>
+                    <a href="#overview" class="text-white hover:text-brand-primary transition-colors font-medium">{t('pillar.explore')} ↓</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="py-20 bg-brand-bg/50">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">{t('pillar.overview_header')}</h2>
+                    <div class="prose prose-invert max-w-none text-gray-300">
+                        <p>{t('pillar.overview_p1')}</p>
+                        <p>{t('pillar.overview_p2')}</p>
+                        <p>{t('pillar.overview_p3')}</p>
+                    </div>
+                </div>
+                <div class="bg-brand-primary/5 border border-brand-primary/20 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-white mb-4">{t('pillar.pillars_header')}</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary font-bold">01.</span>
+                            <span>{t('pillar.pillar1')}</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary font-bold">02.</span>
+                            <span>{t('pillar.pillar2')}</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary font-bold">03.</span>
+                            <span>{t('pillar.pillar3')}</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary font-bold">04.</span>
+                            <span>{t('pillar.pillar4')}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20">
+        <div class="container-custom text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">{t('pillar.automation_header')}</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                {t('pillar.automation_subtitle')}
+            </p>
+        </div>
+        <div class="container-custom">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-white mb-4">{t('pillar.feat1_header')}</h3>
+                    <p class="text-gray-400">
+                        {t('pillar.feat1_text')}
+                    </p>
+                </div>
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-white mb-4">{t('pillar.feat2_header')}</h3>
+                    <p class="text-gray-400">
+                        {t('pillar.feat2_text')}
+                    </p>
+                </div>
+                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+                    <h3 class="text-xl font-bold text-white mb-4">{t('pillar.feat3_header')}</h3>
+                    <p class="text-gray-400">
+                        {t('pillar.feat3_text')}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-primary/5 relative">
+        <div class="container-custom">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                 <div class="order-2 lg:order-1">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-6 bg-brand-bg border border-white/10 rounded-xl text-center">
+                            <span class="block text-4xl font-bold text-brand-primary mb-2">10M+</span>
+                            <span class="text-sm text-gray-400 uppercase tracking-widest">{t('pillar.stat1')}</span>
+                        </div>
+                        <div class="p-6 bg-brand-bg border border-white/10 rounded-xl text-center">
+                            <span class="block text-4xl font-bold text-brand-primary mb-2">99%</span>
+                            <span class="text-sm text-gray-400 uppercase tracking-widest">{t('pillar.stat2')}</span>
+                        </div>
+                        <div class="p-6 bg-brand-bg border border-white/10 rounded-xl text-center">
+                            <span class="block text-4xl font-bold text-brand-primary mb-2">∞</span>
+                            <span class="text-sm text-gray-400 uppercase tracking-widest">{t('pillar.stat3')}</span>
+                        </div>
+                        <div class="p-6 bg-brand-bg border border-white/10 rounded-xl text-center">
+                            <span class="block text-4xl font-bold text-brand-primary mb-2">100%</span>
+                            <span class="text-sm text-gray-400 uppercase tracking-widest">{t('pillar.stat4')}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">{t('pillar.laravel_header')}</h2>
+                    <p class="text-gray-300 mb-6 font-medium">
+                        {t('pillar.laravel_text')}
+                    </p>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-center gap-2">
+                             <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                             {t('pillar.laravel_li1')}
+                        </li>
+                        <li class="flex items-center gap-2">
+                             <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                             {t('pillar.laravel_li2')}
+                        </li>
+                        <li class="flex items-center gap-2">
+                             <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                             {t('pillar.laravel_li3')}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <FAQ />
+
+    <section class="py-20">
+        <div class="container-custom">
+            <div class="prose prose-invert max-w-none text-gray-400 text-sm">
+                <h2 class="text-xl font-bold text-white mt-12 mb-4">{t('pillar.deep_header')}</h2>
+                <p>{t('pillar.deep_p1')}</p>
+                <p>{t('pillar.deep_p2')}</p>
+                <p>{t('pillar.deep_p3')}</p>
+                <p>{t('pillar.deep_p4')}</p>
+                <p>{t('pillar.deep_p5')}</p>
+            </div>
+        </div>
+    </section>
+
+    <CTASection />
+</Layout>

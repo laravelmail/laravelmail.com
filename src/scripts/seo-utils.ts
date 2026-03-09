@@ -5,10 +5,10 @@
 export function injectSeoLinks(html: string): string {
     const links = [
         { phrase: 'email marketing', url: '/email-marketing' },
-        { phrase: 'automated email marketing', url: '/email-automation' },
+        { phrase: 'automated email marketing', url: '/email-automation-software' },
         { phrase: 'mailchimp alternative', url: '/mailchimp-alternative' },
-        { phrase: 'email deliverability', url: '/email-deliverability' },
-        { phrase: 'marketing automation', url: '/email-automation' }
+        { phrase: 'email deliverability', url: '/email-deliverability-guide' },
+        { phrase: 'marketing automation', url: '/email-automation-software' }
     ];
 
     let processedHtml = html;

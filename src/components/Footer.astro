@@ -1,19 +1,24 @@
 ---
 import { Image } from "astro:assets";
 import logoSrc from "../assets/logo.svg";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const companyLinks = [
-    { name: "Email Marketing", href: "/email-marketing" },
-    { name: "Automation", href: "/email-automation" },
-    { name: "Mailchimp Alternative", href: "/mailchimp-alternative" },
-    { name: "Deliverability", href: "/email-deliverability" },
+    { name: "Email Marketing", href: getRelativeLocaleUrl(lang, "/email-marketing") },
+    { name: "Automation", href: getRelativeLocaleUrl(lang, "/email-automation") },
+    { name: "Mailchimp Alternative", href: getRelativeLocaleUrl(lang, "/mailchimp-alternative") },
+    { name: "Deliverability", href: getRelativeLocaleUrl(lang, "/email-deliverability") },
 ];
 
 const legalLinks = [
-    { name: "Privacy Policy", href: "https://laravelmail.com/privacy" },
-    { name: "Terms of Service", href: "/terms-of-service" },
-    { name: "Cookie Policy", href: "/cookie-policy" },
-    { name: "Careers", href: "/careers" },
+    { name: t('footer.privacy'), href: getRelativeLocaleUrl(lang, "/privacy") },
+    { name: t('footer.terms'), href: getRelativeLocaleUrl(lang, "/terms-of-service") },
+    { name: t('footer.cookie'), href: getRelativeLocaleUrl(lang, "/cookie-policy") },
+    { name: "Careers", href: getRelativeLocaleUrl(lang, "/careers") },
 ];
 
 const socialLinks = [
@@ -83,7 +88,7 @@ const organizationSchema = {
         >
             <div class="lg:col-span-2">
                 <a
-                    href="/"
+                    href={getRelativeLocaleUrl(lang, "/")}
                     class="inline-block transition-transform duration-300 hover:scale-105"
                     aria-label="Laravel Mail home"
                     onclick="window.trackFooterClick && window.trackFooterClick('Footer', 'Logo')"
@@ -314,7 +319,7 @@ const organizationSchema = {
                 class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6"
             >
                 <a
-                    href="/sitemap.xml"
+                    href={getRelativeLocaleUrl(lang, "/sitemap.xml")}
                     class="hover:text-white transition-colors duration-300"
                     title="Complete website navigation and page directory"
                     onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Sitemap')"
@@ -332,7 +337,7 @@ const organizationSchema = {
                 </a>
                 <span class="hidden sm:inline text-gray-600">|</span>
                 <a
-                    href="/terms-of-service"
+                    href={getRelativeLocaleUrl(lang, "/terms-of-service")}
                     class="hover:text-white transition-colors duration-300"
                     title="Review our service conditions and legal framework"
                     onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Terms of Service')"

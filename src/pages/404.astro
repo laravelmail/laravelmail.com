@@ -1,19 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout
-  title="404 - Page Not Found | Laravel Mail"
-  description="The page you are looking for does not exist. Return to the Laravel Mail homepage to explore our self-hosted marketing platform and leads database."
+  title={t('404.title')}
+  description={t('404.description')}
 >
   <section class="py-20 md:py-32 flex items-center min-h-[60vh]">
     <div class="container-custom text-center">
       <h1 class="text-4xl md:text-6xl font-bold mb-6">404</h1>
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">Page Not Found</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">{t('404.header')}</h2>
       <p class="text-xl text-gray-600 mb-10 max-w-xl mx-auto">
-        The page you're looking for doesn't exist or has been moved.
+        {t('404.text')}
       </p>
-      <a href="/" class="btn btn-primary"> Back to Home </a>
+      <a href={getRelativeLocaleUrl(lang, "/")} class="btn btn-primary"> {t('404.back')} </a>
     </div>
   </section>
 </Layout>

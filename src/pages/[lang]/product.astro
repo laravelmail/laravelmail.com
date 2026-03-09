@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import CTASection from "../../components/CTASection.astro";
+import Features from "../../components/Features.astro";
+import MarketingAutomation from "../../components/MarketingAutomation.astro";
+import Integrations from "../../components/Integrations.astro";
+import dashboardImage from "../../assets/dashboard.png";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Laravel Mail Marketing Platform",
+    applicationCategory: "BusinessApplication, MarketingApplication",
+    operatingSystem: "Linux, Docker",
+    description:
+        "Self-hosted marketing platform with Local AI Agents and verified B2B leads database for automated email campaigns and data sovereignty.",
+    aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        ratingCount: "128",
+    },
+    offers: {
+        "@type": "Offer",
+        price: "50",
+        priceCurrency: "GBP",
+    },
+    publisher: {
+        "@type": "Organization",
+        name: "Laravel Mail",
+        url: "https://laravelmail.com",
+    },
+};
+---
+
+<Layout
+    title={t('product.title')}
+    description={t('product.description')}
+>
+    <!-- Structured Data -->
+    <script
+        type="application/ld+json"
+        set:html={JSON.stringify(productSchema)}
+    />
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div
+                class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#7c3aed_0%,transparent_50%)]"
+            >
+            </div>
+        </div>
+
+        <div class="container-custom relative z-10">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h1
+                    class="text-5xl md:text-7xl text-white font-extrabold leading-[1.1] tracking-tight animate-on-scroll"
+                >
+                    {t('product.hero_title_1')} <span class="gradient-text"
+                        >{t('product.hero_title_2')}</span
+                    > {t('product.hero_title_3')}
+                </h1>
+                <p
+                    class="mt-8 text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto animate-on-scroll delay-1"
+                >
+                    {t('product.hero_subtitle')}
+                </p>
+                <div
+                    class="mt-10 flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll delay-2"
+                >
+                    <a
+                        href={getRelativeLocaleUrl(lang as string, "/buy")}
+                        class="btn btn-primary px-10 py-4 text-lg font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    >
+                        {t('hero.buy_button')}
+                    </a>
+                </div>
+            </div>
+
+            <div class="animate-on-scroll delay-3 relative max-w-5xl mx-auto">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-brand-primary to-brand-blue rounded-2xl blur opacity-30"
+                >
+                </div>
+                <div
+                    class="relative bg-brand-bg-darker rounded-2xl shadow-2xl overflow-hidden border border-white/10"
+                >
+                    <Image
+                        src={dashboardImage}
+                        alt="Laravel Mail Marketing Dashboard"
+                        class="w-full h-auto"
+                        width={1200}
+                        height={800}
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Components -->
+    <div class="space-y-0">
+        <MarketingAutomation />
+        <Features />
+        <Integrations />
+    </div>
+
+    <CTASection />
+</Layout>
+
+<style>
+    .gradient-text {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-primary to-brand-blue;
+    }
+</style>

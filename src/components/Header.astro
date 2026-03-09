@@ -1,22 +1,33 @@
 ---
 import { Image } from "astro:assets";
 import Logo from "../assets/logo.svg";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import LanguagePicker from "./LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const navItems = [
     {
-        name: "Email Marketing",
-        href: "/email-marketing",
+        name: t('nav.product'),
+        href: getRelativeLocaleUrl(lang, "/product"),
         title: "Email Marketing Platform",
     },
     {
-        name: "Mailchimp Alternative",
-        href: "/mailchimp-alternative",
-        title: "Mailchimp Alternative",
+        name: t('nav.solutions'),
+        href: getRelativeLocaleUrl(lang, "/solutions"),
+        title: "Solutions",
     },
     {
-        name: "Automation",
-        href: "/email-automation",
-        title: "Email Automation Systems",
+        name: t('nav.blog'),
+        href: getRelativeLocaleUrl(lang, "/blog"),
+        title: "Blog",
+    },
+    {
+        name: t('nav.deploy'),
+        href: getRelativeLocaleUrl(lang, "/deploy"),
+        title: "Deploy",
     },
 ];
 
@@ -59,7 +70,7 @@ const socialLinks = [
 >
     <div class="container-custom flex items-center justify-between h-20 px-4">
         <a
-            href="/"
+            href={getRelativeLocaleUrl(lang, "/")}
             onclick="trackClick('logo_home')"
             class="flex items-center transition-transform duration-300 hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-payflo-purple focus:ring-offset-2 rounded"
             aria-label="Laravel Mail"
@@ -138,12 +149,16 @@ const socialLinks = [
 
             <a
                 title="Purchase Now - £40 Setup + £10/mo"
-                href="/buy"
+                href={getRelativeLocaleUrl(lang, "/buy")}
                 onclick="trackClick('get_started')"
                 class="hidden sm:inline-flex btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
             >
-                Purchase Now - £40 Setup + £10/mo
+                {t('nav.buy')}
             </a>
+
+            <div class="hidden md:block">
+                <LanguagePicker />
+            </div>
 
             <!-- Mobile Menu Toggle -->
             <button
@@ -193,11 +208,11 @@ const socialLinks = [
                 class="pt-4 border-t border-white/5 flex items-center justify-between"
             >
                 <a
-                    href="/buy"
+                    href={getRelativeLocaleUrl(lang, "/buy")}
                     onclick="trackClick('mobile_get_started')"
                     class="block text-center py-4 px-8 bg-payflo-purple text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-payflo-purple/20 flex-grow mr-4"
                 >
-                    Purchase Now - £40 Setup + £10/mo
+                    {t('nav.buy')}
                 </a>
                 <div class="flex items-center space-x-4 pr-2">
                     {

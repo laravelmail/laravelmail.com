@@ -1,17 +1,20 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const title =
-    "B2B Leads Platform & AI Marketing Agents | £40 Setup + £10/mo | Laravel Mail";
-const description =
-    "Access verified B2B leads + AI marketing agents monthly. Start automating your outreach with our self-hosted platform. £40 setup fee + £10/month rolling, cancel anytime. Note: cancelling removes access to leads API.";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = t('buy.hero_title');
+const description = t('buy.hero_subtitle');
 const keywords =
     "B2B leads, email marketing, AI agents, marketing automation, verified leads, self-hosted email";
 import CommunitySlack from "../components/CommunitySlack.astro";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} lang={lang}>
     <div class="relative overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32">
         <!-- Background Decor -->
         <div
@@ -49,32 +52,23 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <span
                                 class="text-sm font-bold text-brand-primary uppercase tracking-wider"
                             >
-                                ✓ Trusted by 4,200+ Businesses
+                                ✓ {t('buy.trusted_by')}
                             </span>
                         </div>
                         <p class="text-white/60 text-sm">
-                            Most flexible B2B leads + AI agents platform
+                            {t('value.sol5_subtitle')}
                         </p>
                     </div>
 
                     <h1
                         class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight"
                     >
-                        B2B Leads & <span class="gradient-text"
-                            >AI Marketing</span
-                        > in One Platform
+                        {t('buy.hero_title')}
                     </h1>
                     <p
                         class="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed"
                     >
-                        Access verified B2B leads monthly + deploy AI marketing
-                        agents. Self-hosted platform with
-                        <strong class="text-white">no per-contact fees</strong>
-                        — <strong class="text-white">£40 setup fee</strong> (includes
-                        platform & custom server) + <strong class="text-white"
-                            >£10/month</strong
-                        > rolling (for leads API). Cancel anytime, but you lose access
-                        to the leads API.
+                        {t('buy.hero_subtitle')}
                     </p>
                 </div>
 
@@ -86,7 +80,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         <div class="flex items-center gap-3 mb-8">
                             <span class="text-3xl">💎</span>
                             <h2 class="text-2xl font-bold m-0 text-white">
-                                Subscription Details
+                                {t('buy.sub_title')}
                             </h2>
                         </div>
 
@@ -96,34 +90,33 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 class="bg-gradient-to-br from-payflo-purple/20 to-payflo-blue/10 rounded-2xl p-6 border border-payflo-purple/30"
                             >
                                 <p class="text-white/70 text-sm mb-2">
-                                    Starting at
+                                    {t('buy.price_setup_full')}
                                 </p>
                                 <div class="flex items-baseline gap-2">
                                     <span class="text-5xl font-black text-white"
-                                        >£40</span
+                                        >{t('buy.price_setup_amount')}</span
                                     >
                                     <span class="text-white/60 text-lg"
-                                        >setup fee</span
+                                        >{t('buy.price_setup')}</span
                                     >
                                 </div>
                                 <div class="flex items-baseline gap-2 mt-2">
                                     <span class="text-2xl font-black text-white"
-                                        >+ £10</span
+                                        >{t('buy.price_monthly_amount')}</span
                                     >
                                     <span class="text-white/60 text-lg"
-                                        >/month (cancel anytime)</span
+                                        >{t('buy.price_monthly')}</span
                                     >
                                 </div>
                                 <p class="text-white/60 text-sm mt-3">
-                                    Cancel anytime • No contracts • No refunds
-                                    due to the digital nature of the product
+                                    {t('buy.price_disclaimer')}
                                 </p>
                             </div>
 
                             <!-- What's Included -->
                             <div class="space-y-4">
                                 <h3 class="text-lg font-semibold text-white">
-                                    What You Get Monthly:
+                                    {t('buy.includes_title')}
                                 </h3>
 
                                 <div class="flex items-start gap-3">
@@ -133,11 +126,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                     >
                                     <div>
                                         <h4 class="text-white font-semibold">
-                                            Full Platform Access
+                                            {t('buy.inc_platform')}
                                         </h4>
                                         <p class="text-sm text-white/60 mt-1">
-                                            Complete Laravel Mail source code
-                                            with all features
+                                            {t('deploy.docker_subtitle')}
                                         </p>
                                     </div>
                                 </div>
@@ -149,10 +141,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                     >
                                     <div>
                                         <h4 class="text-white font-semibold">
-                                            One Domain
+                                            {t('buy.inc_leads')}
                                         </h4>
                                         <p class="text-sm text-white/60 mt-1">
-                                            Your custom domain setup included
+                                            {t('value.sol1_desc')}
                                         </p>
                                     </div>
                                 </div>
@@ -164,11 +156,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                     >
                                     <div>
                                         <h4 class="text-white font-semibold">
-                                            One Server Setup
+                                            {t('buy.inc_ai')}
                                         </h4>
                                         <p class="text-sm text-white/60 mt-1">
-                                            One server with the platform
-                                            installed and configured
+                                            {t('value.sol5_desc')}
                                         </p>
                                     </div>
                                 </div>
@@ -180,75 +171,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                     >
                                     <div>
                                         <h4 class="text-white font-semibold">
-                                            18M+ Verified B2B Leads
+                                            {t('value.adv_control_title')}
                                         </h4>
                                         <p class="text-sm text-white/60 mt-1">
-                                            Access over 18 million verified
-                                            leads across multiple industries
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <span
-                                        class="text-2xl text-brand-success flex-shrink-0"
-                                        >✓</span
-                                    >
-                                    <div>
-                                        <h4 class="text-white font-semibold">
-                                            AI Marketing Agents
-                                        </h4>
-                                        <p class="text-sm text-white/60 mt-1">
-                                            Local AI agents for smart outreach
-                                            automation
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <span
-                                        class="text-2xl text-brand-success flex-shrink-0"
-                                        >✓</span
-                                    >
-                                    <div>
-                                        <h4 class="text-white font-semibold">
-                                            Unlimited Campaigns
-                                        </h4>
-                                        <p class="text-sm text-white/60 mt-1">
-                                            Send to unlimited contacts—no
-                                            per-contact pricing
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <span
-                                        class="text-2xl text-brand-success flex-shrink-0"
-                                        >✓</span
-                                    >
-                                    <div>
-                                        <h4 class="text-white font-semibold">
-                                            Analytics & Tracking
-                                        </h4>
-                                        <p class="text-sm text-white/60 mt-1">
-                                            Open rates, clicks, bounces,
-                                            conversions, and more
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start gap-3">
-                                    <span
-                                        class="text-2xl text-brand-success flex-shrink-0"
-                                        >✓</span
-                                    >
-                                    <div>
-                                        <h4 class="text-white font-semibold">
-                                            Priority Support
-                                        </h4>
-                                        <p class="text-sm text-white/60 mt-1">
-                                            Email support + community access for
-                                            troubleshooting
+                                            {t('value.adv_control_desc')}
                                         </p>
                                     </div>
                                 </div>
@@ -262,10 +188,8 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 class="text-sm text-white/70 leading-relaxed italic"
                             >
                                 <strong class="text-white"
-                                    >Monthly Fresh Data:</strong
-                                > Our B2B leads database is updated monthly with verified
-                                prospects. Scale your outreach without worrying about
-                                data becoming stale.
+                                    >{t('buy.why_title')}</strong
+                                > {t('buy.why_subtitle')}
                             </p>
                         </div>
                     </div>
@@ -279,7 +203,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <div class="flex items-center gap-3 mb-8">
                                 <span class="text-3xl">💳</span>
                                 <h2 class="text-2xl font-bold m-0 text-white">
-                                    Get Started Today
+                                    {t('buy.get_started_today')}
                                 </h2>
                             </div>
 
@@ -288,13 +212,13 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                     class="bg-brand-primary/10 border border-brand-primary/30 rounded-xl p-4 text-center"
                                 >
                                     <p class="text-sm text-white/80 mb-2">
-                                        Instant Access
+                                        {t('buy.instant_access')}
                                     </p>
                                     <p class="text-lg font-bold text-white">
-                                        £40 Setup + £10/month • Cancel Anytime
+                                        {t('buy.price_desc')}
                                     </p>
                                     <p class="text-xs text-white/60 mt-2">
-                                        Start immediately after purchase
+                                        {t('buy.start_immediately')}
                                     </p>
                                 </div>
 
@@ -370,8 +294,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <p
                                     class="text-sm text-white/50 text-center px-4 leading-relaxed"
                                 >
-                                    Secure PayPal checkout • No refunds on
-                                    software licenses
+                                    {t('buy.secure_paypal')}
                                 </p>
 
                                 <!-- Trust Badges -->
@@ -388,7 +311,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                         ></path>
                                     </svg>
                                     <span class="text-xs text-white/60"
-                                        >SSL Encrypted</span
+                                        >{t('buy.ssl_encrypted')}</span
                                     >
                                 </div>
                             </div>
@@ -403,10 +326,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <h4
                                     class="text-white font-semibold text-sm mb-2"
                                 >
-                                    Deploy in Minutes
+                                    {t('buy.feat_deploy_title')}
                                 </h4>
                                 <p class="text-xs text-white/60">
-                                    Docker setup + full docs
+                                    {t('buy.feat_deploy_desc')}
                                 </p>
                             </div>
                             <div
@@ -416,10 +339,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <h4
                                     class="text-white font-semibold text-sm mb-2"
                                 >
-                                    Real-Time Analytics
+                                    {t('buy.feat_analytics_title_short')}
                                 </h4>
                                 <p class="text-xs text-white/60">
-                                    Track every metric
+                                    {t('buy.feat_analytics_desc_short')}
                                 </p>
                             </div>
                             <div
@@ -429,10 +352,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <h4
                                     class="text-white font-semibold text-sm mb-2"
                                 >
-                                    100% Control
+                                    {t('buy.feat_control_title_short')}
                                 </h4>
                                 <p class="text-xs text-white/60">
-                                    Self-hosted data
+                                    {t('buy.feat_control_desc_short')}
                                 </p>
                             </div>
                             <div
@@ -442,10 +365,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 <h4
                                     class="text-white font-semibold text-sm mb-2"
                                 >
-                                    No Limits
+                                    {t('buy.feat_limits_title_short')}
                                 </h4>
                                 <p class="text-xs text-white/60">
-                                    Unlimited contacts
+                                    {t('buy.feat_limits_desc_short')}
                                 </p>
                             </div>
                         </div>
@@ -473,11 +396,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             </div>
                             <div>
                                 <h3 class="text-white font-bold m-0 text-sm">
-                                    Bank-Grade Security
+                                    {t('buy.bank_grade_security')}
                                 </h3>
                                 <p class="text-xs text-white/50 m-0">
-                                    256-bit SSL encryption • Secure PayPal
-                                    checkout
+                                    {t('buy.bank_grade_desc')}
                                 </p>
                             </div>
                         </div>
@@ -499,13 +421,12 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     <h2
                         class="text-3xl md:text-5xl font-black text-white mb-8 tracking-tight"
                     >
-                        Why <span class="text-brand-primary">Subscribe?</span>
+                        {t('buy.why_title_1')} <span class="text-brand-primary">{t('buy.why_title_2')}</span>
                     </h2>
                     <p
                         class="text-xl md:text-2xl text-gray-300 leading-relaxed font-medium italic mb-10"
                     >
-                        Fresh data + continuous updates = better results, every
-                        single month.
+                        {t('buy.why_subtitle')}
                     </p>
                     <div
                         class="text-left space-y-6 text-gray-400 text-lg max-w-2xl mx-auto border-t border-white/10 pt-10"
@@ -517,12 +438,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             >
                             <div>
                                 <p class="font-semibold text-white mb-1">
-                                    Monthly Fresh Leads
+                                    {t('value.sol1_title')}
                                 </p>
                                 <p>
-                                    Your B2B leads list grows every month with
-                                    newly verified prospects. No data decay, no
-                                    stale contacts.
+                                    {t('value.sol1_desc')}
                                 </p>
                             </div>
                         </div>
@@ -533,12 +452,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             >
                             <div>
                                 <p class="font-semibold text-white mb-1">
-                                    AI Agents Get Smarter
+                                    {t('value.sol5_title')}
                                 </p>
                                 <p>
-                                    Our AI marketing agents are continuously
-                                    trained. Monthly improvements mean better
-                                    automation and higher conversion rates.
+                                    {t('value.sol5_desc')}
                                 </p>
                             </div>
                         </div>
@@ -549,12 +466,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             >
                             <div>
                                 <p class="font-semibold text-white mb-1">
-                                    Always Updated Platform
+                                    {t('value.adv_automation_title')}
                                 </p>
                                 <p>
-                                    New features, security patches, and
-                                    performance improvements delivered
-                                    automatically. Stay ahead of the curve.
+                                    {t('value.adv_automation_desc')}
                                 </p>
                             </div>
                         </div>
@@ -565,13 +480,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             >
                             <div>
                                 <p class="font-semibold text-white mb-1">
-                                    No Per-Contact Fees
+                                    {t('value.adv_cost_title')}
                                 </p>
                                 <p>
-                                    Unlike other platforms, you pay one flat
-                                    rate regardless of list size. Scale from 100
-                                    to 100,000 contacts for the same £10/month
-                                    rolling.
+                                    {t('value.adv_cost_desc')}
                                 </p>
                             </div>
                         </div>
@@ -587,11 +499,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl font-bold text-white mb-4">
-                        How We Compare
+                        {t('buy.compare_title')}
                     </h2>
                     <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                        Why smart teams choose Laravel Mail over traditional
-                        email platforms
+                        {t('buy.compare_subtitle')}
                     </p>
                 </div>
 
@@ -601,59 +512,59 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <tr class="border-b border-white/10">
                                 <th
                                     class="text-left py-4 px-4 text-white font-bold"
-                                    >Feature</th
+                                    >{t('buy.table_feature')}</th
                                 >
                                 <th
                                     class="text-center py-4 px-4 text-white font-bold"
-                                    >Laravel Mail</th
+                                    >{t('buy.table_lm')}</th
                                 >
                                 <th
                                     class="text-center py-4 px-4 text-white/60 font-bold"
-                                    >Mailchimp</th
+                                    >{t('buy.table_mc')}</th
                                 >
                                 <th
                                     class="text-center py-4 px-4 text-white/60 font-bold"
-                                    >HubSpot</th
+                                    >{t('buy.table_hs')}</th
                                 >
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-white/5">
                             <tr class="hover:bg-white/5 transition">
-                                <td class="py-4 px-4 text-white">Base Price</td>
+                                <td class="py-4 px-4 text-white">{t('buy.table_price')}</td>
                                 <td class="py-4 px-4 text-center"
                                     ><span class="text-brand-primary font-bold"
-                                        >£40 setup + £10/mo</span
+                                        >{t('buy.table_lm_price')}</span
                                     ></td
                                 >
                                 <td class="py-4 px-4 text-center text-white/60"
-                                    >£20+/month</td
+                                    >{t('buy.table_mc_price')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-white/60"
-                                    >£400+/month</td
+                                    >{t('buy.table_hs_price')}</td
                                 >
                             </tr>
                             <tr class="hover:bg-white/5 transition">
                                 <td class="py-4 px-4 text-white"
-                                    >Per-Contact Fees</td
+                                    >{t('buy.table_per_contact')}</td
                                 >
                                 <td
                                     class="py-4 px-4 text-center text-brand-success"
-                                    >None</td
+                                    >{t('buy.table_none')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-red-400"
-                                    >Yes</td
+                                    >{t('buy.table_yes')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-red-400"
-                                    >Yes</td
+                                    >{t('buy.table_yes')}</td
                                 >
                             </tr>
                             <tr class="hover:bg-white/5 transition">
                                 <td class="py-4 px-4 text-white"
-                                    >Self-Hosted Option</td
+                                    >{t('buy.table_self_hosted')}</td
                                 >
                                 <td
                                     class="py-4 px-4 text-center text-brand-success"
-                                    >✓ Full Control</td
+                                    >{t('buy.table_full_control')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-red-400"
                                     >✗</td
@@ -663,38 +574,23 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 >
                             </tr>
                             <tr class="hover:bg-white/5 transition">
-                                <td class="py-4 px-4 text-white">AI Agents</td>
+                                <td class="py-4 px-4 text-white">{t('buy.table_ai')}</td>
                                 <td
                                     class="py-4 px-4 text-center text-brand-success"
-                                    >✓ Included</td
+                                    >{t('buy.table_included')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-red-400"
                                     >✗</td
                                 >
-                                <td class="py-4 px-4 text-center">Limited</td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition">
-                                <td class="py-4 px-4 text-white"
-                                    >B2B Leads Included</td
-                                >
-                                <td
-                                    class="py-4 px-4 text-center text-brand-success"
-                                    >✓ Monthly</td
-                                >
-                                <td class="py-4 px-4 text-center text-red-400"
-                                    >✗</td
-                                >
-                                <td class="py-4 px-4 text-center text-red-400"
-                                    >✗</td
-                                >
+                                <td class="py-4 px-4 text-center">{t('buy.table_limited')}</td>
                             </tr>
                             <tr class="hover:bg-white/5 transition">
                                 <td class="py-4 px-4 text-white"
-                                    >Source Code Access</td
+                                    >{t('buy.table_leads')}</td
                                 >
                                 <td
                                     class="py-4 px-4 text-center text-brand-success"
-                                    >✓ Full</td
+                                    >{t('buy.table_monthly')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-red-400"
                                     >✗</td
@@ -705,17 +601,32 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             </tr>
                             <tr class="hover:bg-white/5 transition">
                                 <td class="py-4 px-4 text-white"
-                                    >Data Privacy</td
+                                    >{t('buy.table_source')}</td
                                 >
                                 <td
                                     class="py-4 px-4 text-center text-brand-success"
-                                    >100% Control</td
+                                    >{t('buy.table_full')}</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                                <td class="py-4 px-4 text-center text-red-400"
+                                    >✗</td
+                                >
+                            </tr>
+                            <tr class="hover:bg-white/5 transition">
+                                <td class="py-4 px-4 text-white"
+                                    >{t('buy.table_privacy')}</td
+                                >
+                                <td
+                                    class="py-4 px-4 text-center text-brand-success"
+                                    >{t('buy.table_100_control')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-white/60"
-                                    >Their servers</td
+                                    >{t('buy.table_their_servers')}</td
                                 >
                                 <td class="py-4 px-4 text-center text-white/60"
-                                    >Their servers</td
+                                    >{t('buy.table_their_servers')}</td
                                 >
                             </tr>
                         </tbody>
@@ -730,10 +641,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
         <div class="container-custom relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-4xl font-bold text-white mb-4">
-                    What Our Subscribers Say
+                    {t('buy.reviews_title')}
                 </h2>
                 <p class="text-xl text-gray-400">
-                    Join 4,200+ teams who've cut email costs by 90%.
+                    {t('buy.reviews_subtitle')}
                 </p>
             </div>
 
@@ -758,18 +669,15 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         </div>
                         <div>
                             <h4 class="text-white font-bold text-lg m-0">
-                                James D.
+                                {t('buy.review1_author')}
                             </h4>
                             <p class="text-gray-500 text-sm m-0">
-                                SaaS Founder
+                                {t('buy.review1_role')}
                             </p>
                         </div>
                     </div>
                     <p class="text-gray-300 italic leading-relaxed">
-                        "We switched from Mailchimp and immediately saved
-                        £400/month. The fresh B2B leads every month help us stay
-                        competitive, and the AI agents handle our follow-ups
-                        automatically. Best investment I've made."
+                        {t('buy.review1_text')}
                     </p>
                 </div>
 
@@ -793,18 +701,15 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         </div>
                         <div>
                             <h4 class="text-white font-bold text-lg m-0">
-                                Sarah M.
+                                {t('buy.review2_author')}
                             </h4>
                             <p class="text-gray-500 text-sm m-0">
-                                Marketing Agency Owner
+                                {t('buy.review2_role')}
                             </p>
                         </div>
                     </div>
                     <p class="text-gray-300 italic leading-relaxed">
-                        "The monthly fresh leads keep our campaigns effective
-                        year-round. No more buyer's remorse from outdated
-                        databases. The AI agents cut our manual outreach time by
-                        60%."
+                        {t('buy.review2_text')}
                     </p>
                 </div>
 
@@ -828,18 +733,15 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         </div>
                         <div>
                             <h4 class="text-white font-bold text-lg m-0">
-                                Rachel C.
+                                {t('buy.review3_author')}
                             </h4>
                             <p class="text-gray-500 text-sm m-0">
-                                B2B Sales Director
+                                {t('buy.review3_role')}
                             </p>
                         </div>
                     </div>
                     <p class="text-gray-300 italic leading-relaxed">
-                        "Hosting our own platform means full GDPR compliance and
-                        our data never leaves our control. The subscription
-                        model gives us peace of mind—no vendor lock-in, cancel
-                        anytime."
+                        {t('buy.review3_text')}
                     </p>
                 </div>
 
@@ -863,18 +765,15 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         </div>
                         <div>
                             <h4 class="text-white font-bold text-lg m-0">
-                                Mike T.
+                                {t('buy.review4_author')}
                             </h4>
                             <p class="text-gray-500 text-sm m-0">
-                                E-commerce Manager
+                                {t('buy.review4_role')}
                             </p>
                         </div>
                     </div>
                     <p class="text-gray-300 italic leading-relaxed">
-                        "Scale without fear. Our list grew from 5K to 50K
-                        contacts and our costs stayed the same. Traditional
-                        platforms would've killed our margins. This is the
-                        future."
+                        {t('buy.review4_text')}
                     </p>
                 </div>
             </div>
@@ -887,11 +786,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Everything You Need to Scale
+                        {t('buy.scale_title')}
                     </h2>
                     <p class="text-lg text-white/70 max-w-3xl mx-auto">
-                        Built for teams that want control, data privacy, and
-                        unlimited growth without vendor lock-in.
+                        {t('buy.scale_subtitle')}
                     </p>
                 </div>
 
@@ -901,13 +799,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     >
                         <div class="text-4xl mb-4">🚀</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Self-Hosted Flexibility
+                            {t('buy.feat_self_hosted_title')}
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Deploy on your own servers, AWS, DigitalOcean, or
-                            any cloud provider. Complete control over your
-                            infrastructure and data means GDPR compliance and
-                            zero vendor lock-in.
+                            {t('buy.feat_self_hosted_desc')}
                         </p>
                     </div>
 
@@ -916,12 +811,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     >
                         <div class="text-4xl mb-4">🤖</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            AI Marketing Agents
+                            {t('buy.feat_ai_title')}
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Local AI agents powered by Ollama. Automate your
-                            outreach, personalize at scale, and never worry
-                            about API costs. Deploy once, run forever.
+                            {t('buy.feat_ai_desc')}
                         </p>
                     </div>
 
@@ -930,13 +823,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     >
                         <div class="text-4xl mb-4">💰</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Predictable Pricing
+                            {t('buy.feat_pricing_title')}
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            £40 setup + £10/month flat rate. Send to 100
-                            contacts or 1 million—same price. No surprises, no
-                            per-contact fees, no overage charges. Pure
-                            transparency.
+                            {t('buy.feat_pricing_desc')}
                         </p>
                     </div>
 
@@ -945,12 +835,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     >
                         <div class="text-4xl mb-4">📊</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Advanced Analytics
+                            {t('buy.feat_analytics_title')}
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Real-time tracking of opens, clicks, bounces,
-                            conversions, and subscriber engagement. Make
-                            data-driven decisions to optimize your campaigns.
+                            {t('buy.feat_analytics_desc')}
                         </p>
                     </div>
 
@@ -959,12 +847,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     >
                         <div class="text-4xl mb-4">🎨</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            1,900+ Ready Templates
+                            {t('buy.feat_templates_title')}
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            Access 1,900+ professionally designed email
-                            templates in Blade and MJML. Drag-and-drop editor
-                            means no coding required to launch campaigns fast.
+                            {t('buy.feat_templates_desc')}
                         </p>
                     </div>
 
@@ -973,34 +859,29 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     >
                         <div class="text-4xl mb-4">🔒</div>
                         <h3 class="text-xl font-bold text-white mb-3">
-                            Enterprise Security
+                            {t('buy.feat_security_title')}
                         </h3>
                         <p class="text-white/70 leading-relaxed">
-                            GDPR-compliant, HIPAA-ready infrastructure. Your
-                            data stays on your servers. SSL encryption, advanced
-                            authentication, and comprehensive audit logs
-                            included.
+                            {t('buy.feat_security_desc')}
                         </p>
                     </div>
                 </div>
 
-                <!-- What's Included Grid -->
                 <div
                     class="bg-gradient-to-br from-payflo-purple/10 to-payflo-blue/10 border border-white/10 rounded-3xl p-10 mb-16"
                 >
                     <h3 class="text-2xl font-bold text-white mb-8 text-center">
-                        Your Monthly Subscription Includes
+                        {t('buy.monthly_inc_title')}
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="flex items-start gap-4">
                             <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Full Platform
+                                    {t('buy.monthly_inc_1_title')}
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Complete Laravel Mail source code with all
-                                    features unlocked
+                                    {t('buy.monthly_inc_1_desc')}
                                 </p>
                             </div>
                         </div>
@@ -1008,11 +889,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    B2B Leads Database
+                                    {t('buy.monthly_inc_2_title')}
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Fresh, verified prospects added monthly.
-                                    Always growing.
+                                    {t('buy.monthly_inc_2_desc')}
                                 </p>
                             </div>
                         </div>
@@ -1020,11 +900,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    AI Agents
+                                    {t('buy.monthly_inc_3_title')}
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Local Ollama-powered agents for smart
-                                    automation
+                                    {t('buy.monthly_inc_3_desc')}
                                 </p>
                             </div>
                         </div>
@@ -1032,11 +911,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Unlimited Sends
+                                    {t('buy.monthly_inc_4_title')}
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    No per-contact fees or limits on campaign
-                                    volume
+                                    {t('buy.monthly_inc_4_desc')}
                                 </p>
                             </div>
                         </div>
@@ -1044,10 +922,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Premium Support
+                                    {t('buy.monthly_inc_5_title')}
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    Email support + community forum access
+                                    {t('buy.monthly_inc_5_desc')}
                                 </p>
                             </div>
                         </div>
@@ -1055,21 +933,19 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <div class="text-3xl flex-shrink-0">✅</div>
                             <div>
                                 <h4 class="text-white font-semibold mb-1">
-                                    Monthly Updates
+                                    {t('buy.monthly_inc_6_title')}
                                 </h4>
                                 <p class="text-white/60 text-sm">
-                                    New features, security patches, and fresh
-                                    leads
+                                    {t('buy.monthly_inc_6_desc')}
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- How It Works -->
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-white mb-8 text-center">
-                        Get Started in 3 Steps
+                        {t('buy.steps_title')}
                     </h3>
                     <div class="space-y-6">
                         <div
@@ -1083,14 +959,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 </div>
                                 <div>
                                     <h4 class="text-white font-semibold mb-2">
-                                        Subscribe & Get Instant Access
+                                        {t('buy.step1_title')}
                                     </h4>
                                     <p class="text-white/70">
-                                        Click "Subscribe Now" and complete your
-                                        secure PayPal payment. Instantly receive
-                                        your dashboard login, full source code
-                                        access, and immediate entry to our
-                                        verified B2B leads database.
+                                        {t('buy.step1_desc')}
                                     </p>
                                 </div>
                             </div>
@@ -1106,15 +978,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 </div>
                                 <div>
                                     <h4 class="text-white font-semibold mb-2">
-                                        Deploy Your Platform
+                                        {t('buy.step2_title')}
                                     </h4>
                                     <p class="text-white/70">
-                                        Deploy Laravel Mail on your servers
-                                        using Docker, AWS, DigitalOcean, or any
-                                        PHP-compatible hosting. Follow our
-                                        step-by-step documentation (takes ~30
-                                        minutes). Full support available if
-                                        needed.
+                                        {t('buy.step2_desc')}
                                     </p>
                                 </div>
                             </div>
@@ -1130,14 +997,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 </div>
                                 <div>
                                     <h4 class="text-white font-semibold mb-2">
-                                        Start Your Campaigns
+                                        {t('buy.step3_title')}
                                     </h4>
                                     <p class="text-white/70">
-                                        Import B2B leads, configure AI agents,
-                                        and launch campaigns. Use your verified
-                                        prospect list to reach buyers who are
-                                        ready to engage. Scale without limits—no
-                                        per-contact fees ever.
+                                        {t('buy.step3_desc')}
                                     </p>
                                 </div>
                             </div>
@@ -1148,7 +1011,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                 <!-- FAQ Section -->
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-white mb-8 text-center">
-                        Frequently Asked Questions
+                        {t('buy.faq_title_main')}
                     </h3>
                     <div class="space-y-4">
                         <details
@@ -1158,7 +1021,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
                                 <span
-                                    >Can I cancel my subscription anytime?</span
+                                    >{t('buy.faq_new_q1')}</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -1166,10 +1029,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Absolutely. Cancel your subscription anytime
-                                from your account dashboard. No contracts, no
-                                lock-in, no cancellation fees. You'll maintain
-                                access through the end of your billing cycle.
+                                {t('buy.faq_new_a1')}
                             </p>
                         </details>
 
@@ -1179,7 +1039,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span>What happens to my data if I cancel?</span
+                                <span>{t('buy.faq_new_q2')}</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -1187,11 +1047,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Your data stays yours. You can export all
-                                contacts, campaigns, and analytics from your
-                                self-hosted instance. Since you control the
-                                infrastructure, your data always remains
-                                available to you.
+                                {t('buy.faq_new_a2')}
                             </p>
                         </details>
 
@@ -1201,19 +1057,14 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span>How many leads do I get monthly?</span>
+                                <span>{t('buy.faq_new_q3')}</span>
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
                                     >+</span
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Our B2B leads database grows continuously.
-                                Subscribers receive regular updates with
-                                verified prospects added monthly. The exact
-                                number varies based on your industry focus and
-                                target market. You'll have access to our full
-                                database dashboard showing available leads.
+                                {t('buy.faq_new_a3')}
                             </p>
                         </details>
 
@@ -1223,7 +1074,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span>Are the leads really email verified?</span
+                                <span>{t('buy.faq_new_q4')}</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -1231,12 +1082,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Yes. Every single lead is email-verified through
-                                multiple validation techniques. We prioritize
-                                data quality over quantity. These are real
-                                prospects who've engaged with businesses online,
-                                ensuring higher deliverability and response
-                                rates.
+                                {t('buy.faq_new_a4')}
                             </p>
                         </details>
 
@@ -1246,19 +1092,14 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span>Do I need technical knowledge?</span>
+                                <span>{t('buy.faq_new_q5')}</span>
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
                                     >+</span
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                While Laravel Mail is built for developers, our
-                                Docker setup and comprehensive documentation
-                                make it accessible to anyone with basic server
-                                management experience. We provide step-by-step
-                                guides, video tutorials, and community support
-                                to help you succeed.
+                                {t('buy.faq_new_a5')}
                             </p>
                         </details>
 
@@ -1269,8 +1110,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
                                 <span
-                                    >What email service providers does it
-                                    support?</span
+                                    >{t('buy.faq_new_q6')}</span
                                 >
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
@@ -1278,11 +1118,7 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Laravel Mail integrates with Amazon SES,
-                                SendGrid, Mailgun, Postmark, and direct SMTP.
-                                Configure multiple providers and switch between
-                                them seamlessly for maximum deliverability and
-                                redundancy.
+                                {t('buy.faq_new_a6')}
                             </p>
                         </details>
 
@@ -1292,18 +1128,14 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span>Is access immediate after purchase?</span>
+                                <span>{t('buy.faq_new_q7')}</span>
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
                                     >+</span
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Yes. After purchase, you'll receive instant
-                                access to your dashboard and can begin using the
-                                platform immediately. Download the source code,
-                                access the B2B leads database, and deploy your
-                                instance right away.
+                                {t('buy.faq_new_a7')}
                             </p>
                         </details>
 
@@ -1313,18 +1145,14 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                             <summary
                                 class="text-white font-semibold cursor-pointer list-none flex items-center justify-between"
                             >
-                                <span>What if I need custom development?</span>
+                                <span>{t('buy.faq_new_q8')}</span>
                                 <span
                                     class="text-2xl group-open:rotate-45 transition-transform"
                                     >+</span
                                 >
                             </summary>
                             <p class="text-white/70 mt-4 leading-relaxed">
-                                Since you get the full source code, you can
-                                modify it to fit your exact needs. We also offer
-                                optional paid development services if you prefer
-                                us to handle customizations. Contact our team
-                                for a custom quote.
+                                {t('buy.faq_new_a8')}
                             </p>
                         </details>
                     </div>
@@ -1333,19 +1161,16 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                 <!-- Use Cases -->
                 <div class="mb-16">
                     <h3 class="text-2xl font-bold text-white mb-8 text-center">
-                        Perfect For Every Team
+                        {t('buy.perfect_for_title')}
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div
                             class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6"
                         >
                             <div class="text-3xl mb-4">🏢</div>
-                            <h4 class="text-white font-bold mb-3">Agencies</h4>
+                            <h4 class="text-white font-bold mb-3">{t('buy.perfect_agencies_title')}</h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                White-label the platform for clients. Manage
-                                multiple campaigns without bleeding margins on
-                                recurring SaaS fees. Your clients get a
-                                dedicated instance.
+                                {t('buy.perfect_agencies_desc')}
                             </p>
                         </div>
                         <div
@@ -1353,13 +1178,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         >
                             <div class="text-3xl mb-4">🛍️</div>
                             <h4 class="text-white font-bold mb-3">
-                                E-commerce
+                                {t('buy.perfect_ecommerce_title')}
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Abandoned cart campaigns, product
-                                recommendations, and retargeting. AI agents
-                                personalize each email. Scale without worrying
-                                about per-contact costs.
+                                {t('buy.perfect_ecommerce_desc')}
                             </p>
                         </div>
                         <div
@@ -1367,12 +1189,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         >
                             <div class="text-3xl mb-4">💼</div>
                             <h4 class="text-white font-bold mb-3">
-                                SaaS Companies
+                                {t('buy.perfect_saas_title')}
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Onboarding sequences, feature announcements, and
-                                retention campaigns. Self-hosted ensures GDPR
-                                compliance and enterprise-grade security.
+                                {t('buy.perfect_saas_desc')}
                             </p>
                         </div>
                         <div
@@ -1380,12 +1200,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         >
                             <div class="text-3xl mb-4">📧</div>
                             <h4 class="text-white font-bold mb-3">
-                                B2B Sales Teams
+                                {t('buy.perfect_sales_title')}
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Qualified leads + AI-powered follow-ups = higher
-                                conversion rates. Built-in lead scoring and
-                                engagement tracking keeps your pipeline full.
+                                {t('buy.perfect_sales_desc')}
                             </p>
                         </div>
                         <div
@@ -1393,12 +1211,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         >
                             <div class="text-3xl mb-4">🎓</div>
                             <h4 class="text-white font-bold mb-3">
-                                Educational Institutions
+                                {t('buy.perfect_edu_title')}
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                Student recruitment, alumni engagement, and
-                                event notifications. GDPR-compliant data
-                                handling keeps you audit-ready.
+                                {t('buy.perfect_edu_desc')}
                             </p>
                         </div>
                         <div
@@ -1406,12 +1222,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                         >
                             <div class="text-3xl mb-4">🏥</div>
                             <h4 class="text-white font-bold mb-3">
-                                Healthcare & Non-Profits
+                                {t('buy.perfect_health_title')}
                             </h4>
                             <p class="text-white/70 text-sm leading-relaxed">
-                                HIPAA-ready infrastructure. Patient
-                                communications and donor engagement without
-                                worrying about vendor compliance.
+                                {t('buy.perfect_health_desc')}
                             </p>
                         </div>
                     </div>
@@ -1424,14 +1238,12 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                     class="bg-gradient-to-r from-payflo-purple to-payflo-blue rounded-3xl p-12 text-center"
                 >
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Ready to Own Your Email Marketing?
+                        {t('buy.final_cta_title')}
                     </h2>
                     <p
                         class="text-white/90 text-lg mb-8 max-w-2xl mx-auto leading-relaxed"
                     >
-                        Get instant access to the complete platform, AI agents,
-                        and verified B2B leads. Just £40 setup + £10/mo. Cancel
-                        anytime (lose API access).
+                        {t('buy.final_cta_subtitle')}
                     </p>
                     <a
                         href="https://www.paypal.com/ncp/links/R2MN2C7WVVNW8"
@@ -1448,10 +1260,10 @@ import CommunitySlack from "../components/CommunitySlack.astro";
                                 d="M20.067 8.178c-.622-2.316-2.583-3.611-5.322-3.611H7.88c-.538 0-.986.388-1.07.915L4.037 19.34c-.056.347.21.66.562.66h3.403c.484 0 .887-.35.962-.824l.034-.216.711-4.524.04-.216a.972.972 0 0 1 .962-.823h1.365c3.153 0 5.613-1.284 6.326-4.8c.32-1.579.167-2.784-.335-3.421zM11.77 12.355H9.667l.344-2.186h2.103c.962 0 1.638.169 2.01.503.243.218.375.568.303 1.018-.119.75-.688 1.411-1.638 1.411-1.019 0-1.019-.746-1.019-.746z"
                             ></path>
                         </svg>
-                        Subscribe Now - £40 Setup + £10/mo
+                        {t('buy.final_cta_btn')}
                     </a>
                     <p class="text-white/70 text-sm mt-6">
-                        ✓ Instant access • ✓ Cancel anytime • ✓ Secure payment
+                        ✓ {t('product.instant_access')} • ✓ {t('buy.cancel_anytime')} • ✓ {t('product.secure_payment')}
                     </p>
                 </div>
             </div>

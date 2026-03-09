@@ -6,6 +6,11 @@ import Features from "../components/Features.astro";
 import MarketingAutomation from "../components/MarketingAutomation.astro";
 import Integrations from "../components/Integrations.astro";
 import dashboardImage from "../assets/dashboard.png";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const productSchema = {
     "@context": "https://schema.org",
@@ -34,8 +39,8 @@ const productSchema = {
 ---
 
 <Layout
-    title="Marketing Features & Local AI Agents | Laravel Mail Self-Hosted"
-    description="Discover powerful self-hosted marketing tools: Local AI agents via Ollama, WhatsApp & Instagram integrations, visual campaign builder, and enterprise-grade email infrastructure."
+    title={t('product.title')}
+    description={t('product.description')}
 >
     <!-- Structured Data -->
     <script
@@ -57,27 +62,23 @@ const productSchema = {
                 <h1
                     class="text-5xl md:text-7xl text-white font-extrabold leading-[1.1] tracking-tight animate-on-scroll"
                 >
-                    The Most Powerful <span class="gradient-text"
-                        >Self-Hosted</span
-                    > Marketing Engine
+                    {t('product.hero_title_1')}<span class="gradient-text"
+                        >{t('product.hero_title_2')}</span
+                    >{t('product.hero_title_3')}
                 </h1>
                 <p
                     class="mt-8 text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto animate-on-scroll delay-1"
                 >
-                    Take full control of your customer relationships with the <strong
-                        class="text-white">only platform in the world</strong
-                    > featuring privacy-first <strong class="text-white"
-                        >Local AI Marketing Agents</strong
-                    > powered by Ollama. No third-party limits, absolute data privacy.
+                    {t('product.hero_subtitle')}
                 </p>
                 <div
                     class="mt-10 flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll delay-2"
                 >
                     <a
-                        href="/buy"
+                        href={getRelativeLocaleUrl(lang, "/buy")}
                         class="btn btn-primary px-10 py-4 text-lg font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
                     >
-                        Purchase Now - £40 Setup + £10/mo
+                        {t('product.purchase_btn')}
                     </a>
                 </div>
             </div>

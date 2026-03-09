@@ -1,36 +1,39 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BetaModal from "../components/BetaModal.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const deploymentPlatforms = [
     {
         name: "Google Cloud",
         logo: "https://deploy.cloud.run/button.svg",
-        url: "/buy",
-        description:
-            "Ready for production with Google Cloud Run (Serverless Docker).",
+        url: getRelativeLocaleUrl(lang, "/buy"),
+        description: t('deploy.gcp_desc'),
         accent: "from-[#4285F4] to-[#34A853]",
     },
     {
         name: "DigitalOcean",
         logo: "https://www.deploytodo.com/do-btn-blue.svg",
-        url: "/buy",
-        description:
-            "Scale seamlessly on DigitalOcean App Platform with native Docker.",
+        url: getRelativeLocaleUrl(lang, "/buy"),
+        description: t('deploy.do_desc'),
         accent: "from-[#0080FF] to-[#0069D9]",
     },
     {
         name: "Railway",
         logo: "https://railway.app/button.svg",
-        url: "/buy",
-        description: "Zero-config enterprise deployment on Railway.",
+        url: getRelativeLocaleUrl(lang, "/buy"),
+        description: t('deploy.railway_desc'),
         accent: "from-[#0B0D0E] to-[#1A1C1D]",
     },
     {
         name: "Heroku",
         logo: "https://www.herokucdn.com/deploy/button.svg",
-        url: "/buy",
-        description: "Professional Docker implementation for Heroku.",
+        url: getRelativeLocaleUrl(lang, "/buy"),
+        description: t('deploy.heroku_desc'),
         accent: "from-[#430098] to-[#7673B0]",
     },
 ];
@@ -63,8 +66,8 @@ const schema = {
 ---
 
 <Layout
-    title="How to Deploy Laravel Mail | One-Click & Docker Setup"
-    description="Step-by-step guide to self-hosting Laravel Mail. One-click deployment for Google Cloud, DigitalOcean, and Railway, or full Docker Compose setup for complete data control."
+    title={t('deploy.title')}
+    description={t('deploy.description')}
 >
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -113,21 +116,20 @@ const schema = {
                             class="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"
                         ></span>
                     </span>
-                    <span>Ready for Production</span>
+                    <span>{t('deploy.badge')}</span>
                 </div>
                 <h1
                     class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight"
                 >
-                    Deploy in <span
+                    {t('deploy.hero_title_1')}<span
                         class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue"
-                        >Seconds</span
+                        >{t('deploy.hero_title_2')}</span
                     >
                 </h1>
                 <p
                     class="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto"
                 >
-                    Pick a platform for one-click deployment or use our Docker
-                    Compose setup for full control over your infrastructure.
+                    {t('deploy.hero_subtitle')}
                 </p>
             </div>
 
@@ -160,7 +162,7 @@ const schema = {
                                 {platform.description}
                             </p>
                             <div class="mt-auto flex items-center text-brand-primary font-bold text-sm">
-                                Deploy Now
+                                {t('deploy.btn_deploy_now')}
                                 <svg
                                     class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1"
                                     fill="none"
@@ -202,15 +204,12 @@ const schema = {
                         <h2
                             class="text-3xl md:text-5xl font-black text-white mb-6"
                         >
-                            Self-Host with <span class="text-brand-primary"
-                                >Docker Compose</span
+                            {t('deploy.docker_title_1')}<span class="text-brand-primary"
+                                >{t('deploy.docker_title_2')}</span
                             >
                         </h2>
                         <p class="text-xl text-gray-400 mb-12 max-w-3xl">
-                            Gain full control over your customer data. After
-                            purchase, you'll receive immediate access to our <strong
-                                >Private Docker Repository</strong
-                            > and complete source code for self-hosted production.
+                            {t('deploy.docker_subtitle')}
                         </p>
 
                         <!-- Step by Step -->
@@ -224,11 +223,10 @@ const schema = {
                                     1
                                 </div>
                                 <h4 class="text-white font-bold text-lg">
-                                    Clone Private Repository
+                                    {t('deploy.step1_title')}
                                 </h4>
                                 <p class="text-gray-400 text-sm">
-                                    Get access to the private Git repository
-                                    after your purchase.
+                                    {t('deploy.step1_desc')}
                                 </p>
                             </div>
                             <div class="space-y-4">
@@ -238,11 +236,10 @@ const schema = {
                                     2
                                 </div>
                                 <h4 class="text-white font-bold text-lg">
-                                    Configure Environment
+                                    {t('deploy.step2_title')}
                                 </h4>
                                 <p class="text-gray-400 text-sm">
-                                    Copy .env.example to .env and set your app
-                                    keys and database credentials.
+                                    {t('deploy.step2_desc')}
                                 </p>
                             </div>
                             <div class="space-y-4">
@@ -252,11 +249,10 @@ const schema = {
                                     3
                                 </div>
                                 <h4 class="text-white font-bold text-lg">
-                                    Launch Container
+                                    {t('deploy.step3_title')}
                                 </h4>
                                 <p class="text-gray-400 text-sm">
-                                    Run docker-compose up -d and your platform
-                                    is live on port 13000.
+                                    {t('deploy.step3_desc')}
                                 </p>
                             </div>
                         </div>
@@ -269,13 +265,13 @@ const schema = {
                                 target="_blank"
                                 class="btn btn-primary px-8 py-4 w-full sm:w-auto text-center font-bold"
                             >
-                                Read Full Documentation
+                                {t('deploy.docs_btn')}
                             </a>
                             <p class="text-gray-500 text-sm italic">
-                                Need help? Join our <a
+                                {t('deploy.discord_text')}<a
                                     href="#"
                                     class="text-brand-primary hover:underline"
-                                    >Discord community</a
+                                    >{t('deploy.discord_link')}</a
                                 >.
                             </p>
                         </div>

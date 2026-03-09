@@ -1,64 +1,69 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout
-    title="Affiliate Program | Laravel Mail"
-    description="Join Laravel Mail's affiliate program and earn 50% commission on every sale. Get paid immediately for referring customers to our B2B lead generation services."
+    title={t('affiliate.title')}
+    description={t('affiliate.description')}
 >
     <main class="py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
         <div class="prose prose-slate max-w-3xl mx-auto">
-            <h1 class="text-4xl font-bold mb-8">Affiliate Program</h1>
+            <h1 class="text-4xl font-bold mb-8">{t('affiliate.h1')}</h1>
 
             <p class="text-gray-600 mb-6">
-                Last updated: {new Date().toLocaleDateString()}
+                {t('affiliate.last_updated')}: {new Date().toLocaleDateString(lang)}
             </p>
 
             <section class="mb-8">
                 <h2 class="text-2xl font-semibold mb-4">
-                    Earn 50% Commission on Every Sale
+                    {t('affiliate.commission_title')}
                 </h2>
                 <p>
-                    Join Laravel Mail's affiliate program and start earning immediate commissions for every customer you refer. We offer an industry-leading 50% commission on all sales made through your referral link.
+                    {t('affiliate.commission_p')}
                 </p>
             </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold mb-4">How It Works</h2>
+                <h2 class="text-2xl font-semibold mb-4">{t('affiliate.how_it_works_title')}</h2>
                 <ol class="list-decimal pl-6 mt-4 space-y-4">
                     <li>
-                        <strong>Sign Up</strong> - Apply to join our affiliate program and get your unique referral link.
+                        <strong>{t('affiliate.step1_title')}</strong> - {t('affiliate.step1_desc')}
                     </li>
                     <li>
-                        <strong>Share</strong> - Promote Laravel Mail to your audience through your website, blog, social media, or email list.
+                        <strong>{t('affiliate.step2_title')}</strong> - {t('affiliate.step2_desc')}
                     </li>
                     <li>
-                        <strong>Earn</strong> - Receive 50% of every sale made through your referral link.
+                        <strong>{t('affiliate.step3_title')}</strong> - {t('affiliate.step3_desc')}
                     </li>
                     <li>
-                        <strong>Get Paid Immediately</strong> - No waiting for payouts. You get paid immediately when your referral makes a purchase.
+                        <strong>{t('affiliate.step4_title')}</strong> - {t('affiliate.step4_desc')}
                     </li>
                 </ol>
             </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Why Promote Laravel Mail?</h2>
+                <h2 class="text-2xl font-semibold mb-4">{t('affiliate.why_promote_title')}</h2>
                 <ul class="list-disc pl-6 mt-4 space-y-2">
-                    <li>50% commission - highest in the industry</li>
-                    <li>Instant payouts - no minimum thresholds</li>
-                    <li>High conversion rates on B2B leads</li>
-                    <li>Trusted by 500+ companies worldwide</li>
-                    <li>90-day cookie tracking window</li>
+                    <li>{t('affiliate.why1')}</li>
+                    <li>{t('affiliate.why2')}</li>
+                    <li>{t('affiliate.why3')}</li>
+                    <li>{t('affiliate.why4')}</li>
+                    <li>{t('affiliate.why5')}</li>
                 </ul>
             </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
+                <h2 class="text-2xl font-semibold mb-4">{t('affiliate.contact_title')}</h2>
                 <p>
-                    Ready to start earning? Get in touch to learn more about our affiliate program and how you can maximize your commissions.
+                    {t('affiliate.contact_p')}
                 </p>
                 <p class="mt-4">
-                    <a href="/contact" class="text-purple-600 hover:text-purple-700 underline">Contact us</a> to apply for our affiliate program.
+                    <a href={getRelativeLocaleUrl(lang, "/contact")} class="text-purple-600 hover:text-purple-700 underline">{t('affiliate.contact_link')}</a> {t('affiliate.step1_desc')}
                 </p>
             </section>
         </div>

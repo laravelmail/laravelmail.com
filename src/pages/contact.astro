@@ -1,35 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Logo from "src/assets/logo.svg";
-import { Image } from "astro:assets";
-import logoSrc from "@/assets/logo.svg";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const contactMethods = [
     {
-        title: "Sales",
-        description:
-            "Discuss lead generation solutions and pricing for your business growth.",
+        title: t('contact.sales_title'),
+        description: t('contact.sales_desc'),
         link: "mailto:info@laravelmail.com",
         icon: "mail",
     },
     {
-        title: "Support",
-        description:
-            "Get help with your lead generation campaigns and technical questions.",
+        title: t('contact.support_title'),
+        description: t('contact.support_desc'),
         link: "mailto:info@laravelmail.com",
         icon: "support",
     },
     {
-        title: "Partnerships",
-        description:
-            "Explore referral programs and strategic partnership opportunities.",
+        title: t('contact.partners_title'),
+        description: t('contact.partners_desc'),
         link: "mailto:info@laravelmail.com",
         icon: "handshake",
     },
     {
-        title: "WhatsApp",
-        description:
-            "Join our community group for instant updates and support.",
+        title: t('contact.whatsapp_title'),
+        description: t('contact.whatsapp_desc'),
         link: "https://chat.whatsapp.com/FyyyBmuFBToFNUtD2UlWt2",
         icon: "whatsapp",
     },
@@ -37,8 +35,8 @@ const contactMethods = [
 ---
 
 <Layout
-    title="Contact Laravel Mail | Lead Generation & Platform Support"
-    description="Have questions about our self-hosted marketing platform or B2B leads database? Contact our sales, support, or partnership teams, or join our WhatsApp community."
+    title={t('contact.title')}
+    description={t('contact.description')}
 >
     <!-- Background decorative elements -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
@@ -59,12 +57,10 @@ const contactMethods = [
                 <h1
                     class="text-4xl md:text-5xl font-bold leading-tight text-white"
                 >
-                    Get in <span class="gradient-text">Touch</span>
+                    {t('contact.hero_title_1')} <span class="gradient-text">{t('contact.hero_title_2')}</span>
                 </h1>
                 <p class="mt-6 text-xl text-gray-400">
-                    Have questions about our B2B lead generation platform? We're
-                    here to help you find the perfect solution for your
-                    business.
+                    {t('contact.hero_subtitle')}
                 </p>
             </div>
 
@@ -150,8 +146,8 @@ const contactMethods = [
                             </p>
                             <span class="mt-4 inline-flex items-center text-sm font-semibold text-brand-primary">
                                 {method.title === "WhatsApp"
-                                    ? "Join Group"
-                                    : "Contact Now"}
+                                    ? t('contact.join_whatsapp')
+                                    : t('contact.contact_now')}
                                 <svg
                                     class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
                                     fill="none"
@@ -204,10 +200,10 @@ const contactMethods = [
                             </div>
                             <div>
                                 <h3 class="text-xl font-bold text-white">
-                                    Our Office
+                                    {t('contact.office_header')}
                                 </h3>
                                 <p class="text-gray-400 text-sm">
-                                    Laravel Mail headquarters
+                                    {t('contact.office_subtitle')}
                                 </p>
                             </div>
                         </div>
@@ -272,13 +268,13 @@ const contactMethods = [
                         class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10"
                     >
                         <h3 class="text-xl font-bold text-white mb-6">
-                            Business Hours
+                            {t('contact.hours_header')}
                         </h3>
 
                         <div class="space-y-4">
                             <div class="flex items-center justify-between">
                                 <span class="text-gray-400"
-                                    >Monday - Friday</span
+                                    >{t('contact.weekdays')}</span
                                 >
                                 <span class="text-white font-medium"
                                     >9:00 AM - 6:00 PM GMT</span
@@ -288,10 +284,10 @@ const contactMethods = [
                                 class="flex items-center justify-between opacity-50"
                             >
                                 <span class="text-gray-400"
-                                    >Saturday - Sunday</span
+                                    >{t('contact.weekends')}</span
                                 >
                                 <span class="text-gray-400 font-medium"
-                                    >Closed</span
+                                    >{t('contact.closed')}</span
                                 >
                             </div>
                         </div>
@@ -302,7 +298,7 @@ const contactMethods = [
                                     class="h-2.5 w-2.5 bg-green-500 rounded-full animate-pulse"
                                 ></span>
                                 <span class="text-gray-300 text-sm"
-                                    >We typically respond within 24 hours</span
+                                    >{t('contact.response_time')}</span
                                 >
                             </div>
                         </div>
@@ -313,32 +309,32 @@ const contactMethods = [
                         class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10"
                     >
                         <h3 class="text-xl font-bold text-white mb-4">
-                            Quick Links
+                            {t('contact.quick_links')}
                         </h3>
                         <div class="flex flex-wrap gap-3">
                             <a
-                                href="/buy"
+                                href={getRelativeLocaleUrl(lang, "/buy")}
                                 class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium"
                             >
-                                Pricing Plans
+                                {t('footer.pricing')}
                             </a>
                             <a
-                                href="/demo"
+                                href={getRelativeLocaleUrl(lang, "/demo")}
                                 class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium"
                             >
-                                Request Demo
+                                {t('footer.demo')}
                             </a>
                             <a
                                 href="https://docs.laravelmail.com"
                                 class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium"
                             >
-                                Documentation
+                                {t('footer.docs')}
                             </a>
                             <a
-                                href="/affiliate"
+                                href={getRelativeLocaleUrl(lang, "/affiliate")}
                                 class="px-4 py-2 bg-white/5 rounded-lg text-gray-300 hover:bg-brand-primary/20 hover:text-brand-primary transition-colors text-sm font-medium"
                             >
-                                Affiliate Program
+                                {t('footer.affiliate')}
                             </a>
                         </div>
                     </div>
@@ -356,25 +352,23 @@ const contactMethods = [
         <div class="container-custom relative">
             <div class="text-center max-w-2xl mx-auto">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">
-                    Ready to Grow Your Business?
+                    {t('cta.ready_header')}
                 </h2>
                 <p class="text-lg text-gray-400 mb-8">
-                    Join 500+ businesses that trust Laravel Mail to drive their
-                    growth through enterprise-grade email marketing and
-                    automation.
+                    {t('cta.ready_subtitle')}
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a
-                        href="/buy"
+                        href={getRelativeLocaleUrl(lang, "/buy")}
                         class="btn bg-white text-brand-primary font-bold py-4 px-10 rounded-xl hover:scale-105 transition-all shadow-lg shadow-white/10"
                     >
-                        Get Started - £40 Setup + £10/mo
+                        {t('buy.cta_button')}
                     </a>
                     <a
-                        href="/demo"
+                        href={getRelativeLocaleUrl(lang, "/demo")}
                         class="btn bg-transparent border-2 border-white/20 text-white font-bold py-4 px-10 rounded-xl hover:bg-white/10 transition-all"
                     >
-                        Request Demo
+                        {t('footer.demo')}
                     </a>
                 </div>
             </div>

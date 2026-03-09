@@ -28,6 +28,8 @@
     "tailwindcss": "^3.3.6"
   },
   "devDependencies": {
-    "sass": "^1.69.5"
+    "@astrojs/check": "^0.9.6",
+    "sass": "^1.69.5",
+    "typescript": "^5.9.3"
   }
 }
