@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CTASection from "../components/CTASection.astro";
+import PlatformShowcase from "../components/PlatformShowcase.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -98,5 +99,6 @@ const t = useTranslations(lang);
         </div>
     </section>
 
+    <PlatformShowcase />
     <CTASection />
 </Layout>

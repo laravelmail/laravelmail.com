@@ -9,6 +9,7 @@ import CTASection from "../../components/CTASection.astro";
 import FAQ from "../../components/FAQ.astro";
 import ValueProposition from "../../components/ValueProposition.astro";
 import CommunitySlack from "../../components/CommunitySlack.astro";
+import PlatformShowcase from "../../components/PlatformShowcase.astro";
 import { languages } from "../../i18n/ui";
 import { useTranslations } from "../../i18n/utils";
 
@@ -29,6 +30,7 @@ const t = useTranslations(lang as any);
   <Hero />
   <Partners />
   <VideoSection />
+  <PlatformShowcase />
   <ValueProposition />
   <HowItWorks />
   <Testimonials />

@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import heroImage from "../assets/logo.svg";
+import heroImage from "../assets/dashboard.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -79,12 +79,12 @@ const t = useTranslations(lang);
                     >
                     </div>
                     <div class="relative rounded-xl shadow-xl overflow-hidden">
-                        <Image
-                            src={heroImage}
-                            alt="Laravel Mail Logo"
-                            class="w-full max-w-md mx-auto h-auto transition-all duration-500 hover:scale-110"
-                            loading="eager"
-                            fetchpriority="high"
+                         <Image 
+                            src={heroImage} 
+                            alt="Laravel Mail Dashboard" 
+                            loading="eager" 
+                            fetchpriority="high" 
+                            class="w-full max-w-md mx-auto h-auto transition-all duration-500 hover:scale-110" 
                         />
                     </div>
                 </div>

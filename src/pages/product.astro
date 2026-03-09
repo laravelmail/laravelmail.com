@@ -5,6 +5,7 @@ import CTASection from "../components/CTASection.astro";
 import Features from "../components/Features.astro";
 import MarketingAutomation from "../components/MarketingAutomation.astro";
 import Integrations from "../components/Integrations.astro";
+import PlatformShowcase from "../components/PlatformShowcase.astro";
 import dashboardImage from "../assets/dashboard.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
@@ -105,6 +106,7 @@ const productSchema = {
 
     <!-- Core Components -->
     <div class="space-y-0">
+        <PlatformShowcase />
         <MarketingAutomation />
         <Features />
         <Integrations />

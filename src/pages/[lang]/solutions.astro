@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import CTASection from "../../components/CTASection.astro";
 import UseCases from "../../components/UseCases.astro";
+import PlatformShowcase from "../../components/PlatformShowcase.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { languages } from "../../i18n/ui";
 
@@ -91,6 +92,7 @@ const solutions = [
             </div>
         </div>
     </section>
+    <PlatformShowcase />
     <CTASection />
     <!-- Detailed Use Cases -->
     <UseCases />

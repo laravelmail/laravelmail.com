@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { languages } from "../../i18n/ui";
+import PlatformShowcase from "../../components/PlatformShowcase.astro";
 
 export async function getStaticPaths() {
   return Object.keys(languages)
@@ -75,4 +76,5 @@ const t = useTranslations(lang as any);
             </section>
         </div>
     </main>
+    <PlatformShowcase />
 </Layout>

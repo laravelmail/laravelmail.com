@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import PlatformShowcase from "../components/PlatformShowcase.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -68,4 +69,5 @@ const t = useTranslations(lang);
             </section>
         </div>
     </main>
+    <PlatformShowcase />
 </Layout>

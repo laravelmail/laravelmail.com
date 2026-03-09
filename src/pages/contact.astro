@@ -168,9 +168,70 @@ const contactMethods = [
             </div>
 
             <!-- Contact Form & Office Info -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-20">
+                <!-- Contact Form -->
+                <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10 shadow-2xl animate-on-scroll delay-2">
+                    <h2 class="text-3xl font-bold text-white mb-6">Send us a <span class="gradient-text">Message</span></h2>
+                    <form action="#" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label for="name" class="text-sm font-medium text-gray-300 ml-1">Full Name</label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    placeholder="John Doe"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 transition-all"
+                                    required
+                                />
+                            </div>
+                            <div class="space-y-2">
+                                <label for="email" class="text-sm font-medium text-gray-300 ml-1">Email Address</label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    placeholder="john@example.com"
+                                    class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 transition-all"
+                                    required
+                                />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="subject" class="text-sm font-medium text-gray-300 ml-1">Subject</label>
+                            <select 
+                                id="subject" 
+                                name="subject" 
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 transition-all appearance-none"
+                            >
+                                <option value="sales" class="bg-gray-900 text-white">Sales Inquiry</option>
+                                <option value="support" class="bg-gray-900 text-white">Technical Support</option>
+                                <option value="partnership" class="bg-gray-900 text-white">Partnership</option>
+                                <option value="other" class="bg-gray-900 text-white">Other</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="message" class="text-sm font-medium text-gray-300 ml-1">Your Message</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="5" 
+                                placeholder="How can we help you today?"
+                                class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 focus:border-brand-primary/50 transition-all resize-none"
+                                required
+                            ></textarea>
+                        </div>
+                        <button 
+                            type="submit" 
+                            class="w-full btn btn-primary py-4 px-8 text-lg font-bold shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-all"
+                        >
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
                 <!-- Office Info -->
-                <div class="space-y-6">
+                <div class="space-y-6 animate-on-scroll delay-3">
                     <div
                         class="bg-brand-bg-card/40 backdrop-blur-md rounded-3xl p-8 border border-white/10"
                     >

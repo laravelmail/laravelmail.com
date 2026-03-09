@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import BetaModal from "../../components/BetaModal.astro";
+import PlatformShowcase from "../../components/PlatformShowcase.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { languages } from "../../i18n/ui";
 
@@ -190,6 +191,8 @@ const schema = {
                     ))
                 }
             </div>
+
+            <PlatformShowcase />
 
             <!-- Manual Setup / Docker Compose -->
             <div class="max-w-5xl mx-auto">

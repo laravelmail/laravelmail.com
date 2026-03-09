@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { languages } from "../../i18n/ui";
+import PlatformShowcase from "../../components/PlatformShowcase.astro";
 
 export async function getStaticPaths() {
   return Object.keys(languages)
@@ -54,9 +55,7 @@ try {
                 >
                     {t('templates.hero_subtitle_1')} <strong class="text-white"
                         >{t('templates.hero_subtitle_2')}</strong
-                    > {t('templates.hero_subtitle_3')} <strong class="text-white"
-                        >{t('templates.hero_subtitle_4')}</strong
-                    > {t('templates.hero_subtitle_5')} <strong class="text-white">{t('templates.hero_subtitle_6')}</strong> {t('templates.hero_subtitle_7')}
+                    > {t('templates.hero_subtitle_3')}
                 </p>
                 <div class="flex items-center justify-center space-x-4">
                     <a
@@ -114,7 +113,7 @@ try {
                                             </span>
                                         </div>
                                         <p class="text-gray-400 text-sm mb-6 line-clamp-2">
-                                            {template.description || t('templates.default_desc')}
+                                            {template.description || t('templates.template_desc')}
                                         </p>
                                         <div class="flex items-center justify-between">
                                             <a
@@ -145,6 +144,7 @@ try {
             }
         </div>
     </main>
+    <PlatformShowcase />
 </Layout>
 
 <style>

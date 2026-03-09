@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import CTASection from "../../components/CTASection.astro";
 import FAQ from "../../components/FAQ.astro";
+import PlatformShowcase from "../../components/PlatformShowcase.astro";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { languages } from "../../i18n/ui";
@@ -154,6 +155,8 @@ const keywords = "email marketing, email marketing platform, email marketing sof
             </div>
         </div>
     </section>
+
+    <PlatformShowcase />
 
     <FAQ />
 
