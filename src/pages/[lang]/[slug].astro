@@ -5,8 +5,10 @@ import seoData from "../../data/seo-variations.json";
 import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
+import { languages } from "../../i18n/ui";
+
 export async function getStaticPaths() {
-  const langs = ['en', 'es', 'zh', 'ru'];
+  const langs = Object.keys(languages).filter(l => l !== 'en');
   
   const paths = [];
   for (const lang of langs) {

@@ -5,9 +5,11 @@ import CTASection from "../../../components/CTASection.astro";
 import { injectSeoLinks } from "../../../scripts/seo-utils";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
+import { languages } from "../../../i18n/ui";
+
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  const langs = ['en', 'es', 'zh', 'ru'];
+  const langs = Object.keys(languages).filter(l => l !== 'en');
   
   const paths = [];
   for (const lang of langs) {

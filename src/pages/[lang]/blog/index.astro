@@ -4,13 +4,12 @@ import Layout from "../../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
+import { languages } from "../../../i18n/ui";
+
 export async function getStaticPaths() {
-  return [
-    { params: { lang: 'en' } },
-    { params: { lang: 'es' } },
-    { params: { lang: 'zh' } },
-    { params: { lang: 'ru' } },
-  ];
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
 }
 
 const { lang } = Astro.params;
