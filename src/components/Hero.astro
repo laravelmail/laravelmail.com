@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import heroImage from "../assets/dashboard.png";
+import heroImage from "../assets/dashboard-2.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -54,6 +54,7 @@ const t = useTranslations(lang);
                     >
                     <a
                         href="#demo-video"
+                        title="Watch the Laravel Mail demo video"
                         class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-white/20 text-white hover:bg-white/10 transition-all duration-300 font-medium"
                     >
                         <svg

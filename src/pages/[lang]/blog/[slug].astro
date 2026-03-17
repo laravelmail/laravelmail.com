@@ -31,9 +31,40 @@ let { title, date, author, authorRole, authorAvatar, excerpt, content, image, ta
 
 // Inject internal SEO links
 content = injectSeoLinks(content);
+
+const blogPostSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": title,
+    "description": excerpt,
+    "image": image,
+    "datePublished": date,
+    "dateModified": date,
+    "author": {
+        "@type": "Person",
+        "name": author,
+        "jobTitle": authorRole
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Laravel Mail",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://laravelmail.com/logo.svg"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": Astro.url.href
+    },
+    "keywords": tags.join(", "),
+    "articleSection": "Email Marketing",
+    "inLanguage": lang
+};
 ---
 
 <Layout title={`${title} | Laravel Mail Blog`} description={excerpt}>
+    <script type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
     <article class="pt-32 pb-20 bg-brand-bg">
         <div class="container-custom">
             <!-- Header -->

@@ -5,7 +5,6 @@ import { getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BetaModal from "../components/BetaModal.astro";
-import UrgencyBanner from "../components/UrgencyBanner.astro";
 import PurchaseToast from "../components/PurchaseToast.astro";
 import "../styles/global.css";
 import "@fontsource/nunito/400.css";
@@ -271,7 +270,6 @@ const {
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <UrgencyBanner />
     <Header transition:persist="header" />
 
     <main

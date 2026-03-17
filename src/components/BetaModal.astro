@@ -53,10 +53,11 @@
                     platform, please get in contact with us:
                 </p>
                 <a
-                    href="mailto:info@laravelmail.com"
+                    href="#"
+                    id="contact-email-link"
                     class="mt-3 inline-flex items-center text-payflo-purple font-semibold hover:text-payflo-dark transition-colors"
                 >
-                    info@laravelmail.com
+                    <span id="contact-email-text"></span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="h-4 w-4 ml-2"
@@ -192,4 +193,15 @@
 
     // Initialize on load and after view transitions
     document.addEventListener("astro:page-load", setupBetaModal);
+
+    // Prevent Cloudflare email obfuscation by rendering email via JS
+    (function() {
+        const email = 'info' + '@' + 'laravelmail.com';
+        const emailLink = document.getElementById('contact-email-link') as HTMLAnchorElement;
+        const emailText = document.getElementById('contact-email-text');
+        if (emailLink && emailText) {
+            emailLink.href = 'mailto:' + email;
+            emailText.textContent = email;
+        }
+    })();
 </script>

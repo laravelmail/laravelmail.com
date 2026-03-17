@@ -24,12 +24,28 @@ const deploymentPlatforms = [
         accent: "from-[#4285F4] to-[#34A853]",
     },
     {
+        name: "Laravel Cloud",
+        logo: "https://laravel.com/img/logomark.min.svg",
+        url: "/buy",
+        description:
+            "Official Laravel hosting platform with optimized Docker support.",
+        accent: "from-[#F9322C] to-[#E34A24]",
+    },
+    {
         name: "DigitalOcean",
         logo: "https://www.deploytodo.com/do-btn-blue.svg",
         url: "/buy",
         description:
             "Scale seamlessly on DigitalOcean App Platform with native Docker.",
         accent: "from-[#0080FF] to-[#0069D9]",
+    },
+    {
+        name: "Coolify",
+        logo: "https://coolify.io/button.svg",
+        url: "/buy",
+        description:
+            "Open-source self-hosted PaaS with one-click Laravel deployment.",
+        accent: "from-[#0D9488] to-[#14B8A6]",
     },
     {
         name: "Railway",
@@ -65,7 +81,7 @@ const schema = {
         priceCurrency: "USD",
     },
     description:
-        "Deploy Laravel Mail instantly using our one-click Docker deployment options for Google Cloud Run, DigitalOcean, Railway, and more.",
+        "Deploy Laravel Mail instantly using our one-click Docker deployment options for Google Cloud, Laravel Cloud, DigitalOcean, Coolify, Railway, and more.",
     publisher: {
         "@type": "Organization",
         name: "Laravel Mail",
@@ -76,7 +92,7 @@ const schema = {
 
 <Layout
     title="How to Deploy Laravel Mail | One-Click & Docker Setup"
-    description="Step-by-step guide to self-hosting Laravel Mail. One-click deployment for Google Cloud, DigitalOcean, and Railway, or full Docker Compose setup for complete data control."
+    description="Step-by-step guide to self-hosting Laravel Mail. One-click deployment for Google Cloud, Laravel Cloud, DigitalOcean, Coolify, and Railway, or full Docker Compose setup for complete data control."
 >
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />

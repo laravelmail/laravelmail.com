@@ -30,9 +30,9 @@ const navItems = [
         title: "Deploy",
     },
     {
-        name: "KumoMTA",
-        href: getRelativeLocaleUrl(lang, "/kumomta"),
-        title: "KumoMTA - Open Source MTA",
+        name: "Contact",
+        href: getRelativeLocaleUrl(lang, "/contact"),
+        title: "Contact Us",
     },
     {
         name: t('nav.github'),
@@ -208,6 +208,7 @@ const socialLinks = [
                     return (
                         <a
                             href={item.href}
+                            title={item.title}
                             target={isExternal ? "_blank" : undefined}
                             rel={isExternal ? "noopener noreferrer" : undefined}
                             onclick={`trackClick('mobile_${item.name}')`}
@@ -224,6 +225,7 @@ const socialLinks = [
             >
                 <a
                     href={getRelativeLocaleUrl(lang, "/buy")}
+                    title="Purchase Laravel Mail - £40 Setup + £10/mo"
                     onclick="trackClick('mobile_get_started')"
                     class="block text-center py-4 px-8 bg-payflo-purple text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-payflo-purple/20 flex-grow mr-4"
                 >
@@ -237,6 +239,7 @@ const socialLinks = [
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 class="text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-lg border border-white/10"
+                                title={social.name}
                                 aria-label={social.name}
                             >
                                 {social.icon === "linkedin" && (

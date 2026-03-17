@@ -5,47 +5,11 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
-const team = [
-    {
-        name: "Wez Furlong",
-        role: "Co-Founder",
-        bio: "With 25 years of experience in distributed and large-scale systems engineering, including as lead engineer and architect on a top-performing commercial MTA, Wez brings his depth of experience at building high-performance, scalable systems to architect and develop KumoMTA.",
-        linkedin: "https://www.linkedin.com/in/wezfurlong/",
-    },
-    {
-        name: "Mike Hillyer",
-        role: "Co-Founder",
-        bio: "Mike has been working in on-prem email infrastructure since 2006 across multiple organizations including EmailNinjas, an on-prem email infrastructure consulting firm that he founded and successfully exited.",
-        linkedin: "https://www.linkedin.com/in/mikehillyer/",
-    },
-    {
-        name: "Tom Mairs",
-        role: "Co-Founder",
-        bio: "Tom has over thirty years of experience in technology as a leader, consultant, administrator, and Customer Success expert, with the last fifteen years spent in the on-prem and cloud email infrastructure industry.",
-        linkedin: "https://www.linkedin.com/in/tommairs/",
-    },
-];
-
-const pillars = [
-    {
-        title: "Fair & Transparent Pricing",
-        description: "No sudden renewal hikes. No hidden fees. We believe in predictable, fair pricing that scales with your business, not against it.",
-    },
-    {
-        title: "Open Source Foundation",
-        description: "Built on open-source principles to directly address industry pain points while ensuring performance, resilience, and security. Your implementation stays yours.",
-    },
-    {
-        title: "Business Continuity",
-        description: "No matter what changes occur in our product roadmap, partnerships, or corporate structure, you will always retain full access to and complete control over your implementation.",
-    },
-];
 ---
 
 <Layout
-    title={t('kumomta.title')}
-    description={t('kumomta.description')}
+    title="Laravel Email Infrastructure Powered by KumoMTA - Laravel Mail"
+    description="Modern Laravel email infrastructure built on KumoMTA. Scale your email delivery with high-performance MTA designed for Laravel applications."
 >
     <!-- Hero Section -->
     <section class="relative pt-20 pb-16 md:pt-32 md:pb-28 overflow-hidden">
@@ -60,165 +24,488 @@ const pillars = [
             <div class="max-w-4xl mx-auto text-center mb-16">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-sm font-medium mb-6">
                     <span>🚀</span>
-                    <span>{t('kumomta.badge')}</span>
+                    <span>Open Source MTA</span>
                 </div>
                 <h1
                     class="text-5xl md:text-7xl text-white font-extrabold leading-[1.1] tracking-tight animate-on-scroll"
                 >
-                    {t('kumomta.hero_1')}<span class="gradient-text">{t('kumomta.hero_2')}</span>
+                    Laravel Email Infrastructure <span class="gradient-text">Powered by KumoMTA</span>
                 </h1>
                 <p
                     class="mt-8 text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto animate-on-scroll delay-1"
                 >
-                    {t('kumomta.hero_subtitle')}
+                    Modern Laravel applications depend heavily on email. From transactional notifications and authentication messages to marketing campaigns and user engagement workflows, reliable email delivery is critical for any serious SaaS product.
                 </p>
                 <div
                     class="mt-10 flex flex-col sm:flex-row gap-5 justify-center animate-on-scroll delay-2"
                 >
                     <a
-                        href="https://kumomta.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="/buy"
                         class="btn btn-primary px-10 py-4 text-lg font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
                     >
-                        {t('kumomta.learn_more')}
+                        Get Started
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- What Kumo Stands For -->
+    <!-- The Challenge Section -->
     <section class="py-24 bg-brand-bg-darker/40">
         <div class="container-custom">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-                    {t('kumomta.stands_header')}
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    The Challenge of Email Infrastructure in Laravel Applications
                 </h2>
-                <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-10 shadow-lg border border-white/10">
-                    <p class="text-xl text-gray-300 leading-relaxed mb-8">
-                        {t('kumomta.stands_intro')}
-                    </p>
-                    <p class="text-lg text-gray-400 leading-relaxed">
-                        {t('kumomta.stands_outro')}
-                    </p>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    Laravel provides excellent abstractions for sending email through its Mail and Notification systems. Integrating SMTP or API providers is simple, and sending messages from your application takes only a few lines of code.
+                </p>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    But once your application starts to grow, several challenges appear:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">📬 Deliverability Management</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Email providers like Gmail and Outlook continuously adjust filtering algorithms. Ensuring messages reach inboxes instead of spam folders requires careful configuration of DNS records, reputation management, and sending patterns.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">📈 High-Volume Sending</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            SaaS platforms often send large volumes of email for user onboarding, notifications, password resets, system alerts, and marketing campaigns. Traditional SMTP providers may throttle traffic or charge heavily as volume increases.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10 md:col-span-2">
+                        <h3 class="text-2xl font-bold text-white mb-4">⚙️ Infrastructure Complexity</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Running your own mail infrastructure requires managing MTA configuration, IP warm-up, queue management, bounce processing, and reputation monitoring. For most development teams, this becomes a significant operational burden.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Core Pillars -->
+    <!-- What is KumoMTA -->
     <section class="py-24 bg-brand-bg-darker">
         <div class="container-custom">
-            <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-4">
-                {t('kumomta.pillars_header')}
-            </h2>
-            <p class="text-xl text-gray-400 text-center mb-16 max-w-2xl mx-auto">
-                {t('kumomta.pillars_subtitle')}
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {
-                    pillars.map((pillar, index) => (
-                        <div
-                            class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10 hover:border-brand-primary/30 transition-all animate-on-scroll"
-                        >
-                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-4">
-                                {pillar.title}
-                            </h3>
-                            <p class="text-gray-400 leading-relaxed">
-                                {pillar.description}
-                            </p>
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    What is KumoMTA?
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    KumoMTA is a modern Mail Transfer Agent designed specifically for high-volume and policy-driven email delivery. Unlike traditional MTAs that rely heavily on static configuration files, KumoMTA provides a programmable architecture that allows teams to control sending behaviour dynamically.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
                         </div>
-                    ))
-                }
+                        <h3 class="text-xl font-bold text-white mb-4">High Performance</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            KumoMTA is designed to handle extremely high message throughput while maintaining efficient queue management and delivery performance.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4">Policy-Driven</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Administrators can implement dynamic policies that control routing, throttling, retries, and domain-specific sending rules.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-4">Modern Architecture</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Built with modern distributed infrastructure in mind, making it well suited for large SaaS platforms and email-heavy applications.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Team Section -->
+    <!-- Why Laravel Developers Need Scalable Email -->
     <section class="py-24 bg-brand-bg-darker/40">
         <div class="container-custom">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                    {t('kumomta.team_header')}
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    Why Laravel Developers Need Scalable Email Infrastructure
                 </h2>
-                <p class="text-xl text-gray-400">
-                    {t('kumomta.team_subtitle')}
+                <p class="text-xl text-gray-300 leading-relaxed mb-12">
+                    Laravel is widely used for building SaaS platforms, marketplaces, and high-growth web applications. In these environments, email quickly becomes one of the most important system components.
                 </p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {
-                    team.map((member, index) => (
-                        <div
-                            class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10 hover:border-brand-primary/30 transition-all animate-on-scroll"
-                        >
-                            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6 mx-auto">
-                                <span class="text-3xl font-bold text-white">
-                                    {member.name.split(' ').map(n => n[0]).join('')}
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-white text-center mb-2">
-                                {member.name}
-                            </h3>
-                            <p class="text-brand-primary text-center mb-4 font-medium">
-                                {member.role}
-                            </p>
-                            <p class="text-gray-400 leading-relaxed text-sm">
-                                {member.bio}
-                            </p>
-                            <div class="mt-6 text-center">
-                                <a
-                                    href={member.linkedin}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                                >
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                                    </svg>
-                                    <span class="text-sm">LinkedIn</span>
-                                </a>
-                            </div>
-                        </div>
-                    ))
-                }
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">📧 Transactional Email</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Applications send real-time messages such as account confirmations, password resets, order receipts, payment notifications, and system alerts. These messages must arrive quickly and reliably.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">🔔 Product Notifications</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Many SaaS platforms rely on email to notify users about activity inside the system, including new messages, workflow events, collaboration updates, and reporting alerts.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">📣 Marketing and Engagement</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Applications often include email campaigns to increase user engagement and retention. These campaigns may involve sending messages to thousands or millions of recipients.
+                        </p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-2xl font-bold text-white mb-4">⚡ System-Generated Messaging</h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Some platforms generate automated communications triggered by business logic, workflows, or scheduled tasks. All these scenarios require a scalable and reliable email delivery platform.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
+    <!-- Problems with Traditional Providers -->
+    <section class="py-24 bg-brand-bg-darker">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    The Problem With Traditional Email Providers
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-12">
+                    Most developers initially rely on hosted email APIs or SMTP providers. While these solutions are easy to start with, they introduce several long-term challenges.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">💰 Increasing Costs</h3>
+                        <p class="text-gray-400 leading-relaxed">As sending volume grows, monthly costs can increase significantly.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">🔒 Vendor Lock-In</h3>
+                        <p class="text-gray-400 leading-relaxed">Switching providers can require rewriting integrations, migrating templates, and reconfiguring infrastructure.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">🎛️ Limited Infrastructure Control</h3>
+                        <p class="text-gray-400 leading-relaxed">Hosted providers abstract away the underlying infrastructure, limiting control over sending behaviour, routing policies, queue management, and IP configuration.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">📊 Scaling Limitations</h3>
+                        <p class="text-gray-400 leading-relaxed">For applications that send millions of messages, provider limits and throttling can impact delivery performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How LaravelMail Simplifies -->
+    <section class="py-24 bg-brand-bg-darker/40">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                    How LaravelMail Simplifies KumoMTA for Developers
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    LaravelMail provides a developer-focused platform that integrates the power of KumoMTA with a simple interface and APIs designed for Laravel applications.
+                </p>
+                <p class="text-xl text-gray-300 leading-relaxed">
+                    Instead of managing your own MTA cluster, LaravelMail provides a ready-to-use infrastructure optimized for Laravel developers. This allows teams to benefit from high-performance email delivery without needing to operate complex mail servers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SMTP Integration -->
+    <section class="py-24 bg-brand-bg-darker">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    Simple SMTP Integration With Laravel
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    LaravelMail can be integrated directly using Laravel's built-in mail system. Configuration only requires updating the SMTP settings inside your Laravel application.
+                </p>
+
+                <div class="bg-gray-900 rounded-2xl p-8 border border-white/10 mb-8">
+                    <h3 class="text-lg font-bold text-white mb-4">Example .env configuration:</h3>
+                    <pre class="text-gray-300 font-mono text-sm overflow-x-auto"><code>MAIL_MAILER=smtp
+MAIL_HOST=smtp.laravelmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_username
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls</code></pre>
+                </div>
+
+                <div class="bg-gray-900 rounded-2xl p-8 border border-white/10 mb-8">
+                    <h3 class="text-lg font-bold text-white mb-4">Example message sending:</h3>
+                    <pre class="text-gray-300 font-mono text-sm overflow-x-auto"><code>Mail::to($user->email)->send(new WelcomeEmail());</code></pre>
+                </div>
+
+                <p class="text-xl text-gray-300 leading-relaxed text-center">
+                    This makes it possible to use LaravelMail without modifying application logic.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Integration -->
+    <section class="py-24 bg-brand-bg-darker/40">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    API Integration for Advanced Workflows
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    In addition to SMTP, LaravelMail provides APIs that allow developers to build more advanced messaging workflows.
+                </p>
+                <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                    <p class="text-lg text-gray-300 leading-relaxed">
+                        These APIs can support features such as:
+                    </p>
+                    <ul class="mt-4 space-y-3 text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary">✓</span>
+                            <span>Programmatic campaign creation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary">✓</span>
+                            <span>Analytics retrieval</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary">✓</span>
+                            <span>Automation workflows</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-brand-primary">✓</span>
+                            <span>Subscriber management</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laravel Queues -->
+    <section class="py-24 bg-brand-bg-darker">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    Built for Laravel Queues and Background Processing
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    Laravel applications often rely heavily on queues to handle background jobs. Email sending is commonly queued to avoid slowing down request processing.
+                </p>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    LaravelMail integrates naturally with this architecture by supporting high-volume queued sending.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-lg font-bold text-white mb-2">Event-Driven Notifications</h3>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-lg font-bold text-white mb-2">Batch Messaging</h3>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-lg font-bold text-white mb-2">Scheduled Campaigns</h3>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+                        <h3 class="text-lg font-bold text-white mb-2">Asynchronous Communication</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deliverability -->
+    <section class="py-24 bg-brand-bg-darker/40">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                    Deliverability and Reliability
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-8">
+                    Email delivery is not just about sending messages; it is about ensuring they reach the inbox.
+                </p>
+                <p class="text-xl text-gray-300 leading-relaxed">
+                    LaravelMail infrastructure includes mechanisms designed to improve deliverability, including optimized sending patterns, queue management, domain-aware routing, and bounce and complaint handling.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="py-24 bg-brand-bg-darker">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    Use Cases for LaravelMail
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-12 text-center">
+                    LaravelMail is designed for developers building applications that rely heavily on email communication.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                        <h3 class="text-lg font-bold text-white">SaaS Platforms</h3>
+                        <p class="text-gray-400 text-sm mt-2">User-driven applications that send large volumes of notifications and system messages.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                        <h3 class="text-lg font-bold text-white">Marketplaces</h3>
+                        <p class="text-gray-400 text-sm mt-2">Platforms that notify buyers and sellers about transactions, updates, and activity.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                        <h3 class="text-lg font-bold text-white">Developer Tools</h3>
+                        <p class="text-gray-400 text-sm mt-2">Systems that generate alerts, reports, or integration notifications.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                        <h3 class="text-lg font-bold text-white">Internal Business Apps</h3>
+                        <p class="text-gray-400 text-sm mt-2">Enterprise tools that rely on automated messaging workflows.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center">
+                        <h3 class="text-lg font-bold text-white">Marketing Platforms</h3>
+                        <p class="text-gray-400 text-sm mt-2">Applications that manage subscriber lists and email campaigns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="py-24 bg-brand-bg-darker/40">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white text-center mb-8">
+                    Advantages for Engineering Teams
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">Developer-Friendly Integration</h3>
+                        <p class="text-gray-400 leading-relaxed">SMTP and API integrations allow Laravel applications to connect quickly without complex setup.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">Scalable Infrastructure</h3>
+                        <p class="text-gray-400 leading-relaxed">The underlying KumoMTA engine enables high-volume email delivery suitable for growing platforms.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">Operational Simplicity</h3>
+                        <p class="text-gray-400 leading-relaxed">Teams do not need to manage mail servers, queue systems, or deliverability infrastructure.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <h3 class="text-xl font-bold text-white mb-3">Flexibility</h3>
+                        <p class="text-gray-400 leading-relaxed">Developers retain the flexibility to integrate email workflows into their application architecture.</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10 md:col-span-2">
+                        <h3 class="text-xl font-bold text-white mb-3">Cost Efficiency</h3>
+                        <p class="text-gray-400 leading-relaxed">Running email infrastructure efficiently helps control operational costs as sending volume grows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
     <section class="py-24 bg-brand-bg-darker">
         <div class="container-custom">
             <div class="max-w-4xl mx-auto text-center">
-                <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary font-bold text-lg mb-8">
-                    <span>45+</span>
-                    <span>{t('kumomta.years_experience')}</span>
-                </div>
                 <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
-                    {t('kumomta.founded_header')}
+                    Getting Started
                 </h2>
-                <p class="text-xl text-gray-400 leading-relaxed mb-10">
-                    {t('kumomta.founded_text')}
+                <p class="text-xl text-gray-300 leading-relaxed mb-12">
+                    Integrating LaravelMail into a Laravel application only takes a few minutes.
                 </p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                        <div class="text-4xl font-bold text-brand-primary mb-2">16th</div>
-                        <div class="text-gray-400">Release</div>
+                        <div class="text-3xl font-bold text-brand-primary mb-2">1</div>
+                        <p class="text-white font-medium">Create a LaravelMail account</p>
                     </div>
                     <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                        <div class="text-4xl font-bold text-brand-primary mb-2">100%</div>
-                        <div class="text-gray-400">Open Source</div>
+                        <div class="text-3xl font-bold text-brand-primary mb-2">2</div>
+                        <p class="text-white font-medium">Configure SMTP credentials</p>
                     </div>
                     <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                        <div class="text-4xl font-bold text-brand-primary mb-2">∞</div>
-                        <div class="text-gray-400">Business Continuity</div>
+                        <div class="text-3xl font-bold text-brand-primary mb-2">3</div>
+                        <p class="text-white font-medium">Update Laravel mail settings</p>
+                    </div>
+                </div>
+
+                <p class="text-xl text-gray-300 leading-relaxed">
+                    Once configured, LaravelMail becomes the delivery engine for all application email.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="py-24 bg-brand-bg-darker/40">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-8">
+                    Conclusion
+                </h2>
+                <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                    Email remains one of the most important communication channels for modern web applications. As platforms scale, the need for reliable and flexible email infrastructure becomes increasingly important.
+                </p>
+                <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                    LaravelMail combines the power of KumoMTA with a developer-friendly platform designed specifically for Laravel applications.
+                </p>
+                <p class="text-xl text-gray-300 leading-relaxed mb-12">
+                    By providing scalable infrastructure, simple integrations, and modern delivery technology, LaravelMail allows development teams to focus on building great products while maintaining reliable email communication.
+                </p>
+                <p class="text-2xl text-gray-300 leading-relaxed font-medium">
+                    For Laravel developers who want full control over their email systems without managing complex infrastructure, LaravelMail provides a powerful and practical solution.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders Section -->
+    <section class="py-24 bg-brand-bg-darker">
+        <div class="container-custom">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+                    Meet the Founders
+                </h2>
+                <p class="text-xl text-gray-400 leading-relaxed mb-12">
+                    45 Years Of Collective Email Experience
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
+                            <span class="text-3xl font-bold text-white">B</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Bogdan</h3>
+                        <p class="text-gray-400">Co-Founder</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
+                            <span class="text-3xl font-bold text-white">A</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Andrei</h3>
+                        <p class="text-gray-400">Co-Founder</p>
+                    </div>
+                    <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl p-8 shadow-lg border border-white/10">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-primary to-brand-blue flex items-center justify-center mb-6">
+                            <span class="text-3xl font-bold text-white">H</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Hammad</h3>
+                        <p class="text-gray-400">Co-Founder</p>
                     </div>
                 </div>
             </div>
