@@ -27,25 +27,45 @@ const faqs = [
         answer: t('faq.a5'),
     },
     {
+        question: "How does Laravel Mail handle email deliverability?",
+        answer: 'Laravel Mail supports DKIM/SPF/DMARC setup for optimal deliverability. Our platform guides you through domain warm-up and provides dedicated infrastructure to maintain your sender reputation. <a href="/kumomta" title="Learn about KumoMTA email infrastructure" class="text-purple-600 hover:underline">Learn about our KumoMTA integration</a>.',
+    },
+    {
+        question: "Can I use Laravel Mail for transactional emails?",
+        answer: "Absolutely. Laravel Mail is perfect for transactional emails including order confirmations, password resets, and account notifications. Use Laravel's Mailable classes for clean, testable email templates.",
+    },
+    {
+        question: "What SMTP providers does Laravel Mail support?",
+        answer: "Laravel Mail supports Amazon SES, SendGrid, Mailgun, Postmark, SMTP, and any other Laravel-compatible mail driver. Configure multiple providers for redundancy and optimal routing.",
+    },
+    {
+        question: "Does Laravel Mail work with Laravel queues?",
+        answer: "Yes! Laravel Mail integrates seamlessly with Laravel queues for asynchronous email sending. Queue your emails to improve application performance and user experience.",
+    },
+    {
+        question: "How does pricing work for Laravel Mail?",
+        answer: "£40 setup fee and £10 monthly rolling subscription. Send to unlimited contacts with no per-contact fees. Includes full source code access, B2B leads database, and AI marketing agents.",
+    },
+    {
         question: "Do you provide support for setup?",
         answer: 'Yes, we do. We offer comprehensive support and guide you through the full onboarding process. This includes complex technical tasks like DNS setup (SPF, DKIM, DMARC) and creating your first campaign templates. For assistance, simply <a href="/contact" class="text-purple-600 hover:underline">get in touch</a> with our dedicated support team.',
     },
     {
         question: "Is Laravel Mail GDPR and CCPA compliant?",
-        answer: "Definitely. Because you are self-hosting and own your data, compliance is much easier. We provide built-in tools to comply with global data privacy laws like GDPR and CCPA, including unsubscribe management and secure data handling practices. You have complete sovereignty over your customer data.",
+        answer: "Definitely. Because you are self-hosting and own your data, compliance is much easier. We provide built-in tools to comply with global data privacy laws like GDPR and CCPA, including unsubscribe management and secure data handling practices. Your data stays on your servers.",
     },
     {
-        question: "Can I import my own B2B lead lists?",
-        answer: "Yes, you can. We support multiple import methods, including uploading CSV, Excel, or connecting via API. Our system automatically validates and deduplicates leads to ensure your list quality remains high.",
+        question: "Can I import my own B2B lead lists into Laravel Mail?",
+        answer: "Yes, you can. Laravel Mail supports multiple import methods, including uploading CSV, Excel, or connecting via API. Our system automatically validates and deduplicates leads to ensure your list quality remains high.",
     },
     {
-        question: "What reporting features are included?",
-        answer: "We provide real-time analytics on key metrics such as opens, clicks, bounce rates, and conversions. You can export detailed reports or sync with your business intelligence (BI) tools for deeper analysis.",
+        question: "What reporting features does Laravel Mail include?",
+        answer: "We provide real-time analytics on key metrics such as opens, clicks, bounce rates, and conversions. Track your Laravel Mail campaigns with detailed reports and export data for deeper analysis.",
     },
     {
         question:
-            "How does Laravel Mail compare to other self-hosted solutions like Mailcoach or SendPortal?",
-        answer: 'While platforms like Mailcoach and SendPortal are excellent choices within the Laravel ecosystem, Laravel Mail is built to be a turnkey solution for businesses rather than just a developer\'s tool. We focus on a seamless user experience, a comprehensive feature set for B2B lead nurturing and marketing campaigns, and dedicated onboarding support. Our platform is designed to get you up and running quickly with powerful tools, without requiring a deep dive into the code. For more information, visit our <a href="/product" class="text-purple-600 hover:underline">product page</a>.',
+            "How does Laravel Mail compare to other Laravel email packages like Mailcoach or Laravel Newsletter?",
+        answer: 'While platforms like Mailcoach are excellent within the Laravel ecosystem, Laravel Mail is built as a turnkey solution for businesses rather than just a developer\'s tool. We focus on seamless user experience, comprehensive B2B lead nurturing features, and dedicated onboarding support. <a href="/mailchimp-alternative" title="Compare Laravel Mail with other platforms" class="text-purple-600 hover:underline">See how we compare</a>.',
     },
     {
         question: "Can I get a refund?",

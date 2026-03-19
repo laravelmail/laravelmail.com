@@ -16,10 +16,24 @@ export default defineConfig({
         },
     },
     redirects: {
+        '/email-automation': '/email-marketing',
+        '/es/email-automation': '/es/email-marketing',
+        '/zh/email-automation': '/zh/email-marketing',
+        '/ru/email-automation': '/ru/email-marketing',
     },
     integrations: [
         tailwind(),
-        sitemap(),
+        sitemap({
+            i18n: {
+                defaultLocale: 'en',
+                locales: {
+                    en: 'en',
+                    es: 'es',
+                    zh: 'zh',
+                    ru: 'ru',
+                },
+            },
+        }),
         preact(),
         icon({
             include: {
