@@ -1,0 +1,16 @@
+{
+  "title": "The Ultimate Guide to Email Subject Lines That Get Opened",
+  "date": "December 3, 2026",
+  "author": "Chris Anderson",
+  "authorRole": "Email Marketing Strategist",
+  "authorAvatar": "/avatar-chris.jpg",
+  "excerpt": "Learn the secrets to writing irresistible email subject lines that boost open rates and drive engagement.",
+  "content": "<div class='lead-paragraph'><p>Your subject line is the first—and sometimes only—impression you make on email recipients. With inboxes overflowing with messages, standing out is critical. A compelling subject line can mean the difference between your email being opened or ignored. This guide reveals the techniques that drive opens.</p></div><div class='highlight-box bg-leadscaptain-purple/5 p-6 rounded-xl my-8'><p class='text-lg'>47% of recipients open emails based on the subject line alone. Make it count.</p></div><h2>The Psychology of Subject Lines</h2><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Understanding what motivates people to open emails is key. Curiosity, urgency, relevance, and personalization all play crucial roles in driving opens.</p></div><h2>Proven Subject Line Formulas</h2><div class='feature-grid grid grid-cols-1 md:grid-cols-2 gap-6 my-8'><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>The How-To Format</h3><p>How to [achieve a desired result]—works every time.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>The Question</h3><p>Pose a question your reader wants answered.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>The Listicle</h3><p>Numbered lists are highly scannable and clickable.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>The FOMO</h3><p>Create urgency with fear of missing out.</p></div></div><h2>Subject Line Best Practices</h2><p>Keep it under 50 characters for mobile optimization. Personalize when possible, but avoid spam trigger words. Test different approaches and use A/B testing to find what works for your audience.</p><p>Use <a href='https://laravelmail.com'>Laravel Mail's subject line analyzer</a> to optimize your subject lines before sending.</p><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Avoid ALL CAPS, excessive punctuation (!!!), and clickbait. These tactics may get opens initially but damage trust over time.</p></div><h2>Common Mistakes to Avoid</h2><p>Don't use misleading subject lines that don't match your content. Avoid being too vague—clarity wins. And never, ever buy email lists and send generic subject lines.</p><p>Master your subject lines with <a href='https://laravelmail.com'>Laravel Mail</a> and watch your open rates soar.</p>",
+  "image": "/blog/email-subject-lines.jpg",
+  "tags": [
+    "Subject Lines",
+    "Open Rates",
+    "Copywriting",
+    "Strategy"
+  ]
+}

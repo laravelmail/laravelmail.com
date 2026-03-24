@@ -1,0 +1,16 @@
+{
+  "title": "Email Marketing for E-commerce: Boosting Sales with Automated Campaigns",
+  "date": "December 10, 2026",
+  "author": "Nicole Martinez",
+  "authorRole": "E-commerce Marketing Expert",
+  "authorAvatar": "/avatar-nicole.jpg",
+  "excerpt": "Discover how e-commerce businesses can leverage email marketing to increase sales, improve customer retention, and grow their online store.",
+  "content": "<div class='lead-paragraph'><p>Email marketing is the secret weapon of successful e-commerce brands. With an average ROI of 36:1, email outperforms all other marketing channels for online retailers. In this guide, we'll explore the automated campaigns that drive e-commerce success.</p></div><div class='highlight-box bg-leadscaptain-purple/5 p-6 rounded-xl my-8'><p class='text-lg'>E-commerce email marketing generates $0.08 of revenue per email sent. For a list of 100,000 subscribers, that's $8,000 per email.</p></div><h2>Essential E-commerce Email Campaigns</h2><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Automation is key to e-commerce email success. Set up these essential campaigns to maximize revenue with minimal ongoing effort.</p></div><h2>High-Impact Automated Sequences</h2><div class='feature-grid grid grid-cols-1 md:grid-cols-2 gap-6 my-8'><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Welcome Series</h3><p>Introduce your brand, showcase bestsellers, and offer a first-purchase discount.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Abandoned Cart</h3><p>Recover an average of 15% of lost revenue with timely reminders.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Post-Purchase</h3><p>Confirm orders, request reviews, and suggest complementary products.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Win-Back Campaigns</h3><p>Re-engage customers who haven't purchased in 90+ days.</p></div></div><h2>Product Recommendation Emails</h2><p>Leverage purchase history and browsing behavior to send personalized product recommendations. These emails consistently outperform generic promotional emails.</p><p>At <a href='https://laravelmail.com'>Laravel Mail</a>, we make it easy to set up sophisticated product recommendation engines.</p><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Segment your customers by purchase history, average order value, and product categories to deliver highly relevant recommendations.</p></div><h2>Seasonal Campaigns</h2><p>Plan your year around key shopping seasons: Black Friday, Cyber Monday, Valentine's Day, back-to-school, and holiday gift guides. Start planning early and build anticipation.</p><p>Supercharge your e-commerce with <a href='https://laravelmail.com'>Laravel Mail's powerful automation tools</a>.</p>",
+  "image": "/blog/ecommerce-email-marketing.jpg",
+  "tags": [
+    "E-commerce",
+    "Sales",
+    "Automation",
+    "Online Store"
+  ]
+}

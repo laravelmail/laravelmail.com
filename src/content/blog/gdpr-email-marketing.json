@@ -1,0 +1,16 @@
+{
+  "title": "GDPR and Email Marketing: Staying Compliant in 2026",
+  "date": "January 7, 2026",
+  "author": "Sophie Laurent",
+  "authorRole": "Privacy Compliance Officer",
+  "authorAvatar": "/avatar-sophie.jpg",
+  "excerpt": "Navigate the complexities of email marketing compliance with confidence. Learn how to stay GDPR compliant while still achieving excellent campaign results.",
+  "content": "<div class='lead-paragraph'><p>Email marketing compliance isn't optional—it's essential. With GDPR, CCPA, and other privacy regulations in effect, understanding and following the rules protects your business and builds subscriber trust. This guide covers everything you need to know about staying compliant.</p></div><div class='highlight-box bg-leadscaptain-purple/5 p-6 rounded-xl my-8'><p class='text-lg'>GDPR violations can cost up to €20 million or 4% of annual global revenue. Compliance is non-negotiable.</p></div><h2>Key GDPR Requirements</h2><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>The General Data Protection Regulation affects how you collect, store, and use email subscriber data. Understanding these requirements is crucial for any business targeting EU residents.</p></div><h2>Essential Compliance Practices</h2><div class='feature-grid grid grid-cols-1 md:grid-cols-2 gap-6 my-8'><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Explicit Consent</h3><p>Subscribers must actively opt-in, not be pre-checked or assumed to consent.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Clear Purpose</h3><p>Explain exactly how you'll use their data when collecting it.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Easy Unsubscribe</h3><p>Make it simple to opt out in every email you send.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Data Access</h3><p>Be prepared to provide subscribers with their data on request.</p></div></div><h2>Building a Compliant List</h2><p>Start with clean data. Remove any contacts collected before GDPR took effect without proper consent. Implement double opt-in to verify consent and maintain records of when and how subscribers opted in.</p><p>Use <a href='https://laravelmail.com'>Laravel Mail's compliance tools</a> to manage consent records and ensure your list stays clean.</p><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Regularly audit your list and remove inactive subscribers or those who haven't engaged in over 12 months.</p></div><h2>International Considerations</h2><p>Beyond GDPR, be aware of CAN-SPAM (US), PIPEDA (Canada), and LGPD (Brazil). Each region has specific requirements—research and comply with all applicable regulations.</p><p>Stay compliant while maximizing results with <a href='https://laravelmail.com'>Laravel Mail</a>.</p>",
+  "image": "/blog/gdpr-email-marketing.jpg",
+  "tags": [
+    "GDPR",
+    "Compliance",
+    "Privacy",
+    "Regulations"
+  ]
+}

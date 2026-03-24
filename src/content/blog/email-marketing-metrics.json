@@ -1,0 +1,16 @@
+{
+  "title": "Measuring Email Marketing ROI: Key Metrics You Must Track",
+  "date": "December 17, 2026",
+  "author": "Tom Bradley",
+  "authorRole": "Analytics Expert",
+  "authorAvatar": "/avatar-tom.jpg",
+  "excerpt": "Learn which email marketing metrics actually matter and how to calculate your ROI to prove the value of your campaigns.",
+  "content": "<div class='lead-paragraph'><p>Email marketing delivers the highest ROI of any marketing channel—but only if you measure it correctly. Understanding your metrics helps you optimize campaigns, justify budget, and demonstrate business impact. This guide covers the essential metrics every email marketer must track.</p></div><div class='highlight-box bg-leadscaptain-purple/5 p-6 rounded-xl my-8'><p class='text-lg'>Companies that calculate email ROI are 3x more likely to increase their email marketing budget.</p></div><h2>The Metrics That Matter</h2><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Not all metrics are created equal. Focus on the metrics that directly tie to business outcomes.</p></div><h2>Primary Metrics to Track</h2><div class='feature-grid grid grid-cols-1 md:grid-cols-2 gap-6 my-8'><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Open Rate</h3><p>Measures subject line effectiveness and list engagement.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Click-Through Rate</h3><p>Shows how many recipients took action after opening.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Conversion Rate</h3><p>Tracks how many clicks resulted in desired actions.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Revenue Per Email</h3><p>The ultimate metric—total revenue divided by emails sent.</p></div></div><h2>Calculating Email ROI</h2><p>The formula is simple: (Revenue - Cost) / Cost x 100 = ROI%. Track all costs including tools, creative, and list rental. For e-commerce, use trackable links to attribute revenue directly to email campaigns.</p><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Set up proper tracking in <a href='https://laravelmail.com'>Laravel Mail</a> to accurately measure conversion and revenue metrics.</p></div><h2>Benchmark Metrics</h2><p>Average open rates vary by industry: retail (20%), B2B (15%), nonprofit (25%). Click-through rates typically range from 2-5%. Use industry benchmarks to evaluate your performance.</p><h2>Reporting Best Practices</h2><p>Create regular reports—weekly for campaigns, monthly for trends, quarterly for strategy reviews. Visualize data to communicate impact to stakeholders.</p><p>Track and optimize with <a href='https://laravelmail.com'>Laravel Mail's comprehensive analytics</a>.</p>",
+  "image": "/blog/email-marketing-metrics.jpg",
+  "tags": [
+    "Metrics",
+    "ROI",
+    "Analytics",
+    "Data"
+  ]
+}

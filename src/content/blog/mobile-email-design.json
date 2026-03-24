@@ -1,0 +1,16 @@
+{
+  "title": "Creating Mobile-Friendly Emails That Convert",
+  "date": "January 14, 2026",
+  "author": "Kevin Chen",
+  "authorRole": "Mobile Marketing Specialist",
+  "authorAvatar": "/avatar-kevin.jpg",
+  "excerpt": "With over 60% of emails opened on mobile devices, mastering mobile email design is essential for campaign success.",
+  "content": "<div class='lead-paragraph'><p>Mobile email design isn't a nice-to-have—it's a necessity. With the majority of emails now opened on smartphones and tablets, your messages must look great and function perfectly on any screen. This guide covers everything you need to create mobile-friendly emails that convert.</p></div><div class='highlight-box bg-leadscaptain-purple/5 p-6 rounded-xl my-8'><p class='text-lg'>Mobile-optimized emails see a 15% increase in click-through rates compared to non-optimized emails.</p></div><h2>Mobile Email Design Principles</h2><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Mobile users have different needs than desktop users. They typically have less time, smaller screens, and are often on the go. Design with these constraints in mind.</p></div><h2>Key Mobile Optimization Strategies</h2><div class='feature-grid grid grid-cols-1 md:grid-cols-2 gap-6 my-8'><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Responsive Design</h3><p>Use fluid templates that adapt to any screen size automatically.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Touch-Friendly CTAs</h3><p>Make buttons large enough to tap easily—at least 44x44 pixels.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Concise Content</h3><p>Keep messages short and scannable on small screens.</p></div><div class='feature-card bg-white p-6 rounded-xl shadow-sm border border-gray-100'><h3 class='text-lg font-semibold mb-2 text-leadscaptain-purple'>Optimized Images</h3><p>Use compressed images and specify alt text for slow connections.</p></div></div><h2>Testing Your Mobile Emails</h2><p>Always test your emails on multiple devices and email clients before sending. Use preview tools that simulate different screen sizes and render engines.</p><p><a href='https://laravelmail.com'>Laravel Mail's email builder</a> includes mobile preview and testing features to ensure your emails look great everywhere.</p><div class='feature-box bg-white p-6 rounded-xl shadow-sm border border-gray-100 my-8'><p>Don't forget to optimize your landing pages for mobile too—the email is only half the battle.</p></div><h2>Common Mobile Mistakes</h2><p>Avoid tiny fonts, horizontal scrolling, and complex tables that break on small screens. Never use fixed-width layouts, and always include a desktop-friendly version for those who want it.</p><p>Create perfect mobile emails with <a href='https://laravelmail.com'>Laravel Mail</a>.</p>",
+  "image": "/blog/mobile-email-design.jpg",
+  "tags": [
+    "Mobile",
+    "Design",
+    "Responsive",
+    "Optimization"
+  ]
+}
