@@ -394,7 +394,7 @@ export default class Chat extends Component<IChatProps, IChatState> {
                     this.removeMessageBubble(id);
                     return;
                 }
-                if (group.userData.lifetime < 2) {
+                if (group.userData.lifetime < 2 && group.children[0] && group.children[1]) {
                     const alpha = group.userData.lifetime / 2;
                     (group.children[0] as any).material.opacity = alpha;
                     (group.children[1] as any).material.opacity = alpha;
@@ -512,10 +512,12 @@ export default class Chat extends Component<IChatProps, IChatState> {
         const group = this.messageObjects.get(id);
         if (group && this.vrmScene) {
             this.vrmScene.remove(group);
-            if (group.children[0].material.map) {
-                group.children[0].material.map.dispose();
+            if (group.children[0]?.material) {
+                if (group.children[0].material.map) {
+                    group.children[0].material.map.dispose();
+                }
+                group.children[0].material.dispose();
             }
-            group.children[0].material.dispose();
         }
         this.messageObjects.delete(id);
     }

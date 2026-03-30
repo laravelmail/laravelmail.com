@@ -75,6 +75,18 @@ document.addEventListener('DOMContentLoaded', function() {
       // Smooth transitions between pages
       document.body.style.willChange = 'transform';
     });
+    
+    // Handle case where transition is already running
+    let pendingTransition = null;
+    document.addEventListener('astro:before-preparation', (event) => {
+      if (document.transition?.pending) {
+        event.preventDefault();
+      }
+    }, { capture: true });
+    
+    document.addEventListener('astro:after-swap', () => {
+      document.body.style.willChange = 'auto';
+    });
   }
 
   // Reduce motion for accessibility
