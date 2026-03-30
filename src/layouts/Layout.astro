@@ -6,6 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BetaModal from "../components/BetaModal.astro";
 import PurchaseToast from "../components/PurchaseToast.astro";
+import ChatWidget from "../components/ChatWidget";
 import "../styles/global.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
@@ -283,6 +284,18 @@ const {
     <Footer transition:persist="footer" />
     <BetaModal />
     <PurchaseToast />
+
+    <ChatWidget 
+      client:load
+      userId="laravelmail-website" 
+      conf={{
+        chatServer: "https://api.laravelgpt.com/api/chat",
+        title: "Laravel Mail Assistant",
+        introMessage: "Hi there! 👋 How can I help you with Laravel Mail today?",
+        placeholderText: "Ask me anything...",
+        mainColor: "#0a92dd"
+      }}
+    />
 
     <!-- Enhanced Intersection Observer for animations -->
     <script>
