@@ -76,6 +76,25 @@ const socialLinks = [
                 menuToggle.classList.toggle("menu-open");
             });
         }
+
+        document.getElementById("buy-now-btn")?.addEventListener("click", function () {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                event: "add_to_cart",
+                ecommerce: {
+                    currency: "GBP",
+                    value: 40,
+                    items: [
+                        {
+                            item_id: "LaravelMail",
+                            item_name: "Mail Plan",
+                            price: 40,
+                            quantity: 1,
+                        },
+                    ],
+                },
+            });
+        });
     });
 </script>
 
@@ -163,9 +182,9 @@ const socialLinks = [
             </div>
 
             <a
+                id="buy-now-btn"
                 title="Purchase Now - £40 Setup + £10/mo"
                 href={getRelativeLocaleUrl(lang, "/buy")}
-                onclick="trackClick('get_started')"
                 class="hidden sm:inline-flex btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
             >
                 {t('nav.buy')}
