@@ -56,6 +56,16 @@ const {
     <meta name="revisit-after" content="7 days" />
 
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {['en', 'es', 'ru', 'zh'].map((locale) => {
+      const path = locale === 'en' ? Astro.url.pathname : `/${locale}${Astro.url.pathname}`;
+      return (
+        <link
+          rel="alternate"
+          hreflang={locale}
+          href={new URL(path, Astro.site)}
+        />
+      );
+    })}
     <link
       rel="alternate"
       hreflang="x-default"

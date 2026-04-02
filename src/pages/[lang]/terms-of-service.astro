@@ -11,11 +11,17 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as any);
+
+const descriptions: Record<string, string> = {
+  es: "Revisa los términos de servicio y licencia de uso de Laravel Mail.",
+  zh: "查看 Laravel Mail 的服务条款和使用许可。",
+  ru: "Просмотрите условия использования и лицензию на использование Laravel Mail.",
+};
 ---
 
 <Layout
     title={t('footer.terms') + " | Laravel Mail"}
-    description="Review the terms of service and usage license for Laravel Mail."
+    description={descriptions[lang as string] || "Review the terms of service and usage license for Laravel Mail."}
 >
     <main class="py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
         <div class="prose prose-slate max-w-3xl mx-auto prose-invert">

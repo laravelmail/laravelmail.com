@@ -11,11 +11,17 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = useTranslations(lang as any);
+
+const descriptions: Record<string, string> = {
+  es: "Comprende cómo Laravel Mail utiliza las cookies para mejorar tu experiencia.",
+  zh: "了解 Laravel Mail 如何使用 cookie 来改善您的体验。",
+  ru: "Узнайте, как Laravel Mail использует файлы cookie для улучшения вашего опыта.",
+};
 ---
 
 <Layout
     title={t('footer.cookie') + " | Laravel Mail"}
-    description="Understand how Laravel Mail uses cookies to improve your experience."
+    description={descriptions[lang as string] || "Understand how Laravel Mail uses cookies to improve your experience."}
 >
     <main class="py-20 px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
         <div class="prose prose-slate max-w-3xl mx-auto prose-invert">

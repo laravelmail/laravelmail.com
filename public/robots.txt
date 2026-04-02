@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://laravelmail.com/sitemap-0.xml
+Sitemap: https://laravelmail.com/sitemap-index.xml
 
 # Disallow admin or private areas (if any)
 Disallow: /api/

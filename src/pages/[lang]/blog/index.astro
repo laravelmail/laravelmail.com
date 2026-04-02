@@ -21,7 +21,12 @@ const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 const title = t('nav.blog') + " | Laravel Mail";
-const description = "Master email marketing, deliverability, and automation. Expert guides and technical insights.";
+const descriptions: Record<string, string> = {
+  es: "Domina el email marketing, la entregabilidad y la automatización. Guías expertas e información técnica.",
+  zh: "掌握邮件营销、送达率和自动化。专家指南和技术见解。",
+  ru: "Освойте email-маркетинг, доставляемость и автоматизацию. Экспертные материалы и технические идеи.",
+};
+const description = descriptions[lang as string] || "Master email marketing, deliverability, and automation. Expert guides and technical insights.";
 ---
 
 <Layout title={title} description={description}>
