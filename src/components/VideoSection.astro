@@ -1,5 +1,10 @@
 ---
 // VideoSection.astro - Embedded YouTube demo video for Laravel Mail
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const videoId = "OcrGNj5AkrU";
 ---
 
@@ -72,11 +77,11 @@ const videoId = "OcrGNj5AkrU";
             >
                 <a
                     href="/buy"
-                    title="Get started with Laravel Mail - £40 Setup + £10/mo"
+                    title={t('hero.buy_button')}
                     class="btn btn-primary px-8 py-3 text-base font-bold"
                     aria-label="Get started with Laravel Mail"
                 >
-                    Get Started — £40 Setup + £10/mo
+                    {t('hero.buy_button')}
                 </a>
                 <a
                     href="/demo"

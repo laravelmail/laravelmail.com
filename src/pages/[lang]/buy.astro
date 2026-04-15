@@ -12,10 +12,8 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const t = useTranslations(lang as any);
 
-const title =
-    "B2B Leads Platform & AI Marketing Agents | £40 Setup + £10/mo | Laravel Mail";
-const description =
-    "Access verified B2B leads + AI marketing agents monthly. Start automating your outreach with our self-hosted platform. £40 setup fee + £10/month rolling, cancel anytime. Note: cancelling removes access to leads API.";
+const title = t('buy.page_title') || "B2B Lead Packs | Verified Leads Starting at $5 | Laravel Mail";
+const description = t('buy.page_description') || "Purchase verified B2B leads in packs. Starting at $5 for 100 leads. No subscription required. Email-verified leads delivered instantly.";
 ---
 
 <Layout title={title} description={description}>
