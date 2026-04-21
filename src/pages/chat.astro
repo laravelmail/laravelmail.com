@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AssistantChat from "../components/chat/AssistantChat";
+---
+
+<Layout title="Chat with AI">
+  <div class="h-[calc(100vh-80px)]">
+    <AssistantChat client:only="react" />
+  </div>
+</Layout>

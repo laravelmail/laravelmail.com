@@ -52,31 +52,29 @@ export default class MessageHolder extends Component<IMessageHolderProps, any> {
         }
     };
     render(props: IMessageHolderProps) {
-        const currentTime = new Date();
-        const message = props.message;
-        const msgTime = new Date(message.time || Date.now());
-        const MessageComponent = messageTypes[message.type] || TextType;
+        const message = props.message || { type: 'text', from: 'unknown', text: '' };
+        const messageType = typeof message.type === 'string' ? message.type : 'text';
+        const MessageComponent = messageTypes[messageType] || TextType;
         const { messageHandler, conf } = this.props;
 
         let styles = '';
         if (message.visible === false || message.visibilityChanged === false) {
             styles += 'display:none';
         }
-        const calculatedTimeout = props.calculatedTimeout;
 
         return (
             <li data-message-id={message.id} className={message.from} style={styles}>
-                {(message.type as string) === 'typing_indicator'
+                {messageType === 'typing_indicator'
                     ? (<MessageComponent onVisibilityChange={this.messageVisibilityChange}
                         message={message}
-                        timeout={calculatedTimeout}
+                        timeout={props.calculatedTimeout}
                         messageHandler={messageHandler}
                         conf={conf}
                     />)
                     : (<div className="msg">
                         <MessageComponent onVisibilityChange={this.messageVisibilityChange}
                             message={message}
-                            timeout={calculatedTimeout}
+                            timeout={props.calculatedTimeout}
                             messageHandler={messageHandler}
                             conf={conf}
                         />

@@ -148,13 +148,13 @@ export default class ListType extends MessageType {
                     }}
                 >
                     {element.image_url && (
-                        <img src={element.image_url} style={imageStyle} alt={element.title} loading="lazy" />
+                        <img src={element.image_url} style={imageStyle} alt={typeof element.title === 'string' ? element.title : ''} loading="lazy" />
                     )}
                     {element.title && (
-                        <p style={titleStyle}>{element.title}</p>
+                        <p style={titleStyle}>{typeof element.title === 'string' ? element.title : JSON.stringify(element.title)}</p>
                     )}
                     {element.subtitle && (
-                        <p style={subtitleStyle}>{element.subtitle}</p>
+                        <p style={subtitleStyle}>{typeof element.subtitle === 'string' ? element.subtitle : JSON.stringify(element.subtitle)}</p>
                     )}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                         {elementButtons}

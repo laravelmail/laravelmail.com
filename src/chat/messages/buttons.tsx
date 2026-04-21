@@ -19,7 +19,7 @@ export default class ButtonsType extends MessageType {
         });
         return (
             <div>
-                {message.text}
+                {message.text ? <span>{message.text}</span> : null}
                 {this.state.attachmentsVisible ? buttons : ''}
             </div>
         );

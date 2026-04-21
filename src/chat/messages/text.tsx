@@ -6,7 +6,7 @@ export default class TextType extends MessageType {
         const message = props.message;
         const attachment = message.attachment;
 
-        const textObject = { __html: message.text };
+        const textObject = { __html: typeof message.text === 'string' ? message.text : JSON.stringify(message.text) };
 
         return (
             <div>

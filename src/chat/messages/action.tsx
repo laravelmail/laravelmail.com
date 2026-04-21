@@ -72,7 +72,7 @@ export default class Action extends MessageType {
 
         return (
             <div style={containerStyle}>
-                {message.text && <div style={textStyle}>{message.text}</div>}
+                {message.text && <div style={textStyle}>{typeof message.text === 'string' ? message.text : JSON.stringify(message.text)}</div>}
                 {this.state.attachmentsVisible && buttons && buttons.length > 0 && (
                     <div style={buttonContainerStyle}>{buttons}</div>
                 )}

@@ -8,7 +8,7 @@ export default class ChatAction extends Component<IChatActionProps, any> {
     render(props: IChatActionProps) {
         return (
             <div class="btn" onClick={() => this.performAction(props.action)}>
-                {props.action.text}
+                {typeof props.action.text === 'string' ? props.action.text : JSON.stringify(props.action.text)}
             </div>
         );
     }

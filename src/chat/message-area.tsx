@@ -4,6 +4,15 @@ import MessageHolder from "./message-holder";
 import { useEffect, useState } from 'preact/hooks';
 import { botman } from './botman';
 
+const toString = (val: unknown): string => {
+    if (val === null || val === undefined) return '';
+    if (typeof val === 'string') return val;
+    if (typeof val === 'number' || typeof val === 'boolean') return String(val);
+    if (Array.isArray(val)) return val.map(toString).join('');
+    if (typeof val === 'object') return JSON.stringify(val);
+    return String(val);
+};
+
 export default class MessageArea extends Component<IMessageAreaProps, any> {
 
 	render(props: IMessageAreaProps, { }) {
@@ -22,8 +31,14 @@ export default class MessageArea extends Component<IMessageAreaProps, any> {
 			<ol class="chat">
 				{
 					props.messages.map((message) => {
+						const safeMessage = {
+							...message,
+							type: typeof message.type === 'string' ? message.type : 'text',
+							text: toString(message.text),
+							from: typeof message.from === 'string' ? message.from : 'unknown',
+						};
 						const listElement = <MessageHolder
-							message={message}
+							message={safeMessage}
 							calculatedTimeout={calculatedTimeout}
 							messageHandler={props.messageHandler}
 							conf={props.conf}
