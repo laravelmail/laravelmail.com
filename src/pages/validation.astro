@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ValidationDashboard from "../components/validation/ValidationDashboard";
+---
+
+<Layout
+  title="Laravel Mail Validation API"
+  description="Validate email addresses, manage allow and block lists, tune scoring rules, and monitor service health from one Laravel Mail dashboard."
+>
+  <ValidationDashboard client:load />
+</Layout>

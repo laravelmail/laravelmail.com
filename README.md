@@ -61,6 +61,15 @@ npm run dev
 
 Create a `.env` file in the root directory with required environment variables (see documentation for available options).
 
+The `/validation` page also supports:
+
+```bash
+PUBLIC_VALIDATION_API_BASE_URL=https://validation.laravelmail.com
+```
+
+If omitted, the dashboard defaults to the production Laravel Mail Validation API.
+If you serve the page from a different origin, configure a same-origin proxy or enable CORS on the validation API. On April 21, 2026, the live API did not return `Access-Control-Allow-Origin` for `Origin: https://laravelmail.com`.
+
 ## Project Structure
 
 ```
@@ -97,6 +106,18 @@ Or connect your repository to Cloudflare Pages for automatic deployments.
 ## Documentation
 
 For full documentation, visit [laravelmail.com](https://laravelmail.com)
+
+## Validation Dashboard
+
+The `/validation` route provides a browser-based control panel for the Laravel Mail Validation API. It includes:
+
+- Single-email validation via `POST /v1/filter-email`
+- Spam feedback via `POST /v1/feedback/spam`
+- Health and root endpoint monitoring via `GET /health` and `GET /`
+- Allowlist and blocklist management via the `/v1/lists` endpoints
+- Score inspection, updates, and reset controls via the `/v1/scores` endpoints
+
+The page is client-rendered and talks directly to the configured validation API base URL.
 
 ## License
 
