@@ -55,22 +55,34 @@ const {
     <meta name="language" content={lang} />
     <meta name="revisit-after" content="7 days" />
 
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
-    {['en', 'es', 'ru', 'zh'].map((locale) => {
-      const path = locale === 'en' ? Astro.url.pathname : `/${locale}${Astro.url.pathname}`;
+    {(() => {
+      // Get current path without locale prefix
+      const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+      const currentLocale = pathParts[0] && ['en', 'es', 'ru', 'zh'].includes(pathParts[0]) ? pathParts[0] : null;
+      const pathWithoutLocale = currentLocale ? '/' + pathParts.slice(1).join('/') : Astro.url.pathname;
+      const canonicalPath = currentLocale ? `/${currentLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}` : pathWithoutLocale;
+      
       return (
-        <link
-          rel="alternate"
-          hreflang={locale}
-          href={new URL(path, Astro.site)}
-        />
+        <>
+          <link rel="canonical" href={new URL(canonicalPath, Astro.site)} />
+          {['en', 'es', 'ru', 'zh'].map((locale) => {
+            const path = locale === 'en' ? pathWithoutLocale : `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
+            return (
+              <link
+                rel="alternate"
+                hreflang={locale}
+                href={new URL(path, Astro.site)}
+              />
+            );
+          })}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL(pathWithoutLocale, Astro.site)}
+          />
+        </>
       );
-    })}
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={new URL(Astro.url.pathname, Astro.site)}
-    />
+    })()}
     <meta name="robots" content="index, follow" />
 
     <!-- Enhanced View Transitions with fallback -->
