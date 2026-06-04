@@ -8,7 +8,18 @@ export function injectSeoLinks(html: string): string {
         { phrase: 'automated email marketing', url: '/email-automation-software' },
         { phrase: 'mailchimp alternative', url: '/mailchimp-alternative' },
         { phrase: 'email deliverability', url: '/email-deliverability-guide' },
-        { phrase: 'marketing automation', url: '/email-automation-software' }
+        { phrase: 'marketing automation', url: '/email-automation-software' },
+        { phrase: 'laravel mail', url: '/' },
+        { phrase: 'laravel email', url: '/' },
+        { phrase: 'laravel email templates', url: '/laravel-email-templates' },
+        { phrase: 'laravel mail queue', url: '/laravel-mail-queue' },
+        { phrase: 'laravel transactional email', url: '/laravel-transactional-email' },
+        { phrase: 'laravel email campaigns', url: '/laravel-email-campaigns' },
+        { phrase: 'laravel newsletter system', url: '/laravel-newsletter-system' },
+        { phrase: 'self hosted email marketing', url: '/self-hosted-email-marketing' },
+        { phrase: 'open source email marketing', url: '/open-source-email-marketing' },
+        { phrase: 'laravel sendgrid alternative', url: '/laravel-sendgrid-alternative' },
+        { phrase: 'laravel email automation', url: '/laravel-email-automation-system' }
     ];
 
     let processedHtml = html;
