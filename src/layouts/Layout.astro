@@ -6,7 +6,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BetaModal from "../components/BetaModal.astro";
 import PurchaseToast from "../components/PurchaseToast.astro";
-import ChatWidget from "../components/ChatWidget";
+
 import "../styles/global.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
@@ -40,7 +40,12 @@ const {
     <meta charset="UTF-8" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, minimum-scale=1, maximum-scale=5" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="handheldfriendly" content="true" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -387,7 +392,7 @@ const {
       src="https://www.paypal.com/sdk/js?client-id=AddiC5z5vZl2wDBLbYo5Ef1a-1U48vvlDeTo1iIHvvrV-J3GgOHMaqwnDWmeCYVIhk3bodChdvIulLmb&currency=USD&intent=capture"
       data-sdk-integration-source="button-factory"></script>
 
-    <!-- AI Chat Widget -->
+    <!-- AI Chat Widget - Disabled
     <script
       src="https://laravelgpt.com/widget.js"
       data-chat-server="https://ai.izdrail.com"
@@ -396,5 +401,6 @@ const {
       data-intro-message="Hello! How can I help you today?"
       data-dark-mode="true"
     ></script>
+    -->
   </body>
 </html>

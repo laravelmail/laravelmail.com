@@ -76,7 +76,7 @@ const organizationSchema = {
 };
 ---
 
-<footer class="bg-gray-900 text-white pt-16 pb-8 relative overflow-hidden">
+<footer class="bg-gray-900 text-white pt-16 pb-8 relative overflow-hidden touch-padding">
     <!-- Subtle background pattern -->
     <div class="absolute inset-0 opacity-5">
         <div
@@ -94,7 +94,7 @@ const organizationSchema = {
 
     <div class="container-custom relative">
         <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-gray-800"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8 pb-12 border-b border-gray-800"
         >
             <div class="lg:col-span-2">
                 <a
@@ -116,7 +116,7 @@ const organizationSchema = {
                     self-hosted email marketing platform that gives you the
                     control to reach curated B2B leads you can trust.
                 </p>
-                <div class="mt-6 flex space-x-4">
+                <div class="mt-6 flex space-x-2">
                     {
                         socialLinks.map((social) => {
                             const titles = {
@@ -130,7 +130,7 @@ const organizationSchema = {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform"
+                                    class="text-gray-400 hover:text-white transition-all duration-300 hover:scale-110 transform p-2 rounded-lg bg-white/5 border border-white/10 touch-padding"
                                     aria-label={`Follow Laravel Mail on ${social.name}`}
                                     title={`Follow us on ${social.name}`}
                                     onclick={`window.trackFooterClick && window.trackFooterClick('Social Media', '${social.name}')`}
@@ -189,10 +189,10 @@ const organizationSchema = {
                                 Blog: "Explore industry insights and lead generation strategies",
                             };
                             return (
-                                <li class="transform transition-all duration-300 hover:translate-x-1">
+                                <li class="transform transition-all duration-300 hover:translate-x-1 mb-2">
                                     <a
                                         href={link.href}
-                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block py-2"
+                                        class="text-gray-400 hover:text-white transition-colors duration-300 block py-2 px-3 rounded-lg bg-white/5 border border-transparent hover:border-white/10 touch-padding"
                                         style={`transition-delay: ${index * 50}ms;`}
                                         title={link.name}
                                         onclick={`window.trackFooterClick && window.trackFooterClick('Footer Navigation', 'Company - ${link.name}')`}
@@ -220,10 +220,10 @@ const organizationSchema = {
                                     "Manage your cookie preferences and privacy settings",
                             };
                             return (
-                                <li class="transform transition-all duration-300 hover:translate-x-1">
+                                <li class="transform transition-all duration-300 hover:translate-x-1 mb-2">
                                     <a
                                         href={link.href}
-                                        class="text-gray-400 hover:text-white transition-colors duration-300 inline-block py-2"
+                                        class="text-gray-400 hover:text-white transition-colors duration-300 block py-2 px-3 rounded-lg bg-white/5 border border-transparent hover:border-white/10 touch-padding"
                                         style={`transition-delay: ${index * 50}ms;`}
                                         title={link.name}
                                         onclick={`window.trackFooterClick && window.trackFooterClick('Footer Navigation', 'Legal - ${link.name}')`}
@@ -322,33 +322,31 @@ const organizationSchema = {
         </div>
 
         <div class="pt-8 text-center text-gray-400 text-sm">
-            <p class="hover:text-gray-300 transition-colors duration-300">
+            <p class="hover:text-gray-300 transition-colors duration-300 mb-4">
                 &copy; {new Date().getFullYear()} Laravel Company. All rights reserved.
             </p>
             <div
-                class="mt-4 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6"
+                class="mt-4 flex flex-wrap justify-center items-center gap-2 sm:gap-4"
             >
                 <a
                     href="/sitemap-index.xml"
-                    class="hover:text-white transition-colors duration-300"
+                    class="hover:text-white transition-colors duration-300 px-3 py-2 rounded-lg bg-white/5 border border-white/10 touch-padding"
                     title="Complete website navigation and page directory"
                     onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Sitemap')"
                 >
                     Sitemap
                 </a>
-                <span class="hidden sm:inline text-gray-600">|</span>
                 <a
                     href="https://laravelmail.com/privacy"
-                    class="hover:text-white transition-colors duration-300"
+                    class="hover:text-white transition-colors duration-300 px-3 py-2 rounded-lg bg-white/5 border border-white/10 touch-padding"
                     title="Understand our data protection and privacy measures"
                     onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Privacy Policy')"
                 >
                     Privacy Policy
                 </a>
-                <span class="hidden sm:inline text-gray-600">|</span>
                 <a
                     href={getRelativeLocaleUrl(lang, "/terms-of-service")}
-                    class="hover:text-white transition-colors duration-300"
+                    class="hover:text-white transition-colors duration-300 px-3 py-2 rounded-lg bg-white/5 border border-white/10 touch-padding"
                     title="Review our service conditions and legal framework"
                     onclick="window.trackFooterClick && window.trackFooterClick('Footer Utility', 'Terms of Service')"
                 >

@@ -7,9 +7,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="pt-20 pb-16 md:pt-28 md:pb-24 relative" itemscope itemtype="https://schema.org/WebPageElement">
+<section class="pt-20 pb-16 md:pt-28 md:pb-24 relative hero-section" itemscope itemtype="https://schema.org/WebPageElement">
     <div class="container-custom">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <!-- LEFT: Hero Text -->
             <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
@@ -22,16 +22,16 @@ const t = useTranslations(lang);
                 <p class="delay-1 mt-6 text-xl text-gray-200 max-w-lg" itemprop="description">
                     {t('hero.subtitle')}
                 </p>
-                <div class="delay-2 mt-8 flex flex-col sm:flex-row items-center gap-4">
+                <div class="delay-2 mt-8 flex flex-col sm:flex-row items-center gap-3">
                     <a
                         href="/buy"
-                        class="btn btn-primary w-full sm:w-auto text-center"
+                        class="btn btn-primary w-full sm:w-auto text-center touch-padding"
                         aria-label="Get started with Laravel Mail"
                     >{t('hero.buy_button')}</a>
                     <a
                         href="#demo-video"
                         title="Watch Laravel Mail demo video"
-                        class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-white/20 text-white hover:bg-white/10 font-medium"
+                        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-white/20 text-white hover:bg-white/10 font-medium touch-padding min-h-[48px]"
                     >
                         <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z"></path>

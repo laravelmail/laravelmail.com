@@ -34,14 +34,21 @@ export default {
         'gradient-x': 'gradientX 3s ease infinite',
         'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce': 'bounce 1s infinite',
+        'spin-slow': 'spin 3s linear infinite',
+        'slide-down': 'slideDown 0.3s ease-out forwards',
+        'slide-up-fast': 'slideUp 0.2s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        slideDown: {
+          '0%': { transform: 'translateY(-10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
         slideUp: {
-          '0%': { transform: 'translateY(30px)', opacity: '0' },
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
         slideInRight: {
@@ -66,6 +73,13 @@ export default {
             animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        ping: {
+          '75%, 100%': { transform: 'scale(2)', opacity: '0' },
+        },
       },
     },
     screens: {
@@ -76,6 +90,13 @@ export default {
       'lg': '992px',
       'xl': '1200px',
       '2xl': '1536px',
+    },
+    touchAction: {
+      'manipulation': 'manipulation',
+      'pan-x': 'pan-x',
+      'pan-y': 'pan-y',
+      'none': 'none',
+      'auto': 'auto',
     },
   },
   plugins: [],

@@ -52,20 +52,89 @@ const socialLinks = [
                 event_category: "navigation",
                 event_label: label,
             });
-            // Clicked
         }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         const menuToggle = document.getElementById("menu-toggle");
         const mobileMenu = document.getElementById("mobile-menu");
+        const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
+        const body = document.body;
+
+        // Touch start position for swipe detection
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        function openMenu() {
+            mobileMenu?.classList.add("mobile-menu-open");
+            menuToggle?.classList.add("menu-open");
+            mobileMenuOverlay?.classList.add("overlay-open");
+            body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            mobileMenu?.classList.remove("mobile-menu-open");
+            menuToggle?.classList.remove("menu-open");
+            mobileMenuOverlay?.classList.remove("overlay-open");
+            body.style.overflow = "";
+        }
+
+        function toggleMenu() {
+            if (mobileMenu?.classList.contains("mobile-menu-open")) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        }
 
         if (menuToggle && mobileMenu) {
-            menuToggle.addEventListener("click", () => {
-                mobileMenu.classList.toggle("mobile-menu-open");
-                menuToggle.classList.toggle("menu-open");
-            });
+            menuToggle.addEventListener("click", toggleMenu);
         }
+
+        // Close menu on overlay click
+        if (mobileMenuOverlay) {
+            mobileMenuOverlay.addEventListener("click", closeMenu);
+        }
+
+        // Close menu on escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                closeMenu();
+            }
+        });
+
+        // Touch events for swipe to close
+        mobileMenu?.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        mobileMenu?.addEventListener("touchmove", (e) => {
+            if (!touchStartX || !touchStartY) return;
+            
+            const touchEndX = e.touches[0].clientX;
+            const touchEndY = e.touches[0].clientY;
+            const diffX = touchStartX - touchEndX;
+            const diffY = Math.abs(touchStartY - touchEndY);
+            
+            // Swipe right to close (left edge swipe)
+            if (diffX > 50 && diffY < 100 && touchStartX < 50) {
+                closeMenu();
+                touchStartX = 0;
+                touchStartY = 0;
+            }
+        }, { passive: true });
+
+        // Close menu when clicking on a link
+        const mobileLinks = mobileMenu?.querySelectorAll("a");
+        mobileLinks?.forEach(link => {
+            link.addEventListener("click", () => {
+                // Small delay to allow navigation
+                setTimeout(() => {
+                    closeMenu();
+                }, 150);
+            });
+        });
 
         document.getElementById("buy-now-btn")?.addEventListener("click", function () {
             window.dataLayer = window.dataLayer || [];
@@ -92,7 +161,14 @@ const socialLinks = [
     class="sticky top-0 z-50 w-full bg-[#0a0e27]/90 backdrop-blur-xl border-b border-white/5"
     role="banner"
 >
-    <div class="container-custom flex items-center justify-between h-20 px-4">
+    <!-- Mobile Menu Overlay -->
+    <div
+        id="mobile-menu-overlay"
+        class="fixed inset-0 bg-black/50 z-40 opacity-0 visibility-hidden transition-all duration-300"
+        aria-hidden="true"
+    ></div>
+    
+    <div class="container-custom flex items-center justify-between h-20 px-4 relative z-10">
         <a
             href={getRelativeLocaleUrl(lang, "/")}
             onclick="trackClick('logo_home')"
@@ -206,11 +282,11 @@ const socialLinks = [
     <!-- Mobile Menu -->
     <nav
         id="mobile-menu"
-        class="md:hidden bg-[#0a0e27] border-t border-white/5"
+        class="md:hidden fixed top-20 left-0 right-0 bg-[#0a0e27]/98 backdrop-blur-xl border-t border-white/5 z-50 max-h-screen overflow-y-auto"
         role="navigation"
         aria-label="Mobile navigation"
     >
-        <div class="container-custom py-6 px-4 space-y-4">
+        <div class="container-custom py-6 px-4 space-y-3">
             {
                 navItems.map((item, index) => {
                     const isExternal = item.href.startsWith("http");
@@ -221,39 +297,46 @@ const socialLinks = [
                             target={isExternal ? "_blank" : undefined}
                             rel={isExternal ? "noopener noreferrer" : undefined}
                             onclick={`trackClick('mobile_${item.name}')`}
-                            class="block py-3 px-4 text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 focus:text-white transition-all duration-300 rounded-xl border border-transparent hover:border-white/10"
+                            class="mobile-nav-link block py-4 px-4 text-lg font-medium text-white/80 hover:text-white hover:bg-white/5 focus:text-white transition-all duration-300 rounded-xl border border-transparent hover:border-white/10 touch-padding"
                             style={`transition-delay: ${index * 50}ms;`}
+                            aria-haspopup="false"
                         >
                             {item.name}
                         </a>
                     );
                 })
             }
+            
+            <!-- Language Picker Mobile -->
+            <div class="pt-4 border-t border-white/5">
+                <LanguagePicker isMobile={true} />
+            </div>
+            
             <div
-                class="pt-4 border-t border-white/5 flex items-center justify-between"
+                class="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4"
             >
                 <a
                     href={getRelativeLocaleUrl(lang, "/buy")}
                     title={t('hero.buy_button')}
                     onclick="trackClick('mobile_get_started')"
-                    class="block text-center py-4 px-8 bg-payflo-purple text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-payflo-purple/20 flex-grow mr-4"
+                    class="mobile-nav-link btn btn-primary w-full sm:w-auto text-center py-4 px-8 bg-payflo-purple text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-payflo-purple/20 touch-padding"
                 >
                     {t('nav.buy')}
                 </a>
-                <div class="flex items-center space-x-4 pr-2">
+                <div class="flex items-center space-x-2 sm:space-x-4">
                     {
                         socialLinks.map((social) => (
                             <a
                                 href={social.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="text-white/50 hover:text-white transition-colors p-2 bg-white/5 rounded-lg border border-white/10"
+                                class="mobile-nav-link text-white/50 hover:text-white transition-colors p-3 bg-white/5 rounded-xl border border-white/10 touch-padding"
                                 title={social.name}
                                 aria-label={social.name}
                             >
                                 {social.icon === "linkedin" && (
                                     <svg
-                                        class="w-6 h-6"
+                                        class="w-5 h-5"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                     >
@@ -262,7 +345,7 @@ const socialLinks = [
                                 )}
                                 {social.icon === "github" && (
                                     <svg
-                                        class="w-6 h-6"
+                                        class="w-5 h-5"
                                         fill="currentColor"
                                         viewBox="0 0 24 24"
                                     >
@@ -279,27 +362,104 @@ const socialLinks = [
 </header>
 
 <style>
-    /* Mobile Menu Toggle Animation */
+    /* Mobile Menu Toggle Animation - Improved */
+    #menu-toggle {
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    
+    #menu-toggle:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    #menu-toggle span {
+        transition: all 0.3s ease;
+    }
+    
     #menu-toggle.menu-open span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
     }
     #menu-toggle.menu-open span:nth-child(2) {
         opacity: 0;
+        transform: scale(0.5);
     }
     #menu-toggle.menu-open span:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
     }
 
+    /* Mobile Menu Animation - Slide down with fade */
     #mobile-menu {
         max-height: 0;
         opacity: 0;
-        overflow: hidden;
+        visibility: hidden;
+        transform: translateY(-20px);
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #mobile-menu.mobile-menu-open {
-        max-height: 600px;
+        max-height: calc(100vh - 80px);
         opacity: 1;
-        padding-bottom: 2rem;
+        visibility: visible;
+        transform: translateY(0);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Mobile Menu Overlay */
+    #mobile-menu-overlay {
+        pointer-events: none;
+    }
+    
+    #mobile-menu-overlay.overlay-open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+    
+    /* Mobile Nav Link Improvements */
+    .mobile-nav-link {
+        min-height: 48px;
+        min-width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .mobile-nav-link:active {
+        transform: scale(0.98);
+        opacity: 0.8;
+    }
+    
+    /* Prevent horizontal scroll when mobile menu is open */
+    body {
+        overflow-x: hidden;
+    }
+    
+    body.overflow-hidden {
+        overflow: hidden;
+    }
+    
+    /* Mobile menu scrollbar styling */
+    #mobile-menu::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    #mobile-menu::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    #mobile-menu::-webkit-scrollbar-thumb {
+        background: rgba(124, 58, 237, 0.3);
+        border-radius: 3px;
+    }
+    
+    #mobile-menu::-webkit-scrollbar-thumb:hover {
+        background: rgba(124, 58, 237, 0.5);
+    }
+    
+    /* Accessibility focus styles */
+    .mobile-nav-link:focus-visible {
+        outline: 3px solid #7c3aed;
+        outline-offset: 2px;
+        border-radius: 12px;
     }
 </style>
