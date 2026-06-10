@@ -163,56 +163,5 @@ document.addEventListener('astro:page-load', () => {
     }
   });
   
-  // ===== Mobile menu enhanced toggle =====
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      // Toggle the menu with animation
-      const isMenuOpen = !mobileMenu.classList.contains('hidden');
-      
-      if (!isMenuOpen) {
-        // Show menu
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.classList.add('mobile-menu-open');
-        menuToggle.setAttribute('aria-expanded', 'true');
-        menuToggle.classList.add('menu-open');
-        
-        // Focus first menu item for keyboard navigation
-        const firstMenuItem = mobileMenu.querySelector('a');
-        if (firstMenuItem) {
-          firstMenuItem.focus();
-        }
-      } else {
-        // Hide menu
-        mobileMenu.classList.add('mobile-menu-closing');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.classList.remove('menu-open');
-        
-        // Wait for animation to finish before hiding
-        setTimeout(() => {
-          mobileMenu.classList.remove('mobile-menu-open');
-          mobileMenu.classList.remove('mobile-menu-closing');
-          mobileMenu.classList.add('hidden');
-        }, 300);
-      }
-    });
-    
-    // Close menu on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-        mobileMenu.classList.add('mobile-menu-closing');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.classList.remove('menu-open');
-        menuToggle.focus(); // Return focus to toggle button
-        
-        setTimeout(() => {
-          mobileMenu.classList.remove('mobile-menu-open');
-          mobileMenu.classList.remove('mobile-menu-closing');
-          mobileMenu.classList.add('hidden');
-        }, 300);
-      }
-    });
-  }
+
 });
