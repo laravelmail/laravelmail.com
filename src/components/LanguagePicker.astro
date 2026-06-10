@@ -104,24 +104,21 @@ function getTargetUrl(targetLang: string) {
 </div>
 
 <script is:inline>
-  // Mobile language picker toggle
-  if (isMobile) {
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggle = document.getElementById('mobile-lang-toggle');
-      const dropdown = toggle?.nextElementSibling;
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('mobile-lang-toggle');
+    const dropdown = toggle?.nextElementSibling;
+    
+    if (toggle && dropdown) {
+      const initialHeight = dropdown.scrollHeight;
+      dropdown.style.maxHeight = '0';
+      dropdown.style.overflow = 'hidden';
+      dropdown.style.transition = 'max-height 0.3s ease';
       
-      if (toggle && dropdown) {
-        const initialHeight = dropdown.scrollHeight;
-        dropdown.style.maxHeight = '0';
-        dropdown.style.overflow = 'hidden';
-        dropdown.style.transition = 'max-height 0.3s ease';
-        
-        toggle.addEventListener('click', () => {
-          const isOpen = dropdown.style.maxHeight !== '0px';
-          dropdown.style.maxHeight = isOpen ? '0' : `${initialHeight}px`;
-          toggle.setAttribute('aria-expanded', (!isOpen).toString());
-        });
-      }
-    });
-  }
+      toggle.addEventListener('click', () => {
+        const isOpen = dropdown.style.maxHeight !== '0px';
+        dropdown.style.maxHeight = isOpen ? '0' : `${initialHeight}px`;
+        toggle.setAttribute('aria-expanded', (!isOpen).toString());
+      });
+    }
+  });
 </script>
