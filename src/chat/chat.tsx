@@ -2,6 +2,7 @@ import { Component, type RenderableProps } from "preact";
 import MessageArea from "./message-area";
 import { botman } from "./botman";
 import type { IMessage, IConfiguration, IFileAttachment } from "../typings";
+import { WebGLVRMEngine, vec3FromValues } from "./webgl-engine";
 
 enum ReplyType {
     Text = "text",
@@ -16,7 +17,6 @@ interface IChatProps {
 declare global {
     interface Window {
         botmanChatWidget: any;
-        THREE: any;
     }
 }
 
@@ -34,73 +34,6 @@ interface IChatState {
     isMinimized: boolean;
 }
 
-class VRMSmoothLookAt {
-    smoothFactor: number = 10.0;
-    yawLimit: number = 45.0;
-    pitchLimit: number = 45.0;
-    _yawDamped: number = 0.0;
-    _pitchDamped: number = 0.0;
-    _yaw: number = 0.0;
-    _pitch: number = 0.0;
-    _needsUpdate: boolean = false;
-    target: any = null;
-    autoUpdate: boolean = true;
-    applier: any;
-    humanoid: any;
-
-    constructor(humanoid: any, applier: any) {
-        this.humanoid = humanoid;
-        this.applier = applier;
-    }
-
-    lookAt(position: any) {
-        if (!position || !this.humanoid) return;
-        const humanoidPosition = this.humanoid.normalizedRestPose?.hips?.position || { x: 0, y: 1, z: 0 };
-        const dx = position.x - humanoidPosition.x;
-        const dy = position.y - humanoidPosition.y;
-        const dz = position.z - humanoidPosition.z;
-        this._yaw = Math.atan2(dx, dz) * (180 / Math.PI);
-        this._pitch = Math.atan2(dy, Math.sqrt(dx * dx + dz * dz)) * (180 / Math.PI);
-        this._needsUpdate = true;
-    }
-
-    update(delta: number) {
-        if (this.target && this.autoUpdate) {
-            let targetPos;
-            if (typeof this.target.getWorldPosition === 'function') {
-                const THREE = (window as any).THREE;
-                if (THREE && THREE.Vector3) {
-                    const vec = new THREE.Vector3();
-                    this.target.getWorldPosition(vec);
-                    targetPos = vec;
-                } else {
-                    targetPos = this.target.position || { x: 0, y: 1, z: 5 };
-                }
-            } else {
-                targetPos = this.target.position || { x: 0, y: 1, z: 5 };
-            }
-            this.lookAt(targetPos);
-            if (Math.abs(this._yaw) > this.yawLimit || Math.abs(this._pitch) > this.pitchLimit) {
-                this._yaw = 0.0;
-                this._pitch = 0.0;
-            }
-            const k = 1.0 - Math.exp(-this.smoothFactor * delta);
-            this._yawDamped += (this._yaw - this._yawDamped) * k;
-            this._pitchDamped += (this._pitch - this._pitchDamped) * k;
-            if (this.applier && typeof this.applier.applyYawPitch === 'function') {
-                this.applier.applyYawPitch(this._yawDamped, this._pitchDamped);
-            }
-            this._needsUpdate = false;
-        }
-        if (this._needsUpdate) {
-            this._needsUpdate = false;
-            if (this.applier && typeof this.applier.applyYawPitch === 'function') {
-                this.applier.applyYawPitch(this._yaw, this._pitch);
-            }
-        }
-    }
-}
-
 export default class Chat extends Component<IChatProps, IChatState> {
     private botman: any;
     private inputRef!: HTMLInputElement;
@@ -108,21 +41,13 @@ export default class Chat extends Component<IChatProps, IChatState> {
     private fileInputRef!: HTMLInputElement;
     private messageEventHandler: (event: MessageEvent) => void;
     private vrmCanvas!: HTMLCanvasElement;
-    private vrmRenderer: any;
-    private vrmScene: any;
-    private vrmCamera: any;
-    private vrmControls: any;
-    private currentVrm: any;
-    private vrmClock: any;
+    private vrmEngine: WebGLVRMEngine | null = null;
     private animationFrameId: number | null = null;
     private vrmInitialized: boolean = false;
     private currentAudio: HTMLAudioElement | null = null;
     private isSpeaking: boolean = false;
     private vrmContainerElement: HTMLElement | null = null;
     private vrmEnlargedContainerElement: HTMLElement | null = null;
-    private messageObjects: Map<string, any> = new Map();
-    private textMeshes: Map<string, any> = new Map();
-    private backgroundMeshes: Map<string, any> = new Map();
     private bubbleCounter: number = 0;
 
     constructor(props: IChatProps) {
@@ -209,12 +134,9 @@ export default class Chat extends Component<IChatProps, IChatState> {
             cancelAnimationFrame(this.animationFrameId);
             this.animationFrameId = null;
         }
-        this.clearMessageBubbles();
-        if (this.vrmScene && this.currentVrm) {
-            this.vrmScene.remove(this.currentVrm.scene);
-        }
-        if (this.vrmRenderer) {
-            this.vrmRenderer.dispose();
+        if (this.vrmEngine) {
+            this.vrmEngine.dispose();
+            this.vrmEngine = null;
         }
         this.vrmInitialized = false;
     }
@@ -223,14 +145,10 @@ export default class Chat extends Component<IChatProps, IChatState> {
         const container = this.getVRMContainer();
         if (container && this.vrmCanvas && !container.contains(this.vrmCanvas)) {
             container.appendChild(this.vrmCanvas);
-            if (this.vrmRenderer) {
+            if (this.vrmEngine) {
                 const width = container.clientWidth;
                 const height = container.clientHeight;
-                this.vrmRenderer.setSize(width, height);
-                if (this.vrmCamera) {
-                    this.vrmCamera.aspect = width / height;
-                    this.vrmCamera.updateProjectionMatrix();
-                }
+                this.vrmEngine.resize(width, height);
             }
         }
     }
@@ -266,148 +184,60 @@ export default class Chat extends Component<IChatProps, IChatState> {
             container.innerHTML = '';
             container.appendChild(this.vrmCanvas);
             await new Promise(resolve => setTimeout(resolve, 50));
-            await this.loadThreeJS();
+
+            const width = container.clientWidth || 300;
+            const height = container.clientHeight || 300;
+
+            this.vrmEngine = new WebGLVRMEngine();
+            this.vrmEngine.init(this.vrmCanvas);
+            this.vrmEngine.resize(width, height);
+
+            const engine = this.vrmEngine;
+            engine.onReady(() => {
+                engine.setDefaultPose({
+                    hips: { x: 0, y: 0, z: 0 },
+                    spine: { x: 0, y: 0, z: 0.1 },
+                    chest: { x: 0, y: 0, z: 0.15 },
+                    neck: { x: 0, y: 0, z: 0 },
+                    head: { x: 0, y: 0, z: 0 },
+                    leftUpperArm: { x: -0.3, y: 0, z: 0.2 },
+                    rightUpperArm: { x: 0.3, y: 0, z: 0.2 },
+                    leftLowerArm: { x: 0, y: 0, z: 0.1 },
+                    rightLowerArm: { x: 0, y: 0, z: 0.1 }
+                });
+                engine.createGardenScene();
+                engine.start();
+                this.setState({ vrmReady: true });
+            });
+
+            const modelUrl = this.props.conf.vrmModelUrl || 'https://pixiv.github.io/three-vrm/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm';
+            await engine.loadModel(modelUrl);
         } catch (error) {
             console.error('[VRM] Failed to initialize VRM:', error);
             this.vrmInitialized = false;
         }
     }
 
-    private async loadThreeJS(): Promise<void> {
-        const existingMap = document.querySelector('script[type="importmap"]');
-        if (!existingMap) {
-            const script = document.createElement('script');
-            script.type = 'importmap';
-            script.textContent = JSON.stringify({
-                imports: {
-                    "three": "https://cdn.jsdelivr.net/npm/three@0.176.0/build/three.module.js",
-                    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/",
-                    "@pixiv/three-vrm": "https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.1.0/lib/three-vrm.module.js"
-                }
-            });
-            document.head.appendChild(script);
-            await new Promise(resolve => setTimeout(resolve, 100));
-        }
-        await this.setupVRMScene();
-    }
-
-    private async setupVRMScene(): Promise<void> {
-        try {
-            const THREE = await import('https://cdn.jsdelivr.net/npm/three@0.176.0/build/three.module.js');
-            const { GLTFLoader } = await import('https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/loaders/GLTFLoader.js');
-            const { OrbitControls } = await import('https://cdn.jsdelivr.net/npm/three@0.176.0/examples/jsm/controls/OrbitControls.js');
-            const { VRMLoaderPlugin } = await import('https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.1.0/lib/three-vrm.module.js');
-            (window as any).THREE = THREE;
-            this.vrmRenderer = new THREE.WebGLRenderer({ canvas: this.vrmCanvas, alpha: true, antialias: true });
-            const container = this.getVRMContainer();
-            const width = container?.clientWidth || 300, height = container?.clientHeight || 300;
-            this.vrmRenderer.setSize(width, height);
-            this.vrmRenderer.setPixelRatio(window.devicePixelRatio);
-            this.vrmRenderer.outputColorSpace = THREE.SRGBColorSpace;
-            // Explicitly set clear color to transparent
-            this.vrmRenderer.setClearColor(0x000000, 0);
-
-            this.vrmCamera = new THREE.PerspectiveCamera(30.0, width / height, 0.1, 20.0);
-            this.vrmCamera.position.set(0.0, 1.0, 5.0);
-            this.vrmControls = new OrbitControls(this.vrmCamera, this.vrmCanvas);
-            this.vrmControls.screenSpacePanning = true;
-            this.vrmControls.target.set(0.0, 1.0, 0.0);
-            this.vrmControls.enableDamping = true;
-            this.vrmControls.dampingFactor = 0.05;
-            this.vrmControls.update();
-            this.vrmScene = new THREE.Scene();
-
-            // Ensure scene background is null for transparency
-            this.vrmScene.background = null;
-
-            this.vrmScene.add(new THREE.AmbientLight(0xffffff, 0.5));
-            const directionalLight = new THREE.DirectionalLight(0xffffff, Math.PI);
-            directionalLight.position.set(1.0, 1.0, 1.0).normalize();
-            this.vrmScene.add(directionalLight);
-            // Removed GridHelper for cleaner look
-            const loader = new GLTFLoader();
-            loader.crossOrigin = 'anonymous';
-            loader.register((parser: any) => new VRMLoaderPlugin(parser));
-            const modelUrl = this.props.conf.vrmModelUrl || 'https://pixiv.github.io/three-vrm/packages/three-vrm/examples/models/VRM1_Constraint_Twist_Sample.vrm';
-            loader.load(modelUrl, (gltf: any) => {
-                const vrm = gltf.userData.vrm;
-                vrm.scene.traverse((obj: any) => { obj.frustumCulled = false; });
-                if (vrm.humanoid) {
-                    const pose = {
-                        hips: { x: 0, y: 0, z: 0 },
-                        spine: { x: 0, y: 0, z: 0.1 },
-                        chest: { x: 0, y: 0, z: 0.15 },
-                        neck: { x: 0, y: 0, z: 0 },
-                        head: { x: 0, y: 0, z: 0 },
-                        leftUpperArm: { x: -0.3, y: 0, z: 0.2 },
-                        rightUpperArm: { x: 0.3, y: 0, z: 0.2 },
-                        leftLowerArm: { x: 0, y: 0, z: 0.1 },
-                        rightLowerArm: { x: 0, y: 0, z: 0.1 }
-                    };
-                    Object.entries(pose).forEach(([boneName, rotation]) => {
-                        const bone = vrm.humanoid.getBoneNode(boneName as any);
-                        if (bone) {
-                            bone.rotation.set(rotation.x, rotation.y, rotation.z);
-                        }
-                    });
-                    vrm.scene.updateMatrixWorld(true);
-                }
-                if (vrm.lookAt) {
-                    const smoothLookAt = new VRMSmoothLookAt(vrm.humanoid, vrm.lookAt.applier);
-                    Object.assign(smoothLookAt, vrm.lookAt);
-                    vrm.lookAt = smoothLookAt;
-                    vrm.lookAt.target = this.vrmCamera;
-                }
-                this.vrmScene.add(vrm.scene);
-                this.currentVrm = vrm;
-                this.setState({ vrmReady: true });
-            }, undefined, (error: any) => console.error('[VRM] Error loading VRM:', error));
-            this.vrmClock = new THREE.Clock();
-            this.startVRMAnimation();
-        } catch (error) {
-            console.error('[VRM] Error setting up VRM scene:', error);
-        }
-    }
-
-    private startVRMAnimation(): void {
-        const animate = () => {
-            this.animationFrameId = requestAnimationFrame(animate);
-            const deltaTime = this.vrmClock?.getDelta() || 0;
-            if (this.vrmControls) this.vrmControls.update();
-            if (this.currentVrm) this.currentVrm.update(deltaTime);
-            this.animateMessageBubbles(deltaTime);
-            if (this.vrmRenderer && this.vrmScene && this.vrmCamera) {
-                this.vrmRenderer.render(this.vrmScene, this.vrmCamera);
+    private wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+        const words = text.split(' ');
+        const lines: string[] = [];
+        let currentLine = words[0] || '';
+        for (let i = 1; i < words.length; i++) {
+            const word = words[i];
+            const width = ctx.measureText(currentLine + ' ' + word).width;
+            if (width < maxWidth) {
+                currentLine += ' ' + word;
+            } else {
+                lines.push(currentLine);
+                currentLine = word;
             }
-        };
-        animate();
-    }
-
-    private animateMessageBubbles(deltaTime: number): void {
-        const THREE = (window as any).THREE;
-        if (!THREE) return;
-
-        this.messageObjects.forEach((group, id) => {
-            if (group.userData.lifetime) {
-                group.userData.lifetime -= deltaTime;
-                if (group.userData.lifetime <= 0) {
-                    this.removeMessageBubble(id);
-                    return;
-                }
-                if (group.userData.lifetime < 2 && group.children[0] && group.children[1]) {
-                    const alpha = group.userData.lifetime / 2;
-                    (group.children[0] as any).material.opacity = alpha;
-                    (group.children[1] as any).material.opacity = alpha;
-                }
-            }
-            group.position.y += deltaTime * 0.1;
-        });
+        }
+        lines.push(currentLine);
+        return lines;
     }
 
     private createMessageBubble(message: IMessage): void {
-        const THREE = (window as any).THREE;
-        if (!THREE || !this.vrmScene || !message.id) return;
-        if (this.messageObjects.has(message.id)) return;
+        if (!this.vrmEngine || !message.id) return;
 
         const isBot = message.from === 'chatbot';
         const text = message.text || '';
@@ -429,9 +259,6 @@ export default class Chat extends Component<IChatProps, IChatState> {
         canvas.width = maxWidth;
         canvas.height = textHeight + padding * 2;
 
-        // Brand Palette: #7c3aed (Purple), #ec4899 (Pink), #0f172a (Dark BG), #1e293b (Card BG)
-        // Bot: Dark Card BG with Purple Border
-        // User: Purple BG with Pink Border
         context.fillStyle = isBot ? 'rgba(30, 41, 59, 0.95)' : 'rgba(124, 58, 237, 0.95)';
         context.fillRect(0, 0, canvas.width, canvas.height);
         context.strokeStyle = isBot ? 'rgba(124, 58, 237, 0.8)' : 'rgba(236, 72, 153, 0.8)';
@@ -444,89 +271,24 @@ export default class Chat extends Component<IChatProps, IChatState> {
             context.fillText(line, canvas.width / 2, padding + i * lineHeight + fontSize / 2);
         });
 
-        const texture = new THREE.CanvasTexture(canvas);
-        texture.minFilter = THREE.LinearFilter;
-        texture.wrapS = THREE.ClampToEdgeWrapping;
-        texture.wrapT = THREE.ClampToEdgeWrapping;
-
-        const material = new THREE.MeshBasicMaterial({
-            map: texture,
-            transparent: true,
-            opacity: 1,
-            depthWrite: false,
-            side: THREE.DoubleSide
-        });
-
-        const plane = new THREE.Mesh(
-            new THREE.PlaneGeometry(canvas.width / 100, canvas.height / 100),
-            material
-        );
-
         const position = isBot
-            ? new THREE.Vector3(-1.0, 2.5 + this.bubbleCounter * 0.8, 1.0)
-            : new THREE.Vector3(1.0, 2.5 + this.bubbleCounter * 0.8, 1.0);
+            ? vec3FromValues(-1.0, 2.5 + this.bubbleCounter * 0.8, 1.0)
+            : vec3FromValues(1.0, 2.5 + this.bubbleCounter * 0.8, 1.0);
 
-        plane.position.copy(position);
-        plane.lookAt(this.vrmCamera.position);
-
-        const group = new THREE.Group();
-        group.add(plane);
-        group.userData = {
-            lifetime: 8,
-            isBot,
-            id: message.id
-        };
-
-        this.vrmScene.add(group);
-        this.messageObjects.set(message.id, group);
+        this.vrmEngine.addBubble(message.id, canvas, position);
         this.bubbleCounter++;
-
-        if (this.messageObjects.size > 5) {
-            const firstId = this.messageObjects.keys().next().value;
-            if (firstId) {
-                setTimeout(() => this.removeMessageBubble(firstId), 500);
-            }
-        }
-    }
-
-    private wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
-        const words = text.split(' ');
-        const lines: string[] = [];
-        let currentLine = words[0] || '';
-
-        for (let i = 1; i < words.length; i++) {
-            const word = words[i];
-            const width = ctx.measureText(currentLine + ' ' + word).width;
-            if (width < maxWidth) {
-                currentLine += ' ' + word;
-            } else {
-                lines.push(currentLine);
-                currentLine = word;
-            }
-        }
-        lines.push(currentLine);
-        return lines;
     }
 
     private removeMessageBubble(id: string): void {
-        const group = this.messageObjects.get(id);
-        if (group && this.vrmScene) {
-            this.vrmScene.remove(group);
-            if (group.children[0]?.material) {
-                if (group.children[0].material.map) {
-                    group.children[0].material.map.dispose();
-                }
-                group.children[0].material.dispose();
-            }
+        if (this.vrmEngine) {
+            this.vrmEngine.removeBubble(id);
         }
-        this.messageObjects.delete(id);
     }
 
     private clearMessageBubbles(): void {
-        this.messageObjects.forEach((group, id) => {
-            this.removeMessageBubble(id);
-        });
-        this.messageObjects.clear();
+        if (this.vrmEngine) {
+            this.vrmEngine.clearBubbles();
+        }
         this.bubbleCounter = 0;
     }
 
@@ -715,9 +477,9 @@ export default class Chat extends Component<IChatProps, IChatState> {
     }
 
     private animateVRMMouth(isOpen: boolean): void {
-        if (!this.currentVrm || !this.currentVrm.expressionManager) return;
+        if (!this.vrmEngine) return;
         try {
-            this.currentVrm.expressionManager.setValue('aa', isOpen ? 0.5 : 0);
+            this.vrmEngine.setExpression('aa', isOpen ? 0.5 : 0);
         } catch (error) {
             console.debug('[VRM] Expression not available');
         }

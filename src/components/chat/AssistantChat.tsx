@@ -1,15 +1,11 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
 
 interface OllamaModel {
   name: string;
   modified_at: string;
   size: number;
-}
-
-interface OllamaTagsResponse {
-  models: OllamaModel[];
 }
 
 interface Message {
@@ -47,12 +43,13 @@ function formatTime(iso: string) {
 }
 
 export default function AssistantChat() {
-  const [models, setModels] = useState<OllamaModel[]>([]);
-  const [selectedModel, setSelectedModel] = useState<string>("");
+  const [models] = useState<OllamaModel[]>([
+    { name: "laravelcompany/laravelmail", modified_at: new Date().toISOString(), size: 0 }
+  ]);
+  const [selectedModel] = useState<string>("laravelcompany/laravelmail");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
 
@@ -61,22 +58,6 @@ export default function AssistantChat() {
     if (!el) return;
     el.scrollTop = el.scrollHeight;
   };
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`${OLLAMA_BASE_URL}/api/tags`);
-        const data: OllamaTagsResponse = await res.json();
-        setModels(data.models);
-        const lm = data.models.find((m) =>
-          m.name.toLowerCase().includes("laravelmail")
-        );
-        setSelectedModel(lm ? lm.name : (data.models[0]?.name ?? ""));
-      } catch (e) {
-        console.error("Failed to fetch models:", e);
-      }
-    })();
-  }, []);
 
   useLayoutEffect(() => {
     scrollToBottom();
@@ -179,55 +160,27 @@ export default function AssistantChat() {
     }
   };
 
-  const filteredModels = models.filter((m) =>
-    m.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <div style={{ height: 'calc(100vh - 80px)' }} className="flex flex-col md:flex-row border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-900">
       {/* Left sidebar */}
       <div className="w-full md:w-1/3 border-r border-gray-200 dark:border-gray-700 flex flex-col" style={{ minHeight: 0 }}>
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <div className="flex">
-            <div className="relative w-full">
-              <input
-                className="block w-full border disabled:cursor-not-allowed disabled:opacity-50 border-gray-300 bg-gray-50 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500 p-2.5 text-sm rounded-lg"
-                type="text"
-                placeholder="Search models..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
         <div className="flex-1 overflow-y-auto" style={{ minHeight: 0 }}>
           <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-            {filteredModels.map((model, idx) => (
+            {models.map((model) => (
               <li
                 key={model.name}
-                onClick={() => setSelectedModel(model.name)}
-                className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer ${
-                  selectedModel === model.name
-                    ? "bg-blue-50 dark:bg-gray-800"
-                    : ""
-                }`}
+                className="p-4 bg-blue-50 dark:bg-gray-800"
               >
                 <div className="flex items-center space-x-4">
                   <div className="relative">
                     <div className="flex items-center justify-center space-x-4 rounded">
                       <div className="relative">
                         <div
-                          className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${presetAvatars[idx % presetAvatars.length]}`}
+                          className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${presetAvatars[0]}`}
                         >
                           {getInitials(model.name)}
                         </div>
-                        <span
-                          className={`absolute h-3.5 w-3.5 rounded-full border-2 border-white dark:border-gray-800 -bottom-1 -right-1 ${
-                            selectedModel === model.name
-                              ? "bg-green-400"
-                              : "bg-gray-400"
-                          }`}
-                        />
+                        <span className="absolute h-3.5 w-3.5 rounded-full border-2 border-white dark:border-gray-800 -bottom-1 -right-1 bg-green-400" />
                       </div>
                     </div>
                   </div>
@@ -238,9 +191,6 @@ export default function AssistantChat() {
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                       AI Assistant
                     </p>
-                  </div>
-                  <div className="inline-flex items-center text-xs font-semibold text-gray-500 dark:text-gray-400">
-                    {formatTime(model.modified_at)}
                   </div>
                 </div>
               </li>

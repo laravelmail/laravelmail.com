@@ -24,7 +24,7 @@ export default defineConfig({
     },
     integrations: [
         react({
-            include: ['**/chat/**/*'],
+            include: ['**/chat/**/*', '**/components/chat/**/*'],
         }),
         tailwind(),
         sitemap({
@@ -38,7 +38,9 @@ export default defineConfig({
                 },
             },
         }),
-        preact(),
+        preact({
+            exclude: ['**/chat/**/*', '**/components/chat/**/*'],
+        }),
         icon({
             include: {
                 ph: [
