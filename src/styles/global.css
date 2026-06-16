@@ -541,7 +541,6 @@ h3 {
 
 /* Prevent horizontal overflow on mobile */
 html {
-  overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -550,6 +549,7 @@ html {
 body {
   -webkit-overflow-scrolling: touch;
   scrollbar-gutter: stable;
+  overflow-x: hidden;
 }
 
 /* Prevent zoom on input focus (iOS) */
@@ -777,10 +777,7 @@ a {
   touch-action: manipulation;
 }
 
-/* Smooth scrolling for anchor links on mobile */
-html {
-  scroll-behavior: smooth;
-}
+/* Smooth scrolling is defined at line 42 */
 
 /* Disable overscroll bounce on iOS */
 body {
