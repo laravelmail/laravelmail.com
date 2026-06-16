@@ -44,10 +44,10 @@ const presetAvatars = [
 ];
 
 const SUGGESTED_PROMPTS = [
-  "Explain how Laravel queues work",
-  "Write a SQL query to find active users",
-  "Debug a memory leak in Node.js",
-  "Compare React and Vue for a new project",
+  "Help me create a welcome email for new users",
+  "Help me create a password reset email",
+  "Help me create an invoice email for customers",
+  "Help me create a promotional email campaign",
 ];
 
 function getInitials(name: string) {
@@ -143,9 +143,9 @@ function renderInlineMarkdown(text: string) {
 
 export default function AssistantChat() {
   const [models] = useState<OllamaModel[]>([
-    { name: "laravelcompany/laravelmail", modified_at: new Date().toISOString(), size: 0 },
+    { name: "hf.co/laravelcompany/laravelmail:latest", modified_at: new Date().toISOString(), size: 0 },
   ]);
-  const [selectedModel] = useState<string>("laravelcompany/laravelmail");
+  const [selectedModel] = useState<string>("hf.co/laravelcompany/laravelmail:latest");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -477,7 +477,7 @@ export default function AssistantChat() {
                       <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
                     </div>
                     <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">How can I help you?</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-sm">Ask me anything about code, architecture, debugging, or best practices.</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-sm">Help me create an email for any occasion.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-lg w-full">
                       {SUGGESTED_PROMPTS.map((prompt) => (
                         <button
