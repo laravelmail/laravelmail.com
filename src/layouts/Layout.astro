@@ -5,7 +5,7 @@ import { getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import BetaModal from "../components/BetaModal.astro";
-import PurchaseToast from "../components/PurchaseToast.astro";
+
 
 import "../styles/global.css";
 import "@fontsource/nunito/400.css";
@@ -310,7 +310,6 @@ const {
 
     <Footer transition:persist="footer" />
     <BetaModal />
-    <PurchaseToast />
 
     {/* <ChatWidget 
       client:load
@@ -327,6 +326,9 @@ const {
     <!-- Enhanced Intersection Observer for animations -->
     <script>
       document.addEventListener("astro:page-load", () => {
+        // Reset body overflow in case mobile menu or modal left it locked
+        document.body.style.overflow = "";
+
         const animatedElements =
           document.querySelectorAll(".animate-on-scroll");
 
