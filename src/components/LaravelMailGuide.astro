@@ -13,9 +13,8 @@ const t = useTranslations(lang);
                     What is Laravel Mail?
                 </h2>
                 <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                    Laravel Mail is a powerful mail driver system built into the Laravel framework. 
-                    It provides a clean, expressive API for sending emails across multiple drivers including SMTP, 
-                    queue-based sending, and cloud services.
+                    Laravel Mail is a powerful self-hosted email and marketing platform that is free.
+                    Take full control of your email infrastructure without relying on third-party services.
                 </p>
             </header>
 
@@ -25,19 +24,16 @@ const t = useTranslations(lang);
                         <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                         </svg>
-                        SMTP Configuration
+                        Self-Hosted Infrastructure
                     </h3>
                     <p class="text-gray-300 mb-4">
-                        Configure Laravel Mail with your preferred SMTP provider for reliable email delivery.
+                        Host on your own servers for complete data ownership and privacy. No monthly fees, no vendor lock-in.
                     </p>
-                    <pre class="bg-gray-900 rounded-lg p-4 overflow-x-auto text-sm"><code class="text-green-400">// .env
-MAIL_MAILER=smtp
-MAIL_HOST=smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=null
-MAIL_PASSWORD=null
-MAIL_ENCRYPTION=tls
-MAIL_FROM_ADDRESS="hello@example.com"</code></pre>
+                    <pre class="bg-gray-900 rounded-lg p-4 overflow-x-auto text-sm"><code class="text-green-400">git clone https://github.com/laravelmail/app.laravelmail.com.git
+cd app.laravelmail.com
+cp .env.example .env
+php artisan key:generate
+php artisan migrate</code></pre>
                 </article>
 
                 <article class="bg-brand-bg-card/40 backdrop-blur-md rounded-xl p-6 border border-white/10">
@@ -45,42 +41,43 @@ MAIL_FROM_ADDRESS="hello@example.com"</code></pre>
                         <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                         </svg>
-                        Queue-Based Sending
+                        Marketing Automation
                     </h3>
                     <p class="text-gray-300 mb-4">
-                        Send emails asynchronously using Laravel queues for better performance.
+                        Build automated email sequences, drip campaigns, and trigger-based workflows.
                     </p>
-                    <pre class="bg-gray-900 rounded-lg p-4 overflow-x-auto text-sm"><code class="text-green-400">Mail::to($user)->queue(
-    new OrderShipped($order)
-);
+                    <pre class="bg-gray-900 rounded-lg p-4 overflow-x-auto text-sm"><code class="text-green-400">// Create a campaign
+$campaign = Campaign::create([
+    'name' => 'Welcome Series',
+    'subject' => 'Welcome aboard!',
+]);
 
-// Or for immediate sending
-Mail::to($user)->send(
-    new WelcomeEmail()
-);</code></pre>
+// Schedule emails
+$campaign->scheduleEmail([
+    'delay' => '1 day',
+    'template' => 'welcome-intro',
+]);</code></pre>
                 </article>
             </div>
 
             <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-xl p-8 border border-white/10 mb-12">
-                <h3 class="text-xl font-bold text-white mb-4">Sending HTML & Plain Text Emails</h3>
+                <h3 class="text-xl font-bold text-white mb-4">Beautiful Email Templates</h3>
                 <p class="text-gray-300 mb-4">
-                    Laravel Mail supports both HTML and plain text emails out of the box. 
-                    Create beautiful email templates using Blade templates.
+                    Design responsive HTML emails with the built-in editor or use Blade templates.
+                    Preview and test before sending.
                 </p>
-                <pre class="bg-gray-900 rounded-lg p-4 overflow-x-auto text-sm mb-4"><code class="text-green-400">{`<!-- resources/views/emails/welcome.blade.php -->
+                <pre class="bg-gray-900 rounded-lg p-4 overflow-x-auto text-sm mb-4"><code class="text-green-400">{`<!-- resources/views/emails/campaign.blade.php -->
 <html>
     <body>
-        <h1>Welcome to {{ $company }}</h1>
-        <p>Hello {{ $user->name }},</p>
-        <p>{{ $message }}</p>
+        <h1>{{ $campaign->subject }}</h1>
+        <p>Hi {{ $subscriber->name }},</p>
+        {!! $campaign->body !!}
+        <a href="{{ $unsubscribeUrl }}">Unsubscribe</a>
     </body>
-</html> -->
-
-// Sending the email
-Mail::to($user)->send(new WelcomeMail($user));`}</code></pre>
+</html>`}</code></pre>
                 <a 
-                    href="/deploy" 
-                    title="Learn how to deploy Laravel Mail for production email sending"
+                    href="/install" 
+                    title="Learn how to deploy Laravel Mail for production"
                     class="inline-flex items-center text-brand-primary hover:underline"
                 >
                     Deploy Laravel Mail for production →

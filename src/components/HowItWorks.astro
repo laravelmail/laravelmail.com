@@ -1,6 +1,5 @@
 ---
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
-import { getRelativeLocaleUrl } from "astro:i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -25,39 +24,6 @@ const purchaseSteps = [
         step: "4",
         title: t('how.p_step4_title'),
         description: t('how.p_step4_desc'),
-    },
-];
-
-const setupSteps = [
-    {
-        number: "01",
-        icon: "🔗",
-        title: t('value.sol2_title'),
-        description: t('how.setup_subtitle'),
-        bullets: [
-            t('value.sol2_desc'),
-            t('deploy.step1_desc')
-        ],
-    },
-    {
-        number: "02",
-        icon: "⚙️",
-        title: t('value.sol3_subtitle'),
-        description: t('value.sol3_desc'),
-        bullets: [
-            t('deploy.step2_desc'),
-            t('deploy.docker_subtitle')
-        ],
-    },
-    {
-        number: "03",
-        icon: "📈",
-        title: t('value.sol1_subtitle'),
-        description: t('value.sol1_desc'),
-        bullets: [
-            t('deploy.step3_desc'),
-            t('deploy.hero_subtitle')
-        ],
     },
 ];
 ---
@@ -120,93 +86,4 @@ const setupSteps = [
     </div>
 </section>
 
-<!-- Section 2: Detailed 3-Step Setup -->
-<section class="py-24 bg-brand-bg-darker/60 relative overflow-hidden">
-    <!-- Subtle animated background -->
-    <div class="absolute inset-0 opacity-10">
-        <div
-            class="absolute top-20 left-10 w-96 h-96 bg-brand-primary/20 rounded-full blur-3xl animate-pulse"
-        >
-        </div>
-        <div
-            class="absolute bottom-20 right-10 w-96 h-96 bg-brand-accent/20 rounded-full blur-3xl animate-pulse delay-1000"
-        >
-        </div>
-    </div>
 
-    <div class="container-custom relative">
-        <div class="text-center max-w-4xl mx-auto mb-20">
-            <h2 class="text-5xl md:text-6xl font-black text-white mb-6">
-                <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent"
-                    >{t('how.setup_header')}</span
-                >
-            </h2>
-            <p class="text-xl md:text-2xl text-gray-400 leading-relaxed">
-                {t('how.setup_subtitle')}
-            </p>
-        </div>
-
-        <div class="grid lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-            {
-                setupSteps.map((step, index) => (
-                    <div
-                        class={`group relative bg-brand-bg-card/40 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border border-white/10 hover:border-brand-primary/30 hover:-translate-y-3 animate-on-scroll delay-${index + 2}`}
-                    >
-                        <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-brand-primary/5 to-brand-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div class="relative z-10">
-                            <div class="flex items-center justify-between mb-6">
-                                <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-r from-brand-primary to-brand-accent text-white text-3xl font-black shadow-2xl">
-                                    {step.icon}
-                                </div>
-                                <span class="text-6xl font-black text-white/10">
-                                    {step.number}
-                                </span>
-                            </div>
-                            <h3
-                                class="text-2xl font-bold text-white mb-3"
-                                set:html={step.title}
-                            />
-                            <p class="text-gray-400 mb-4">{step.description}</p>
-                            <ul class="space-y-2 text-sm text-gray-400">
-                                {step.bullets.map((bullet) => (
-                                    <li class="flex items-start">
-                                        <span class="text-brand-primary mr-2">
-                                            •
-                                        </span>
-                                        <span>{bullet}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                ))
-            }
-        </div>
-
-        <!-- CTA -->
-        <div class="text-center mt-20">
-            <a
-                href={getRelativeLocaleUrl(lang, "/install")}
-                class="inline-flex items-center px-10 py-5 text-xl font-bold text-white bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl shadow-2xl hover:shadow-brand-primary/50 transform hover:scale-105 transition-all duration-300 group"
-            >
-                {t('how.cta_btn')}
-                <svg
-                    class="w-7 h-7 ml-3 group-hover:translate-x-2 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="3"
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                </svg>
-            </a>
-            <p class="mt-4 text-gray-500">
-                {t('how.cta_p')}
-            </p>
-        </div>
-    </div>
-</section>
