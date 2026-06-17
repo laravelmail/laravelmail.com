@@ -1,9 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ValidationDashboard from "../components/validation/ValidationDashboard";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import ValidationDashboard from "../../components/validation/ValidationDashboard";
+import { languages } from "../../i18n/ui";
 
-const lang = getLangFromUrl(Astro.url);
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter(lang => lang !== 'en')
+    .map(lang => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
 
 const envVars = [
     { variable: "EMAILFILTER_URL", defaultValue: "http://localhost:1099", description: "Internal EmailFilter endpoint" },
@@ -15,48 +21,13 @@ const envVars = [
 ];
 
 const engines = [
-    {
-        name: "Bloombox",
-        description: "High-speed Bloom filter checks across 1M+ known disposable and invalid domains. Sub-millisecond lookups for instant pre-filtering.",
-        latency: "<1ms",
-        color: "green",
-    },
-    {
-        name: "Syntax Validator",
-        description: "RFC-compliant email syntax validation. Catches malformed addresses before they reach heavier verification stages.",
-        latency: "<1ms",
-        color: "blue",
-    },
-    {
-        name: "MX/DNS Checker",
-        description: "Real-time mail exchanger verification. Confirms the domain has valid MX records and can accept email.",
-        latency: "~10ms",
-        color: "purple",
-    },
-    {
-        name: "Disposable Detector",
-        description: "Identifies temporary and throwaway email providers using an ever-growing database of disposable email services.",
-        latency: "<1ms",
-        color: "orange",
-    },
-    {
-        name: "Reacher SMTP",
-        description: "Deep SMTP verification that connects to the mail server to confirm mailbox existence without sending an email.",
-        latency: "~1.2s",
-        color: "pink",
-    },
-    {
-        name: "Bayesian Inference",
-        description: "Statistical probability engine that combines all signal weights to produce a unified confidence score for each validation.",
-        latency: "<5ms",
-        color: "cyan",
-    },
-    {
-        name: "LightGBM ML",
-        description: "Machine learning model trained on real verification data. Provides nuanced deliverability predictions beyond rule-based systems.",
-        latency: "~10ms",
-        color: "yellow",
-    },
+    { name: "Bloombox", description: "High-speed Bloom filter checks across 1M+ known disposable and invalid domains. Sub-millisecond lookups for instant pre-filtering.", latency: "<1ms", color: "green" },
+    { name: "Syntax Validator", description: "RFC-compliant email syntax validation. Catches malformed addresses before they reach heavier verification stages.", latency: "<1ms", color: "blue" },
+    { name: "MX/DNS Checker", description: "Real-time mail exchanger verification. Confirms the domain has valid MX records and can accept email.", latency: "~10ms", color: "purple" },
+    { name: "Disposable Detector", description: "Identifies temporary and throwaway email providers using an ever-growing database of disposable email services.", latency: "<1ms", color: "orange" },
+    { name: "Reacher SMTP", description: "Deep SMTP verification that connects to the mail server to confirm mailbox existence without sending an email.", latency: "~1.2s", color: "pink" },
+    { name: "Bayesian Inference", description: "Statistical probability engine that combines all signal weights to produce a unified confidence score for each validation.", latency: "<5ms", color: "cyan" },
+    { name: "LightGBM ML", description: "Machine learning model trained on real verification data. Provides nuanced deliverability predictions beyond rule-based systems.", latency: "~10ms", color: "yellow" },
 ];
 
 const makeCommands = [
@@ -90,12 +61,7 @@ const responseExample = `{
     "recommendation": "accept",
     "reasons": ["Mailbox exists", "High-trust domain age"],
     "audit_log": [
-      {
-        "signal": "deliverable",
-        "value": true,
-        "weight": 1.4,
-        "contribution": 0.35
-      }
+      { "signal": "deliverable", "value": true, "weight": 1.4, "contribution": 0.35 }
     ]
   },
   "engines": {
@@ -103,10 +69,7 @@ const responseExample = `{
     "emailfilter": { "status": "success", "latency_ms": 150 },
     "bloombox": { "status": "success", "latency_ms": 10 }
   },
-  "meta": {
-    "request_id": "req_abc123...",
-    "processing_time_ms": 1360
-  }
+  "meta": { "request_id": "req_abc123...", "processing_time_ms": 1360 }
 }`;
 
 const telemetryCode = `from app.services.database import EmailValidationDB
@@ -130,15 +93,7 @@ db.export_valid_emails("verified_leads.csv")`;
             gtag("event", "view_item", {
                 currency: "USD",
                 value: 0,
-                items: [
-                    {
-                        item_id: "EmailValidationAPI",
-                        item_name: "Laravel Mail Email Validation API",
-                        affiliation: "laravelmail.com",
-                        price: 0,
-                        quantity: 1,
-                    },
-                ],
+                items: [{ item_id: "EmailValidationAPI", item_name: "Laravel Mail Email Validation API", affiliation: "laravelmail.com", price: 0, quantity: 1 }],
             });
         }
     </script>
@@ -149,7 +104,6 @@ db.export_valid_emails("verified_leads.csv")`;
             <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-primary/20 blur-[120px] rounded-full"></div>
             <div class="absolute top-1/2 -right-24 w-80 h-80 bg-brand-blue/20 blur-[100px] rounded-full"></div>
         </div>
-
         <div class="container-custom relative z-10">
             <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
                 <div class="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-bold mb-6">
@@ -160,25 +114,16 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span>Multi-Engine Validation</span>
                 </div>
                 <h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight">
-                    Email Validation
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue">API</span>
+                    Email Validation <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue">API</span>
                 </h1>
                 <p class="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                    A high-intelligence, multi-engine email validation service built with FastAPI.
-                    Orchestrates deep SMTP checks, heuristic pre-filtering, and reputation analysis to
-                    deliver verifiable, consensus-based deliverability verdicts.
+                    A high-intelligence, multi-engine email validation service built with FastAPI. Orchestrates deep SMTP checks, heuristic pre-filtering, and reputation analysis to deliver verifiable, consensus-based deliverability verdicts.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#interactive-dashboard" class="btn btn-primary px-8 py-3 font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
-                        Try It Live
-                    </a>
-                    <a href="#api-reference" class="btn border border-white/20 text-white hover:bg-white/5 px-8 py-3 font-bold transition-all">
-                        API Reference
-                    </a>
+                    <a href="#interactive-dashboard" class="btn btn-primary px-8 py-3 font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Try It Live</a>
+                    <a href="#api-reference" class="btn border border-white/20 text-white hover:bg-white/5 px-8 py-3 font-bold transition-all">API Reference</a>
                 </div>
             </div>
-
-            <!-- Live Endpoint Badge -->
             <div class="max-w-2xl mx-auto mb-12 animate-on-scroll">
                 <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-6 shadow-2xl">
                     <div class="flex items-center gap-3 mb-3">
@@ -203,9 +148,7 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">0</span>
                     Interactive Dashboard
                 </h2>
-                <p class="text-gray-400 max-w-3xl">
-                    Validate emails, manage allow/block lists, tune scoring rules, and monitor service health — all from one dashboard.
-                </p>
+                <p class="text-gray-400 max-w-3xl">Validate emails, manage allow/block lists, tune scoring rules, and monitor service health — all from one dashboard.</p>
             </div>
             <div class="max-w-5xl mx-auto animate-on-scroll">
                 <ValidationDashboard client:load />
@@ -221,12 +164,8 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">1</span>
                     What You Get
                 </h2>
-                <p class="text-gray-400 max-w-3xl">
-                    A unified email validation service combining multiple verification engines,
-                    Bayesian inference, and LightGBM machine learning — all running on your own infrastructure.
-                </p>
+                <p class="text-gray-400 max-w-3xl">A unified email validation service combining multiple verification engines, Bayesian inference, and LightGBM machine learning — all running on your own infrastructure.</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
                 <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
                     <h3 class="text-white font-bold text-lg mb-3">Unified API</h3>
@@ -248,10 +187,7 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">2</span>
                     Architecture
                 </h2>
-                <p class="text-gray-400 mb-8 max-w-3xl">
-                    The service is fully unified into a single FastAPI backend. The legacy EmailFilter service
-                    has been decommissioned and its logic integrated into the core pipeline.
-                </p>
+                <p class="text-gray-400 mb-8 max-w-3xl">The service is fully unified into a single FastAPI backend. The legacy EmailFilter service has been decommissioned and its logic integrated into the core pipeline.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
                         <p class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">Port</p>
@@ -277,10 +213,7 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">3</span>
                     Verification Engines
                 </h2>
-                <p class="text-gray-400 mb-8 max-w-3xl">
-                    Each email passes through multiple specialized engines. Signals are combined
-                    using weighted scoring and machine learning to produce a final verdict.
-                </p>
+                <p class="text-gray-400 mb-8 max-w-3xl">Each email passes through multiple specialized engines. Signals are combined using weighted scoring and machine learning to produce a final verdict.</p>
                 <div class="space-y-4">
                     {engines.map((engine) => (
                         <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-2xl border border-white/10 p-6 hover:border-brand-primary/30 transition-colors">
@@ -288,17 +221,7 @@ db.export_valid_emails("verified_leads.csv")`;
                                 <div class="flex-1">
                                     <div class="flex items-center gap-3 mb-2">
                                         <h3 class="text-white font-bold text-lg">{engine.name}</h3>
-                                        <span class={`px-2 py-0.5 rounded text-xs font-mono font-bold ${
-                                            engine.color === "green" ? "bg-green-500/20 text-green-400" :
-                                            engine.color === "blue" ? "bg-blue-500/20 text-blue-400" :
-                                            engine.color === "purple" ? "bg-purple-500/20 text-purple-400" :
-                                            engine.color === "orange" ? "bg-orange-500/20 text-orange-400" :
-                                            engine.color === "pink" ? "bg-pink-500/20 text-pink-400" :
-                                            engine.color === "cyan" ? "bg-cyan-500/20 text-cyan-400" :
-                                            "bg-yellow-500/20 text-yellow-400"
-                                        }`}>
-                                            {engine.latency}
-                                        </span>
+                                        <span class={`px-2 py-0.5 rounded text-xs font-mono font-bold ${engine.color === "green" ? "bg-green-500/20 text-green-400" : engine.color === "blue" ? "bg-blue-500/20 text-blue-400" : engine.color === "purple" ? "bg-purple-500/20 text-purple-400" : engine.color === "orange" ? "bg-orange-500/20 text-orange-400" : engine.color === "pink" ? "bg-pink-500/20 text-pink-400" : engine.color === "cyan" ? "bg-cyan-500/20 text-cyan-400" : "bg-yellow-500/20 text-yellow-400"}`}>{engine.latency}</span>
                                     </div>
                                     <p class="text-gray-400 text-sm">{engine.description}</p>
                                 </div>
@@ -314,10 +237,7 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">4</span>
                     Quick Start
                 </h2>
-                <p class="text-gray-400 mb-8 max-w-3xl">
-                    Validate your first email with a single API call. The service runs on port 1098
-                    and returns a comprehensive verdict with confidence scores.
-                </p>
+                <p class="text-gray-400 mb-8 max-w-3xl">Validate your first email with a single API call. The service runs on port 1098 and returns a comprehensive verdict with confidence scores.</p>
                 <div class="space-y-6">
                     <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
                         <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
@@ -327,30 +247,17 @@ db.export_valid_emails("verified_leads.csv")`;
                                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
                             <span class="text-gray-400 text-sm font-mono">Validation Request</span>
-                            <button
-                                onclick="navigator.clipboard.writeText(document.getElementById('validation-curl').textContent)"
-                                class="text-gray-400 hover:text-white text-sm font-mono transition-colors"
-                            >
-                                Copy
-                            </button>
+                            <button onclick="navigator.clipboard.writeText(document.getElementById('vl-curl').textContent)" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Copy</button>
                         </div>
-                        <pre class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="validation-curl" set:html={curlExample} /></pre>
+                        <pre class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="vl-curl" set:html={curlExample} /></pre>
                     </div>
-
                     <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
                         <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
-                            <div class="flex items-center gap-2">
-                                <span class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-green-500/20 text-green-400">200 OK</span>
-                            </div>
+                            <div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-green-500/20 text-green-400">200 OK</span></div>
                             <span class="text-gray-400 text-sm font-mono">Response</span>
-                            <button
-                                onclick="navigator.clipboard.writeText(document.getElementById('validation-response').textContent)"
-                                class="text-gray-400 hover:text-white text-sm font-mono transition-colors"
-                            >
-                                Copy
-                            </button>
+                            <button onclick="navigator.clipboard.writeText(document.getElementById('vl-resp').textContent)" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Copy</button>
                         </div>
-                        <pre class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="validation-response" set:html={responseExample} /></pre>
+                        <pre class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="vl-resp" set:html={responseExample} /></pre>
                     </div>
                 </div>
             </div>
@@ -361,7 +268,6 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">5</span>
                     API Reference
                 </h2>
-
                 <div class="mb-12">
                     <h3 class="text-xl font-bold text-white mb-4">Verify Email</h3>
                     <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl">
@@ -369,77 +275,29 @@ db.export_valid_emails("verified_leads.csv")`;
                             <span class="px-3 py-1 rounded text-sm font-mono font-bold bg-green-500/20 text-green-400">POST</span>
                             <code class="text-white font-mono text-lg">/api/v1/verify-email</code>
                         </div>
-
                         <h4 class="text-white font-bold mb-3">Request Body</h4>
-                        <div class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto mb-6">
-                            <code set:html={requestExample} />
-                        </div>
-
+                        <div class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto mb-6"><code set:html={requestExample} /></div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div>
-                                <p class="text-white font-semibold text-sm mb-1">email</p>
-                                <p class="text-gray-400 text-xs">required — Email address to validate</p>
-                            </div>
-                            <div>
-                                <p class="text-white font-semibold text-sm mb-1">is_signup</p>
-                                <p class="text-gray-400 text-xs">optional — Hint for signup context</p>
-                            </div>
-                            <div>
-                                <p class="text-white font-semibold text-sm mb-1">proxy</p>
-                                <p class="text-gray-400 text-xs">optional — SMTP proxy configuration</p>
-                            </div>
+                            <div><p class="text-white font-semibold text-sm mb-1">email</p><p class="text-gray-400 text-xs">required — Email address to validate</p></div>
+                            <div><p class="text-white font-semibold text-sm mb-1">is_signup</p><p class="text-gray-400 text-xs">optional — Hint for signup context</p></div>
+                            <div><p class="text-white font-semibold text-sm mb-1">proxy</p><p class="text-gray-400 text-xs">optional — SMTP proxy configuration</p></div>
                         </div>
                     </div>
                 </div>
-
                 <div class="mb-12">
                     <h3 class="text-xl font-bold text-white mb-4">Verdict Fields</h3>
                     <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full text-left">
-                                <thead>
-                                    <tr class="border-b border-white/10 bg-white/5">
-                                        <th class="px-6 py-4 text-white font-bold text-sm">Field</th>
-                                        <th class="px-6 py-4 text-white font-bold text-sm">Type</th>
-                                        <th class="px-6 py-4 text-white font-bold text-sm hidden md:table-cell">Description</th>
-                                    </tr>
-                                </thead>
+                                <thead><tr class="border-b border-white/10 bg-white/5"><th class="px-6 py-4 text-white font-bold text-sm">Field</th><th class="px-6 py-4 text-white font-bold text-sm">Type</th><th class="px-6 py-4 text-white font-bold text-sm hidden md:table-cell">Description</th></tr></thead>
                                 <tbody>
-                                    <tr class="border-b border-white/5 bg-white/[0.02]">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">status</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">safe, risky, or invalid</td>
-                                    </tr>
-                                    <tr class="border-b border-white/5">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">confidence</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">float</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">0.0 – 1.0 confidence level</td>
-                                    </tr>
-                                    <tr class="border-b border-white/5 bg-white/[0.02]">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">score</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">float</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">Composite deliverability score</td>
-                                    </tr>
-                                    <tr class="border-b border-white/5">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">source</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">hybrid_ml, rule_based, or ml_only</td>
-                                    </tr>
-                                    <tr class="border-b border-white/5 bg-white/[0.02]">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">recommendation</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">accept, review, or reject</td>
-                                    </tr>
-                                    <tr class="border-b border-white/5">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">reasons</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string[]</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">Human-readable explanation list</td>
-                                    </tr>
-                                    <tr class="bg-white/[0.02]">
-                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">audit_log</code></td>
-                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">array</code></td>
-                                        <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">Signal-by-signal contribution breakdown</td>
-                                    </tr>
+                                    <tr class="border-b border-white/5 bg-white/[0.02]"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">status</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">safe, risky, or invalid</td></tr>
+                                    <tr class="border-b border-white/5"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">confidence</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">float</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">0.0 – 1.0 confidence level</td></tr>
+                                    <tr class="border-b border-white/5 bg-white/[0.02]"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">score</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">float</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">Composite deliverability score</td></tr>
+                                    <tr class="border-b border-white/5"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">source</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">hybrid_ml, rule_based, or ml_only</td></tr>
+                                    <tr class="border-b border-white/5 bg-white/[0.02]"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">recommendation</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">accept, review, or reject</td></tr>
+                                    <tr class="border-b border-white/5"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">reasons</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">string[]</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">Human-readable explanation list</td></tr>
+                                    <tr class="bg-white/[0.02]"><td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">audit_log</code></td><td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">array</code></td><td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">Signal-by-signal contribution breakdown</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -453,24 +311,17 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">6</span>
                     Machine Learning Pipeline
                 </h2>
-                <p class="text-gray-400 mb-8 max-w-3xl">
-                    The validation engine improves over time using telemetry data stored in DuckDB.
-                    Train the model with live data and bootstrap high-quality samples for cold starts.
-                </p>
+                <p class="text-gray-400 mb-8 max-w-3xl">The validation engine improves over time using telemetry data stored in DuckDB. Train the model with live data and bootstrap high-quality samples for cold starts.</p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl">
                         <h3 class="text-white font-bold text-lg mb-4">ML Training</h3>
                         <p class="text-gray-400 text-sm mb-4">Train the model using live telemetry data stored in DuckDB:</p>
-                        <div class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400">
-                            <code>make train</code>
-                        </div>
+                        <div class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400"><code>make train</code></div>
                     </div>
                     <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl">
                         <h3 class="text-white font-bold text-lg mb-4">Data Bootstrapping</h3>
                         <p class="text-gray-400 text-sm mb-4">Seed the database with high-quality verification samples:</p>
-                        <div class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400">
-                            <code>make bootstrap</code>
-                        </div>
+                        <div class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400"><code>make bootstrap</code></div>
                     </div>
                 </div>
             </div>
@@ -481,26 +332,14 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">7</span>
                     Accessing Telemetry
                 </h2>
-                <p class="text-gray-400 mb-8 max-w-3xl">
-                    The system creates a DuckDB database at <code class="text-brand-primary">data/email_validation.db</code>.
-                    Export verified leads directly via the service API.
-                </p>
+                <p class="text-gray-400 mb-8 max-w-3xl">The system creates a DuckDB database at <code class="text-brand-primary">data/email_validation.db</code>. Export verified leads directly via the service API.</p>
                 <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
                     <div class="flex items-center justify-between px-6 py-4 border-b border-white/10">
-                        <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        </div>
+                        <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div></div>
                         <span class="text-gray-400 text-sm font-mono">Python Export</span>
-                        <button
-                            onclick="navigator.clipboard.writeText(document.getElementById('telemetry-code').textContent)"
-                            class="text-gray-400 hover:text-white text-sm font-mono transition-colors"
-                        >
-                            Copy
-                        </button>
+                        <button onclick="navigator.clipboard.writeText(document.getElementById('vl-telemetry').textContent)" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Copy</button>
                     </div>
-                    <pre class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="telemetry-code" set:html={telemetryCode} /></pre>
+                    <pre class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="vl-telemetry" set:html={telemetryCode} /></pre>
                 </div>
             </div>
 
@@ -510,29 +349,16 @@ db.export_valid_emails("verified_leads.csv")`;
                     <span class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg">8</span>
                     Configuration
                 </h2>
-                <p class="text-gray-400 mb-8 max-w-3xl">
-                    Configure the service using environment variables. Most have sensible defaults
-                    and work out of the box.
-                </p>
+                <p class="text-gray-400 mb-8 max-w-3xl">Configure the service using environment variables. Most have sensible defaults and work out of the box.</p>
                 <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden">
                     <div class="overflow-x-auto">
                         <table class="w-full text-left">
-                            <thead>
-                                <tr class="border-b border-white/10 bg-white/5">
-                                    <th class="px-6 py-4 text-white font-bold text-sm">Variable</th>
-                                    <th class="px-6 py-4 text-white font-bold text-sm">Default</th>
-                                    <th class="px-6 py-4 text-white font-bold text-sm hidden md:table-cell">Description</th>
-                                </tr>
-                            </thead>
+                            <thead><tr class="border-b border-white/10 bg-white/5"><th class="px-6 py-4 text-white font-bold text-sm">Variable</th><th class="px-6 py-4 text-white font-bold text-sm">Default</th><th class="px-6 py-4 text-white font-bold text-sm hidden md:table-cell">Description</th></tr></thead>
                             <tbody>
                                 {envVars.map((v, i) => (
                                     <tr class={`border-b border-white/5 ${i % 2 === 0 ? "bg-white/[0.02]" : ""}`}>
-                                        <td class="px-6 py-3">
-                                            <code class="text-brand-primary font-mono text-sm">{v.variable}</code>
-                                        </td>
-                                        <td class="px-6 py-3">
-                                            <code class="text-gray-300 font-mono text-sm">{v.defaultValue}</code>
-                                        </td>
+                                        <td class="px-6 py-3"><code class="text-brand-primary font-mono text-sm">{v.variable}</code></td>
+                                        <td class="px-6 py-3"><code class="text-gray-300 font-mono text-sm">{v.defaultValue}</code></td>
                                         <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">{v.description}</td>
                                     </tr>
                                 ))}
@@ -568,35 +394,17 @@ db.export_valid_emails("verified_leads.csv")`;
                     <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
                         <h3 class="text-white font-bold mb-3">Network Access</h3>
                         <ul class="space-y-2 text-gray-400 text-sm">
-                            <li class="flex items-start gap-2">
-                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                Port 25 outbound for SMTP probes (Reacher)
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                Port 1098 exposed for the API
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                Coolify: set Service Port to 1098
-                            </li>
+                            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Port 25 outbound for SMTP probes (Reacher)</li>
+                            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Port 1098 exposed for the API</li>
+                            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Coolify: set Service Port to 1098</li>
                         </ul>
                     </div>
                     <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
                         <h3 class="text-white font-bold mb-3">License</h3>
                         <ul class="space-y-2 text-gray-400 text-sm">
-                            <li class="flex items-start gap-2">
-                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                CC-04 — Public Domain
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                Free for personal and commercial use
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                Maintained by the LaravelMail Team
-                            </li>
+                            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>CC-04 — Public Domain</li>
+                            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Free for personal and commercial use</li>
+                            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Maintained by the LaravelMail Team</li>
                         </ul>
                     </div>
                 </div>

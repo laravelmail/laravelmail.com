@@ -25,14 +25,14 @@ const navItems = [
         title: "Laravel Mail Blog",
     },
     {
-        name: "Contact",
-        href: getRelativeLocaleUrl(lang, "/contact"),
-        title: "Contact Laravel Mail Team",
-    },
-    {
         name: "Agent",
         href: "/chat",
         title: "Chat with AI Assistant",
+    },
+    {
+        name: "Validation",
+        href: getRelativeLocaleUrl(lang, "/validation"),
+        title: "Email Validation API",
     },
 ];
 
@@ -144,15 +144,15 @@ const socialLinks = [
         document.getElementById("buy-now-btn")?.addEventListener("click", function () {
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({
-                event: "add_to_cart",
+                event: "begin_install",
                 ecommerce: {
-                    currency: "GBP",
-                    value: 40,
+                    currency: "USD",
+                    value: 0,
                     items: [
                         {
                             item_id: "LaravelMail",
-                            item_name: "Mail Plan",
-                            price: 40,
+                            item_name: "Laravel Mail Self-Hosted",
+                            price: 0,
                             quantity: 1,
                         },
                     ],
@@ -255,7 +255,7 @@ const socialLinks = [
             <a
                 id="buy-now-btn"
                 title={t('hero.buy_button')}
-                href={getRelativeLocaleUrl(lang, "/buy")}
+                href={getRelativeLocaleUrl(lang, "/install")}
                 class="hidden sm:inline-flex btn bg-payflo-purple text-white px-6 py-2.5 rounded-xl font-bold text-sm transition-all hover:shadow-lg hover:shadow-payflo-purple/20 active:scale-95"
             >
                 {t('nav.buy')}
@@ -321,7 +321,7 @@ const socialLinks = [
                 class="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4"
             >
                 <a
-                    href={getRelativeLocaleUrl(lang, "/buy")}
+                    href={getRelativeLocaleUrl(lang, "/install")}
                     title={t('hero.buy_button')}
                     onclick="trackClick('mobile_get_started')"
                     class="mobile-nav-link btn btn-primary w-full sm:w-auto text-center py-4 px-8 bg-payflo-purple text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-payflo-purple/20 touch-padding"

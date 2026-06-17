@@ -12,8 +12,8 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const t = useTranslations(lang as any);
 
-const title = t('buy.page_title') || "B2B Lead Packs | Verified Leads Starting at $5 | Laravel Mail";
-const description = t('buy.page_description') || "Purchase verified B2B leads in packs. Starting at $5 for 100 leads. No subscription required. Email-verified leads delivered instantly.";
+const title = t('buy.page_title') || "Install Laravel Mail | Self-Hosted Email Marketing";
+const description = t('buy.page_description') || "Install Laravel Mail on your own server. Free self-hosted email marketing platform with full data control.";
 ---
 
 <Layout title={title} description={description}>
@@ -145,7 +145,7 @@ const description = t('buy.page_description') || "Purchase verified B2B leads in
                              <h2 class="text-2xl font-bold mb-4">Get Started</h2>
                              <p>Self-hosting and leads platform are currently available in English.</p>
                              <div class="mt-8">
-                                <a href="/buy" class="btn btn-primary w-full text-center">Go to English Checkout</a>
+                                <a href="/install" class="btn btn-primary w-full text-center">Go to English Install</a>
                              </div>
                         </div>
                     </div>

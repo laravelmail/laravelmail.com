@@ -1,0 +1,1414 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const dockerCompose = `services:
+  app.laravelmail.com:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: izdrail/app.laravelmail.com:latest
+    container_name: app.laravelmail.com
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '5210:5210'
+      - '5211:5211'
+      - '5173:5173'
+      - '2525:2525'
+      - '25:25'
+    volumes:
+      - './:/var/www'
+      - './.env:/var/www/.env'
+      - './docker/kumomta/policy:/opt/kumomta/etc/policy'
+    networks:
+      - sail
+    depends_on:
+      - mysql
+      - mailpit
+      - redis
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    command: redis-server --requirepass redis_password
+    ports:
+      - '6378:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - sail
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: laravel_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - sail
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    volumes:
+      - mailpit_data:/data
+    networks:
+      - sail
+
+  phpmyadmin:
+    container_name: phpmyadmin-laravel
+    ports:
+      - '8086:80'
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - sail
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+  mailpit_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  sail:
+    driver: bridge`;
+
+const envVariables = [
+    {
+        variable: "APP_NAME",
+        example: "Laravel Mail",
+        description: "The name of your application",
+    },
+    {
+        variable: "APP_URL",
+        example: "https://app.example.com",
+        description: "The full URL where your app will be accessible",
+    },
+    {
+        variable: "APP_KEY",
+        example: "base64:...",
+        description: "Laravel encryption key (generated automatically)",
+    },
+    {
+        variable: "DB_HOST",
+        example: "mysql",
+        description: "MySQL hostname (use 'mysql' for Docker)",
+    },
+    {
+        variable: "DB_DATABASE",
+        example: "laravel",
+        description: "MySQL database name",
+    },
+    {
+        variable: "DB_USERNAME",
+        example: "laravel",
+        description: "MySQL username",
+    },
+    {
+        variable: "DB_PASSWORD",
+        example: "laravel_password",
+        description: "MySQL password",
+    },
+    {
+        variable: "REDIS_HOST",
+        example: "redis",
+        description: "Redis hostname (use 'redis' for Docker)",
+    },
+    {
+        variable: "REDIS_PASSWORD",
+        example: "redis_password",
+        description: "Redis authentication password",
+    },
+    {
+        variable: "MAIL_MAILER",
+        example: "smtp",
+        description: "Mail driver (smtp, log, array)",
+    },
+    {
+        variable: "MAIL_HOST",
+        example: "mailpit",
+        description: "SMTP server hostname",
+    },
+    {
+        variable: "MAIL_PORT",
+        example: "1025",
+        description: "SMTP server port",
+    },
+    {
+        variable: "MAIL_FROM_ADDRESS",
+        example: "noreply@example.com",
+        description: "Default sender email address",
+    },
+    {
+        variable: "MAIL_FROM_NAME",
+        example: "Laravel Mail",
+        description: "Default sender name",
+    },
+];
+
+const systemReqs = [
+    {
+        label: "RAM",
+        value: "2 GB minimum",
+        recommended: "4 GB+",
+        note: "More RAM improves queue processing speed",
+    },
+    {
+        label: "CPU",
+        value: "2 vCPU minimum",
+        recommended: "4 vCPU+",
+        note: "AI features (Ollama) need more cores",
+    },
+    {
+        label: "Disk",
+        value: "20 GB minimum",
+        recommended: "50 GB+ SSD",
+        note: "MySQL and Mailpit store data locally",
+    },
+    {
+        label: "OS",
+        value: "Linux (amd64)",
+        recommended: "Ubuntu 22.04+",
+        note: "Docker works best on Linux kernels",
+    },
+];
+
+const makeCommands = [
+    {
+        command: "make build",
+        description: "Build the Docker image for production",
+    },
+    {
+        command: "make prod",
+        description: "Start all containers in production mode",
+    },
+    {
+        command: "make down",
+        description: "Stop and remove all containers",
+    },
+    {
+        command: "make restart",
+        description: "Restart all containers",
+    },
+    {
+        command: "make rebuild",
+        description: "Full rebuild: stop, build, start, migrate, seed, and clear caches",
+    },
+    {
+        command: "make shell",
+        description: "Access the application container's bash shell",
+    },
+    {
+        command: "make logs",
+        description: "Tail the application container logs",
+    },
+    {
+        command: "make migrate",
+        description: "Run database migrations",
+    },
+    {
+        command: "make seed",
+        description: "Seed the database",
+    },
+    {
+        command: "make test",
+        description: "Run PHPUnit tests",
+    },
+    {
+        command: "make lint",
+        description: "Run PHP CodeSniffer linting",
+    },
+    {
+        command: "make fix-lint",
+        description: "Auto-fix linting issues",
+    },
+    {
+        command: "make clear-cache",
+        description: "Clear all Laravel caches (views, routes, config, cache)",
+    },
+    {
+        command: "make clean-queue",
+        description: "Clear the Horizon queue",
+    },
+    {
+        command: "make prune",
+        description: "Prune unused Docker resources",
+    },
+    {
+        command: "make clean",
+        description: "Full cleanup: remove containers, images, and volumes",
+    },
+];
+
+const ports = [
+    { port: "5210", service: "Application (HTTP)", category: "app" },
+    { port: "5211", service: "Application (Alt)", category: "app" },
+    { port: "5173", service: "Vite Dev Server", category: "app" },
+    { port: "2525", service: "KumoMTA (SMTP)", category: "mail" },
+    { port: "25", service: "SMTP (Standard)", category: "mail" },
+    { port: "1025", service: "Mailpit SMTP", category: "mail" },
+    { port: "8025", service: "Mailpit Web UI", category: "mail" },
+    { port: "3306", service: "MySQL", category: "db" },
+    { port: "6378", service: "Redis", category: "db" },
+    { port: "8086", service: "phpMyAdmin", category: "db" },
+];
+---
+
+<Layout
+    title="Install Laravel Mail"
+    description="Complete installation guide for Laravel Mail. Deploy a self-hosted email marketing platform with Docker Compose, MySQL, Redis, and KumoMTA."
+>
+    <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "view_install_page",
+            page_type: "installation",
+            content_group: "self_hosted",
+        });
+        if (typeof gtag === "function") {
+            gtag("event", "view_item", {
+                currency: "USD",
+                value: 0,
+                items: [
+                    {
+                        item_id: "LaravelMail",
+                        item_name: "Laravel Mail Self-Hosted",
+                        affiliation: "laravelmail.com",
+                        price: 0,
+                        quantity: 1,
+                    },
+                ],
+            });
+        }
+    </script>
+
+    <section class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div
+            class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-30"
+        >
+            <div
+                class="absolute -top-24 -left-24 w-96 h-96 bg-brand-primary/20 blur-[120px] rounded-full"
+            >
+            </div>
+            <div
+                class="absolute top-1/2 -right-24 w-80 h-80 bg-brand-blue/20 blur-[100px] rounded-full"
+            >
+            </div>
+        </div>
+
+        <div class="container-custom relative z-10">
+            <!-- Hero -->
+            <div class="max-w-4xl mx-auto text-center mb-20 animate-on-scroll">
+                <div
+                    class="inline-flex items-center space-x-2 bg-brand-primary/10 border border-brand-primary/20 text-brand-primary px-4 py-2 rounded-full text-sm font-bold mb-6"
+                >
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"
+                        ></span>
+                        <span
+                            class="relative inline-flex rounded-full h-2 w-2 bg-brand-primary"
+                        ></span>
+                    </span>
+                    <span>Self-Hosted</span>
+                </div>
+                <h1
+                    class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight"
+                >
+                    Install<span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue"
+                        >Laravel Mail</span
+                    >
+                </h1>
+                <p
+                    class="text-xl text-gray-400 leading-relaxed max-w-2xl mx-auto"
+                >
+                    Deploy the complete email marketing platform on your own
+                    infrastructure with Docker Compose in minutes. No SaaS fees,
+                    no limits — full control over your data.
+                </p>
+            </div>
+
+            <!-- What You Get -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >0</span
+                    >
+                    What You Get
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Laravel Mail is a self-hosted, open-source email marketing
+                    platform built with Laravel. When you install it, you get
+                    the entire stack running on your server — no data leaves
+                    your infrastructure.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-3">
+                            Email Marketing Engine
+                        </h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Unlimited contacts and lists
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Drag-and-drop email builder
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Campaign scheduling and automation
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Open/click tracking and analytics
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-3">
+                            Multi-Channel Messaging
+                        </h3>
+                        <p class="text-gray-500 text-xs mb-3">
+                            Also available on <a href="https://laravelsocial.com" target="_blank" rel="noopener noreferrer" class="text-brand-primary hover:underline">Laravelsocial.com</a>
+                        </p>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                WhatsApp Business API integration
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Facebook Messenger automation
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Instagram DM automation
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Gmail inbox management
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-3">
+                            AI-Powered Features
+                        </h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Local Ollama AI integration
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                AI subject line generation
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Autonomous lead scoring agents
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Content generation (all on-device)
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-3">
+                            Infrastructure & Security
+                        </h3>
+                        <ul class="space-y-2 text-gray-400 text-sm">
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                GDPR-compliant, full data ownership
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                KumoMTA high-performance SMTP
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Multi-tenant workspaces
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <svg class="w-4 h-4 mt-0.5 text-brand-accent flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                White-label and custom domains
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Requirements -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >1</span
+                    >
+                    System Requirements
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Your server needs to meet these minimum requirements to run
+                    Laravel Mail. Docker handles PHP, Node.js, and all
+                    dependencies inside containers — you don't need to install
+                    them on the host.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {
+                        systemReqs.map((req) => (
+                            <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                                <p class="text-gray-500 text-xs font-bold uppercase tracking-wider mb-2">
+                                    {req.label}
+                                </p>
+                                <p class="text-white font-bold text-lg mb-1">
+                                    {req.value}
+                                </p>
+                                <p class="text-brand-primary text-sm font-semibold mb-2">
+                                    Recommended: {req.recommended}
+                                </p>
+                                <p class="text-gray-500 text-xs">{req.note}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+                <div
+                    class="mt-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl p-6"
+                >
+                    <p class="text-blue-400 font-bold text-sm mb-2">
+                        Cloud Provider Examples
+                    </p>
+                    <p class="text-gray-400 text-sm">
+                        DigitalOcean Basic Droplet ($12/mo, 2 GB RAM), AWS
+                        t3.small ($15/mo, 2 GB RAM), Hetzner CX21 (€4.85/mo, 2
+                        GB RAM), or any VPS with 2+ GB RAM running Ubuntu 22.04+.
+                        For AI features with Ollama, use 4 GB+ RAM.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Supported Operating Systems -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >2</span
+                    >
+                    Supported Operating Systems
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Docker works on all major platforms, but we recommend Linux
+                    for production deployments.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            Ubuntu 22.04 / 24.04 LTS
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Recommended for production. Best Docker support and
+                            stability.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            Debian 12 / Rocky Linux 9
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Enterprise-grade alternatives with long-term
+                            support.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            macOS / Windows (Dev Only)
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Works for local development. Not recommended for
+                            production.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prerequisites -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >3</span
+                    >
+                    Prerequisites — What You Need to Install
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Before installing Laravel Mail, make sure your server has
+                    the following software installed. Docker handles PHP, Node,
+                    MySQL, and Redis inside containers — you only need Docker
+                    and Git on the host.
+                </p>
+                <div class="space-y-4">
+                    <div
+                        class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-4">
+                            Install Docker Engine
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Docker runs all services (PHP, MySQL, Redis, etc.) in
+                            isolated containers. Install the official Docker Engine
+                            and Docker Compose plugin.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto custom-scrollbar"
+                        >
+                            <code>
+                                <span class="text-gray-500"># Ubuntu / Debian</span><br
+                                />
+                                curl -fsSL https://get.docker.com -o get-docker.sh<br
+                                />
+                                sudo sh get-docker.sh<br />
+                                sudo usermod -aG docker $USER<br />
+                                <br />
+                                <span class="text-gray-500"># Verify installation</span><br
+                                />
+                                docker --version<br />
+                                docker compose version
+                            </code>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-4">
+                            Install Git
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Git is used to clone the Laravel Mail repository.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto custom-scrollbar"
+                        >
+                            <code>
+                                <span class="text-gray-500"># Ubuntu / Debian</span><br
+                                />
+                                sudo apt update && sudo apt install git -y<br />
+                                <br />
+                                <span class="text-gray-500"># Verify</span><br
+                                />
+                                git --version
+                            </code>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl"
+                    >
+                        <h3 class="text-white font-bold text-lg mb-4">
+                            Install Make (optional but recommended)
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Make provides simple commands like <code
+                                class="text-brand-primary">make build</code
+                            > and <code class="text-brand-primary">make prod</code
+                            > to manage your installation.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto custom-scrollbar"
+                        >
+                            <code>
+                                <span class="text-gray-500"># Ubuntu / Debian</span><br
+                                />
+                                sudo apt install make -y
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Firewall / Ports -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >4</span
+                    >
+                    Firewall & Port Configuration
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Open the required ports in your server firewall. If you're
+                    using a cloud provider (AWS, GCP, DigitalOcean), also
+                    configure the security group / firewall rules.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold mb-3">
+                            Required Ports
+                        </h3>
+                        <div class="space-y-2">
+                            {
+                                ports.map((p) => (
+                                    <div class="flex items-center gap-3">
+                                        <span
+                                            class={`px-2 py-0.5 rounded text-xs font-mono font-bold ${p.category === "app" ? "bg-blue-500/20 text-blue-400" : p.category === "mail" ? "bg-green-500/20 text-green-400" : "bg-purple-500/20 text-purple-400"}`}
+                                        >
+                                            {p.port}
+                                        </span>
+                                        <span class="text-gray-400 text-sm">
+                                            {p.service}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold mb-3">
+                            UFW Firewall Commands
+                        </h3>
+                        <div
+                            class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 space-y-1"
+                        >
+                            <code>
+                                sudo ufw allow 22/tcp<br />
+                                sudo ufw allow 80/tcp<br />
+                                sudo ufw allow 443/tcp<br />
+                                sudo ufw allow 5210/tcp<br />
+                                sudo ufw allow 25/tcp<br />
+                                sudo ufw allow 2525/tcp<br />
+                                sudo ufw enable
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >5</span
+                    >
+                    Installation Steps
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Follow these steps to get Laravel Mail running. The entire
+                    process takes about 5-10 minutes depending on your server
+                    speed and internet connection.
+                </p>
+                <div
+                    class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl"
+                >
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <span
+                                class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold text-sm"
+                                >1</span
+                            >
+                            <div class="flex-1">
+                                <p class="text-white font-semibold mb-2">
+                                    Clone the repository
+                                </p>
+                                <p class="text-gray-400 text-sm mb-3">
+                                    Download the Laravel Mail source code to your
+                                    server.
+                                </p>
+                                <div
+                                    class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto"
+                                >
+                                    <code
+                                        >git clone https://github.com/izdrail/laravel-mail.git<br
+                                        />cd laravel-mail</code
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span
+                                class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold text-sm"
+                                >2</span
+                            >
+                            <div class="flex-1">
+                                <p class="text-white font-semibold mb-2">
+                                    Configure environment variables
+                                </p>
+                                <p class="text-gray-400 text-sm mb-3">
+                                    Copy the example env file and customize it
+                                    for your setup. At minimum, set your
+                                    <code class="text-brand-primary">APP_URL</code
+                                    >, database credentials, and mail settings.
+                                </p>
+                                <div
+                                    class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto"
+                                >
+                                    <code>cp .env.example .env</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span
+                                class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold text-sm"
+                                >3</span
+                            >
+                            <div class="flex-1">
+                                <p class="text-white font-semibold mb-2">
+                                    Generate application key
+                                </p>
+                                <p class="text-gray-400 text-sm mb-3">
+                                    Laravel needs an encryption key for secure
+                                    sessions and encrypted data.
+                                </p>
+                                <div
+                                    class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto"
+                                >
+                                    <code>make build && make prod</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span
+                                class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold text-sm"
+                                >4</span
+                            >
+                            <div class="flex-1">
+                                <p class="text-white font-semibold mb-2">
+                                    Run database migrations and seed
+                                </p>
+                                <p class="text-gray-400 text-sm mb-3">
+                                    Create all database tables and populate
+                                    default data (admin user, settings, etc.).
+                                </p>
+                                <div
+                                    class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto"
+                                >
+                                    <code>make migrate && make seed</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span
+                                class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-primary/20 flex items-center justify-center text-brand-primary font-bold text-sm"
+                                >5</span
+                            >
+                            <div class="flex-1">
+                                <p class="text-white font-semibold mb-2">
+                                    Access your application
+                                </p>
+                                <p class="text-gray-400 text-sm mb-3">
+                                    Open your browser and navigate to your server
+                                    IP or domain on port 5210.
+                                </p>
+                                <div
+                                    class="bg-black/40 rounded-xl p-4 font-mono text-sm text-green-400 overflow-x-auto"
+                                >
+                                    <code
+                                        >http://your-server-ip:5210</code
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environment Variables -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >6</span
+                    >
+                    Environment Variables Reference
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    These are the key variables in your <code
+                        class="text-brand-primary">.env</code
+                    > file. Most have sensible defaults — you only need to change
+                    a few for production.
+                </p>
+                <div
+                    class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden"
+                >
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr
+                                    class="border-b border-white/10 bg-white/5"
+                                >
+                                    <th
+                                        class="px-6 py-4 text-white font-bold text-sm"
+                                        >Variable</th
+                                    >
+                                    <th
+                                        class="px-6 py-4 text-white font-bold text-sm"
+                                        >Example</th
+                                    >
+                                    <th
+                                        class="px-6 py-4 text-white font-bold text-sm hidden md:table-cell"
+                                        >Description</th
+                                    >
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    envVariables.map((v, i) => (
+                                        <tr
+                                            class={`border-b border-white/5 ${i % 2 === 0 ? "bg-white/[0.02]" : ""}`}
+                                        >
+                                            <td class="px-6 py-3">
+                                                <code class="text-brand-primary font-mono text-sm">
+                                                    {v.variable}
+                                                </code>
+                                            </td>
+                                            <td class="px-6 py-3">
+                                                <code class="text-gray-300 font-mono text-sm">
+                                                    {v.example}
+                                                </code>
+                                            </td>
+                                            <td class="px-6 py-3 text-gray-400 text-sm hidden md:table-cell">
+                                                {v.description}
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docker Compose -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >7</span
+                    >
+                    Docker Compose Configuration
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    This is the full Docker Compose config. It defines 5
+                    services: the Laravel app, MySQL, Redis, Mailpit (email
+                    testing), and phpMyAdmin. All data is persisted via Docker
+                    volumes.
+                </p>
+                <div
+                    class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden shadow-2xl"
+                >
+                    <div
+                        class="flex items-center justify-between px-6 py-4 border-b border-white/10"
+                    >
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span class="text-gray-400 text-sm font-mono"
+                            >docker-compose.yaml</span
+                        >
+                        <button
+                            onclick="navigator.clipboard.writeText(document.getElementById('docker-compose-code').textContent)"
+                            class="text-gray-400 hover:text-white text-sm font-mono transition-colors"
+                        >
+                            Copy
+                        </button>
+                    </div>
+                    <pre
+                        class="p-6 text-sm text-gray-300 overflow-x-auto custom-scrollbar"><code id="docker-compose-code">{dockerCompose}</code></pre>
+                </div>
+            </div>
+
+            <!-- Make Commands -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >8</span
+                    >
+                    Available Make Commands
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Use these shortcuts to manage your installation. All
+                    commands run inside the Docker containers.
+                </p>
+                <div class="space-y-3">
+                    {
+                        makeCommands.map((cmd) => (
+                            <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl px-6 py-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 hover:border-brand-primary/30 transition-colors">
+                                <code class="text-brand-primary font-mono font-bold text-sm whitespace-nowrap">
+                                    {cmd.command}
+                                </code>
+                                <span class="text-gray-400 text-sm">
+                                    {cmd.description}
+                                </span>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Post-Installation -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >9</span
+                    >
+                    Post-Installation Checklist
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    After installation, verify everything is working and
+                    complete these steps before going live.
+                </p>
+                <div
+                    class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-8 shadow-2xl"
+                >
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 mt-0.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <div>
+                                <p class="text-white font-semibold">
+                                    Verify all containers are running
+                                </p>
+                                <p class="text-gray-400 text-sm">
+                                    Run <code class="text-brand-primary">docker ps</code
+                                    > — you should see 5 containers (app, mysql,
+                                    redis, mailpit, phpmyadmin).
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 mt-0.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <div>
+                                <p class="text-white font-semibold">
+                                    Test email sending
+                                </p>
+                                <p class="text-gray-400 text-sm">
+                                    Send a test email from the dashboard. Check
+                                    Mailpit at <code class="text-brand-primary"
+                                        >http://localhost:8025</code
+                                    > to see captured emails.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 mt-0.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <div>
+                                <p class="text-white font-semibold">
+                                    Configure your domain and SSL
+                                </p>
+                                <p class="text-gray-400 text-sm">
+                                    Point your domain DNS to the server IP. Use
+                                    Certbot or a reverse proxy (Nginx/Caddy) for
+                                    HTTPS.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 mt-0.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <div>
+                                <p class="text-white font-semibold">
+                                    Set up DNS for email sending
+                                </p>
+                                <p class="text-gray-400 text-sm">
+                                    Configure SPF, DKIM, and DMARC DNS records
+                                    for your sending domain to improve
+                                    deliverability.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 mt-0.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <div>
+                                <p class="text-white font-semibold">
+                                    Change default passwords
+                                </p>
+                                <p class="text-gray-400 text-sm">
+                                    Update MySQL root password, Redis password,
+                                    and create your admin account with a strong
+                                    password.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <svg class="w-5 h-5 mt-0.5 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            <div>
+                                <p class="text-white font-semibold">
+                                    Set up automated backups
+                                </p>
+                                <p class="text-gray-400 text-sm">
+                                    Configure daily MySQL dumps and Docker volume
+                                    backups to external storage (S3, Backblaze,
+                                    etc.).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="max-w-5xl mx-auto mb-20 animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >10</span
+                    >
+                    Troubleshooting
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Common issues and how to fix them.
+                </p>
+                <div class="space-y-4">
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold mb-2">
+                            Port 25 already in use
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-3">
+                            Another SMTP server (Postfix, Sendmail) is running on
+                            port 25.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-3 font-mono text-xs text-green-400"
+                        >
+                            <code
+                                >sudo systemctl stop postfix<br />sudo systemctl
+                                disable postfix</code
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold mb-2">
+                            Containers keep restarting
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-3">
+                            Check the logs for the specific error.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-3 font-mono text-xs text-green-400"
+                        >
+                            <code>make logs</code>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold mb-2">
+                            Database connection refused
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-3">
+                            MySQL might not be ready yet. Wait a few seconds and
+                            try again, or restart the app container.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-3 font-mono text-xs text-green-400"
+                        >
+                            <code>make restart</code>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6"
+                    >
+                        <h3 class="text-white font-bold mb-2">
+                            Cannot access port 5210 externally
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-3">
+                            Check your cloud provider's firewall / security
+                            group. The port must be open for inbound TCP traffic.
+                        </p>
+                        <div
+                            class="bg-black/40 rounded-xl p-3 font-mono text-xs text-green-400"
+                        >
+                            <code>sudo ufw status</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Overview -->
+            <div class="max-w-5xl mx-auto animate-on-scroll">
+                <h2
+                    class="text-3xl font-black text-white mb-4 flex items-center gap-3"
+                >
+                    <span
+                        class="w-10 h-10 rounded-xl bg-brand-primary/20 flex items-center justify-center text-brand-primary font-black text-lg"
+                        >11</span
+                    >
+                    Services Included
+                </h2>
+                <p class="text-gray-400 mb-8 max-w-3xl">
+                    Laravel Mail runs 6 Docker containers out of the box. Each
+                    handles a specific part of the stack.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-brand-primary/30 transition-colors"
+                    >
+                        <div
+                            class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4"
+                        >
+                            <svg
+                                class="w-6 h-6 text-blue-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            Laravel Mail App
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            The main application running PHP 8.3, Node.js for
+                            asset compilation, and Supervisor for queue workers.
+                            Accessible on port 5210.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-brand-primary/30 transition-colors"
+                    >
+                        <div
+                            class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center mb-4"
+                        >
+                            <svg
+                                class="w-6 h-6 text-red-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            MySQL 8.0
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Primary relational database. Stores contacts,
+                            campaigns, templates, and all application data.
+                            Persistent volume storage.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-brand-primary/30 transition-colors"
+                    >
+                        <div
+                            class="w-12 h-12 rounded-xl bg-red-600/20 flex items-center justify-center mb-4"
+                        >
+                            <svg
+                                class="w-6 h-6 text-red-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            Redis
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            In-memory store for caching, session management, and
+                            queue broker for Horizon (Laravel's queue dashboard).
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-brand-primary/30 transition-colors"
+                    >
+                        <div
+                            class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mb-4"
+                        >
+                            <svg
+                                class="w-6 h-6 text-green-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            Mailpit
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Fake SMTP server for development. Captures all
+                            outgoing emails and displays them in a web UI on port
+                            8025.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-brand-primary/30 transition-colors"
+                    >
+                        <div
+                            class="w-12 h-12 rounded-xl bg-orange-500/20 flex items-center justify-center mb-4"
+                        >
+                            <svg
+                                class="w-6 h-6 text-orange-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5v2m0-2a2 2 0 100 4m0-4a2 2 0 110 4m-6 4v2m0-2a2 2 0 100 4m0-4a2 2 0 110-4"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            phpMyAdmin
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            Web-based database management tool. Access MySQL
+                            directly at port 8086 for debugging and data
+                            management.
+                        </p>
+                    </div>
+                    <div
+                        class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-brand-primary/30 transition-colors"
+                    >
+                        <div
+                            class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center mb-4"
+                        >
+                            <svg
+                                class="w-6 h-6 text-cyan-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold text-lg mb-2">
+                            KumoMTA
+                        </h3>
+                        <p class="text-gray-400 text-sm">
+                            High-performance open-source MTA (Mail Transfer
+                            Agent). Handles outbound email delivery on port 2525
+                            with built-in rate limiting and analytics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+        height: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+</style>

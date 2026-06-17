@@ -94,6 +94,31 @@ const demos = [
     </div>
   </section>
 
+  <!-- Calendly Schedule Demo -->
+  <section class="py-24 bg-brand-bg-darker relative overflow-hidden">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-primary/5 blur-[150px] rounded-full"></div>
+    <div class="container-custom relative z-10">
+      <div class="max-w-4xl mx-auto text-center mb-12 animate-on-scroll">
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+          Book a <span class="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent">Live Demo</span>
+        </h2>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+          Schedule a personalized walkthrough with our team. See Laravel Mail in action and get answers to your specific questions.
+        </p>
+      </div>
+      <div class="max-w-4xl mx-auto animate-on-scroll">
+        <div class="bg-brand-bg-card/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+          <div
+            class="calendly-inline-widget"
+            data-url="https://calendly.com/laravelmail/demo"
+            style="min-height: 700px;"
+          ></div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Community Call to Action -->
   <section class="py-24 bg-brand-bg-darker relative">
     <div class="container-custom">
@@ -105,7 +130,7 @@ const demos = [
             {t('demo.ready_subtitle')}
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <a href={getRelativeLocaleUrl(lang as string, "/buy")} class="btn btn-primary px-10 py-5 text-xl font-bold rounded-2xl w-full sm:w-auto shadow-2xl shadow-brand-primary/20">
+            <a href={getRelativeLocaleUrl(lang as string, "/install")} class="btn btn-primary px-10 py-5 text-xl font-bold rounded-2xl w-full sm:w-auto shadow-2xl shadow-brand-primary/20">
               {t('demo.get_started')}
             </a>
             <a href={getRelativeLocaleUrl(lang as string, "/contact")} class="text-white font-bold hover:text-brand-primary transition-colors flex items-center group">

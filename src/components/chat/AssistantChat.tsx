@@ -87,17 +87,20 @@ function renderMarkdown(text: string) {
     const lang = match[1] || "text";
     const code = match[2].trimEnd();
     parts.push(
-      <div key={match.index} className="relative group my-2">
-        <div className="flex items-center justify-between bg-gray-800 text-gray-300 text-xs px-3 py-1.5 rounded-t-lg">
-          <span>{lang}</span>
+      <div key={match.index} className="relative group my-3 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-600">
+        <div className="flex items-center justify-between bg-gray-800 text-gray-300 text-xs px-4 py-2">
+          <span className="font-mono">{lang}</span>
           <button
-            onClick={() => navigator.clipboard.writeText(code)}
-            className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white"
+            onClick={() => {
+              navigator.clipboard.writeText(code);
+            }}
+            className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white text-[11px]"
           >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
             Copy
           </button>
         </div>
-        <pre className="bg-gray-900 text-gray-100 text-sm p-3 rounded-b-lg overflow-x-auto">
+        <pre className="bg-gray-900 text-gray-100 text-sm p-4 overflow-x-auto font-mono leading-relaxed">
           <code>{code}</code>
         </pre>
       </div>
@@ -106,15 +109,90 @@ function renderMarkdown(text: string) {
   }
 
   if (lastIndex < text.length) {
-    parts.push(renderInlineMarkdown(text.slice(lastIndex)));
+    parts.push(renderBlockMarkdown(text.slice(lastIndex)));
   }
 
   return parts.length > 0 ? parts : renderInlineMarkdown(text);
 }
 
+function renderBlockMarkdown(text: string) {
+  const blocks = text.split(/\n\n+/);
+  return blocks.map((block, i) => {
+    const trimmed = block.trim();
+    if (!trimmed) return null;
+
+    if (/^#{1,6}\s/.test(trimmed)) {
+      const level = trimmed.match(/^(#{1,6})/)?.[1].length ?? 1;
+      const content = trimmed.replace(/^#{1,6}\s+/, "");
+      const sizeClasses: Record<number, string> = {
+        1: "text-xl font-bold mt-4 mb-2",
+        2: "text-lg font-bold mt-4 mb-2",
+        3: "text-base font-semibold mt-3 mb-1",
+        4: "text-sm font-semibold mt-3 mb-1",
+        5: "text-sm font-medium mt-2 mb-1",
+        6: "text-xs font-medium mt-2 mb-1",
+      };
+      const cls = sizeClasses[level] || sizeClasses[3];
+      if (level === 1) return <h1 key={i} className={cls}>{renderInlineMarkdown(content)}</h1>;
+      if (level === 2) return <h2 key={i} className={cls}>{renderInlineMarkdown(content)}</h2>;
+      if (level === 3) return <h3 key={i} className={cls}>{renderInlineMarkdown(content)}</h3>;
+      if (level === 4) return <h4 key={i} className={cls}>{renderInlineMarkdown(content)}</h4>;
+      if (level === 5) return <h5 key={i} className={cls}>{renderInlineMarkdown(content)}</h5>;
+      return <h6 key={i} className={cls}>{renderInlineMarkdown(content)}</h6>;
+    }
+
+    if (/^>\s/.test(trimmed)) {
+      const content = trimmed.replace(/^>\s?/gm, "");
+      return (
+        <blockquote key={i} className="border-l-4 border-purple-400 pl-4 my-2 text-gray-600 dark:text-gray-300 italic">
+          {renderInlineMarkdown(content)}
+        </blockquote>
+      );
+    }
+
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
+      return <hr key={i} className="my-3 border-gray-200 dark:border-gray-600" />;
+    }
+
+    if (/^[-*+]\s/.test(trimmed)) {
+      const items = trimmed.split("\n").filter(l => /^[-*+]\s/.test(l.trim()));
+      return (
+        <ul key={i} className="list-disc list-inside space-y-1 my-2 text-gray-700 dark:text-gray-300">
+          {items.map((item, j) => (
+            <li key={j}>{renderInlineMarkdown(item.replace(/^[-*+]\s+/, ""))}</li>
+          ))}
+        </ul>
+      );
+    }
+
+    if (/^\d+\.\s/.test(trimmed)) {
+      const items = trimmed.split("\n").filter(l => /^\d+\.\s/.test(l.trim()));
+      return (
+        <ol key={i} className="list-decimal list-inside space-y-1 my-2 text-gray-700 dark:text-gray-300">
+          {items.map((item, j) => (
+            <li key={j}>{renderInlineMarkdown(item.replace(/^\d+\.\s+/, ""))}</li>
+          ))}
+        </ol>
+      );
+    }
+
+    if (trimmed.includes("\n")) {
+      return (
+        <div key={i} className="space-y-1 my-1">
+          {trimmed.split("\n").map((line, j) => (
+            <p key={j} className="text-gray-700 dark:text-gray-300">{renderInlineMarkdown(line)}</p>
+          ))}
+        </div>
+      );
+    }
+
+    return <p key={i} className="text-gray-700 dark:text-gray-300 my-1">{renderInlineMarkdown(trimmed)}</p>;
+  });
+}
+
 function renderInlineMarkdown(text: string) {
   const parts: React.ReactNode[] = [];
-  const inlineRegex = /(`[^`]+`|\*\*[^*]+\*\*)/g;
+  const inlineRegex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
   let lastIdx = 0;
   let m;
 
@@ -122,14 +200,23 @@ function renderInlineMarkdown(text: string) {
     if (m.index > lastIdx) {
       parts.push(text.slice(lastIdx, m.index));
     }
-    if (m[0].startsWith("``") || m[0].startsWith("`")) {
+    if (m[0].startsWith("**")) {
+      parts.push(<strong key={m.index} className="font-bold">{m[0].replace(/\*\*/g, "")}</strong>);
+    } else if (m[0].startsWith("`")) {
       parts.push(
-        <code key={m.index} className="bg-gray-200 dark:bg-gray-600 px-1 py-0.5 rounded text-sm font-mono">
+        <code key={m.index} className="bg-gray-200 dark:bg-gray-600 px-1.5 py-0.5 rounded text-sm font-mono text-pink-600 dark:text-pink-400">
           {m[0].replace(/`/g, "")}
         </code>
       );
-    } else if (m[0].startsWith("**")) {
-      parts.push(<strong key={m.index}>{m[0].replace(/\*\*/g, "")}</strong>);
+    } else if (m[0].startsWith("[")) {
+      const linkMatch = m[0].match(/\[([^\]]+)\]\(([^)]+)\)/);
+      if (linkMatch) {
+        parts.push(
+          <a key={m.index} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
+            {linkMatch[1]}
+          </a>
+        );
+      }
     }
     lastIdx = m.index + m[0].length;
   }
@@ -138,7 +225,7 @@ function renderInlineMarkdown(text: string) {
     parts.push(text.slice(lastIdx));
   }
 
-  return parts.length > 0 ? parts : text;
+  return parts.length > 0 ? <>{parts}</> : text;
 }
 
 export default function AssistantChat() {
