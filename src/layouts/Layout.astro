@@ -62,30 +62,34 @@ const {
     <meta name="revisit-after" content="7 days" />
 
     {(() => {
-      // Get current path without locale prefix
-      const pathParts = Astro.url.pathname.split('/').filter(Boolean);
-      const currentLocale = pathParts[0] && ['en', 'es', 'ru', 'zh'].includes(pathParts[0]) ? pathParts[0] : null;
-      const pathWithoutLocale = currentLocale ? '/' + pathParts.slice(1).join('/') : Astro.url.pathname;
-      const canonicalPath = currentLocale ? `/${currentLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}` : pathWithoutLocale;
-      
+      const locales = ['en', 'es', 'ru', 'zh'];
+      const pathname = Astro.url.pathname;
+      const pathParts = pathname.split('/').filter(Boolean);
+      const currentLocale = pathParts[0] && locales.includes(pathParts[0]) ? pathParts[0] : null;
+
+      let pathWithoutLocale;
+      if (currentLocale) {
+        const rest = pathParts.slice(1).join('/');
+        pathWithoutLocale = rest ? '/' + rest + (pathname.endsWith('/') ? '/' : '') : '/';
+      } else {
+        pathWithoutLocale = pathname;
+      }
+
       return (
         <>
-          <link rel="canonical" href={new URL(canonicalPath, Astro.site)} />
-          {['en', 'es', 'ru', 'zh'].map((locale) => {
-            const path = locale === 'en' ? pathWithoutLocale : `/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
+          <link rel="canonical" href={new URL(pathname, Astro.site)} />
+          {locales.map((locale) => {
+            const href = locale === 'en'
+              ? pathWithoutLocale
+              : `/${locale}${pathWithoutLocale}`;
             return (
               <link
                 rel="alternate"
                 hreflang={locale}
-                href={new URL(path, Astro.site)}
+                href={new URL(href, Astro.site)}
               />
             );
           })}
-          <link
-            rel="alternate"
-            hreflang="x-default"
-            href={new URL(pathWithoutLocale, Astro.site)}
-          />
         </>
       );
     })()}
