@@ -389,13 +389,7 @@
         "header": "Laravel Mail – Email for Laravel Developers",
         "content": "**Laravel mail** is the backbone of modern Laravel applications. Whether you need **laravel email** delivery for transactional messages or full **laravel send email** campaigns, our platform integrates natively. Master **laravel mailables**, **laravel notification email**, and **laravel email templates** with a self-hosted approach that keeps your data yours. Built for developers who want **laravel markdown mail** and **laravel mail queue** performance at scale."
     },
-    {
-        "slug": "laravel-email-templates",
-        "title": "Laravel Email Templates: Build Beautiful Mail with Blade & Markdown",
-        "description": "Create responsive Laravel email templates using Blade and Markdown. Drag-and-drop editor included for non-technical team members.",
-        "header": "Laravel Email Templates",
-        "content": "Building **laravel email templates** has never been easier. Use Laravel's native Blade templating engine or **laravel markdown mail** for clean, responsive designs. Our platform extends this with a **laravel drag and drop email editor** so your whole team can create beautiful **laravel email templates** without touching code. Every template works seamlessly with **laravel mail queue** for high-volume sending."
-    },
+
     {
         "slug": "laravel-mail-queue",
         "title": "Laravel Mail Queue: High-Performance Email Sending at Scale",

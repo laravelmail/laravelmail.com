@@ -1,0 +1,363 @@
+---
+const title = "Laravel Email Templates: Design Beautiful Emails with AI | templates.laravelmail.com";
+const description = "Design, customize, and export high-converting email templates with AI assistance. Built for Laravel developers with MJML and Blade support.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Laravel Mail Team" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://laravelmail.com/laravel-email-templates" />
+    <meta property="og:image" content="https://laravelmail.com/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://laravelmail.com/og-image.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+      * { font-family: 'Inter', sans-serif; }
+      .gradient-text { background: linear-gradient(135deg, #0ea5e9, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      .gradient-bg { background: linear-gradient(135deg, #0ea5e9, #8b5cf6); }
+      .gradient-border { border: 1px solid transparent; background-clip: padding-box; position: relative; }
+      .gradient-border::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, #0ea5e9, #8b5cf6); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+      .animate-float { animation: float 6s ease-in-out infinite; }
+      @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+      .animate-glow { animation: glow 3s ease-in-out infinite alternate; }
+      @keyframes glow { from { box-shadow: 0 0 20px rgba(14,165,233,0.3); } to { box-shadow: 0 0 40px rgba(139,92,246,0.5); } }
+      .bg-grid { background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 30px 30px; }
+    </style>
+  </head>
+  <body class="bg-[#0a0e1a] text-white antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0e1a]/80 backdrop-blur-xl border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <a href="https://templates.laravelmail.com" class="flex items-center space-x-2">
+            <span class="text-xl font-black gradient-text">Laravel Mail</span>
+          </a>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="https://templates.laravelmail.com" class="text-sm text-gray-400 hover:text-white transition-colors">Home</a>
+            <a href="https://templates.laravelmail.com/templates" class="text-sm text-gray-400 hover:text-white transition-colors">Templates</a>
+            <a href="https://templates.laravelmail.com/features" class="text-sm text-gray-400 hover:text-white transition-colors">Features</a>
+            <a href="https://templates.laravelmail.com/login" class="text-sm text-gray-400 hover:text-white transition-colors">Login</a>
+            <a href="https://templates.laravelmail.com/signup" class="text-sm font-semibold px-4 py-2 gradient-bg rounded-lg hover:opacity-90 transition-opacity">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-16 overflow-hidden bg-grid">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0ea5e9]/5 via-transparent to-transparent" />
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
+        <div class="text-center max-w-4xl mx-auto">
+          <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#0ea5e9]/10 text-[#0ea5e9] border border-[#0ea5e9]/20 mb-8">
+            NEW: AI Content Assistant v2.0
+          </span>
+          <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6">
+            Design The Future<br />
+            <span class="gradient-text">Of Email.</span>
+          </h1>
+          <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            The ultimate template engine for Laravel developers. Create high-converting, responsive emails with AI-driven copy and seamless MJML exports.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="https://templates.laravelmail.com/templates" class="px-8 py-3 gradient-bg rounded-xl text-white font-bold hover:opacity-90 transition-opacity animate-glow">
+              Browse Templates
+            </a>
+            <a href="https://templates.laravelmail.com/studio" class="px-8 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-bold hover:bg-white/10 transition-colors">
+              Open Studio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-24 bg-[#0d1225]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black mb-4">Powerful by <span class="gradient-text">Design</span></h2>
+          <p class="text-gray-400 text-lg">Everything you need to ship world-class emails in minutes, not hours.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#0ea5e9]/30 transition-all">
+            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">AI Co-pilot</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Let AI refine your copy, suggests subject lines, and generate dynamic variations for A/B testing.</p>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#0ea5e9]/30 transition-all">
+            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">MJML Export</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Full responsiveness out of the box. Export standard MJML code that works across all clients.</p>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#0ea5e9]/30 transition-all">
+            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Visual Studio</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">A designer-friendly drag & drop interface paired with a powerful code editor for developers.</p>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#0ea5e9]/30 transition-all">
+            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Laravel Blade</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Built for Laravel developers. Use Blade components, markdown syntax, and Laravel's templating engine natively.</p>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#0ea5e9]/30 transition-all">
+            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Live Preview</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">See exactly how your email looks in real-time across desktop, mobile, and tablet viewports instantly.</p>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-[#0ea5e9]/30 transition-all">
+            <div class="w-12 h-12 rounded-xl gradient-bg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Team Collaboration</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Share templates with your team, manage permissions, and collaborate on designs in real-time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-24 bg-[#0a0e1a]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black mb-4">How It <span class="gradient-text">Works</span></h2>
+          <p class="text-gray-400 text-lg">Get started in three simple steps</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-2xl font-black mx-auto mb-6">1</div>
+            <h3 class="text-xl font-bold mb-3">Choose a Template</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Browse our library of professionally designed templates or start from scratch with a blank canvas.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-2xl font-black mx-auto mb-6">2</div>
+            <h3 class="text-xl font-bold mb-3">Customize with AI</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Use our AI assistant to generate compelling copy, optimize subject lines, and personalize content.</p>
+          </div>
+          <div class="text-center">
+            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center text-2xl font-black mx-auto mb-6">3</div>
+            <h3 class="text-xl font-bold mb-3">Export & Deploy</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Download as MJML, HTML, or Blade template. Integrate directly into your Laravel application.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-16 bg-[#0d1225] border-y border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-4xl font-black gradient-text mb-1">500+</div>
+            <div class="text-gray-500 text-sm">Email Templates</div>
+          </div>
+          <div>
+            <div class="text-4xl font-black gradient-text mb-1">50K+</div>
+            <div class="text-gray-500 text-sm">Developers</div>
+          </div>
+          <div>
+            <div class="text-4xl font-black gradient-text mb-1">10M+</div>
+            <div class="text-gray-500 text-sm">Emails Sent</div>
+          </div>
+          <div>
+            <div class="text-4xl font-black gradient-text mb-1">99.9%</div>
+            <div class="text-gray-500 text-sm">Uptime</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-[#0a0e1a]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-5xl font-black mb-6">Ready to Transform Your Email Game?</h2>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-10">Join thousands of developers creating beautiful, high-converting emails with the power of AI and Laravel.</p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="https://templates.laravelmail.com/templates" class="px-8 py-3 gradient-bg rounded-xl text-white font-bold hover:opacity-90 transition-opacity">Browse Templates</a>
+          <a href="https://templates.laravelmail.com/signup" class="px-8 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-bold hover:bg-white/10 transition-colors">Create Free Account</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 bg-[#0d1225]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black mb-4">Loved by <span class="gradient-text">Developers</span></h2>
+          <p class="text-gray-400 text-lg">See what our community has to say</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <p class="text-gray-300 mb-6 leading-relaxed text-sm">"Laravel Mail saved us hundreds of hours. The AI assistant is incredibly smart and the MJML export works perfectly with our Laravel codebase."</p>
+            <div>
+              <div class="font-bold">SM</div>
+              <div class="text-gray-500 text-sm">Sarah Mitchell</div>
+              <div class="text-gray-600 text-xs">Senior Developer at TechCorp</div>
+            </div>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <p class="text-gray-300 mb-6 leading-relaxed text-sm">"The template library is massive and the quality is top-notch. We've seen a 40% increase in email open rates since switching."</p>
+            <div>
+              <div class="font-bold">JK</div>
+              <div class="text-gray-500 text-sm">James Kim</div>
+              <div class="text-gray-600 text-xs">CTO at GrowthStartup</div>
+            </div>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <p class="text-gray-300 mb-6 leading-relaxed text-sm">"Best email template tool for Laravel developers. The Blade integration is seamless and the team collaboration features are a game changer."</p>
+            <div>
+              <div class="font-bold">ER</div>
+              <div class="text-gray-500 text-sm">Emma Rodriguez</div>
+              <div class="text-gray-600 text-xs">Lead Engineer at SaaSify</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="py-24 bg-[#0a0e1a]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black mb-4">Simple, Transparent <span class="gradient-text">Pricing</span></h2>
+          <p class="text-gray-400 text-lg">Start free, upgrade when you need more</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <h3 class="text-xl font-bold mb-2">Free</h3>
+            <div class="text-4xl font-black mb-4"><span class="text-2xl text-gray-500">$</span>0</div>
+            <p class="text-gray-500 text-sm mb-6">Forever free</p>
+            <ul class="space-y-3 mb-8 text-sm">
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Access to 500+ templates</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Basic AI assistance</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> HTML export</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Community support</li>
+            </ul>
+            <a href="https://templates.laravelmail.com/signup" class="block w-full text-center px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-bold hover:bg-white/10 transition-colors">Get Started</a>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.04] border-2 border-[#0ea5e9]/40 relative">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold gradient-bg rounded-full">MOST POPULAR</span>
+            <h3 class="text-xl font-bold mb-2">Pro</h3>
+            <div class="text-4xl font-black mb-4"><span class="text-2xl text-gray-500">$</span>19<span class="text-lg text-gray-500">/mo</span></div>
+            <p class="text-gray-500 text-sm mb-6">Per user</p>
+            <ul class="space-y-3 mb-8 text-sm">
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Everything in Free</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Advanced AI features</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> MJML & Blade export</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Team collaboration</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Priority support</li>
+            </ul>
+            <a href="https://templates.laravelmail.com/pricing" class="block w-full text-center px-4 py-3 gradient-bg rounded-xl text-white font-bold hover:opacity-90 transition-opacity">Upgrade to Pro</a>
+          </div>
+          <div class="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+            <div class="text-4xl font-black mb-4 text-gray-400">Custom</div>
+            <p class="text-gray-500 text-sm mb-6">Contact us</p>
+            <ul class="space-y-3 mb-8 text-sm">
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Everything in Pro</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Custom integrations</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Dedicated account manager</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> SLA guarantee</li>
+              <li class="flex items-center text-gray-400"><svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> On-premise deployment</li>
+            </ul>
+            <a href="https://templates.laravelmail.com/contact" class="block w-full text-center px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white font-bold hover:bg-white/10 transition-colors">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 bg-[#0d1225]">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-5xl font-black mb-4">Frequently Asked <span class="gradient-text">Questions</span></h2>
+          <p class="text-gray-400 text-lg">Everything you need to know</p>
+        </div>
+        <div class="space-y-6">
+          <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <summary class="flex items-center justify-between cursor-pointer font-bold text-white">
+              How do I integrate templates with my Laravel app?
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-gray-400 text-sm leading-relaxed">Simply export your template as a Blade file and place it in your <code class="text-[#0ea5e9]">resources/views/emails</code> directory. Use Laravel's Mail facade to send it with <code class="text-[#0ea5e9]">Mail::send(new YourMailable())</code>.</p>
+          </details>
+          <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <summary class="flex items-center justify-between cursor-pointer font-bold text-white">
+              What email clients are supported?
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-gray-400 text-sm leading-relaxed">Our MJML export ensures compatibility with all major email clients including Gmail, Outlook, Apple Mail, Yahoo Mail, and mobile clients. The HTML export also includes inline styles for maximum compatibility.</p>
+          </details>
+          <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <summary class="flex items-center justify-between cursor-pointer font-bold text-white">
+              Can I customize the AI-generated content?
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-gray-400 text-sm leading-relaxed">Absolutely! The AI assistant generates suggestions that you can edit, accept, or reject. You have full control over the final copy and design.</p>
+          </details>
+          <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <summary class="flex items-center justify-between cursor-pointer font-bold text-white">
+              Is there a trial period for the Pro plan?
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-gray-400 text-sm leading-relaxed">Yes! We offer a 14-day free trial for Pro with full access to all features. No credit card required to start.</p>
+          </details>
+          <details class="group p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+            <summary class="flex items-center justify-between cursor-pointer font-bold text-white">
+              Do you offer refunds?
+              <svg class="w-5 h-5 text-gray-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </summary>
+            <p class="mt-4 text-gray-400 text-sm leading-relaxed">We offer a 30-day money-back guarantee for all paid plans. If you're not satisfied, contact us for a full refund.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-[#0a0e1a] border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="flex items-center space-x-2">
+            <span class="text-lg font-black gradient-text">Laravel Mail</span>
+          </div>
+          <div class="flex items-center space-x-6 text-sm">
+            <a href="https://templates.laravelmail.com" class="text-gray-500 hover:text-white transition-colors">Home</a>
+            <a href="https://templates.laravelmail.com/templates" class="text-gray-500 hover:text-white transition-colors">Templates</a>
+            <a href="https://templates.laravelmail.com/features" class="text-gray-500 hover:text-white transition-colors">Features</a>
+            <a href="https://templates.laravelmail.com/login" class="text-gray-500 hover:text-white transition-colors">Login</a>
+            <a href="https://templates.laravelmail.com/signup" class="text-gray-500 hover:text-white transition-colors">Sign Up</a>
+          </div>
+        </div>
+        <div class="mt-8 text-center text-xs text-gray-600">
+          Part of the Laravel Company ecosystem, delivering integrated messaging, e-commerce, and SEO solutions.
+        </div>
+        <div class="mt-2 text-center text-xs text-gray-600">
+          &copy; 2026 Laravel Software. All Rights Reserved.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
