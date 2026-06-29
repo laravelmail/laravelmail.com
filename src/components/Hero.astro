@@ -1,75 +1,525 @@
 ---
-import { Image } from "astro:assets";
-import heroImage from "../assets/dashboard-2.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="pt-20 pb-16 md:pt-28 md:pb-24 relative hero-section" itemscope itemtype="https://schema.org/WebPageElement">
-    <div class="container-custom">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-            <!-- LEFT: Hero Text -->
-            <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    Product Hunt #1 of the Day
-                </div>
-                <h1 class="text-white delay-0 text-4xl md:text-5xl lg:text-6xl font-black leading-tight" itemprop="headline">
-                    {t('hero.pill')}
-                </h1>
-                <p class="delay-1 mt-6 text-xl text-gray-200 max-w-lg" itemprop="description">
-                    {t('hero.subtitle')}
-                </p>
-                <div class="delay-2 mt-8 flex flex-col sm:flex-row items-center gap-3">
-                    <a
-                        href="/install"
-                        class="btn btn-primary w-full sm:w-auto text-center touch-padding"
-                        aria-label="Get started with Laravel Mail"
-                    >{t('hero.buy_button')}</a>
-                    <a
-                        href="#demo-video"
-                        title="Watch Laravel Mail demo video"
-                        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border border-white/20 text-white hover:bg-white/10 font-medium touch-padding min-h-[48px]"
-                    >
-                        <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8 5v14l11-7z"></path>
-                        </svg>
-                        {t('hero.watch_demo')}
-                    </a>
-                </div>
-                <div class="mt-6 flex items-center gap-4 text-sm text-gray-400">
-                    <span class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                        4,600+ users
-                    </span>
-                    <span class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                        No credit card
-                    </span>
-                    <span class="flex items-center gap-1">
-                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                        Cancel anytime
-                    </span>
-                </div>
+<style is:global>
+  .hero-bg {
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(99,40,200,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(30,20,80,0.5) 0%, transparent 60%),
+                #0f172a;
+  }
+
+  #hero-three {
+    position: absolute;
+    top: 0; right: 0;
+    width: 55%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-dash {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 56%;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+  }
+
+  .dash-mockup {
+    background: rgba(15,17,50,0.85);
+    border: 1px solid rgba(124,58,237,0.35);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(124,58,237,0.25), 0 40px 80px rgba(0,0,0,0.6);
+    transform: perspective(1200px) rotateY(-8deg) rotateX(4deg);
+    transform-origin: center center;
+    max-width: 620px;
+    margin-left: auto;
+  }
+
+  .code-block {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #c084fc;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 380px;
+  }
+
+  .code-block .cmd { color: #e2e8f0; }
+  .code-block .cmd .kw { color: #7c3aed; }
+  .copy-btn { background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.4); transition: color 0.2s; padding: 0; }
+  .copy-btn:hover { color: #fff; }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15,17,50,0.85);
+    border: 1.5px solid rgba(124,58,237,0.4);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 30px rgba(124,58,237,0.2);
+  }
+
+  @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  @keyframes scanline { 0%,100% { opacity: 0; } 50% { opacity: 1; } }
+
+  .float-anim { animation: float 6s ease-in-out infinite; }
+  .float-anim-slow { animation: float 8s ease-in-out infinite 1s; }
+  .glow-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124,58,237,0.6), transparent);
+    animation: scanline 4s ease-in-out infinite;
+  }
+
+  @media (max-width: 991px) {
+    #hero-three { display: none; }
+    .hero-dash { display: none; }
+  }
+</style>
+
+<section class="hero-bg relative overflow-hidden" style="min-height:100vh;" itemscope itemtype="https://schema.org/WebPageElement">
+  <canvas id="hero-three"></canvas>
+
+  <div class="hero-content max-w-7xl mx-auto px-8 flex items-center" style="min-height:100vh; padding-top:100px; padding-bottom:80px;">
+    <div class="w-full lg:w-1/2 flex flex-col justify-center" style="max-width:540px;">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        Product Hunt #1 of the Day
+      </div>
+
+      <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6" itemprop="headline">
+        {t('hero.pill')}
+      </h1>
+
+      <p class="text-xl text-gray-200 leading-relaxed max-w-lg mb-8" itemprop="description">
+        {t('hero.subtitle')}
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4 mb-8">
+        <a
+          href="/install"
+          class="btn btn-primary w-full sm:w-auto text-center touch-padding"
+          aria-label="Get started with Laravel Mail"
+        >
+          {t('hero.buy_button')}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-6 mb-8">
+        <span class="flex items-center gap-2 text-sm text-gray-400">
+          <span class="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          4,600+ users
+        </span>
+        <span class="flex items-center gap-2 text-sm text-gray-400">
+          <span class="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          No credit card
+        </span>
+        <span class="flex items-center gap-2 text-sm text-gray-400">
+          <span class="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><svg width="8" height="8" viewBox="0 0 8 8" fill="none"><path d="M1 4l2 2 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+          Cancel anytime
+        </span>
+      </div>
+
+      <div class="code-block">
+        <span class="cmd">
+          <span style="color:#a78bfa">docker-compose</span>
+          <span style="color:#e2e8f0"> up</span>
+        </span>
+        <button class="copy-btn" onclick="copyCmd(this)" title="Copy" aria-label="Copy command">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="5" y="5" width="8" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 11V3.5A1.5 1.5 0 014.5 2H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-dash" style="padding:60px 40px 60px 0;">
+    <div style="position:relative; height:100%; display:flex; align-items:center;">
+      <div class="dash-mockup float-anim">
+        <div class="flex items-center justify-between px-5 py-3" style="background:rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.07);">
+          <div class="flex items-center gap-2 text-sm font-semibold">
+            <div class="w-[22px] h-[22px] rounded-md bg-brand-primary flex items-center justify-center">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="white"><path d="M1 3l5 3 5-3M1 3v6l5 3 5-3V3" stroke="white" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            Laravel Mail
+            <span class="text-[9px] bg-brand-primary px-1.5 py-0.5 rounded font-medium text-white">ALPHA</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/><path d="M11 11l3 3" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1a5 5 0 015 5c0 3-1 4.5-1 4.5H4S3 9 3 6a5 5 0 015-5zM6.5 13.5a1.5 1.5 0 003 0" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-xs" style="color:rgba(255,255,255,0.5);">Laravel User ∨</span>
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="w-[120px] p-4 flex-shrink-0" style="border-right:1px solid rgba(255,255,255,0.06);">
+            <div class="flex flex-col gap-0.5">
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs bg-brand-primary/20 text-brand-primary">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>
+                Dashboard
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-gray-400">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><path d="M1 4l5-3 5 3v5l-5 3-5-3V4z"/></svg>
+                Campaigns
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-gray-400">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><circle cx="6" cy="5" r="3"/><path d="M1 11c0-2.2 2.2-4 5-4s5 1.8 5 4"/></svg>
+                Subscribers
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-gray-400">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><path d="M6 1v5l3 2"/></svg>
+                Automations
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-gray-400">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><rect x="1" y="2" width="10" height="8" rx="1"/><path d="M4 5h4M4 7h2"/></svg>
+                Templates
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-gray-400">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><path d="M2 9V4l4 4 4-4v5"/></svg>
+                Reports
+              </div>
+              <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs text-gray-400">
+                <svg width="12" height="12" fill="none" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1"><circle cx="6" cy="6" r="2"/><path d="M6 1v1M6 10v1M1 6h1M10 6h1"/></svg>
+                Settings
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-1 p-4 overflow-hidden">
+            <p class="text-sm font-semibold mb-3 text-white">Dashboard</p>
+
+            <div class="grid grid-cols-4 gap-2 mb-3.5">
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:8px;">
+                <div class="text-[10px] text-gray-400 mb-0.5">Total Subscribers</div>
+                <div class="text-lg font-bold text-white">12,458</div>
+                <div class="text-[10px] text-green-400 mt-0.5">▲ 12.5%</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:8px;">
+                <div class="text-[10px] text-gray-400 mb-0.5">Emails Sent</div>
+                <div class="text-lg font-bold text-white">189,456</div>
+                <div class="text-[10px] text-green-400 mt-0.5">▲ 8.7%</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:8px;">
+                <div class="text-[10px] text-gray-400 mb-0.5">Open Rate</div>
+                <div class="text-lg font-bold text-white">42.1%</div>
+                <div class="text-[10px] text-green-400 mt-0.5">▲ 5.3%</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:8px;">
+                <div class="text-[10px] text-gray-400 mb-0.5">Click Rate</div>
+                <div class="text-lg font-bold text-white">8.7%</div>
+                <div class="text-[10px] text-green-400 mt-0.5">▲ 2.1%</div>
+              </div>
             </div>
 
-            <!-- RIGHT: Hero Image -->
-            <div class="delay-4">
-                <div title="email marketing and lead management software" class="relative">
-                    <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-primary to-brand-blue rounded-xl opacity-30"></div>
-                    <div class="relative rounded-xl shadow-xl overflow-hidden">
-                         <Image 
-                            src={heroImage} 
-                            alt="Laravel Mail Dashboard" 
-                            loading="eager" 
-                            fetchpriority="high" 
-                            class="w-full max-w-md mx-auto h-auto" 
-                        />
+            <div class="grid grid-cols-[1fr_180px] gap-2.5">
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:10px;">
+                <p class="text-xs font-semibold text-white mb-2">Campaign Performance</p>
+                <svg viewBox="0 0 240 80" style="width:100%; height:70px;">
+                  <defs>
+                    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.4"/>
+                      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 70 C30 70, 40 50, 60 45 S100 30, 130 25 S190 20, 240 15" fill="none" stroke="#7c3aed" stroke-width="2"/>
+                  <path d="M0 70 C30 70, 40 50, 60 45 S100 30, 130 25 S190 20, 240 15 L240 80 L0 80z" fill="url(#areaGrad)"/>
+                  <circle cx="130" cy="25" r="3" fill="#a78bfa"/>
+                  <text x="120" y="18" font-size="8" fill="#a78bfa" text-anchor="middle">2,456</text>
+                  <text x="0" y="79" font-size="7" fill="rgba(255,255,255,0.3)">May 10</text>
+                  <text x="60" y="79" font-size="7" fill="rgba(255,255,255,0.3)">May 15</text>
+                  <text x="120" y="79" font-size="7" fill="rgba(255,255,255,0.3)">May 20</text>
+                  <text x="180" y="79" font-size="7" fill="rgba(255,255,255,0.3)">May 25</text>
+                </svg>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:10px;">
+                <p class="text-xs font-semibold text-white mb-2">Top Campaigns</p>
+                <div class="flex flex-col gap-2">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-4 h-4 rounded bg-brand-primary flex items-center justify-center"><svg width="8" height="8" fill="white" viewBox="0 0 8 8"><path d="M1 2l3 2 3-2M1 2v3l3 2 3-2V2"/></svg></div>
+                      <span class="text-[10px] text-gray-400">Product Launch</span>
                     </div>
+                    <span class="text-[10px] font-semibold text-white">9,124</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-4 h-4 rounded bg-blue-600"></div>
+                      <span class="text-[10px] text-gray-400">Newsletter May</span>
+                    </div>
+                    <span class="text-[10px] font-semibold text-white">6,253</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1.5">
+                      <div class="w-4 h-4 rounded bg-emerald-700"></div>
+                      <span class="text-[10px] text-gray-400">Re-engagement</span>
+                    </div>
+                    <span class="text-[10px] font-semibold text-white">4,982</span>
+                  </div>
+                  <a href="#" class="text-[10px] text-brand-primary text-center block mt-1 no-underline">View all</a>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+
+      <div class="orb" style="width:60px; height:60px; top:15%; right:0; animation: float 5s ease-in-out infinite;">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M2 7l11 7 11-7M2 7v12l11 7 11-7V7" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="orb" style="width:56px; height:56px; bottom:20%; right:12px; animation: float 7s ease-in-out infinite 0.5s;">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="4" stroke="#c084fc" stroke-width="1.5"/><path d="M3 19c0-3.3 3.6-6 8-6s8 2.7 8 6" stroke="#c084fc" stroke-width="1.5" stroke-linecap="round"/><circle cx="18" cy="9" r="2.5" fill="#22d3ee" opacity="0.8"/><circle cx="4" cy="9" r="2.5" fill="#22d3ee" opacity="0.8"/></svg>
+      </div>
+      <div class="orb" style="width:50px; height:50px; top:55%; left:-10px; animation: float 6s ease-in-out infinite 1s;">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="5" width="6" height="8" rx="1" stroke="#22d3ee" stroke-width="1.5"/><path d="M13 8h6M13 12h4" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="orb" style="width:54px; height:54px; bottom:35%; left:-20px; animation: float 5.5s ease-in-out infinite 0.8s;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="#7c3aed" opacity="0.7"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="#7c3aed" opacity="0.5"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="#7c3aed" opacity="0.5"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="#7c3aed"/></svg>
+      </div>
     </div>
+  </div>
+
+  <div class="glow-line" style="bottom:0; left:0; right:0;"></div>
 </section>
+
+<script is:inline>
+(function() {
+  var script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  script.onload = function() {
+    var canvas = document.getElementById('hero-three');
+    if (!canvas) return;
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+    camera.position.set(0, 0, 5);
+
+    function resize() {
+      var w = canvas.clientWidth;
+      var h = canvas.clientHeight;
+      if (w === 0 || h === 0) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var ambient = new THREE.AmbientLight(0x7c3aed, 0.6);
+    scene.add(ambient);
+    var dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    dirLight.position.set(3, 5, 5);
+    scene.add(dirLight);
+    var purpleLight = new THREE.PointLight(0x7c3aed, 3, 12);
+    purpleLight.position.set(0, 0, 3);
+    scene.add(purpleLight);
+    var cyanLight = new THREE.PointLight(0x22d3ee, 1.5, 10);
+    cyanLight.position.set(-2, 2, 2);
+    scene.add(cyanLight);
+
+    var envelopeMat = new THREE.MeshPhysicalMaterial({
+      color: 0x0d1030,
+      emissive: 0x7c3aed,
+      emissiveIntensity: 0.2,
+      roughness: 0.15,
+      metalness: 0.8,
+      transparent: true,
+      opacity: 0.92,
+    });
+    var edgeMat = new THREE.MeshBasicMaterial({ color: 0xa78bfa });
+    var flapMat = new THREE.MeshPhysicalMaterial({
+      color: 0x1a1e55,
+      emissive: 0x7c3aed,
+      emissiveIntensity: 0.15,
+      roughness: 0.2,
+      metalness: 0.7,
+      side: THREE.DoubleSide,
+    });
+
+    var envelopeGroup = new THREE.Group();
+    scene.add(envelopeGroup);
+
+    var bodyGeo = new THREE.BoxGeometry(2.8, 1.9, 0.08);
+    var body = new THREE.Mesh(bodyGeo, envelopeMat);
+    envelopeGroup.add(body);
+
+    var edgesGeo = new THREE.EdgesGeometry(bodyGeo);
+    var edgeLines = new THREE.LineSegments(edgesGeo, new THREE.LineBasicMaterial({ color: 0xa78bfa, linewidth: 1 }));
+    envelopeGroup.add(edgeLines);
+
+    var flapShape = new THREE.Shape();
+    flapShape.moveTo(-1.4, 0);
+    flapShape.lineTo(0, 1.1);
+    flapShape.lineTo(1.4, 0);
+    flapShape.lineTo(-1.4, 0);
+    var flapGeo = new THREE.ShapeGeometry(flapShape);
+    var flap = new THREE.Mesh(flapGeo, flapMat);
+    flap.position.set(0, 0.95, 0.042);
+    envelopeGroup.add(flap);
+
+    var flapPts = [
+      new THREE.Vector3(-1.4, 0.95, 0.043),
+      new THREE.Vector3(0, 2.05, 0.043),
+      new THREE.Vector3(1.4, 0.95, 0.043),
+      new THREE.Vector3(-1.4, 0.95, 0.043),
+    ];
+    var flapEdgeGeo = new THREE.BufferGeometry().setFromPoints(flapPts);
+    var flapEdge = new THREE.Line(flapEdgeGeo, new THREE.LineBasicMaterial({ color: 0xa78bfa }));
+    envelopeGroup.add(flapEdge);
+
+    var vLeft = [new THREE.Vector3(-1.4, -0.95, 0.043), new THREE.Vector3(0, 0.1, 0.043)];
+    var vRight = [new THREE.Vector3(1.4, -0.95, 0.043), new THREE.Vector3(0, 0.1, 0.043)];
+    envelopeGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(vLeft), new THREE.LineBasicMaterial({ color: 0x6d28d9, opacity: 0.5, transparent: true })));
+    envelopeGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(vRight), new THREE.LineBasicMaterial({ color: 0x6d28d9, opacity: 0.5, transparent: true })));
+
+    var ringGeo = new THREE.RingGeometry(1.4, 1.8, 64);
+    var ringMat = new THREE.MeshBasicMaterial({ color: 0x7c3aed, transparent: true, opacity: 0.18, side: THREE.DoubleSide });
+    var ring = new THREE.Mesh(ringGeo, ringMat);
+    ring.rotation.x = -Math.PI / 2;
+    ring.position.set(0, -2, 0);
+    scene.add(ring);
+
+    var ring2Geo = new THREE.RingGeometry(2.0, 2.2, 64);
+    var ring2 = new THREE.Mesh(ring2Geo, new THREE.MeshBasicMaterial({ color: 0x7c3aed, transparent: true, opacity: 0.08, side: THREE.DoubleSide }));
+    ring2.rotation.x = -Math.PI / 2;
+    ring2.position.set(0, -2.05, 0);
+    scene.add(ring2);
+
+    var arrowGeo = new THREE.ConeGeometry(0.06, 0.25, 3);
+    var arrowMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    var arrow = new THREE.Mesh(arrowGeo, arrowMat);
+    arrow.rotation.z = -Math.PI / 4;
+    arrow.position.set(0.9, 1.1, 0.1);
+    envelopeGroup.add(arrow);
+
+    var linesMat = new THREE.LineBasicMaterial({ color: 0x7c3aed, transparent: true, opacity: 0.25 });
+    for (var i = 0; i < 5; i++) {
+      var pts = [];
+      var y = -0.8 + i * 0.35;
+      pts.push(new THREE.Vector3(-2.5, y, -0.1));
+      pts.push(new THREE.Vector3(2.5, y, -0.1));
+      var geo = new THREE.BufferGeometry().setFromPoints(pts);
+      scene.add(new THREE.Line(geo, linesMat));
+    }
+
+    // Mouse rotation
+    var isDragging = false;
+    var prevMouse = { x: 0, y: 0 };
+    var rotVel = { x: 0, y: 0 };
+
+    canvas.style.pointerEvents = 'auto';
+    canvas.style.cursor = 'grab';
+
+    canvas.addEventListener('mousedown', function(e) {
+      isDragging = true;
+      prevMouse.x = e.clientX;
+      prevMouse.y = e.clientY;
+      canvas.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      var dx = e.clientX - prevMouse.x;
+      var dy = e.clientY - prevMouse.y;
+      envelopeGroup.rotation.y += dx * 0.01;
+      envelopeGroup.rotation.x += dy * 0.005;
+      envelopeGroup.rotation.x = Math.max(-0.5, Math.min(0.5, envelopeGroup.rotation.x));
+      rotVel.x = dy * 0.005;
+      rotVel.y = dx * 0.01;
+      prevMouse.x = e.clientX;
+      prevMouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseup', function() {
+      isDragging = false;
+      canvas.style.cursor = 'grab';
+    });
+
+    // Touch support
+    canvas.addEventListener('touchstart', function(e) {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        prevMouse.x = e.touches[0].clientX;
+        prevMouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    canvas.addEventListener('touchmove', function(e) {
+      if (!isDragging || e.touches.length !== 1) return;
+      var dx = e.touches[0].clientX - prevMouse.x;
+      var dy = e.touches[0].clientY - prevMouse.y;
+      envelopeGroup.rotation.y += dx * 0.01;
+      envelopeGroup.rotation.x += dy * 0.005;
+      envelopeGroup.rotation.x = Math.max(-0.5, Math.min(0.5, envelopeGroup.rotation.x));
+      prevMouse.x = e.touches[0].clientX;
+      prevMouse.y = e.touches[0].clientY;
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', function() {
+      isDragging = false;
+    }, { passive: true });
+
+    var t = 0;
+    var clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      var dt = clock.getDelta();
+      t += dt;
+
+      if (!isDragging) {
+        envelopeGroup.rotation.y += rotVel.y * 0.95;
+        envelopeGroup.rotation.x += rotVel.x * 0.95;
+        rotVel.x *= 0.95;
+        rotVel.y *= 0.95;
+
+        envelopeGroup.position.y = Math.sin(t * 0.7) * 0.15;
+        envelopeGroup.position.x = -0.2 + Math.sin(t * 0.4) * 0.05;
+      }
+
+      purpleLight.intensity = 2.5 + Math.sin(t * 1.5) * 0.8;
+      ring.material.opacity = 0.12 + Math.sin(t * 1.2) * 0.06;
+      ring2.material.opacity = 0.06 + Math.sin(t * 0.8 + 1) * 0.03;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    var ro = new ResizeObserver(function() { resize(); });
+    ro.observe(canvas);
+  };
+  document.head.appendChild(script);
+})();
+
+function copyCmd(btn) {
+  navigator.clipboard.writeText('docker-compose up').then(function() {
+    var orig = btn.innerHTML;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    setTimeout(function() { btn.innerHTML = orig; }, 1800);
+  });
+}
+</script>
