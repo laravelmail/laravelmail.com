@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly PUBLIC_VALIDATION_API_BASE_URL?: string;
+  readonly PUBLIC_TEMPLATES_API_BASE_URL?: string;
 }
 
 interface ImportMeta {

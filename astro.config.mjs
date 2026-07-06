@@ -9,6 +9,14 @@ export default defineConfig({
     site: 'https://laravelmail.com',
     output: 'static',
     prefetch: true,
+    vite: {
+        server: {
+            proxy: {
+                '/api': 'https://templates.laravelmail.com',
+                '/static': 'https://templates.laravelmail.com',
+            },
+        },
+    },
     i18n: {
         defaultLocale: 'en',
         locales: ['en', 'es', 'zh', 'ru'],

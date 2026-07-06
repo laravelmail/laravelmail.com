@@ -1,6 +1,5 @@
-"use client";
-
-import { useState, useLayoutEffect, useRef, useCallback, useEffect } from "react";
+import { useState, useLayoutEffect, useRef, useCallback, useEffect } from "preact/hooks";
+import type { ComponentChild } from "preact";
 
 interface OllamaModel {
   name: string;
@@ -75,7 +74,7 @@ function estimateTokens(text: string) {
 }
 
 function renderMarkdown(text: string) {
-  const parts: React.ReactNode[] = [];
+  const parts: ComponentChild[] = [];
   const codeBlockRegex = /```(\w*)\n([\s\S]*?)```/g;
   let lastIndex = 0;
   let match;
@@ -191,7 +190,7 @@ function renderBlockMarkdown(text: string) {
 }
 
 function renderInlineMarkdown(text: string) {
-  const parts: React.ReactNode[] = [];
+  const parts: ComponentChild[] = [];
   const inlineRegex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
   let lastIdx = 0;
   let m;
