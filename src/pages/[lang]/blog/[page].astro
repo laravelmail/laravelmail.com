@@ -1,0 +1,135 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from "../../../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { Image } from "astro:assets";
+import Logo from "../../../assets/logo.svg";
+
+import { languages } from "../../../i18n/ui";
+
+export async function getStaticPaths({ paginate }) {
+  const posts = await getCollection('blog');
+  const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+  const langs = Object.keys(languages).filter(lang => lang !== 'en');
+
+  return langs.flatMap(lang =>
+    paginate(sortedPosts, {
+      pageSize: 12,
+      params: { lang },
+    })
+  );
+}
+
+const { page } = Astro.props;
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
+
+const title = t('nav.blog') + " | Laravel Mail";
+const descriptions: Record<string, string> = {
+  es: "Domina el email marketing, la entregabilidad y la automatización. Guías expertas e información técnica.",
+  zh: "掌握邮件营销、送达率和自动化。专家指南和技术见解。",
+  ru: "Освойте email-маркетинг, доставляемость и автоматизацию. Экспертные материалы и технические идеи.",
+};
+const description = descriptions[lang as string] || "Master email marketing, deliverability, and automation. Expert guides and technical insights.";
+
+const paginationPages: (number | 'dots')[] = [];
+const total = page.lastPage;
+const current = page.currentPage;
+if (total <= 5) {
+    for (let i = 1; i <= total; i++) paginationPages.push(i);
+} else {
+    paginationPages.push(1);
+    if (current > 3) paginationPages.push('dots');
+    const start = Math.max(2, current - 1);
+    const end = Math.min(total - 1, current + 1);
+    for (let i = start; i <= end; i++) paginationPages.push(i);
+    if (current < total - 2) paginationPages.push('dots');
+    paginationPages.push(total);
+}
+---
+
+<Layout title={title} description={description}>
+    <section class="pt-32 pb-20 bg-brand-bg relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0 bg-repeat bg-[url('/grid-pattern.svg')]"></div>
+        </div>
+        <div class="container-custom relative">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-black text-white mb-6">{t('nav.blog')} <span class="gradient-text">Insights</span></h1>
+                <p class="text-xl text-gray-400">
+                    Master deliverability, automation, and growth with our technical guides.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {page.data.map((post) => (
+                    <article class="flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-brand-primary/50 transition-all duration-300 group">
+                        <a href={getRelativeLocaleUrl(lang as string, `/blog/${post.id.replace('.json', '')}`)} class="block overflow-hidden aspect-video relative bg-brand-bg-darker flex items-center justify-center p-12">
+                            <Image 
+                                src={Logo} 
+                                alt={post.data.title}
+                                class="w-full h-auto max-h-[80%] object-contain transition-transform duration-500 group-hover:scale-110"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        </a>
+                        <div class="p-6 flex flex-grow flex-col">
+                            <div class="flex items-center gap-4 mb-4">
+                                {post.data.tags.slice(0, 1).map(tag => (
+                                    <span class="text-xs font-bold uppercase tracking-wider text-brand-primary px-2 py-1 bg-brand-primary/10 rounded">
+                                        {tag}
+                                    </span>
+                                ))}
+                                <span class="text-xs text-gray-500">{post.data.date}</span>
+                            </div>
+                            <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-brand-primary transition-colors">
+                                <a href={getRelativeLocaleUrl(lang as string, `/blog/${post.id.replace('.json', '')}`)}>{post.data.title}</a>
+                            </h2>
+                            <p class="text-gray-400 text-sm mb-6 flex-grow line-clamp-3">
+                                {post.data.excerpt}
+                            </p>
+                            <div class="flex items-center gap-3 pt-6 border-t border-white/10">
+                                <div class="w-8 h-8 rounded-full bg-brand-primary/20 flex items-center justify-center p-1.5">
+                                    <Image src={Logo} alt={post.data.author} class="w-full h-full object-contain" />
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">{post.data.author}</p>
+                                    <p class="text-xs text-gray-500">{post.data.authorRole}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </div>
+
+            {page.lastPage > 1 && (
+                <nav class="pagination flex items-center justify-center gap-2 mt-16" aria-label="Blog pagination">
+                    {page.url.prev && (
+                        <a href={page.url.prev} class="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-white transition-colors">
+                            ← Previous
+                        </a>
+                    )}
+                    {paginationPages.map((p) =>
+                        p === 'dots'
+                            ? <span class="min-w-[40px] h-10 px-3 flex items-center justify-center text-sm text-gray-500">...</span>
+                            : <a
+                                href={getRelativeLocaleUrl(lang as string, `/blog/${p}`)}
+                                class:list={[
+                                    "min-w-[40px] h-10 px-3 flex items-center justify-center text-sm font-medium rounded-lg transition-colors",
+                                    p === page.currentPage
+                                        ? "bg-brand-primary text-white"
+                                        : "text-gray-400 bg-white/5 border border-white/10 hover:bg-white/10 hover:text-white"
+                                ]}
+                              >{p}</a>
+                    )}
+                    {page.url.next && (
+                        <a href={page.url.next} class="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-white transition-colors">
+                            Next →
+                        </a>
+                    )}
+                </nav>
+            )}
+        </div>
+    </section>
+</Layout>

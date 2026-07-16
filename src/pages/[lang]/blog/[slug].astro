@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from "../../../layouts/Layout.astro";
 import CTASection from "../../../components/CTASection.astro";
 import { injectSeoLinks } from "../../../scripts/seo-utils";
+import { marked } from 'marked';
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 import { languages } from "../../../i18n/ui";
@@ -30,7 +31,7 @@ const t = useTranslations(lang as any);
 let { title, date, author, authorRole, authorAvatar, excerpt, content, image, tags } = post.data;
 
 // Inject internal SEO links
-content = injectSeoLinks(content);
+content = injectSeoLinks(marked.parse(content) as string);
 
 const blogPostSchema = {
     "@context": "https://schema.org",
@@ -81,7 +82,7 @@ const blogPostSchema = {
                     {title}
                 </h1>
                 <div class="flex items-center justify-center gap-4">
-                    <img src={authorAvatar} alt={author} class="w-12 h-12 rounded-full border-2 border-brand-primary" />
+                    <img src="https://avatars.githubusercontent.com/u/2276408?v=4" alt={author} class="w-12 h-12 rounded-full border-2 border-brand-primary" />
                     <div class="text-left">
                         <p class="text-white font-bold">{author}</p>
                         <p class="text-gray-400 text-sm">{authorRole}</p>
@@ -91,7 +92,7 @@ const blogPostSchema = {
 
             <!-- Featured Image -->
             <div class="max-w-5xl mx-auto mb-16 rounded-3xl overflow-hidden shadow-2xl shadow-brand-primary/20">
-                <img src={image} alt={title} class="w-full h-auto" />
+                <img src="/logo.svg" alt={title} class="w-full h-auto" />
             </div>
 
             <!-- Content -->

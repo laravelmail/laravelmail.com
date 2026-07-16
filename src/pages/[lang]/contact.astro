@@ -177,6 +177,51 @@ const t = useTranslations(lang as any);
         </div>
     </section>
 
+    <section class="py-16 md:py-24 bg-white/5">
+        <div class="container-custom">
+            <div class="text-center max-w-3xl mx-auto animate-on-scroll animated">
+                <h2 class="text-3xl md:text-4xl font-bold leading-tight text-white">
+                    Send Us a <span class="gradient-text bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">Message</span>
+                </h2>
+                <p class="mt-4 text-lg text-gray-400">
+                    Prefer to write instead? Fill out the form below and we'll get back to you within 24 hours.
+                </p>
+            </div>
+
+            <div class="mt-12 max-w-2xl mx-auto animate-on-scroll animated">
+                <form id="contact-form" class="rounded-xl bg-white/10 p-8 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <input type="text" name="name" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-colors" id="name" placeholder="Your name" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div>
+                            <input type="email" name="email" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-colors" id="email" placeholder="Email" required>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <input type="text" name="phone" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-colors" id="phone" placeholder="Phone (optional)">
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div>
+                        <textarea name="message" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-colors resize-none" id="message" rows="4" placeholder="Your message..." required></textarea>
+                        <div class="help-block with-errors"></div>
+                    </div>
+
+                    <div>
+                        <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
+                            Send Message
+                        </button>
+                        <div id="form-status" class="mt-3 text-center text-sm"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <script is:inline>
         (function() {
             const email = 'info@laravelmail.com';
@@ -184,6 +229,47 @@ const t = useTranslations(lang as any);
             if (footerEmail) {
                 footerEmail.href = 'mailto:' + email;
                 footerEmail.textContent = email;
+            }
+
+            const form = document.getElementById('contact-form');
+            const statusDiv = document.getElementById('form-status');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+
+                    statusDiv.textContent = 'Sending...';
+                    statusDiv.className = 'mt-3 text-center text-sm text-gray-400';
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Sending...';
+
+                    try {
+                        const res = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (res.ok) {
+                            statusDiv.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+                            statusDiv.className = 'mt-3 text-center text-sm text-green-400';
+                            form.reset();
+                        } else {
+                            const error = await res.text();
+                            statusDiv.textContent = 'Error: ' + error;
+                            statusDiv.className = 'mt-3 text-center text-sm text-red-400';
+                        }
+                    } catch (err) {
+                        statusDiv.textContent = 'Connection error. Please try again.';
+                        statusDiv.className = 'mt-3 text-center text-sm text-red-400';
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send Message';
+                    }
+                });
             }
         })();
     </script>

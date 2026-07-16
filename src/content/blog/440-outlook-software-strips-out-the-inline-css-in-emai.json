@@ -1,0 +1,11 @@
+{
+  "title": "Outlook software strips out the inline CSS in emails",
+  "date": "2026-07-15",
+  "author": "Stefan Bogdanescu",
+  "authorRole": "Founder & Senior Architect",
+  "authorAvatar": "/avatar-stefan.jpg",
+  "excerpt": "# Outlook Software Strips Out Inline CSS in Emails: A Developer's Guide to Email Compatibility As developers crafting HTML emails, one of the most frustrating...",
+  "image": null,
+  "tags": [],
+  "content": "# Outlook Software Strips Out Inline CSS in Emails: A Developer's Guide to Email Compatibility\n\nAs developers crafting HTML emails, one of the most frustrating challenges is achieving cross-client consistency. We design layouts that look perfect in Gmail, Apple Mail, and modern web browsers, but often encounter a hostile environment when deploying to legacy clients like Microsoft Outlook. The specific issue you’ve encountered—where inline CSS properties, especially those controlling dimensions on images, vanish in Outlook—is a classic symptom of these rendering engine differences.\n\nThis post will dive deep into why this happens, address the historical context, and provide practical, modern solutions for building robust"
+}
