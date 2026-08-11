@@ -229,9 +229,9 @@ function renderInlineMarkdown(text: string) {
 
 export default function AssistantChat() {
   const [models] = useState<OllamaModel[]>([
-    { name: "hf.co/laravelcompany/laravelmail:latest", modified_at: new Date().toISOString(), size: 0 },
+    { name: "hf.co/laravelcompany/laravelmail:Q4_K_M", modified_at: new Date().toISOString(), size: 0 },
   ]);
-  const [selectedModel] = useState<string>("hf.co/laravelcompany/laravelmail:latest");
+  const [selectedModel] = useState<string>("hf.co/laravelcompany/laravelmail:Q4_K_M");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
