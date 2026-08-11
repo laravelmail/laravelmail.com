@@ -3,7 +3,6 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 import preact from '@astrojs/preact';
-import react from '@astrojs/react';
 
 export default defineConfig({
     site: 'https://laravelmail.com',
@@ -31,9 +30,6 @@ export default defineConfig({
         '/ru/email-automation': '/ru/email-marketing',
     },
     integrations: [
-        react({
-            include: ['**/chat/**/*', '**/components/chat/**/*'],
-        }),
         tailwind(),
         sitemap({
             i18n: {
@@ -46,9 +42,7 @@ export default defineConfig({
                 },
             },
         }),
-        preact({
-            exclude: ['**/chat/**/*', '**/components/chat/**/*'],
-        }),
+        preact(),
         icon({
             include: {
                 ph: [
