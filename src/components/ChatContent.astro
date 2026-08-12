@@ -1,0 +1,317 @@
+---
+import AssistantChat from "../components/chat/AssistantChat";
+
+const faqs = [
+  {
+    question: "What is a free AI email generator?",
+    answer:
+      "A free AI email generator is an online tool that uses a large language model (LLM) to write professional email drafts for you. You simply describe the email you need, and the AI email writer produces a complete, context-aware message in seconds — with no login or payment required.",
+  },
+  {
+    question: "Is the AI email generator really free?",
+    answer:
+      "Yes. Our free AI email writer lets you generate professional emails without entering a credit card or creating an account. Just describe the email you want and our AI email generator will produce a polished draft for you.",
+  },
+  {
+    question: "Do I need to log in to use the AI email writer?",
+    answer:
+      "No. You can start writing emails with our free AI email generator immediately — no login, no sign-up, and no installation required. Type your instructions and generate your email right in your browser.",
+  },
+  {
+    question: "What types of emails can the AI email generator write?",
+    answer:
+      "Our AI email writer can draft almost any professional message: business emails, sales follow-ups, cold outreach, meeting requests, customer support replies, invoices, welcome emails, and promotional campaigns.",
+  },
+  {
+    question: "How do I write a professional email with AI?",
+    answer:
+      "Describe the recipient, the purpose of your message, and the tone you want in the text box, then generate. The AI email generator uses your instructions to produce a polished, ready-to-send draft you can copy, edit, and send.",
+  },
+  {
+    question: "Can I use the free AI email generator for business communication?",
+    answer:
+      "Absolutely. The AI email generator is ideal for sales, follow-ups, and general business communication. It produces grammatically correct, well-structured emails with a professional tone every time.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://laravelmail.com/chat#application",
+  name: "Laravel Mail AI Email Generator",
+  description:
+    "Free AI email generator to craft professional emails. Write professional, context-aware emails instantly with no login and no credit card required.",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: "https://laravelmail.com/chat",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  },
+  screenshot: "https://laravelmail.com/og-image.png",
+  publisher: {
+    "@type": "Organization",
+    name: "Laravel Mail Team",
+    logo: "https://laravelmail.com/logo.svg",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Home",
+      item: "https://laravelmail.com/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Email Marketing",
+      item: "https://laravelmail.com/email-marketing",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Free AI Email Generator",
+      item: "https://laravelmail.com/chat",
+    },
+  ],
+};
+
+const relatedTools = [
+  {
+    title: "Email Templates Generator",
+    href: "/templates",
+    description:
+      "Browse hundreds of professionally designed email templates for campaigns, launches, and customer engagement.",
+  },
+  {
+    title: "Email Validator & Checker",
+    href: "/validation",
+    description:
+      "Verify and clean your email lists to improve deliverability and reduce bounce rates.",
+  },
+  {
+    title: "Email Subject Line Strategies",
+    href: "/email-subject-line-strategies",
+    description:
+      "Boost your open rates with data-driven subject line strategies and proven formulas.",
+  },
+  {
+    title: "AI Email Marketing Platform",
+    href: "/email-marketing",
+    description:
+      "Scale your email marketing with automation, analytics, and deliverability tooling.",
+  },
+];
+---
+
+<!-- Structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<!-- Hero -->
+<section class="pt-16 pb-8 md:pt-24 md:pb-12 bg-brand-bg relative overflow-hidden">
+  <div class="container-custom relative">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
+        Free AI Email Generator
+      </div>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-white mb-6">
+        Free <span class="gradient-text">AI Email Generator</span>
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-4">
+        Generate professional, context-aware emails instantly. No credit card required.
+      </p>
+      <p class="text-sm text-gray-400">
+        Perfect for sales, follow-ups, cold outreach, and everyday business communication.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- AI Email Writer Tool -->
+<section class="py-6 md:py-10 bg-brand-bg">
+  <div class="container-custom">
+    <AssistantChat client:only="preact" />
+  </div>
+</section>
+
+<!-- Content Layer -->
+<section class="py-16 md:py-24 bg-brand-bg/50">
+  <div class="container-custom">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        The Fastest Way to Generate Email with AI
+      </h2>
+      <div class="text-gray-300 leading-relaxed space-y-4 mb-12">
+        <p>
+          The free <strong>AI email writer</strong> by Laravel Mail makes it easy to generate fine-tuned
+          emails, thanks to GPT models. Using a large language model (LLM), it will generate email content
+          based on the context and intent expressed in your instructions. Simply describe who you are
+          writing to and what you need, and the <strong>AI email generator</strong> produces a professional,
+          ready-to-send draft in seconds.
+        </p>
+        <p>
+          Whether you need a sales follow-up, a meeting request, a cold outreach message, or a customer
+          support reply, the AI email writer adapts to your tone, your audience, and your goal — so you can
+          write emails with AI and get better responses without staring at a blank page.
+        </p>
+      </div>
+
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+        Why Use a Free AI Email Generator?
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+          <h3 class="text-xl font-bold text-white mb-3">Saves Time</h3>
+          <p class="text-gray-400">
+            Write professional emails in seconds instead of spending 20 minutes on every message.
+          </p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+          <h3 class="text-xl font-bold text-white mb-3">Overcomes Writer's Block</h3>
+          <p class="text-gray-400">
+            Get a strong first draft instantly and refine it until it sounds exactly like you.
+          </p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+          <h3 class="text-xl font-bold text-white mb-3">Professional Tone</h3>
+          <p class="text-gray-400">
+            Never worry about typos, awkward phrasing, or the wrong level of formality again.
+          </p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300">
+          <h3 class="text-xl font-bold text-white mb-3">Better Responses</h3>
+          <p class="text-gray-400">
+            Clear, well-structured emails get more replies, more meetings, and more conversions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-16 md:py-24 bg-brand-bg-darker/40">
+  <div class="container-custom">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-center">
+        Questions &amp; answers about AI Email Writer
+      </h2>
+      <p class="text-center text-gray-400 mb-12">
+        Everything you need to know about our free AI email generator.
+      </p>
+      <div>
+        {faqs.map((faq) => (
+          <div class="mb-6 bg-brand-bg-card/40 backdrop-blur-md rounded-lg shadow-sm border border-white/10 overflow-hidden">
+            <details class="group">
+              <summary class="flex justify-between items-center cursor-pointer p-6 transition-all duration-300 hover:bg-white/5 list-none">
+                <h3 class="text-lg font-medium text-white group-open:text-brand-primary transition-colors duration-300">
+                  {faq.question}
+                </h3>
+                <div class="flex-shrink-0 ml-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-gray-400 group-open:rotate-180 transition-transform duration-300"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </summary>
+              <div class="px-6 pb-6">
+                <p class="text-gray-300 leading-relaxed text-base">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Related Tools -->
+<section class="py-16 md:py-24 bg-brand-bg">
+  <div class="container-custom">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        More Free <span class="gradient-text">Email Tools</span>
+      </h2>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        Keep building better emails with our complete suite of free email tools and generators.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      {relatedTools.map((tool) => (
+        <a
+          href={tool.href}
+          title={tool.title}
+          class="group p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-primary/50 transition-all duration-300 hover:-translate-y-1 block"
+        >
+          <h3 class="text-xl font-bold text-white mb-3 group-hover:text-brand-primary transition-colors duration-300">
+            {tool.title}
+          </h3>
+          <p class="text-gray-400">
+            {tool.description}
+          </p>
+          <span class="mt-4 inline-flex items-center text-brand-primary font-medium">
+            Explore
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details summary::marker {
+    display: none;
+  }
+</style>

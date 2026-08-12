@@ -1,6 +1,13 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ChatContent from "../components/ChatContent.astro";
+import Layout from "../../layouts/Layout.astro";
+import ChatContent from "../../components/ChatContent.astro";
+import { languages } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter((lang) => lang !== "en")
+    .map((lang) => ({ params: { lang } }));
+}
 
 const title = "Free AI Email Generator: Write Professional Emails in Seconds";
 const description = "Generate professional emails for free with our AI Email Writer. No login required. Perfect for sales, follow-ups, and business communication.";

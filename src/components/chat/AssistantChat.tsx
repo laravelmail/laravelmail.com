@@ -43,10 +43,10 @@ const presetAvatars = [
 ];
 
 const SUGGESTED_PROMPTS = [
+  "Write an email to a colleague requesting a meeting to discuss a project",
   "Help me create a welcome email for new users",
-  "Help me create a password reset email",
-  "Help me create an invoice email for customers",
   "Help me create a promotional email campaign",
+  "Write a professional follow-up email after a job interview",
 ];
 
 function getInitials(name: string) {
@@ -562,8 +562,8 @@ export default function AssistantChat() {
                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg">
                       <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
                     </div>
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">How can I help you?</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-sm">Help me create an email for any occasion.</p>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Generate professional emails with AI</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 max-w-sm">Describe the email you need — the free AI email writer will draft it for you in seconds.</p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-lg w-full">
                       {SUGGESTED_PROMPTS.map((prompt) => (
                         <button
@@ -636,7 +636,7 @@ export default function AssistantChat() {
                     ref={inputRef}
                     className="flex-1 border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     type="text"
-                    placeholder="Type a message..."
+                    placeholder="Describe the email you want to write... e.g. a meeting request or sales follow-up"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
