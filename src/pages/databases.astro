@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+import databases from "../content/databases/databases.json";
+
+interface DatabaseEntry {
+  id: string;
+  title: string;
+  description: string;
+  stats: Record<string, number>;
+}
+
+const databaseEntries = databases as DatabaseEntry[];
+const formatNumber = (value: number) => new Intl.NumberFormat("en").format(value);
+const getLargestStat = (database: DatabaseEntry) => Math.max(...Object.values(database.stats));
+---
+
+<Layout
+  title="Databases | Laravel Mail"
+  description="Browse available databases and buy access through Laravel Mail."
+>
+  <main class="min-h-screen bg-brand-bg pt-32 pb-20">
+    <section class="container-custom">
+      <div class="max-w-4xl mb-12">
+        <p class="mb-4 inline-flex items-center rounded-full border border-brand-primary/30 bg-brand-primary/10 px-4 py-2 text-sm font-bold text-brand-primary">
+          Database catalog
+        </p>
+        <h1 class="text-4xl md:text-6xl font-black text-white mb-6">
+          Available databases
+        </h1>
+        <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+          Browse the current database catalog and open any database page to review its details before checkout.
+        </p>
+      </div>
+
+      <div class="mb-8 max-w-2xl">
+        <label for="database-search" class="sr-only">Search databases</label>
+        <div class="relative">
+          <svg
+            class="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-white/40"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+            />
+          </svg>
+          <input
+            id="database-search"
+            type="search"
+            placeholder="Search databases"
+            autocomplete="off"
+            class="w-full rounded-2xl border border-white/10 bg-white/5 py-4 pl-12 pr-4 text-base text-white placeholder:text-white/40 outline-none transition focus:border-brand-primary/50 focus:bg-white/10 focus:ring-2 focus:ring-brand-primary/20"
+          />
+        </div>
+        <p class="mt-3 text-sm text-gray-400" id="database-result-count">
+          Showing {databaseEntries.length} databases
+        </p>
+      </div>
+
+      <div id="database-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        {databaseEntries.map((database) => (
+          <a
+            href={`/databases/${database.id}`}
+            data-database-card
+            data-search={`${database.id} ${database.title} ${database.description} ${Object.keys(database.stats).join(" ")}`.toLowerCase()}
+            class="group rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-brand-primary/40 hover:bg-white/10"
+          >
+            <div class="mb-4 flex items-start justify-between gap-4">
+              <h2 class="text-xl font-bold text-white leading-snug">
+                {database.title}
+              </h2>
+              <span class="shrink-0 rounded-full bg-brand-primary/10 px-3 py-1 text-xs font-bold text-brand-primary">
+                {formatNumber(getLargestStat(database))}
+              </span>
+            </div>
+
+            <p class="mb-5 line-clamp-4 text-sm leading-relaxed text-gray-400">
+              {database.description}
+            </p>
+
+            <div class="flex items-center justify-between border-t border-white/10 pt-4">
+              <span class="text-sm text-gray-400">
+                {Object.keys(database.stats).slice(0, 3).join(", ")}
+              </span>
+              <span class="text-sm font-bold text-brand-primary group-hover:text-white">
+                View
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div
+        id="database-empty-state"
+        class="hidden rounded-2xl border border-white/10 bg-white/5 p-10 text-center"
+      >
+        <h2 class="mb-2 text-2xl font-bold text-white">No databases found</h2>
+        <p class="text-gray-400">Try another name, field type, or keyword.</p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const searchInput = document.getElementById("database-search") as HTMLInputElement | null;
+  const resultCount = document.getElementById("database-result-count");
+  const emptyState = document.getElementById("database-empty-state");
+  const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-database-card]"));
+
+  function updateDatabaseResults() {
+    const query = searchInput?.value.trim().toLowerCase() || "";
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const matches = !query || card.dataset.search?.includes(query);
+      card.classList.toggle("hidden", !matches);
+      if (matches) visibleCount += 1;
+    });
+
+    if (resultCount) {
+      resultCount.textContent = `Showing ${visibleCount} ${visibleCount === 1 ? "database" : "databases"}`;
+    }
+
+    emptyState?.classList.toggle("hidden", visibleCount > 0);
+  }
+
+  searchInput?.addEventListener("input", updateDatabaseResults);
+</script>

@@ -1,0 +1,90 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import databases from "../../content/databases/databases.json";
+
+interface DatabaseEntry {
+  id: string;
+  title: string;
+  description: string;
+  stats: Record<string, number>;
+}
+
+export function getStaticPaths() {
+  return (databases as DatabaseEntry[]).map((database) => ({
+    params: { id: database.id },
+    props: { database },
+  }));
+}
+
+const { database } = Astro.props as { database: DatabaseEntry };
+
+const cleanTitle = database.title.replace(/^\P{L}+/u, "").trim();
+const totalRecords = Math.max(...Object.values(database.stats));
+const buyUrl = `/buy?database=${encodeURIComponent(database.id)}&name=${encodeURIComponent(cleanTitle || database.title)}`;
+const seoTitle = `${cleanTitle || database.title} Database | Laravel Mail`;
+const seoDescription = `Buy access to the ${cleanTitle || database.title} database. ${database.description}`;
+
+const formatNumber = (value: number) => new Intl.NumberFormat("en").format(value);
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <main class="min-h-screen bg-brand-bg pt-32 pb-20">
+    <section class="container-custom">
+      <nav class="mb-10 flex items-center gap-2 text-sm text-gray-400">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-white">Databases</span>
+        <span>/</span>
+        <span class="text-white/70">{cleanTitle || database.title}</span>
+      </nav>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
+        <article class="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-10">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-primary/30 bg-brand-primary/10 px-4 py-2 text-sm font-bold text-brand-primary">
+            Verified database
+          </div>
+
+          <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
+            {database.title}
+          </h1>
+
+          <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-10">
+            {database.description}
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Object.entries(database.stats).map(([label, value]) => (
+              <div class="rounded-xl border border-white/10 bg-brand-bg-card/50 p-5">
+                <p class="text-sm text-gray-400 mb-2">{label}</p>
+                <p class="text-2xl font-black text-white">{formatNumber(value)}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+
+        <aside class="rounded-2xl border border-white/10 bg-brand-bg-card/70 p-6 lg:sticky lg:top-28">
+          <div class="mb-6">
+            <p class="text-sm uppercase tracking-wider text-gray-400 mb-2">Database access</p>
+            <h2 class="text-2xl font-bold text-white">{cleanTitle || database.title}</h2>
+          </div>
+
+          <div class="mb-6 rounded-xl border border-brand-primary/30 bg-brand-primary/10 p-5">
+            <p class="text-sm text-gray-300 mb-1">Largest available field</p>
+            <p class="text-3xl font-black text-brand-primary">{formatNumber(totalRecords)}</p>
+          </div>
+
+          <a
+            href={buyUrl}
+            class="inline-flex w-full items-center justify-center rounded-xl bg-brand-primary px-5 py-4 text-base font-bold text-white transition hover:bg-brand-primary/90"
+          >
+            Buy database
+          </a>
+
+          <p class="mt-4 text-sm leading-relaxed text-gray-400">
+            Continue to checkout with this database preselected.
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+</Layout>
