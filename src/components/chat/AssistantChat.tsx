@@ -1,5 +1,6 @@
 import { useState, useLayoutEffect, useRef, useCallback, useEffect } from "preact/hooks";
 import type { ComponentChild } from "preact";
+import { fetchWithFallback } from "../../lib/ai-client";
 
 interface OllamaModel {
   name: string;
@@ -29,7 +30,8 @@ interface DebugStats {
   responseSize: number;
 }
 
-const OLLAMA_BASE_URL = "https://ai.izdrail.com";
+const PRIMARY_AI_ENDPOINT = import.meta.env.PUBLIC_PRIMARY_AI_ENDPOINT || "https://ai.izdrail.com";
+const FALLBACK_AI_ENDPOINT = import.meta.env.PUBLIC_FALLBACK_AI_ENDPOINT;
 
 const presetAvatars = [
   "bg-gradient-to-br from-purple-500 to-pink-500",
@@ -248,6 +250,8 @@ export default function AssistantChat() {
   });
   const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dataProvider, setDataProvider] = useState<string>("local");
+  const [dataModel, setDataModel] = useState<string>("hf.co/laravelcompany/laravelmail:Q4_K_M");
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
@@ -322,118 +326,52 @@ export default function AssistantChat() {
     const assistantMsg: Message = { role: "assistant", content: "", timestamp: Date.now() };
     setMessages((prev) => [...prev, assistantMsg]);
 
-    const requestBody = {
-      model: selectedModel,
-      messages: [...messages, userMsg].map((m) => ({ role: m.role, content: m.content })),
-      stream: true,
-    };
-
-    const requestSize = JSON.stringify(requestBody).length;
-
-    setDebugStats((prev) => ({
-      ...prev,
-      startTime: Date.now(),
-      endTime: null,
-      firstTokenTime: null,
-      totalTokens: 0,
-      chunksReceived: 0,
-      requestSize,
-      responseSize: 0,
-    }));
-
-    addDebugLog({
-      type: "request",
-      data: {
-        url: `${OLLAMA_BASE_URL}/api/chat`,
-        model: selectedModel,
-        messageCount: requestBody.messages.length,
-        requestSize,
-      },
-    });
-
     try {
-      const res = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(requestBody),
+      const fullPrompt = promptText || input.trim();
+      const apiBase = import.meta.env.SSR ? "" : import.meta.env.PUBLIC_API_BASE_URL || "";
+      const apiUrl = apiBase + "/api/ai-generate?prompt=" + encodeURIComponent(fullPrompt);
+
+      const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
-      addDebugLog({
-        type: "response",
-        data: { status: res.status, statusText: res.statusText, ok: res.ok },
-      });
-
-      if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-
-      const reader = res.body?.getReader();
-      if (!reader) throw new Error("No response body");
-
-      const decoder = new TextDecoder();
-      let buffer = "";
-      let fullContent = "";
-      let chunksReceived = 0;
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-
-        for (const line of lines) {
-          if (!line.trim()) continue;
-          try {
-            const data = JSON.parse(line);
-            chunksReceived++;
-
-            if (data.message?.content) {
-              fullContent += data.message.content;
-
-              if (chunksReceived === 1) {
-                setDebugStats((prev) => ({ ...prev, firstTokenTime: Date.now() - (prev.startTime ?? Date.now()) }));
-                addDebugLog({ type: "info", data: `First token received after ${Date.now() - (debugStats.startTime ?? Date.now())}ms` });
-              }
-
-              setMessages((prev) => {
-                const updated = [...prev];
-                const last = updated[updated.length - 1];
-                if (last?.role === "assistant") {
-                  updated[updated.length - 1] = { ...last, content: fullContent };
-                }
-                return updated;
-              });
-            }
-
-            if (data.done) {
-              addDebugLog({
-                type: "stream_chunk",
-                data: {
-                  totalDuration: data.total_duration,
-                  evalCount: data.eval_count,
-                  evalDuration: data.eval_duration,
-                  promptEvalCount: data.prompt_eval_count,
-                  promptEvalDuration: data.prompt_eval_duration,
-                },
-              });
-            }
-          } catch {
-            addDebugLog({ type: "error", data: `Malformed JSON chunk: ${line.slice(0, 100)}` });
-          }
-        }
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "AI generation failed");
       }
 
-      setDebugStats((prev) => ({
-        ...prev,
-        endTime: Date.now(),
-        totalTokens: estimateTokens(fullContent),
-        chunksReceived,
-        responseSize: fullContent.length,
-      }));
+      const data = await response.json();
+
+      setMessages((prev) => {
+        const updated = [...prev];
+        const last = updated[updated.length - 1];
+        if (last?.role === "assistant") {
+          updated[updated.length - 1] = {
+            ...last,
+            content: data.data?.text || response.statusText,
+          };
+        }
+        return updated;
+      });
+
+      // Update provider/model state for debug panel
+      if (data.data) {
+        setDataProvider(data.data.provider || "local");
+        setDataModel(data.data.model || "hf.co/laravelcompany/laravelmail:Q4_K_M");
+      }
+
+      // Update debug panel with provider info
+      addDebugLog({
+        type: "info",
+        data: `Provider: ${data.data?.provider || "unknown"}, Model: ${data.data?.model || "unknown"}`,
+      });
 
       addDebugLog({
         type: "info",
-        data: `Stream complete. ${chunksReceived} chunks, ~${estimateTokens(fullContent)} tokens`,
+        data: `AI response received after ${Date.now() - (debugStats.startTime ?? Date.now())}ms`,
       });
     } catch (e) {
       console.error("Chat error:", e);
@@ -444,7 +382,7 @@ export default function AssistantChat() {
         if (last?.role === "assistant") {
           updated[updated.length - 1] = {
             ...last,
-            content: `Error: ${e instanceof Error ? e.message : "Failed to get response"}`,
+            content: `Error: Unable to generate email. Please try again later.`,
           };
         }
         return updated;
@@ -540,9 +478,9 @@ export default function AssistantChat() {
               </button>
               <button
                 onClick={() => {
-                  const msg = prompt("Enter API base URL:", OLLAMA_BASE_URL);
-                  if (msg && msg !== OLLAMA_BASE_URL) {
-                    addDebugLog({ type: "info", data: `Note: URL change requires code edit. Current: ${OLLAMA_BASE_URL}` });
+                  const msg = prompt("Enter API base URL:", PRIMARY_AI_ENDPOINT);
+                  if (msg && msg !== PRIMARY_AI_ENDPOINT) {
+                    addDebugLog({ type: "info", data: `Note: URL change requires code edit. Current: ${PRIMARY_AI_ENDPOINT}` });
                   }
                 }}
                 className="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
@@ -736,8 +674,11 @@ export default function AssistantChat() {
 
                 {/* API endpoint */}
                 <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-700">
-                  <p className="text-[10px] text-gray-400 dark:text-gray-500 font-mono truncate" title={OLLAMA_BASE_URL}>
-                    {OLLAMA_BASE_URL}/api/chat
+                  <p className="text-[10px] text-gray-400 dark:text-gray-500 font-mono truncate" title="Provider">
+                    {dataProvider}
+                  </p>
+                  <p className="text-[10px] text-gray-400 dark:text-gray-500 font-mono truncate" title="Model">
+                    {dataModel}
                   </p>
                 </div>
               </div>
