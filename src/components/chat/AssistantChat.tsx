@@ -231,9 +231,9 @@ function renderInlineMarkdown(text: string) {
 
 export default function AssistantChat() {
   const [models] = useState<OllamaModel[]>([
-    { name: "hf.co/laravelcompany/laravelmail:Q4_K_M", modified_at: new Date().toISOString(), size: 0 },
+    { name: "hf.co/laravelcompany/laravelmail:latest", modified_at: new Date().toISOString(), size: 0 },
   ]);
-  const [selectedModel] = useState<string>("hf.co/laravelcompany/laravelmail:Q4_K_M");
+  const [selectedModel] = useState<string>("hf.co/laravelcompany/laravelmail:latest");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -251,7 +251,7 @@ export default function AssistantChat() {
   const [copiedMessageIndex, setCopiedMessageIndex] = useState<number | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dataProvider, setDataProvider] = useState<string>("local");
-  const [dataModel, setDataModel] = useState<string>("hf.co/laravelcompany/laravelmail:Q4_K_M");
+  const [dataModel, setDataModel] = useState<string>("hf.co/laravelcompany/laravelmail:latest");
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
@@ -360,7 +360,7 @@ export default function AssistantChat() {
       // Update provider/model state for debug panel
       if (data.data) {
         setDataProvider(data.data.provider || "local");
-        setDataModel(data.data.model || "hf.co/laravelcompany/laravelmail:Q4_K_M");
+        setDataModel(data.data.model || "hf.co/laravelcompany/laravelmail:latest");
       }
 
       // Update debug panel with provider info

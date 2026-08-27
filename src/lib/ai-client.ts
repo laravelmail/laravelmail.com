@@ -1,7 +1,7 @@
 import type { AIProviderInterface } from "./ai-provider";
 import { LocalProvider, OpenRouterProvider } from "./ai-provider";
 
-const DEFAULT_PRIMARY_MODEL = "hf.co/laravelcompany/laravelmail:Q4_K_M";
+const DEFAULT_PRIMARY_MODEL = "hf.co/laravelcompany/laravelmail:latest";
 const DEFAULT_OPENROUTER_MODEL = "nvidia/nemotron-3-ultra-550b-a55b:free";
 const DEFAULT_OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1";
 

@@ -97,14 +97,15 @@ const blogPostSchema = {
 
             <!-- Content -->
             <div class="max-w-3xl mx-auto">
-                <div class="prose prose-invert prose-lg max-w-none 
+                <div id="blog-content" class="prose prose-invert prose-lg max-w-none 
                     prose-headings:text-white prose-headings:font-bold
                     prose-p:text-gray-300 prose-p:leading-relaxed
                     prose-li:text-gray-300
                     prose-strong:text-white prose-strong:font-bold
                     prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
                     prose-img:rounded-2xl
-                    prose-blockquote:border-l-brand-primary prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-8 prose-blockquote:rounded-r-xl">
+                    prose-blockquote:border-l-brand-primary prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-8 prose-blockquote:rounded-r-xl
+                    prose-pre:!bg-transparent prose-pre:!p-0 prose-pre:!m-0">
                     <Fragment set:html={content} />
                 </div>
 
@@ -124,7 +125,69 @@ const blogPostSchema = {
     <CTASection />
 </Layout>
 
+<script is:inline>
+document.addEventListener('astro:page-load', () => {
+  const root = document.getElementById('blog-content');
+  if (!root || root.dataset.codeEnhanced) return;
+  root.dataset.codeEnhanced = '1';
+  root.querySelectorAll('pre').forEach((pre) => {
+    const code = pre.querySelector('code');
+    let lang = 'code';
+    if (code) {
+      const m = code.className.match(/language-(\w+)/);
+      if (m) lang = m[1];
+    }
+    if (pre.parentElement?.classList.contains('code-block')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'code-block';
+    const header = document.createElement('div');
+    header.className = 'code-block-header';
+    header.innerHTML = `<div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">${lang}</span><button type="button" class="code-copy" aria-label="Copy code">Copy</button>`;
+    const btn = header.querySelector('.code-copy');
+    btn.addEventListener('click', async () => {
+      const text = code ? code.innerText : pre.innerText;
+      try { await navigator.clipboard.writeText(text); btn.textContent='Copied!'; setTimeout(()=>btn.textContent='Copy',1500);} catch {}
+    });
+    pre.parentNode.insertBefore(wrap, pre);
+    wrap.appendChild(header);
+    wrap.appendChild(pre);
+  });
+});
+</script>
+
 <style is:global>
+    .prose :not(pre) > code {
+        @apply bg-white/[0.08] border border-white/10 text-brand-primary/90 px-1.5 py-0.5 rounded-md text-[0.875em] font-mono font-medium break-words;
+    }
+    .prose :not(pre) > code::before, .prose :not(pre) > code::after { content: none; }
+    .prose .code-block {
+        @apply my-8 rounded-2xl overflow-hidden border border-white/10 bg-[#0a0e27]/80 shadow-xl shadow-black/30 backdrop-blur-sm;
+    }
+    .prose .code-block-header {
+        @apply flex items-center gap-3 px-4 py-2.5 bg-white/[0.04] border-b border-white/10 text-xs;
+    }
+    .prose .code-dots { @apply flex gap-1.5; }
+    .prose .code-dots span { @apply w-3 h-3 rounded-full block; }
+    .prose .code-dots span:nth-child(1) { background: #ff5f56; }
+    .prose .code-dots span:nth-child(2) { background: #ffbd2e; }
+    .prose .code-dots span:nth-child(3) { background: #27c93f; }
+    .prose .code-lang { @apply ml-1 text-gray-400 font-mono lowercase tracking-wide; }
+    .prose .code-copy {
+        @apply ml-auto text-gray-300 hover:text-white bg-white/10 hover:bg-white/15 border border-white/10 rounded-lg px-3 py-1 font-medium transition-colors cursor-pointer;
+    }
+    .prose .code-block pre {
+        @apply !bg-transparent !border-0 !rounded-none p-4 md:p-5 overflow-x-auto text-[13.5px] leading-relaxed;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(124,58,237,0.4) transparent;
+    }
+    .prose .code-block pre code {
+        @apply !bg-transparent !p-0 !border-0 text-gray-200 font-mono;
+        white-space: pre;
+    }
+    .prose pre::-webkit-scrollbar { height: 6px; }
+    .prose pre::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 999px; }
+
     /* Custom styles for the injected HTML content */
     .prose .lead-paragraph p {
         @apply text-xl text-gray-200 leading-relaxed italic border-l-4 border-brand-primary pl-6 mb-8;

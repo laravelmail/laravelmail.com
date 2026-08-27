@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import { generateWithProviderFallback } from "../../lib/ai-client";
 
 export interface AIResponse {

@@ -3,15 +3,16 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 import preact from '@astrojs/preact';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     site: 'https://laravelmail.com',
-    output: 'static',
+    output: 'server',
+    adapter: cloudflare(),
     prefetch: true,
     vite: {
         server: {
             proxy: {
-                '/api': 'https://templates.laravelmail.com',
                 '/static': 'https://templates.laravelmail.com',
             },
         },
