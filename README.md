@@ -12,7 +12,7 @@ A powerful, self-hosted email marketing platform built with Laravel. Take full c
 - **Automated Campaigns** - Set up drip sequences, behavior-triggered emails, and more
 - **Verified B2B Leads Database** - Access lifetime verified B2B leads
 - **Multi-Channel** - WhatsApp & Instagram integrations included
-- **No Monthly Fees** - One-time purchase, lifetime access
+- **Self-Hosted** - Deploy on your own infrastructure
 
 ## Screenshots
 

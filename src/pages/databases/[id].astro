@@ -20,9 +20,8 @@ const { database } = Astro.props as { database: DatabaseEntry };
 
 const cleanTitle = database.title.replace(/^\P{L}+/u, "").trim();
 const totalRecords = Math.max(...Object.values(database.stats));
-const buyUrl = `/buy?database=${encodeURIComponent(database.id)}&name=${encodeURIComponent(cleanTitle || database.title)}`;
 const seoTitle = `${cleanTitle || database.title} Database | Laravel Mail`;
-const seoDescription = `Buy access to the ${cleanTitle || database.title} database. ${database.description}`;
+const seoDescription = `${cleanTitle || database.title} database. ${database.description}`;
 
 const formatNumber = (value: number) => new Intl.NumberFormat("en").format(value);
 ---
@@ -74,14 +73,14 @@ const formatNumber = (value: number) => new Intl.NumberFormat("en").format(value
           </div>
 
           <a
-            href={buyUrl}
+            href="/contact"
             class="inline-flex w-full items-center justify-center rounded-xl bg-brand-primary px-5 py-4 text-base font-bold text-white transition hover:bg-brand-primary/90"
           >
-            Buy database
+            Contact us
           </a>
 
           <p class="mt-4 text-sm leading-relaxed text-gray-400">
-            Continue to checkout with this database preselected.
+            Get in touch for more information about this database.
           </p>
         </aside>
       </div>
