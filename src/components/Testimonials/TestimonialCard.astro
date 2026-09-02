@@ -1,0 +1,101 @@
+---
+import type { Testimonial } from "../../data/testimonials";
+
+interface Props {
+  testimonial: Testimonial;
+  index?: number;
+}
+
+const { testimonial, index = 0 } = Astro.props;
+---
+
+<article
+  class="testimonial-card relative flex flex-col justify-between p-6 md:p-8 rounded-3xl bg-brand-bg-card/60 backdrop-blur-xl border border-white/10 hover:border-brand-primary/40 transition-all duration-300 group overflow-hidden shadow-lg h-full"
+  style={`animation-delay: ${index * 0.1}s`}
+>
+  <!-- Card Ambient Glow -->
+  <div
+    class={`absolute inset-0 bg-gradient-to-br ${
+      index % 2 === 0
+        ? "from-brand-primary/5 to-transparent"
+        : "from-brand-accent/5 to-transparent"
+    } opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}
+  >
+  </div>
+  <div
+    class="absolute -top-24 -right-24 w-48 h-48 bg-brand-primary/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+  >
+  </div>
+
+  <div class="relative z-10 flex flex-col h-full justify-between">
+    <!-- Top Header: Avatar + Meta + Optional Company Logo -->
+    <div class="flex items-center justify-between gap-4 mb-6">
+      <div class="flex items-center gap-4">
+        <div class="relative flex-shrink-0">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-brand-primary to-brand-accent rounded-2xl blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"
+          >
+          </div>
+          <img
+            src={testimonial.avatar}
+            alt={`Avatar of ${testimonial.name}`}
+            class="relative w-12 h-12 md:w-14 md:h-14 rounded-2xl object-cover border border-white/10 group-hover:scale-105 transition-transform duration-300 bg-brand-bg-card"
+            loading="lazy"
+            onerror="this.onerror=null; this.src='/favicon.svg';"
+          />
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold text-white group-hover:text-brand-primary transition-colors duration-300 leading-snug">
+            {testimonial.name}
+          </h3>
+          {(testimonial.role || testimonial.company) && (
+            <p class="text-xs md:text-sm text-gray-400 font-medium tracking-wide">
+              {testimonial.role}{testimonial.role && testimonial.company ? ' • ' : ''}{testimonial.company}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {testimonial.companyLogo && testimonial.companyLogo !== testimonial.avatar && (
+        <div class="flex-shrink-0">
+          <img
+            src={testimonial.companyLogo}
+            alt={testimonial.company ? `${testimonial.company} logo` : 'Company logo'}
+            class="w-8 h-8 md:w-10 md:h-10 rounded-xl object-contain border border-white/10 p-1 bg-white/5"
+            loading="lazy"
+          />
+        </div>
+      )}
+    </div>
+
+    <!-- Quote Content -->
+    <div class="relative flex-grow">
+      <svg
+        class="absolute -top-3 -left-2 w-8 h-8 text-brand-primary/15 group-hover:text-brand-primary/25 transition-colors pointer-events-none"
+        fill="currentColor"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+      >
+        <path
+          d="M10 8v8H6c0 2.2 1.8 4 4 4v4c-4.4 0-8-3.6-8-8V8h8zm14 0v8h-4c0 2.2 1.8 4 4 4v4c-4.4 0-8-3.6-8-8V8h8z"
+        ></path>
+      </svg>
+      <blockquote class="text-gray-300 text-base md:text-lg leading-relaxed pl-6 italic">
+        "{testimonial.quote}"
+      </blockquote>
+    </div>
+  </div>
+</article>
+
+<style>
+  .testimonial-card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .testimonial-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  }
+</style>
