@@ -8,7 +8,9 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
     site: 'https://laravelmail.com',
     output: 'server',
-    adapter: cloudflare(),
+    adapter: cloudflare({
+        imageService: "compile",
+    }),
     prefetch: true,
     vite: {
         server: {
