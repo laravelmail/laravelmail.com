@@ -327,7 +327,11 @@ const {
     -->
 
     <!-- Enhanced Intersection Observer for animations -->
-    <script>
+    <!-- is:inline so this runs at parse time: bundled module scripts sit in -->
+    <!-- the deferred chain behind third-party trackers, and when one of those -->
+    <!-- hangs (dropped packets, strict firewalls) every .animate-on-scroll -->
+    <!-- section stays permanently invisible. -->
+    <script is:inline>
       const initScrollAnimations = () => {
         // Reset body overflow in case mobile menu or modal left it locked
         document.body.style.overflow = "";
