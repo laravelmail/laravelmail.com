@@ -355,14 +355,12 @@ const {
 
       document.addEventListener("astro:page-load", initScrollAnimations);
 
-      // astro:page-load does not reliably fire on the initial full-page load,
-      // which left every .animate-on-scroll element permanently invisible.
-      // Run immediately as well so first visits always reveal the sections.
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initScrollAnimations);
-      } else {
-        initScrollAnimations();
-      }
+      // astro:page-load (and even DOMContentLoaded, when a deferred asset
+      // hangs) is not guaranteed on the initial full-page load, which left
+      // every .animate-on-scroll section permanently invisible. This inline
+      // script sits at the end of the body, so the content above it already
+      // exists: run immediately, and again on astro:page-load for swaps.
+      initScrollAnimations();
 
       // Handle view transition events
       document.addEventListener("astro:before-preparation", () => {
