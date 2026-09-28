@@ -328,12 +328,13 @@ const {
 
     <!-- Enhanced Intersection Observer for animations -->
     <script>
-      document.addEventListener("astro:page-load", () => {
+      const initScrollAnimations = () => {
         // Reset body overflow in case mobile menu or modal left it locked
         document.body.style.overflow = "";
 
-        const animatedElements =
-          document.querySelectorAll(".animate-on-scroll");
+        const animatedElements = document.querySelectorAll(
+          ".animate-on-scroll:not(.animated)",
+        );
 
         const observer = new IntersectionObserver(
           (entries) => {
@@ -350,7 +351,18 @@ const {
         animatedElements.forEach((element) => {
           observer.observe(element);
         });
-      });
+      };
+
+      document.addEventListener("astro:page-load", initScrollAnimations);
+
+      // astro:page-load does not reliably fire on the initial full-page load,
+      // which left every .animate-on-scroll element permanently invisible.
+      // Run immediately as well so first visits always reveal the sections.
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initScrollAnimations);
+      } else {
+        initScrollAnimations();
+      }
 
       // Handle view transition events
       document.addEventListener("astro:before-preparation", () => {
