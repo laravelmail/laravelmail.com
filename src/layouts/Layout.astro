@@ -38,6 +38,10 @@ const {
 <!doctype html>
 <html lang={lang}>
   <head>
+    <!-- Set before first paint so scroll-reveal only hides content when JS can reveal it again -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
     <meta charset="UTF-8" />
     <title>{title}</title>
     <meta name="description" content={description} />

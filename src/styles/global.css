@@ -143,14 +143,16 @@ body {
   }
 }
 
-.animate-on-scroll {
+/* Only hide when JS is available to reveal: if the observer script never
+   runs (blocked trackers, hung deferred chain), content must stay visible. */
+.js .animate-on-scroll {
   opacity: 0;
   transform: translateY(40px);
   animation: fadeInUp 0.8s var(--transition-timing) forwards;
   animation-play-state: paused;
 }
 
-.animate-on-scroll.animated {
+.js .animate-on-scroll.animated {
   animation-play-state: running;
 }
 
