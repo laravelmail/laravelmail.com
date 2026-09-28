@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from "../../layouts/Layout.astro";
 import CTASection from "../../components/CTASection.astro";
+import BlogLeadscaptainPopup from "../../components/BlogLeadscaptainPopup.astro";
 import BlogListing from "../../components/BlogListing.astro";
 import { injectSeoLinks } from "../../scripts/seo-utils";
 import { marked } from 'marked';
@@ -90,6 +91,7 @@ const { page, post } = Astro.props;
             </div>
         </article>
         <CTASection />
+        <BlogLeadscaptainPopup />
     </Layout>
 
     <style is:global>

@@ -1,0 +1,116 @@
+---
+// Popup banner shown only on blog inner pages. Mirrors the laravelcompany.com
+// BlogLeadscaptainPopup (Stefan 2026-09-28: same banner in Laravel Mail).
+// Asset: public/leadscaptain_350x350_ad.gif. Dismissal persists for the
+// session so returning readers are not nagged on every article.
+---
+
+<div
+  id="lc-popup-overlay"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/70 px-4 opacity-0 transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-label="LeadsCaptain promotion"
+>
+  <div
+    id="lc-popup-card"
+    class="relative w-full max-w-sm rounded-2xl border border-white/10 bg-gray-900 p-6 shadow-2xl shadow-brand-primary/20"
+  >
+    <button
+      id="lc-popup-close"
+      type="button"
+      aria-label="Close popup"
+      class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-lg leading-none text-white/70 transition-colors hover:bg-white/20 hover:text-white"
+    >
+      &times;
+    </button>
+    <a
+      id="lc-popup-link"
+      href="https://leadscaptain.com"
+      target="_blank"
+      rel="noopener sponsored"
+      class="block"
+    >
+      <img
+        src="/leadscaptain_350x350_ad.gif"
+        alt="LeadsCaptain - find and reach your next customers"
+        width="350"
+        height="350"
+        loading="lazy"
+        class="mx-auto w-full max-w-[350px] rounded-xl"
+      />
+    </a>
+    <p class="mt-4 text-center text-sm text-white/50">
+      Sponsored by LeadsCaptain
+    </p>
+  </div>
+</div>
+
+<script>
+  const LC_POPUP_KEY = "lc-popup-dismissed";
+  function lcTrack(eventName, params) {
+    try {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, params || {});
+      }
+    } catch {
+      // analytics blocked - never break the popup
+    }
+  }
+  const overlay = document.getElementById("lc-popup-overlay");
+  const closeButton = document.getElementById("lc-popup-close");
+
+  function lcClosePopup() {
+    if (!overlay) return;
+    overlay.classList.remove("opacity-100");
+    overlay.classList.add("opacity-0");
+    window.setTimeout(() => {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("flex");
+    }, 300);
+    try {
+      window.sessionStorage.setItem(LC_POPUP_KEY, "1");
+    } catch {
+      // storage unavailable - popup simply shows again next page
+    }
+  }
+
+  function lcMaybeOpenPopup() {
+    if (!overlay) return;
+    let dismissed = false;
+    try {
+      dismissed = window.sessionStorage.getItem(LC_POPUP_KEY) === "1";
+    } catch {
+      dismissed = false;
+    }
+    if (dismissed) return;
+    overlay.classList.remove("hidden");
+    overlay.classList.add("flex");
+    requestAnimationFrame(() => {
+      overlay.classList.remove("opacity-0");
+      overlay.classList.add("opacity-100");
+    });
+    closeButton?.focus();
+    lcTrack("leadscaptain_popup_view", { page_path: window.location.pathname });
+  }
+
+  if (overlay) {
+    window.setTimeout(lcMaybeOpenPopup, 3000);
+    closeButton?.addEventListener("click", lcClosePopup);
+    const link = document.getElementById("lc-popup-link");
+    link?.addEventListener("click", () => {
+      lcTrack("leadscaptain_popup_click", {
+        link_url: link.href,
+        page_path: window.location.pathname,
+      });
+    });
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) lcClosePopup();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !overlay.classList.contains("hidden")) {
+        lcClosePopup();
+      }
+    });
+  }
+</script>
