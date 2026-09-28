@@ -362,6 +362,11 @@ const {
       };
 
       document.addEventListener("astro:page-load", initScrollAnimations);
+      // ClientRouter swaps replace the body content; nodes observed before a
+      // swap are detached and their observers die with them, so re-init after
+      // every swap as well.
+      document.addEventListener("astro:after-swap", initScrollAnimations);
+      window.addEventListener("load", initScrollAnimations);
 
       // astro:page-load (and even DOMContentLoaded, when a deferred asset
       // hangs) is not guaranteed on the initial full-page load, which left
