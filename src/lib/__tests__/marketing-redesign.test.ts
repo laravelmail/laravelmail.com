@@ -22,6 +22,25 @@ describe('marketing redesign guardrails',()=>{
   expect(middleware).toContain('status: 404');
   expect(middleware).toContain("context.rewrite('/404')");
  });
+ it('keeps the dark mode contract and content visible without scroll observers',()=>{
+  expect(source('src/layouts/Layout.astro')).toContain('<html lang={lang} class="dark">');
+  expect(source('src/styles/marketing.css')).toContain('.js .animate-on-scroll,.js .animate-on-scroll.animated{opacity:1!important');
+ });
+ it('uses static product images and one shared booking component',()=>{
+  for(const locale of ['', '[lang]/']){
+   expect(source(`src/pages/${locale}product.astro`)).toContain('src="/screens/dashboard.png"');
+   expect(source(`src/pages/${locale}product.astro`)).not.toContain('<Image');
+   expect(source(`src/pages/${locale}demo.astro`)).toContain('<Demo />');
+   expect(source(`src/pages/${locale}solutions.astro`)).toContain('<Solutions />');
+  }
+  expect(source('src/components/marketing/Demo.astro')).toContain('<Booking />');
+ });
+ it('does not leave blank product placeholders or CDN template theme behind',()=>{
+  const solutions=source('src/components/marketing/Solutions.astro');
+  for(const name of ['Laravel Social','Laravel Mail','Laravel SEO','Laravel GPT','Laravel UI','LeadsCaptain']) expect(solutions).toContain(name);
+  expect(source('src/pages/laravel-email-templates.astro')).not.toContain('cdn.tailwindcss.com');
+  expect(source('src/pages/create-campaign.astro')).not.toContain('youtube.com/embed');
+ });
  it('keeps contact details, company location and legal destinations',()=>{
   const footer=source('src/components/Footer.astro');
   for(const value of ['7 High Street','Basildon, Essex','SS14 1AB','+44 744 821 8899','info@laravelmail.com','/privacy','/terms-of-service','/cookie-policy']) expect(footer).toContain(value);

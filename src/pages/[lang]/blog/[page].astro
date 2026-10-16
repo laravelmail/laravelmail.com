@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from "../../../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { Image } from "astro:assets";
+
 import Logo from "../../../assets/logo.svg";
 
 import { languages } from "../../../i18n/ui";
@@ -69,8 +69,8 @@ if (total <= 5) {
                 {page.data.map((post) => (
                     <article class="flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-brand-primary/50 transition-all duration-300 group">
                         <a href={getRelativeLocaleUrl(lang as string, `/blog/${post.id.replace('.json', '')}`)} class="block overflow-hidden aspect-video relative bg-brand-bg-darker flex items-center justify-center p-12">
-                            <Image 
-                                src={Logo} 
+                            <img
+                                src={Logo.src}
                                 alt={post.data.title}
                                 class="w-full h-auto max-h-[80%] object-contain transition-transform duration-500 group-hover:scale-110"
                             />
@@ -93,7 +93,7 @@ if (total <= 5) {
                             </p>
                             <div class="flex items-center gap-3 pt-6 border-t border-white/10">
                                 <div class="w-8 h-8 rounded-full bg-brand-primary/20 flex items-center justify-center p-1.5">
-                                    <Image src={Logo} alt={post.data.author} class="w-full h-full object-contain" />
+                                    <img src={Logo.src} alt={post.data.author} class="w-full h-full object-contain" />
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium text-white">{post.data.author}</p>
