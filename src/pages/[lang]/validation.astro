@@ -1,4 +1,5 @@
 ---
+import ProductIntro from "../../components/marketing/ProductIntro.astro";
 import Layout from "../../layouts/Layout.astro";
 import ValidationDashboard from "../../components/validation/ValidationDashboard";
 import { languages } from "../../i18n/ui";
@@ -98,50 +99,9 @@ db.export_valid_emails("verified_leads.csv")`;
         }
     </script>
 
-    <!-- Hero -->
-    <section class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-30">
-            <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-primary/20 blur-[120px] rounded-full"></div>
-            <div class="absolute top-1/2 -right-24 w-80 h-80 bg-brand-blue/20 blur-[100px] rounded-full"></div>
-        </div>
-        <div class="container-custom relative z-10">
-            <div class="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
-                <div class="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-bold mb-6">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-                    </span>
-                    <span>Multi-Engine Validation</span>
-                </div>
-                <h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight tracking-tight">
-                    Email Validation <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-blue">API</span>
-                </h1>
-                <p class="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto">
-                    A high-intelligence, multi-engine email validation service built with FastAPI. Orchestrates deep SMTP checks, heuristic pre-filtering, and reputation analysis to deliver verifiable, consensus-based deliverability verdicts.
-                </p>
-                <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#interactive-dashboard" class="btn btn-primary px-8 py-3 font-bold shadow-lg shadow-brand-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">Try It Live</a>
-                    <a href="#api-reference" class="btn border border-white/20 text-white hover:bg-white/5 px-8 py-3 font-bold transition-all">API Reference</a>
-                </div>
-            </div>
-            <div class="max-w-2xl mx-auto mb-12 animate-on-scroll">
-                <div class="bg-gradient-to-br from-[#1e293b]/80 to-[#0f172a]/80 backdrop-blur-xl rounded-3xl border border-white/10 p-6 shadow-2xl">
-                    <div class="flex items-center gap-3 mb-3">
-                        <span class="px-2 py-0.5 rounded text-xs font-mono font-bold bg-green-500/20 text-green-400">POST</span>
-                        <code class="text-white font-mono text-sm">/api/v1/verify-email</code>
-                    </div>
-                    <div class="flex items-center gap-4 text-sm text-gray-400">
-                        <span>Port <code class="text-brand-primary">1098</code></span>
-                        <span>FastAPI + DuckDB</span>
-                        <span>LightGBM ML</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <ProductIntro eyebrow="CHECK / EMAIL VALIDATION" title="Better signals." accent="Before you send." description="Inspect email syntax, domains and risk signals from one interface. Use the verdict to review your list, not as a promise of delivery." image="/screens/product/validation.webp" alt="Actual Laravel Mail validation interface with service status and domain lists" href="#interactive-dashboard" cta="Open the validation tools" />
     <!-- Interactive Dashboard -->
-    <section id="interactive-dashboard" class="py-16 relative">
+    <section id="interactive-dashboard" class="lm-tool-section">
         <div class="container-custom">
             <div class="max-w-5xl mx-auto mb-12 animate-on-scroll">
                 <h2 class="text-3xl font-black text-white mb-4 flex items-center gap-3">

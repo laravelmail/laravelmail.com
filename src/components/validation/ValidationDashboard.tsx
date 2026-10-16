@@ -299,19 +299,19 @@ export default function ValidationDashboard() {
   }, [email]);
 
   return (
-    <div className="relative isolate overflow-hidden">
+    <div className="lm-validation-workbench relative isolate overflow-hidden">
       <div className="absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[radial-gradient(circle_at_top,_rgba(10,146,221,0.22),_transparent_45%),radial-gradient(circle_at_20%_20%,_rgba(236,72,153,0.18),_transparent_30%)]" />
 
-      <div className="container-custom py-14 md:py-20">
+      <div className="lm-validation-shell py-8 md:py-12">
         <div className="mx-auto max-w-6xl space-y-8">
           <section className="grid gap-6 lg:grid-cols-[1.35fr_0.65fr]">
-            <div className="rounded-[2rem] border border-white/10 bg-slate-950/45 p-8 shadow-2xl shadow-slate-950/40 backdrop-blur">
+            <div className="rounded-[2rem] border border-white/10 bg-slate-950/45 p-5 md:p-8 shadow-2xl shadow-slate-950/40 backdrop-blur">
               <span className="inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-100">
                 Validation Workbench
               </span>
-              <h1 className="mt-5 max-w-3xl text-4xl font-bold leading-tight text-white md:text-5xl">
+              <h2 className="lm-workbench-title mt-5 max-w-3xl font-bold leading-tight text-white">
                 Test emails, tune scoring, and manage domain rules from one page.
-              </h1>
+              </h2>
               <p className="mt-4 max-w-2xl text-base text-slate-300 md:text-lg">
                 This dashboard is wired to the Laravel Mail Validation API and exposes the live
                 validation, feedback, list, scoring, root, and health endpoints.

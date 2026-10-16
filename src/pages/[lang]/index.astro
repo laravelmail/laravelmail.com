@@ -1,37 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Hero from "../../components/Hero.astro";
-import Partners from "../../components/Partners.astro";
-import VideoSection from "../../components/VideoSection.astro";
-import HowItWorks from "../../components/HowItWorks.astro";
-import Testimonials from "../../components/Testimonials.astro";
-import CTASection from "../../components/CTASection.astro";
-import FAQ from "../../components/FAQ.astro";
-import ValueProposition from "../../components/ValueProposition.astro";
-import PlatformShowcase from "../../components/PlatformShowcase.astro";
-import { languages } from "../../i18n/ui";
-import { useTranslations } from "../../i18n/utils";
-
-export async function getStaticPaths() {
-  return Object.keys(languages)
-    .filter(lang => lang !== 'en') // Default language handled at root
-    .map(lang => ({ params: { lang } }));
-}
-
-const { lang } = Astro.params;
-const t = useTranslations(lang as any);
+import Home from "../../components/marketing/Home.astro";
+import { languages } from '../../i18n/ui';
+export async function getStaticPaths() { return Object.keys(languages).filter(lang => lang !== 'en').map(lang => ({params:{lang}})); }
 ---
-
-<Layout
-  title={t('hero.title')}
-  description={t('hero.subtitle')}
->
-  <Hero />
-  <Partners />
-  <VideoSection />
-  <PlatformShowcase />
-  <ValueProposition />
-  <HowItWorks />
-  <Testimonials />
-  <FAQ />  <CTASection />
-</Layout>
+<Layout title="Laravel Mail | Open-source, self-hosted email marketing" description="Campaigns, templates, email validation and AI-assisted drafts. Built on Laravel, running on your own infrastructure."><Home /></Layout>

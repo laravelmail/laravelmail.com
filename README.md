@@ -127,3 +127,26 @@ MIT License - See LICENSE file for details.
 
 - Website: [https://laravelmail.com](https://laravelmail.com)
 - Contact: [https://laravelmail.com/contact](https://laravelmail.com/contact)
+
+## Marketing design and demo booking (October 2026)
+
+The shared header/footer and key product pages use the navy/plum, purple CTA,
+Sora/Nunito design language studied on drupalcompany.com. Blog source files are
+unchanged. Pricing routes were removed, including localized variants.
+
+The demo at `/contact` embeds the existing Calendly event:
+`https://calendly.com/laravelagency/30min`.
+Override at build time with `PUBLIC_CALENDLY_URL` (HTTPS calendly.com event URLs
+only). The direct booking link remains available if the embed is blocked.
+
+**Calendly account setup still required:** configure the event's invitee questions
+(custom fields) and booking notification/workflow recipient `info@laravelmail.com`
+in Calendly. The website cannot enable those account settings. Confirm the
+questions, required flags and notification route inside the account, then review
+an actual booking notification before calling that part complete. No booking has
+been made by this change.
+
+Product thumbnails in `public/screens/product/` are actual screenshots captured
+16 October 2026 in the app's QA workspace. They are cropped to product content,
+excluding account/workspace controls and any subscriber data. No test email was
+sent and no product data was changed for the captures.

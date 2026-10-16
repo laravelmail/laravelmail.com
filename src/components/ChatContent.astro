@@ -1,4 +1,5 @@
 ---
+import ProductIntro from "./marketing/ProductIntro.astro";
 import AssistantChat from "../components/chat/AssistantChat";
 
 const faqs = [
@@ -129,29 +130,11 @@ const relatedTools = [
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
-<!-- Hero -->
-<section class="pt-16 pb-8 md:pt-24 md:pb-12 bg-brand-bg relative overflow-hidden">
-  <div class="container-custom relative">
-    <div class="max-w-3xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
-        Free AI Email Generator
-      </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight text-white mb-6">
-        Free <span class="gradient-text">AI Email Generator</span>
-      </h1>
-      <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-4">
-        Generate professional, context-aware emails instantly. No credit card required.
-      </p>
-      <p class="text-sm text-gray-400">
-        Perfect for sales, follow-ups, cold outreach, and everyday business communication.
-      </p>
-    </div>
-  </div>
-</section>
+<ProductIntro eyebrow="WRITE / EMAIL AGENT" title="Start with an idea." accent="Leave with a draft." description="Describe the email you need. Use the writer below to prepare copy, then review and edit it before sending. The product screenshot shows the campaign agent in Laravel Mail." image="/screens/product/agent.webp" alt="Actual Laravel Mail AI Email Agent draft and review interface" href="#email-writer" cta="Try the email writer" />
 
 <!-- AI Email Writer Tool -->
-<section class="py-6 md:py-10 bg-brand-bg">
-  <div class="container-custom">
+<section id="email-writer" class="lm-tool-section">
+  <div class="container-custom dark lm-agent">
     <AssistantChat client:only="preact" />
   </div>
 </section>

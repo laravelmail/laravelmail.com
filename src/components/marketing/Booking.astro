@@ -1,0 +1,10 @@
+---
+import {calendlyUrl,calendlyEmbedUrl} from '../../config/booking';
+const configured = import.meta.env.PUBLIC_CALENDLY_URL;
+const direct = calendlyUrl(configured);
+---
+<div>
+ <p class="lm-booking-note">Choose a time below, or <a href={direct} target="_blank" rel="noopener noreferrer">open Calendly in a new tab ↗</a>.</p>
+ <iframe class="lm-booking" src={calendlyEmbedUrl(configured)} title="Book a Laravel Mail demo with Calendly" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+ <p class="lm-booking-note">Booking is handled by Calendly. <a class="lm-text-link" href={direct} target="_blank" rel="noopener noreferrer">Open the booking page ↗</a></p>
+</div>

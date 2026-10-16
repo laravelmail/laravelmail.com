@@ -1,0 +1,10 @@
+---
+interface Props { eyebrow: string; title: string; accent: string; description: string; image: string; alt: string; href?: string; cta?: string; }
+const {eyebrow,title,accent,description,image,alt,href,cta} = Astro.props;
+---
+<section class="lm-section lm-product-hero">
+ <div class="lm-shell lm-two-column">
+  <div><span class="lm-eyebrow">{eyebrow}</span><h1>{title}<br /><span class="lm-gradient">{accent}</span></h1><p class="lm-lead">{description}</p>{href && <a class="lm-button" href={href}>{cta} <span aria-hidden="true">→</span></a>}</div>
+  <figure class="lm-product-frame"><img src={image} alt={alt} width="1050" height="605" fetchpriority="high" /><figcaption>Actual Laravel Mail interface · QA workspace</figcaption></figure>
+ </div>
+</section>

@@ -12,6 +12,7 @@ export default defineConfig({
         imageService: "compile",
     }),
     prefetch: true,
+    devToolbar: { enabled: false },
     vite: {
         server: {
             proxy: {

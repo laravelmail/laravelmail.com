@@ -9,6 +9,10 @@ import BetaModal from "../components/BetaModal.astro";
 
 
 import "../styles/global.css";
+import "../styles/marketing.css";
+import "@fontsource/sora/400.css";
+import "@fontsource/sora/600.css";
+import "@fontsource/sora/700.css";
 import "@fontsource/nunito/400.css";
 import "@fontsource/nunito/500.css";
 import "@fontsource/nunito/600.css";
@@ -146,13 +150,6 @@ const {
             "description": "Access to a comprehensive verified leads database"
           }
         ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "1000+",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
         "screenshot": "https://laravelmail.com/og-image.png",
         "url": "https://laravelmail.com",
         "datePublished": "2023-10-01",
@@ -320,7 +317,7 @@ const {
     </main>
 
     <Footer transition:persist="footer" />
-    <BetaModal />
+
 
     <!-- ChatWidget disabled for now
     <ChatWidget 

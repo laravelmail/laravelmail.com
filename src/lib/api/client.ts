@@ -12,10 +12,6 @@ function getTemplatesApiBaseUrl(): string {
     return DEFAULT_TEMPLATES_API_BASE_URL;
   }
 
-  if (import.meta.env.DEV) {
-    return "";
-  }
-
   return DEFAULT_TEMPLATES_API_BASE_URL;
 }
 
