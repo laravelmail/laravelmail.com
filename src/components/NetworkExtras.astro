@@ -34,7 +34,7 @@ const partners = [
 <div id="lc-net-card" class="lc-card" role="dialog" aria-label="LeadsCaptain promotion" hidden>
   <button id="lc-net-close" type="button" aria-label="Close popup and open LeadsCaptain in a new tab">&times;</button>
   <a id="lc-net-link" href="https://leadscaptain.com" target="_blank" rel="noopener sponsored">
-    <img src="/leadscaptain_350x350_ad.gif" alt="LeadsCaptain - find and reach your next customers" width="350" height="350" loading="lazy" />
+    <img src="/leadscaptain_350x350_ad.gif" alt="LeadsCaptain - find and reach your next customers" width="350" height="350" loading="eager" decoding="async" />
   </a>
   <p>Sponsored by LeadsCaptain</p>
 </div>
@@ -55,6 +55,12 @@ const partners = [
   .lc-card p{margin:10px 0 0;text-align:center;font:12px system-ui,sans-serif;color:rgba(255,255,255,.5)}
   .lc-card button{position:absolute;right:8px;top:8px;width:28px;height:28px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:18px;line-height:1;cursor:pointer;z-index:1}
   .lc-card button:hover{background:rgba(255,255,255,.25)}
+  @media (max-width:640px){
+    .lc-card,#lc-popup-card{width:150px!important;max-width:150px!important;right:10px!important;bottom:10px!important;left:auto!important;padding:8px!important;border-radius:12px!important}
+    .lc-card p,#lc-popup-card p{margin-top:6px!important;font-size:10px!important}
+    .lc-card button,#lc-popup-card button{width:24px!important;height:24px!important;font-size:15px!important}
+    #lc-popup-card img{border-radius:8px!important}
+  }
 </style>
 
 <script is:inline>
