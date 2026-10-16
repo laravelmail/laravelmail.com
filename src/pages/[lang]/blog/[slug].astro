@@ -72,7 +72,7 @@ const blogPostSchema = {
         <div class="container-custom">
             <!-- Header -->
             <div class="max-w-4xl mx-auto mb-12 text-center">
-                <div class="flex items-center justify-center gap-4 mb-6">
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
                     {tags.map(tag => (
                         <span class="text-xs font-bold uppercase tracking-wider text-brand-primary px-3 py-1 bg-brand-primary/10 rounded-full border border-brand-primary/20">
                             {tag}
@@ -191,7 +191,9 @@ document.addEventListener('astro:page-load', () => {
     .prose pre::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 999px; }
 
     /* Custom styles for the injected HTML content */
-    .prose .lead-paragraph p {
+    .prose .bg-white { background: rgba(255,255,255,.05); color: #d1d5db; border: 1px solid rgba(255,255,255,.1); }
+        .prose { overflow-wrap: anywhere; }
+        .prose .lead-paragraph p {
         @apply text-xl text-gray-200 leading-relaxed italic border-l-4 border-brand-primary pl-6 mb-8;
     }
     

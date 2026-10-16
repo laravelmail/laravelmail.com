@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { listTemplates, getTemplateMeta } from "../../lib/api/client";
+import { listTemplates, getTemplateMeta, getThumbnailUrl } from "../../lib/api/client";
 import type { TemplateMeta } from "../../lib/api/types";
 
 export async function getStaticPaths() {
@@ -27,7 +27,8 @@ interface Props {
   name: string;
 }
 
-const { slug, name } = Astro.props;
+const slug = Astro.props.slug || Astro.params.slug || "";
+const name = Astro.props.name || slug.replaceAll("-", " ");
 
 let meta: TemplateMeta | null = null;
 try {
@@ -56,11 +57,13 @@ const seoDesc = meta?.description
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="lg:col-span-2">
           <div class="bg-brand-bg-card/40 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden">
-            <div class="aspect-[3/4] relative bg-gray-900/50 flex items-center justify-center">
-              <iframe
-                id="template-content"
-                class="w-full h-full"
-                title={meta?.name || name}
+            <div class="bg-gray-900/50">
+              <img
+                src={getThumbnailUrl(slug)}
+                alt={`${meta?.name || name} email template preview`}
+                class="w-full h-auto"
+                width="800"
+                height="1000"
               />
             </div>
           </div>
@@ -148,15 +151,3 @@ const seoDesc = meta?.description
     </div>
   </main>
 </Layout>
-
-<script>
-  (async function () {
-    const TEMPLATE_ORIGIN = "https://templates.laravelmail.com";
-    const slug = window.location.pathname.split("/").filter(Boolean).pop();
-    if (!slug) return;
-    const iframe = document.getElementById("template-content") as HTMLIFrameElement | null;
-    if (!iframe) return;
-
-    iframe.src = `${TEMPLATE_ORIGIN}/templates/${encodeURIComponent(slug)}`;
-  })();
-</script>
