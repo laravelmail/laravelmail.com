@@ -1,0 +1,93 @@
+---
+// LeadsCaptain popup banner + partner network strip. Self-contained (own CSS), safe in any layout.
+// Behaviour per Stefan's brief of 2026-09-28: bottom-right card, links to leadscaptain.com,
+// closing also opens the link in a new tab, GA events for view/click/close.
+const partners = [
+  { host: 'laravelcompany.com', name: 'Laravel Company', about: 'Laravel development agency' },
+  { host: 'laravelmail.com', name: 'Laravel Mail', about: 'Self-hosted email marketing' },
+  { host: 'laravelseo.com', name: 'Laravel SEO', about: 'SEO reports and tools' },
+  { host: 'laravelsocial.com', name: 'Laravel Social', about: 'Social media scheduler' },
+  { host: 'laravelsms.com', name: 'Laravel SMS', about: 'SMS for Laravel' },
+  { host: 'laravelvoip.com', name: 'Laravel VoIP', about: 'VoIP telephony' },
+  { host: 'laravelgpt.com', name: 'Laravel GPT', about: 'Self-hosted AI infrastructure' },
+  { host: 'laravelcart.com', name: 'Laravel Cart', about: 'Modular commerce for Laravel' },
+  { host: 'laravelbooking.com', name: 'Laravel Booking', about: 'Self-hosted booking system' },
+  { host: 'laravelgit.com', name: 'Laravel Git', about: 'Self-hosted Git for Laravel teams' },
+  { host: 'drupalcompany.com', name: 'Drupal Company', about: 'Drupal development' },
+  { host: 'magentocompany.com', name: 'Magento Company', about: 'Magento development' },
+  { host: 'phpteacher.com', name: 'PHP Teacher', about: 'Learn PHP for free' },
+  { host: 'balcanphp.com', name: 'Balcan PHP', about: 'PHP and web conference' },
+];
+---
+
+<section class="lc-net" aria-label="Partner sites">
+  <div class="lc-net-inner">
+    <p class="lc-net-title">Our network</p>
+    <ul class="lc-net-list">
+      {partners.map((p) => (
+        <li data-host={p.host}><a href={`https://${p.host}`} rel="noopener" title={p.about}><strong>{p.name}</strong><span>{p.about}</span></a></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<div id="lc-net-card" class="lc-card" role="dialog" aria-label="LeadsCaptain promotion" hidden>
+  <button id="lc-net-close" type="button" aria-label="Close popup and open LeadsCaptain in a new tab">&times;</button>
+  <a id="lc-net-link" href="https://leadscaptain.com" target="_blank" rel="noopener sponsored">
+    <img src="/leadscaptain_350x350_ad.gif" alt="LeadsCaptain - find and reach your next customers" width="350" height="350" loading="lazy" />
+  </a>
+  <p>Sponsored by LeadsCaptain</p>
+</div>
+
+<style is:global>
+  .lc-net{background:#0b1020;color:#cbd5e1;border-top:1px solid rgba(255,255,255,.1);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;position:relative;z-index:1}
+  .lc-net-inner{max-width:80rem;margin:0 auto;padding:2rem 1.25rem}
+  .lc-net-title{margin:0 0 1rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;font-weight:700}
+  .lc-net-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.6rem}
+  .lc-net-list a{display:block;padding:.65rem .8rem;border:1px solid rgba(255,255,255,.1);border-radius:.6rem;text-decoration:none;color:inherit;transition:border-color .2s,background .2s}
+  .lc-net-list a:hover{border-color:#8b5cf6;background:rgba(139,92,246,.1)}
+  .lc-net-list strong{display:block;color:#fff;font-size:.9rem}
+  .lc-net-list span{display:block;font-size:.78rem;color:#94a3b8;margin-top:.1rem}
+  .lc-card{position:fixed;right:20px;bottom:20px;z-index:2147483000;width:300px;max-width:calc(100vw - 40px);padding:14px;border-radius:16px;background:rgba(15,23,42,.96);border:1px solid #1e293b;box-shadow:0 20px 40px rgba(0,0,0,.5);opacity:0;transform:translateY(16px);transition:opacity .3s,transform .3s}
+  .lc-card[hidden]{display:none}
+  .lc-card.lc-in{opacity:1;transform:none}
+  .lc-card img{display:block;width:100%;height:auto;border-radius:10px}
+  .lc-card p{margin:10px 0 0;text-align:center;font:12px system-ui,sans-serif;color:rgba(255,255,255,.5)}
+  .lc-card button{position:absolute;right:8px;top:8px;width:28px;height:28px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:18px;line-height:1;cursor:pointer;z-index:1}
+  .lc-card button:hover{background:rgba(255,255,255,.25)}
+</style>
+
+<script is:inline>
+(function () {
+  var host = location.hostname.replace(/^www\./, '');
+  document.querySelectorAll('.lc-net-list li').forEach(function (li) { if (li.getAttribute('data-host') === host) li.style.display = 'none'; });
+  // another LeadsCaptain popup already on this page (older per-site component): do not double up
+  if (document.getElementById('lc-popup-card')) return;
+  var KEY = 'lc-popup-dismissed';
+  var card = document.getElementById('lc-net-card');
+  var closeBtn = document.getElementById('lc-net-close');
+  var link = document.getElementById('lc-net-link');
+  if (!card) return;
+  function track(n, p) { try { if (typeof window.gtag === 'function') window.gtag('event', n, p || {}); } catch (e) {} }
+  function hide() {
+    card.classList.remove('lc-in');
+    setTimeout(function () { card.hidden = true; }, 300);
+    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+  }
+  var dismissed = false;
+  try { dismissed = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (dismissed) return;
+  setTimeout(function () {
+    card.hidden = false;
+    requestAnimationFrame(function () { card.classList.add('lc-in'); });
+    track('leadscaptain_popup_view', { page_path: location.pathname });
+  }, 3000);
+  closeBtn.addEventListener('click', function () {
+    track('leadscaptain_popup_close_click', { link_url: link.href, page_path: location.pathname });
+    window.open(link.href, '_blank', 'noopener');
+    hide();
+  });
+  link.addEventListener('click', function () { track('leadscaptain_popup_click', { link_url: link.href, page_path: location.pathname }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !card.hidden) hide(); });
+})();
+</script>

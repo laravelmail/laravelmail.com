@@ -4,6 +4,7 @@ import { fade } from "astro:transitions";
 import { getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import NetworkExtras from "../components/NetworkExtras.astro";
 import BetaModal from "../components/BetaModal.astro";
 // import ChatWidget from "../components/ChatWidget";
 
@@ -317,6 +318,7 @@ const {
     </main>
 
     <Footer transition:persist="footer" />
+    <NetworkExtras transition:persist="network" />
 
 
     <!-- ChatWidget disabled for now
