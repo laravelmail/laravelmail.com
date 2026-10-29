@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CTASection from "./CTASection.astro";
+import { renderInlineMarkdown } from "../lib/inline-markdown";
 import { useTranslations } from "../i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -48,7 +49,7 @@ const t = useTranslations(lang as any);
                     </p>
                     <div class="space-y-6">
                         {page.content.split('\n\n').map(para => (
-                            <p>{para}</p>
+                            <p set:html={renderInlineMarkdown(para)} />
                         ))}
                     </div>
 
