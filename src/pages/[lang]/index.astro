@@ -1,7 +1,42 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Home from "../../components/marketing/Home.astro";
-import { languages } from '../../i18n/ui';
-export async function getStaticPaths() { return Object.keys(languages).filter(lang => lang !== 'en').map(lang => ({params:{lang}})); }
+import SeoVariationPage from "../../components/SeoVariationPage.astro";
+import seoData from "../../data/seo-variations.json";
+import { languages, defaultLang } from "../../i18n/ui";
+
+export async function getStaticPaths() {
+  return Object.keys(languages)
+    .filter((lang) => lang !== "en")
+    .map((lang) => ({ params: { lang } }));
+}
+
+// Astro routes every single-segment path here ("/[lang]" and "/[slug]" are the same
+// SSR pattern and cannot both exist). A non-locale segment is therefore either one of
+// the SEO landing pages from seo-variations.json - served in the default language -
+// or a real 404. Previously every unknown single-segment URL served the homepage
+// with a 200 (soft-404).
+const { lang } = Astro.params;
+// Object.hasOwn: the `in` operator also matches inherited keys like "constructor".
+const isLocale = lang !== undefined && Object.hasOwn(languages, lang);
+const seoPage =
+  lang && !isLocale
+    ? seoData.find((entry) => entry.slug === lang)
+    : undefined;
+
+if (lang && !isLocale && !seoPage) {
+  const notFound = await Astro.rewrite("/404");
+  return new Response(notFound.body, { status: 404, headers: notFound.headers });
+}
 ---
-<Layout title="Laravel Mail | Open-source, self-hosted email marketing" description="Campaigns, templates, email validation and AI-assisted drafts. Built on Laravel, running on your own infrastructure."><Home /></Layout>
+
+{seoPage ? (
+  <SeoVariationPage page={seoPage} lang={defaultLang} />
+) : (
+  <Layout
+    title="Laravel Mail | Open-source, self-hosted email marketing"
+    description="Campaigns, templates, email validation and AI-assisted drafts. Built on Laravel, running on your own infrastructure."
+  >
+    <Home />
+  </Layout>
+)}

@@ -7,6 +7,8 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 
 import { languages } from "../../i18n/ui";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const langs = Object.keys(languages).filter(l => l !== 'en');
   

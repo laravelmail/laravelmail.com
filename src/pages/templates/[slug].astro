@@ -31,9 +31,20 @@ const slug = Astro.props.slug || Astro.params.slug || "";
 const name = Astro.props.name || slug.replaceAll("-", " ");
 
 let meta: TemplateMeta | null = null;
+let apiFailed = false;
 try {
   meta = await getTemplateMeta(slug);
-} catch {}
+} catch (error) {
+  // A 404 from the templates API means the template does not exist: answer a real
+  // site 404 instead of a soft-404 detail page. Any other API failure keeps the
+  // degraded page (name derived from the slug) so a transient outage does not 404
+  // real templates.
+  if (error instanceof Error && error.name === "TemplatesApiError" && (error as { status?: number }).status === 404) {
+    const notFound = await Astro.rewrite("/404");
+    return new Response(notFound.body, { status: 404, headers: notFound.headers });
+  }
+  apiFailed = true;
+}
 
 const seoTitle = meta
   ? `${meta.name} - Email Template | Laravel Mail`

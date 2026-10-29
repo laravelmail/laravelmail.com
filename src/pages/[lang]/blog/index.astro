@@ -1,0 +1,24 @@
+---
+export const prerender = true;
+
+import { languages } from "../../../i18n/ui";
+import BlogListPage from "../../../components/blog/BlogListPage.astro";
+import { getBlogListPage } from "../../../scripts/blog-pagination";
+
+// The [page] route only matches numbered URLs (/es/blog/2/...), so the bare
+// localized blog index had no matching route and fell into the adapter
+// no-route fallback. Prerender page 1 here so /es/blog/ is a static asset.
+export function getStaticPaths() {
+  return Object.keys(languages)
+    .filter((l) => l !== 'en')
+    .map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as string;
+const listPage = await getBlogListPage(1);
+if (!listPage) {
+  throw new Error('blog index: no posts found at build time');
+}
+---
+
+<BlogListPage lang={lang} posts={listPage.posts} currentPage={1} lastPage={listPage.lastPage} />
