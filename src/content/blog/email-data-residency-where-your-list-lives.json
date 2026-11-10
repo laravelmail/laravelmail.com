@@ -1,0 +1,15 @@
+{
+  "title": "Data Residency: Where Does Your List Actually Live?",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "Ask your email platform where subscriber data sits and the answer is a shrug and a subprocessors page. Self-hosting turns the answer into an address you chose.",
+  "content": "<div class='lead-paragraph'><p>\"Where is my subscribers' data stored?\" For most email platforms the honest answer is a list of regions, subprocessors and clauses. When you self-host, the answer is one sentence: on my server, in the jurisdiction I picked.</p></div>\n\n<h2>Why residency keeps coming up</h2>\n<p>Privacy regulators care about where personal data crosses borders, and so do an increasing number of customers. Enterprise procurement teams now ask residency questions in the first call. A mailing list is personal data - names, emails, behavior - so residency is not an abstract concern for anyone who sends email.</p></p>\n\n<h2>What self-hosting changes</h2>\n<p>You choose the datacenter and the country. Backups live where you put them. Access logs are yours. When a customer or a regulator asks where the data is, you answer from knowledge, not from a vendor's marketing page. That answer - specific, verifiable, yours - builds a kind of trust no badge can.</p>\n\n<h2>The obligations that stay yours</h2>\n<p>Residency is not a compliance certificate. Consent records, unsubscribe handling, deletion requests and breach duties remain your job under GDPR and friends. Self-hosting makes the geography simple; the discipline is still on you.</p>\n\n<h2>A question worth asking today</h2>\n<p>Wherever your list lives now, find the answer in your vendor's documentation. If it takes more than five minutes to find, that is the answer.</p>",
+  "image": "/screens/intelligence.png",
+  "tags": [
+    "Privacy",
+    "Self-hosting",
+    "Compliance"
+  ]
+}

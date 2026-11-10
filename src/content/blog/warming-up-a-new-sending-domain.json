@@ -1,0 +1,15 @@
+{
+  "title": "Warming Up a New Sending Domain: The Boring Playbook That Works",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "New domains start with zero trust. The week-by-week warmup discipline that gets you to the inbox without shortcuts.",
+  "content": "<div class='lead-paragraph'><p>Inbox providers treat a new sending domain like a stranger at the door: polite suspicion until proven otherwise. Warming up is how you prove otherwise - slowly, consistently, without hacks.</p></div>\n\n<h2>Authenticate before you send anything</h2>\n<p>SPF, DKIM and DMARC in place from message one. Sending warm-up mail without authentication is introducing yourself while wearing a mask. Alignment between the visible From domain and the authentication domains matters most.</p>\n\n<h2>Start with the people who want you</h2>\n<p>Your first sends go to your most engaged subscribers - recent openers, recent buyers, people who asked to hear from you this week. Opens and replies are the votes that build reputation; a warm-up list of disengaged contacts votes against you.</p>\n\n<h2>Grow volume on a schedule</h2>\n<p>Small consistent daily sends, increasing gradually over four to eight weeks. The pattern inbox providers reward is predictability: same sender, steady growth, low complaints. A spike from zero to fifty thousand on day three is how domains get a reputation that takes months to repair.</p>\n\n<h2>Watch the right signals</h2>\n<p>Bounce rate, complaint rate, and provider-specific deferrals in your logs. If Gmail starts temp-failing you, slow down - the machine is telling you the pace is wrong. Warm-up is one of the few places in email where patience is the entire strategy.</p>",
+  "image": "/screens/campaigns-2.png",
+  "tags": [
+    "Deliverability",
+    "Domains",
+    "Playbook"
+  ]
+}

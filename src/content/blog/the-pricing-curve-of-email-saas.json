@@ -1,0 +1,15 @@
+{
+  "title": "The Pricing Curve: Why Email SaaS Gets Expensive Exactly When You Succeed",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "Per-subscriber pricing means your bill grows with your list, not your usage. How to compute your own crossover point - and what a flat-cost stack changes.",
+  "content": "<div class='lead-paragraph'><p>Email platforms charge by the subscriber. That sounds fair until you plot it: your list is the one metric you want to grow, and every unit of growth raises the rent. The faster you succeed, the faster the bill climbs.</p></div>\n\n<h2>The shape of the curve</h2>\n<p>SaaS email pricing is a staircase of tiers keyed to list size. The steps arrive at the worst moments - right after a campaign works, right after a launch brings in subscribers. And the list keeps costing money even when you do not send: inactive subscribers count toward the tier on most platforms.</p>\n\n<h2>Compute your own crossover</h2>\n<p>Take your current monthly platform bill, project it at two and five times your list size using the vendor's public tiers, and compare against the cost of a server plus an hour a month of maintenance. The numbers differ per business, but the direction rarely does: the curve only bends one way.</p>\n\n<h2>What the flat-cost stack looks like</h2>\n<p>Self-hosted email flips the shape: software you control, a server at a fixed monthly price, sending costs that track actual volume through your MTA or relay. List growth becomes pure upside - the tenth thousand subscribers cost the same as the first.</p>\n\n<h2>The non-money part</h2>\n<p>Per-subscriber pricing also distorts behavior: teams prune engaged-but-quiet subscribers to stay under a tier, and hoard old addresses to avoid shrinking. Neither is good marketing. When the list stops being the billing unit, list hygiene becomes a deliverability decision instead of a financial one.</p>",
+  "image": "/screens/dashboard.png",
+  "tags": [
+    "Self-hosting",
+    "Costs",
+    "Strategy"
+  ]
+}

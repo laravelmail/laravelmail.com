@@ -1,0 +1,15 @@
+{
+  "title": "List Hygiene on Autopilot: Local AI for Bounces, Complaints and Dead Weight",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "A clean list delivers better than a big one. Using local models to classify bounces, triage complaints and score engagement - without shipping your list anywhere.",
+  "content": "<div class='lead-paragraph'><p>Every list rots: addresses die, people disengage, some hit the spam-complaint button instead of unsubscribing. Hygiene is the unglamorous work that keeps deliverability high - and local AI makes it continuous instead of quarterly.</p></div>\n\n<h2>Bounces are not all the same</h2>\n<p>A hard bounce is an unsubscribe; a soft bounce is a maybe; a mailbox-full is a \"try later\". SMTP replies are messy human text, and classifying them is a perfect small-model task. A local classifier reads every bounce, files it correctly, and your suppression list stays precise - no good addresses killed by a regex, no dead ones kept by mistake.</p>\n\n<h2>Complaint triage without the drama</h2>\n<p>Feedback-loop complaints need fast, correct handling: suppress immediately, but also understand why. A model reading the complaint context can separate \"never signed up\" (a list problem) from \"too many emails\" (a cadence problem) - different diseases, different medicine.</p>\n\n<h2>Engagement scoring that fits your business</h2>\n<p>Opens, clicks and recency combine into an engagement score that drives sunset policies: who gets the full cadence, who gets the slower lane, who gets the re-confirmation email. A local model can re-score the whole list nightly for free, because the hardware is already paid for.</p>\n\n<h2>The privacy bonus</h2>\n<p>List hygiene means reading behavioral data at scale - exactly the data you least want in someone else's API. Local classification keeps the entire loop on your infrastructure: the list is analyzed where it lives.</p>",
+  "image": "/screens/inbox.png",
+  "tags": [
+    "Local AI",
+    "List Hygiene",
+    "Deliverability"
+  ]
+}

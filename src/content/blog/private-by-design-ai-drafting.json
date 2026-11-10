@@ -1,0 +1,15 @@
+{
+  "title": "Private by Design: AI Drafting Where the List Never Leaves the Box",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "Your subscriber list is your most sensitive marketing asset. How local AI drafting keeps names, segments and behavior on your server, end to end.",
+  "content": "<div class='lead-paragraph'><p>Every time someone pastes subscriber data into a chatbot to \"personalize\" a campaign, that data crosses a boundary you do not control. There is a cleaner architecture: bring the model to the data, not the data to the model.</p></div>\n\n<h2>The boundary that matters</h2>\n<p>An email platform holds names, addresses, engagement history, purchase signals - everything privacy law and common decency say to guard. With local inference, prompts are built and answered on your own server. The subscriber record used to personalize a draft never traverses a third-party API, is never logged by a provider, and never enters anyone's training pipeline.</p>\n\n<h2>What drafting locally looks like</h2>\n<p>The agent pulls the segment definition, the campaign brief and the brand voice from your database, drafts the variants, scores them, and logs the result - all inside your infrastructure. The only thing that ever leaves is the final email, through your own MTA, to the subscriber it was written for.</p>\n\n<h2>The compliance dividend</h2>\n<p>GDPR and its cousins get dramatically simpler when the data flow has one hop. Your records of processing stop listing a chain of AI sub-processors. \"The data stays on our servers\" is a sentence your legal reviewer and your enterprise customers both like hearing.</p>\n\n<h2>The quality question, answered honestly</h2>\n<p>Local models draft well for most campaign work, especially with a good brand-voice prompt and a few examples. Reserve cloud calls for the rare piece that needs the absolute best prose - and strip personal data from those prompts. Privacy and quality are a routing decision, not a trade-off.</p>",
+  "image": "/screens/ai-email-marketing.png",
+  "tags": [
+    "Local AI",
+    "Privacy",
+    "AI Drafting"
+  ]
+}

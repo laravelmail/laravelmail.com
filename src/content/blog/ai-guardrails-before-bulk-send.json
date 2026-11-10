@@ -1,0 +1,15 @@
+{
+  "title": "Guardrails Before the Send Button: Letting AI Draft at Scale Safely",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "An AI that drafts ten thousand emails will eventually draft a bad one. The pre-send gates that catch it before your list does.",
+  "content": "<div class='lead-paragraph'><p>AI drafting at scale is a force multiplier with a failure mode: it produces fluent, confident, occasionally wrong text at the speed of your queue. The answer is not less automation - it is gates between generation and delivery.</p></div>\n\n<h2>Gate one: the rules that never bend</h2>\n<p>Hard checks that run on every draft: no broken personalization tokens, no links to domains you have not approved, no claims on your forbidden list, length within bounds, unsubscribe link present. These are code, not prompts - deterministic checks do not hallucinate.</p>\n\n<h2>Gate two: the model reviewing the model</h2>\n<p>A second pass where a model scores the draft against the brief: does it match the segment, the tone, the offer? Scoring catches the subtle failures - the draft that is grammatical but wrong for the audience. Low scorers route to a human or regenerate.</p>\n\n<h2>Gate three: human eyes where they matter</h2>\n<p>Not every send needs a human, but some do: new campaigns, new segments, anything above a volume threshold, anything the first two gates flagged. The human reviews a sample, not the stream - their job is calibration, not copy-paste approval.</p>\n\n<h2>The audit trail</h2>\n<p>Log what was drafted, what the gates said, and what actually sent. When something does go wrong - it will, once - the log turns a postmortem from archaeology into reading. Guardrails plus a trail is what makes AI sending a system instead of a gamble.</p>",
+  "image": "/screens/automation.png",
+  "tags": [
+    "AI",
+    "Guardrails",
+    "Quality"
+  ]
+}

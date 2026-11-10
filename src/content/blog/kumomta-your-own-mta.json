@@ -1,0 +1,16 @@
+{
+  "title": "Kumomta and You: Sending Through Your Own MTA",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "What changes when your campaigns leave through an MTA you control instead of a shared SaaS relay - and what you have to take seriously to make it work.",
+  "content": "<div class='lead-paragraph'><p>Between \"campaign sent\" and \"email delivered\" sits the Mail Transfer Agent - the software that actually talks to Gmail's servers. Most senders never think about it because a vendor runs it. Running your own MTA like Kumomta puts that layer under your control, and it changes what is possible.</p></div>\n\n<h2>What your own MTA gives you</h2>\n<p>Queue control, throttling per provider, custom retry logic, and bounce handling tuned to your traffic. When Yahoo starts deferring your mail at 4 PM, you see it in your own queue and adjust your own rules - no ticket, no waiting for a vendor's incident page.</p>\n\n<h2>Warm-up is your job now</h2>\n<p>A new IP with no history is treated as guilty until proven otherwise. Start with your most engaged recipients, keep early volumes low and consistent, and let the reputation build over weeks. There is no shortcut - anyone selling one is selling a blacklist entry.</p>\n\n<h2>The plumbing that is not optional</h2>\n<p>SPF, DKIM and DMARC aligned on your sending domain. Reverse DNS that matches. A working abuse@ address and feedback loops with the major providers. These are table stakes; the MTA cannot compensate for their absence.</p>\n\n<h2>Is it worth it?</h2>\n<p>If your volume is modest and your SaaS deliverability is fine, shared infrastructure is fine. If you send at volume, need fine-grained control, or want your deliverability fate in your own hands, owning the MTA layer is the natural end state of self-hosted email - and Kumomta is built for exactly this workload.</p>",
+  "image": "/screens/services.png",
+  "tags": [
+    "Kumomta",
+    "MTA",
+    "Self-hosting",
+    "Deliverability"
+  ]
+}

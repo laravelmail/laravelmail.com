@@ -1,0 +1,15 @@
+{
+  "title": "Small Model for Sorting, Big Model for Writing: Task-Based Routing for Email AI",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "Not every AI task deserves the same model. Routing classification to small local models and drafting to larger ones cuts cost without cutting quality.",
+  "content": "<div class='lead-paragraph'><p>Using one giant model for every AI task is like hiring a surgeon to apply bandages. Email marketing workloads split cleanly into tasks with very different difficulty - and routing each to the right model is the cheapest architecture decision you will make.</p></div>\n\n<h2>The task ladder</h2>\n<p>At the bottom: classification and extraction - bounce reasons, interest tags, sentiment on replies, unsubscribe-signal detection. Small local models handle these at high volume for free. In the middle: transformations - subject line variants, tone rewrites, snippet personalization. Mid-size local models do these well. At the top: original long-form drafting and delicate judgment calls, where a frontier model may still earn its tokens.</p>\n\n<h2>Routing as configuration</h2>\n<p>With Neuron's provider abstraction, routing is a per-agent setting, not a rewrite. The bounce-classifier agent points at the local model; the campaign-copy agent points wherever quality demands. You can move tasks up and down the ladder as models improve - and local models improve every few months.</p>\n\n<h2>The metrics that tell you it works</h2>\n<p>Track acceptance rate per task: how often a human keeps the model's output. When a task's acceptance is high on the small model, it stays local. When it dips, that task climbs the ladder. Let the acceptance data - not assumptions - draw the routing table.</p>\n\n<h2>The compounding benefit</h2>\n<p>Once routing exists, volume stops being scary. Ten thousand classifications cost the same as ten: nothing, on hardware you already own. That is when AI stops being a campaign garnish and becomes infrastructure.</p>",
+  "image": "/screens/ai-workflows.png",
+  "tags": [
+    "Local AI",
+    "Architecture",
+    "Neuron"
+  ]
+}

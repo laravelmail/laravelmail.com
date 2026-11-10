@@ -1,0 +1,15 @@
+{
+  "title": "Your Sending Reputation Is an Asset - Own It",
+  "date": "November 10, 2026",
+  "author": "Juan Rodriguez",
+  "authorRole": "Founder & CEO",
+  "authorAvatar": "/avatar-juan.jpg",
+  "excerpt": "On shared SaaS infrastructure your deliverability is partly your neighbors'. On your own stack, every point of reputation you earn is yours to keep.",
+  "content": "<div class='lead-paragraph'><p>Deliverability is usually discussed as a set of rules: authenticate, warm up, don't spam. Underneath the rules sits something more valuable - a reputation attached to your domain and your IPs. The question is who that reputation belongs to.</p></div>\n\n<h2>Reputation follows the sender identity</h2>\n<p>Inbox providers score your sending domain and your sending IPs. On shared platforms, the IPs are shared with thousands of other senders; your score is diluted by the worst behavior the platform tolerates that week. On your own infrastructure, the reputation you see is the reputation you earned - no mystery dips caused by someone else's campaign.</p>\n\n<h2>Earned reputation is portable</h2>\n<p>A well-warmed domain with clean authentication (SPF, DKIM, DMARC) and a history of wanted mail is an asset with real value. When you own the stack, that asset stays with you if you change tools. Your sending history is not locked inside a vendor's panel.</p>\n\n<h2>The discipline that builds it</h2>\n<p>Consistent volume, engaged recipients, fast handling of bounces and complaints, and no sudden spikes. None of this is exotic - but it compounds daily, and compounding is why reputation is worth owning. A year of clean sending on your own domain is hard to buy and easy to keep.</p>\n\n<h2>What self-hosting adds</h2>\n<p>Full visibility. Your own logs, your own bounce data, your own complaint feedback loops. When a campaign underperforms you can diagnose it from primary evidence instead of opening a support ticket and hoping.</p>",
+  "image": "/screens/sending-services.png",
+  "tags": [
+    "Deliverability",
+    "Self-hosting",
+    "Reputation"
+  ]
+}
