@@ -57,7 +57,7 @@ const { page, post } = Astro.props;
                         {post.data.title}
                     </h1>
                     <div class="flex items-center justify-center gap-4">
-                        <img src="https://avatars.githubusercontent.com/u/2276408?v=4" alt={post.data.author} class="w-12 h-12 rounded-full border-2 border-brand-primary" />
+                        <img src={post.data.authorAvatar === "/favicon.svg" ? post.data.authorAvatar : "https://avatars.githubusercontent.com/u/2276408?v=4"} alt={post.data.authorAvatar === "/favicon.svg" ? "Laravel Mail" : post.data.author} class="w-12 h-12 rounded-full border-2 border-brand-primary" />
                         <div class="text-left">
                             <p class="text-white font-bold">{post.data.author}</p>
                             <p class="text-gray-400 text-sm">{post.data.authorRole}</p>
