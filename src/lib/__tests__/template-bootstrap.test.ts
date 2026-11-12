@@ -11,3 +11,6 @@ it('allows a client retry rather than returning a false empty library on cold fa
 it('serves the last successful public page during a transient upstream failure',async()=>{
  vi.useFakeTimers();try {const {getTemplateBootstrap}=await import('../api/template-bootstrap');const first=await getTemplateBootstrap();vi.advanceTimersByTime(61000);mocks.listTemplates.mockRejectedValueOnce(new Error('temporary'));expect(await getTemplateBootstrap()).toEqual(first);} finally {vi.useRealTimers();}
 });
+it('does not discard the page if optional filter metadata is unavailable',async()=>{
+ mocks.getIndustries.mockRejectedValueOnce(new Error('metadata'));const {getTemplateBootstrap}=await import('../api/template-bootstrap');expect((await getTemplateBootstrap())?.initialTemplates).toHaveLength(1);
+});

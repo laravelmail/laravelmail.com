@@ -5,7 +5,7 @@ let cached: {value: Awaited<ReturnType<typeof load>>, expires: number} | undefin
 let pending: ReturnType<typeof load> | undefined;
 async function load() {
   const [listing, industries, messageTypes] = await Promise.all([
-    listTemplates({page:1,page_size:12}), getIndustries(), getMessageTypes(),
+    listTemplates({page:1,page_size:12}), getIndustries().catch(() => []), getMessageTypes().catch(() => []),
   ]);
   return {initialTemplates:listing.templates,initialTotal:listing.total,initialIndustries:industries,initialMessageTypes:messageTypes};
 }
