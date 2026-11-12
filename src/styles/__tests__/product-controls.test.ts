@@ -25,3 +25,8 @@ it('keeps ORW top-progress styling and template request cancellation wiring',()=
  expect(css).toContain('height:3px');expect(css).toContain('linear-gradient(90deg,#1d9edf 0%,#5fbc54 100%)');expect(css).toContain('prefers-reduced-motion');
  expect(browser).toContain('props.initialTemplates !== undefined');expect(browser).toContain('controller.abort()');expect(browser).toContain('lm:progress-start');expect(browser).toContain('lm:progress-end');
 });
+it('pre-renders template shells without waiting on an upstream API',()=>{
+ for(const path of ['../../pages/templates.astro','../../pages/[lang]/templates.astro']) {
+  const page=readFileSync(new URL(path,import.meta.url),'utf8');expect(page).toContain('export const prerender = true');expect(page).not.toContain('await getTemplateBootstrap');
+ }
+});

@@ -1,15 +1,13 @@
 ---
+export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ProductIntro from "../components/marketing/ProductIntro.astro";
 import TemplateBrowser from "../components/templates/TemplateBrowser";
-import { getTemplateBootstrap } from "../lib/api/template-bootstrap";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const initialData = await getTemplateBootstrap();
-Astro.response.headers.set("Cache-Control", "public, max-age=30, s-maxage=60, stale-while-revalidate=300");
 ---
 
 <Layout
@@ -20,7 +18,6 @@ Astro.response.headers.set("Cache-Control", "public, max-age=30, s-maxage=60, st
     <section class="lm-tool-section" id="template-library"><div class="lm-shell"><div class="lm-tool-panel"><h2 class="lm-tool-title">Template library</h2><p class="lm-muted mb-6">Search and filter designs, then open a template for a closer look.</p>
             <TemplateBrowser
                 client:load
-                {...initialData}
             />
     </div></div></section>
 </Layout>

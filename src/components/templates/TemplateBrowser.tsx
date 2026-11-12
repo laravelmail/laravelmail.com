@@ -24,7 +24,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
   const [messageType, setMessageType] = useState("");
   const [industries, setIndustries] = useState<string[]>(props.initialIndustries || []);
   const [messageTypes, setMessageTypes] = useState<string[]>(props.initialMessageTypes || []);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(props.initialTemplates === undefined);
   const [error, setError] = useState<string | null>(null);
   const [committedSearch, setCommittedSearch] = useState("");
   const [retry, setRetry] = useState(0);
@@ -118,7 +118,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
         </div>
       </div>
 
-      {!loading && !error && props.initialTemplates && (
+      {!loading && !error && (
         <p className="text-gray-400 text-sm mb-6">
           Showing {templates.length} of {total} templates
         </p>
