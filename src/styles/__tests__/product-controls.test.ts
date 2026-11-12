@@ -20,3 +20,8 @@ describe('hydrated template controls',()=>{it('keeps search usable and adjacent 
 });});
 
 it('applies shared geometry to validation actions and inputs',()=>{expect(css).toContain('.lm-validation-workbench button {box-sizing:border-box;');expect(css).toContain('.lm-validation-workbench input:not([type=checkbox]):not([type=radio])');});
+it('keeps ORW top-progress styling and template request cancellation wiring',()=>{
+ const browser=readFileSync(new URL('../../components/templates/TemplateBrowser.tsx',import.meta.url),'utf8');
+ expect(css).toContain('height:3px');expect(css).toContain('linear-gradient(90deg,#1d9edf 0%,#5fbc54 100%)');expect(css).toContain('prefers-reduced-motion');
+ expect(browser).toContain('props.initialTemplates !== undefined');expect(browser).toContain('controller.abort()');expect(browser).toContain('lm:progress-start');expect(browser).toContain('lm:progress-end');
+});

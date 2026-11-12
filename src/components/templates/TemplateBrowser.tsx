@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "preact/hooks";
+import { useState, useEffect, useRef } from "preact/hooks";
 import {
   listTemplates,
   getIndustries,
@@ -25,46 +25,30 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
   const [industries, setIndustries] = useState<string[]>(props.initialIndustries || []);
   const [messageTypes, setMessageTypes] = useState<string[]>(props.initialMessageTypes || []);
   const [loading, setLoading] = useState(false);
-  const [initialLoad] = useState(!props.initialTemplates);
   const [error, setError] = useState<string | null>(null);
-  const [searchCommit, setSearchCommit] = useState(0);
-
+  const [committedSearch, setCommittedSearch] = useState("");
+  const [retry, setRetry] = useState(0);
+  const firstRender = useRef(true);
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
-  const fetchTemplates = useCallback(async () => {
+  useEffect(() => {
+    // SSR already supplied this exact first page. Do not fetch it twice.
+    if (firstRender.current && props.initialTemplates !== undefined) {
+      firstRender.current = false;
+      return;
+    }
+    firstRender.current = false;
+    const controller = new AbortController();
+    const progressKey = `templates-${Date.now()}-${Math.random()}`;
+    window.dispatchEvent(new CustomEvent('lm:progress-start', {detail:progressKey}));
     setLoading(true);
     setError(null);
-    try {
-      const data = await listTemplates({
-        page,
-        page_size: pageSize,
-        search: search || null,
-        industry: industry || null,
-        message_type: messageType || null,
-      });
-      setTemplates(data.templates);
-      setTotal(data.total);
-    } catch (e: any) {
-      setError(e.message || "Failed to load templates");
-      if (templates.length === 0) {
-        setLoading(false);
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, [page, pageSize, search, industry, messageType]);
-
-  useEffect(() => {
-    if (initialLoad) {
-      fetchTemplates();
-    }
-  }, [initialLoad, fetchTemplates]);
-
-  useEffect(() => {
-    if (!initialLoad) {
-      fetchTemplates();
-    }
-  }, [page, industry, messageType, searchCommit]);
+    listTemplates({page,page_size:pageSize,search:committedSearch || null,industry:industry || null,message_type:messageType || null}, controller.signal)
+      .then(data => { if (!controller.signal.aborted) {setTemplates(data.templates);setTotal(data.total);} })
+      .catch(error => {if (!controller.signal.aborted) setError(error.message || "Failed to load templates");})
+      .finally(() => {window.dispatchEvent(new CustomEvent('lm:progress-end', {detail:progressKey}));if (!controller.signal.aborted) setLoading(false);});
+    return () => {controller.abort();window.dispatchEvent(new CustomEvent('lm:progress-end', {detail:progressKey}));};
+  }, [page, industry, messageType, committedSearch, retry]);
 
   useEffect(() => {
     if (!props.initialIndustries) {
@@ -75,9 +59,6 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
     }
   }, []);
 
-  useEffect(() => {
-    setPage(1);
-  }, [industry, messageType]);
 
   function formatName(name: string): string {
     return name
@@ -109,14 +90,14 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
               type="text"
               value={search}
               onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
-              onKeyDown={(e) => { if (e.key === "Enter") { setPage(1); setSearchCommit(c => c + 1); } }}
+              onKeyDown={(e) => { if (e.key === "Enter") { setPage(1); setCommittedSearch(search); } }}
               placeholder="Search templates..."
               className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-brand-primary/50 focus:ring-1 focus:ring-brand-primary/30 transition-all"
             />
           </div>
           <select
             value={industry}
-            onChange={(e) => setIndustry((e.target as HTMLSelectElement).value)}
+            onChange={(e) => {setPage(1);setIndustry((e.target as HTMLSelectElement).value);}}
             className="px-4 py-3 bg-brand-bg-card/80 border border-white/15 rounded-xl text-white shadow-lg shadow-black/10 focus:outline-none focus:border-brand-primary/60 focus:ring-2 focus:ring-brand-primary/20 transition-all min-w-[180px] appearance-none"
           >
             <option value="" className="bg-brand-bg-card text-white">All Industries</option>
@@ -126,7 +107,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
           </select>
           <select
             value={messageType}
-            onChange={(e) => setMessageType((e.target as HTMLSelectElement).value)}
+            onChange={(e) => {setPage(1);setMessageType((e.target as HTMLSelectElement).value);}}
             className="px-4 py-3 bg-brand-bg-card/80 border border-white/15 rounded-xl text-white shadow-lg shadow-black/10 focus:outline-none focus:border-brand-primary/60 focus:ring-2 focus:ring-brand-primary/20 transition-all min-w-[180px] appearance-none"
           >
             <option value="" className="bg-brand-bg-card text-white">All Types</option>
@@ -154,7 +135,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
           <p className="text-red-400 font-semibold">Error loading templates: {error}</p>
           <button
             data-lm-action="true"
-            onClick={fetchTemplates}
+            onClick={() => setRetry(value => value + 1)}
             className="mt-4 px-6 py-2 bg-brand-primary/20 text-brand-primary rounded-xl hover:bg-brand-primary/30 transition-all font-semibold"
           >
             Try Again
@@ -169,7 +150,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
               <p className="text-gray-400 text-lg">No templates found matching your criteria.</p>
               <button
             data-lm-action="true"
-                onClick={() => { setSearch(""); setIndustry(""); setMessageType(""); setPage(1); setSearchCommit(c => c + 1); }}
+                onClick={() => { setSearch(""); setCommittedSearch(""); setIndustry(""); setMessageType(""); setPage(1); }}
                 className="mt-4 text-brand-primary hover:underline font-semibold"
               >
                 Clear filters

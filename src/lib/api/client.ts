@@ -57,6 +57,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
 
 export async function listTemplates(
   params: ListTemplatesParams = {},
+  signal?: AbortSignal,
 ): Promise<TemplatesListResponse> {
   const searchParams = new URLSearchParams();
   if (params.page !== undefined) searchParams.set("page", String(params.page));
@@ -67,7 +68,7 @@ export async function listTemplates(
   if (params.tag) searchParams.set("tag", params.tag);
 
   const url = templatesApiUrl(`/api/templates${searchParams.toString() ? "?" + searchParams.toString() : ""}`);
-  const response = await fetch(url);
+  const response = await fetch(url, {signal: signal ? AbortSignal.any([signal, AbortSignal.timeout(8000)]) : AbortSignal.timeout(8000)});
   return handleResponse<TemplatesListResponse>(response);
 }
 
@@ -93,12 +94,12 @@ export async function getTemplateContent(slug: string): Promise<string> {
 }
 
 export async function getIndustries(): Promise<string[]> {
-  const response = await fetch(templatesApiUrl("/api/industries"));
+  const response = await fetch(templatesApiUrl("/api/industries"), {signal:AbortSignal.timeout(8000)});
   return handleResponse<string[]>(response);
 }
 
 export async function getMessageTypes(): Promise<string[]> {
-  const response = await fetch(templatesApiUrl("/api/message-types"));
+  const response = await fetch(templatesApiUrl("/api/message-types"), {signal:AbortSignal.timeout(8000)});
   return handleResponse<string[]>(response);
 }
 

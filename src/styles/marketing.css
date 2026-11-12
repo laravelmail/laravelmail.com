@@ -95,3 +95,12 @@ main .text-brand-primary{color:#b58aff}
 .lm-validation-workbench button {box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:144px;min-width:0;max-width:100%;height:var(--control-height);min-height:var(--control-height);max-height:var(--control-height);padding:0 15px;border-radius:var(--control-radius);font:var(--control-weight) var(--control-font)/1.35 system-ui,sans-serif;}
 .lm-validation-workbench input:not([type=checkbox]):not([type=radio]),.lm-validation-workbench select {box-sizing:border-box;min-width:0;height:var(--control-height);min-height:var(--control-height);border-radius:var(--control-radius);font-size:var(--control-font);padding-top:0;padding-bottom:0;}
 @media(max-width:900px) {.lm-validation-workbench .flex.items-start.justify-between {flex-wrap:wrap;}.lm-validation-workbench .flex.flex-col.gap-3 {flex-direction:column;}}
+/* ORW navigation bar: fixed 3px blue-to-green gradient with the same glow. */
+#lm-navigation-progress {position:fixed;inset:0 0 auto;z-index:100000;pointer-events:none;height:3px;opacity:0;}
+#lm-navigation-progress::before {content:"";display:block;height:100%;width:0;background:linear-gradient(90deg,#1d9edf 0%,#5fbc54 100%);box-shadow:0 0 10px rgba(29,158,223,.5);}
+#lm-navigation-progress[data-state=loading] {opacity:1;}
+#lm-navigation-progress[data-state=loading]::before {animation:lm-navigation-loading 5s ease-out forwards;}
+#lm-navigation-progress[data-state=complete] {opacity:0;transition:opacity .3s;}
+#lm-navigation-progress[data-state=complete]::before {width:100%;}
+@keyframes lm-navigation-loading {0%{width:0}10%{width:30%}40%{width:70%}100%{width:90%}}
+@media(prefers-reduced-motion:reduce) {#lm-navigation-progress[data-state=loading]::before {animation:none;width:70%;}}
