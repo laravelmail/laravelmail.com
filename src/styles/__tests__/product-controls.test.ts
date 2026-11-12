@@ -18,3 +18,5 @@ describe('hydrated template controls',()=>{it('keeps search usable and adjacent 
  expect(browser).toContain('lm-template-filters');expect(browser.match(/data-lm-action="true"/g)).toHaveLength(4);
  expect(css).toContain('grid-template-columns:minmax(220px,1fr)');expect(css).toContain('[data-lm-action="true"]');
 });});
+
+it('applies shared geometry to validation actions and inputs',()=>{expect(css).toContain('.lm-validation-workbench button {box-sizing:border-box;');expect(css).toContain('.lm-validation-workbench input:not([type=checkbox]):not([type=radio])');});
