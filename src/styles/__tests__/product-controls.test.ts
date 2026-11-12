@@ -9,5 +9,6 @@ describe('dark default and equal product controls',()=>{
  it('uses the same desktop and mobile sizes as the app workspace',()=>{
   for(const token of ['--control-height:40px','--control-height:44px','--control-radius:9px','width:144px','--control-font:13px','--control-weight:500'])expect(css).toContain(token);
   expect(css).toContain('.lm-actions>.lm-button {flex:0 0 144px;}');
+  expect(css).toContain('.lm-button.lm-header-cta {display:none;}');
  });
 });

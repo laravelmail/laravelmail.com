@@ -81,3 +81,5 @@ main .text-brand-primary{color:#b58aff}
 .lm-actions>.lm-button {flex:0 0 144px;}
 .btn.w-full {width:100%;}
 @media(max-width:767px) {:root {--control-height:44px;}}
+/* Do not let the shared display rule reveal the desktop-only header CTA. */
+@media(max-width:900px) {.lm-button.lm-header-cta {display:none;}}
