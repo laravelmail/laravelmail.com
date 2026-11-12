@@ -89,7 +89,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
 
   return (
     <div>
-      <div className="mb-10 space-y-4">
+      <div className="lm-template-filters mb-10 space-y-4">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
             <svg
@@ -153,6 +153,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
         <div className="max-w-2xl mx-auto p-8 bg-red-500/10 border border-red-500/20 rounded-2xl text-center">
           <p className="text-red-400 font-semibold">Error loading templates: {error}</p>
           <button
+            data-lm-action="true"
             onClick={fetchTemplates}
             className="mt-4 px-6 py-2 bg-brand-primary/20 text-brand-primary rounded-xl hover:bg-brand-primary/30 transition-all font-semibold"
           >
@@ -167,6 +168,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
             <div className="text-center py-20">
               <p className="text-gray-400 text-lg">No templates found matching your criteria.</p>
               <button
+            data-lm-action="true"
                 onClick={() => { setSearch(""); setIndustry(""); setMessageType(""); setPage(1); setSearchCommit(c => c + 1); }}
                 className="mt-4 text-brand-primary hover:underline font-semibold"
               >
@@ -230,8 +232,9 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
               </div>
 
               {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 mt-12">
+                <div className="lm-template-pagination flex items-center justify-center gap-4 mt-12">
                   <button
+            data-lm-action="true"
                     onClick={() => setPage((p) => Math.max(1, p - 1))}
                     disabled={page <= 1}
                     className="px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-all"
@@ -242,6 +245,7 @@ export default function TemplateBrowser(props: TemplateBrowserProps) {
                     Page {page} of {totalPages}
                   </span>
                   <button
+            data-lm-action="true"
                     onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                     disabled={page >= totalPages}
                     className="px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/10 transition-all"

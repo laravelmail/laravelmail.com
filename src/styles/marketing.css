@@ -83,3 +83,11 @@ main .text-brand-primary{color:#b58aff}
 @media(max-width:767px) {:root {--control-height:44px;}}
 /* Do not let the shared display rule reveal the desktop-only header CTA. */
 @media(max-width:900px) {.lm-button.lm-header-cta {display:none;}}
+
+/* The hydrated template library shares product control geometry. The search
+   must retain useful width when its two native selects have long options. */
+.lm-template-filters>div:first-child {display:grid;grid-template-columns:minmax(220px,1fr) minmax(160px,.6fr) minmax(160px,.6fr);gap:16px;}
+.lm-template-filters input,.lm-template-filters select {box-sizing:border-box;width:100%;min-width:0;height:var(--control-height);min-height:var(--control-height);border-radius:var(--control-radius);font-size:var(--control-font);padding-top:0;padding-bottom:0;}
+[data-lm-action="true"] {box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;width:144px;height:var(--control-height);min-height:var(--control-height);padding:0 15px;border:1px solid #3a4352;border-radius:var(--control-radius);background:#202630;color:#cdd4e1;font:var(--control-weight) var(--control-font)/1.35 system-ui,sans-serif;}
+.lm-template-pagination {flex-wrap:wrap;}
+@media(max-width:767px) {.lm-template-filters>div:first-child {grid-template-columns:minmax(0,1fr);}.lm-template-pagination {gap:8px;}.lm-template-pagination>span {order:-1;flex-basis:100%;text-align:center;}}

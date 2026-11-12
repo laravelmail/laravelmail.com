@@ -12,3 +12,9 @@ describe('dark default and equal product controls',()=>{
   expect(css).toContain('.lm-button.lm-header-cta {display:none;}');
  });
 });
+
+describe('hydrated template controls',()=>{it('keeps search usable and adjacent pagination equal',()=>{
+ const browser=readFileSync(new URL('../../components/templates/TemplateBrowser.tsx',import.meta.url),'utf8');
+ expect(browser).toContain('lm-template-filters');expect(browser.match(/data-lm-action="true"/g)).toHaveLength(4);
+ expect(css).toContain('grid-template-columns:minmax(220px,1fr)');expect(css).toContain('[data-lm-action="true"]');
+});});
