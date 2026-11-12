@@ -68,3 +68,16 @@ main a:not([class*="bg-"]):not(.btn):not(.lm-button):not(.lm-card-image):not(.lm
 main .text-brand-primary{color:#b58aff}
 
 .lm-resource{display:flex;align-items:center;justify-content:space-between;gap:18px;text-decoration:none!important;min-height:84px;font-weight:700}.lm-resource:hover{border-color:#a78bfa88;background:#7c3aed11}
+
+/* Shared product action dimensions. Text actions match Mail and SMTP; icon
+   controls and full-width form actions keep their layout role. */
+:root {--control-height:40px;--control-radius:9px;--control-font:13px;--control-weight:500;}
+.lm-button,.btn {box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:7px;width:144px;min-width:0;max-width:100%;height:var(--control-height);min-height:var(--control-height);max-height:var(--control-height);padding:0 15px;border-radius:var(--control-radius);font:var(--control-weight) var(--control-font)/1.35 system-ui,sans-serif;text-align:center;white-space:normal;flex-shrink:0;box-shadow:none;}
+.lm-button {background:#7860df;border-color:#927cf0;color:#fff;}
+.lm-button-outline {background:#202630;border-color:#3a4352;color:#cdd4e1;}
+.lm-button:hover {background:#8a72ed;transform:none;}
+.lm-button-outline:hover {background:#303847;}
+.lm-button:focus-visible,.btn:focus-visible {outline:2px solid #baa9ff;outline-offset:3px;}
+.lm-actions>.lm-button {flex:0 0 144px;}
+.btn.w-full {width:100%;}
+@media(max-width:767px) {:root {--control-height:44px;}}
