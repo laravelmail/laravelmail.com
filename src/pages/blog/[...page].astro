@@ -5,6 +5,7 @@ import CTASection from "../../components/CTASection.astro";
 import BlogLeadscaptainPopup from "../../components/BlogLeadscaptainPopup.astro";
 import BlogListing from "../../components/BlogListing.astro";
 import { injectSeoLinks } from "../../scripts/seo-utils";
+import { demoteContentH1, truncateAtWord } from "../../scripts/seo-text";
 import { marked } from 'marked';
 
 export const prerender = true;
@@ -24,10 +25,15 @@ export async function getStaticPaths({ paginate }) {
 }
 
 const { page, post } = Astro.props;
+
+// Keep the SERP title under ~60 chars: drop the brand suffix first, truncate as a last resort.
+const postTitle = post ? post.data.title : '';
+const postFullTitle = `${postTitle} | Laravel Mail Blog`;
+const postPageTitle = postFullTitle.length <= 60 ? postFullTitle : truncateAtWord(postTitle, 60);
 ---
 
 {post ? (
-    <Layout title={`${post.data.title} | Laravel Mail Blog`} description={post.data.excerpt}>
+    <Layout title={postPageTitle} description={post.data.excerpt}>
         <script type="application/ld+json" set:html={JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
@@ -78,7 +84,7 @@ const { page, post } = Astro.props;
                         prose-a:text-brand-primary prose-a:no-underline hover:prose-a:underline
                         prose-img:rounded-2xl
                         prose-blockquote:border-l-brand-primary prose-blockquote:bg-white/5 prose-blockquote:py-2 prose-blockquote:px-8 prose-blockquote:rounded-r-xl">
-                        <Fragment set:html={injectSeoLinks(marked.parse(post.data.content) as string)} />
+                        <Fragment set:html={injectSeoLinks(demoteContentH1(marked.parse(post.data.content) as string))} />
                     </div>
 
                     <div class="mt-16 pt-8 border-t border-white/10 flex flex-wrap gap-2">

@@ -20,6 +20,7 @@ import "@fontsource/nunito/600.css";
 import "@fontsource/nunito/700.css";
 import favIcon from "../assets/favicon.png";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { truncateAtWord } from "../scripts/seo-text";
 
 interface Props {
   title?: string;
@@ -38,6 +39,11 @@ const {
   keywords = "laravel mail, email marketing laravel, laravel email marketing, self-hosted email marketing, laravel mail platform, laravel smtp, laravel queue mail, laravel notifications, email marketing platform, email templates, newsletter templates, marketing automation",
   ogImage = "/logo.svg",
 } = Astro.props;
+
+// Keep tags within search-engine display limits (Ahrefs: titles > 60 chars and
+// meta descriptions > 160 chars get flagged and are truncated in the SERP anyway).
+const safeTitle = truncateAtWord(title, 60);
+const safeDescription = truncateAtWord(description, 160);
 ---
 
 <!doctype html>
@@ -48,8 +54,8 @@ const {
       document.documentElement.classList.add("js");
     </script>
     <meta charset="UTF-8" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{safeTitle}</title>
+    <meta name="description" content={safeDescription} />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, minimum-scale=1, maximum-scale=5" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -99,6 +105,11 @@ const {
               />
             );
           })}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={new URL(pathWithoutLocale, Astro.site)}
+          />
         </>
       );
     })()}
@@ -138,19 +149,12 @@ const {
         "operatingSystem": "Web",
         "applicationCategory": "BusinessApplication",
         "keywords": "laravel mail, email marketing laravel, laravel email, laravel smtp, laravel mail facade, self-hosted email marketing, laravel notifications, laravel queue mail",
-
-        "hasPart": [
-          {
-            "@type": "SoftwareApplication",
-            "name": "AI Marketing Agents",
-            "description": "AI-powered marketing agents for automated campaigns"
-          },
-          {
-            "@type": "SoftwareApplication",
-            "name": "Verified B2B Customers",
-            "description": "Access to a comprehensive verified leads database"
-          }
-        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Laravel Mail is free and open-source (MIT)."
+        },
         "screenshot": "https://laravelmail.com/og-image.png",
         "url": "https://laravelmail.com",
         "datePublished": "2023-10-01",
@@ -175,18 +179,18 @@ const {
         "@type": "Organization",
         "name": "Laravel Company",
         "url": "https://laravelmail.com",
-        "logo": "logo.svg"
+        "logo": "https://laravelmail.com/logo.svg"
       }
     </script>
 
     <!-- Open Graph -->
     <meta
       property="og:title"
-      content={title}
+      content={safeTitle}
     />
     <meta
       property="og:description"
-      content={description}
+      content={safeDescription}
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
@@ -196,7 +200,7 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content={title}
+      content={safeTitle}
     />
     <meta
       name="twitter:description"

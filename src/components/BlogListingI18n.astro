@@ -2,6 +2,7 @@
 
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import Logo from "../assets/logo.svg";
+import { withTrailingSlash } from "../scripts/seo-text";
 
 const { page, lang } = Astro.props;
 ---
@@ -21,7 +22,7 @@ const { page, lang } = Astro.props;
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {page.data.map((post: any) => (
                 <article class="flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-brand-primary/50 transition-all duration-300 group">
-                    <a href={getRelativeLocaleUrl(lang, `/blog/${post.id.replace('.json', '')}`)} class="block overflow-hidden aspect-video relative bg-brand-bg-darker flex items-center justify-center p-12">
+                    <a href={getRelativeLocaleUrl(lang, `/blog/${post.id.replace('.json', '')}/`)} class="block overflow-hidden aspect-video relative bg-brand-bg-darker flex items-center justify-center p-12">
                         <img
                             src={Logo.src}
                             alt={post.data.title}
@@ -39,7 +40,7 @@ const { page, lang } = Astro.props;
                             <span class="text-xs text-gray-500">{post.data.date}</span>
                         </div>
                         <h2 class="text-2xl font-bold text-white mb-3 group-hover:text-brand-primary transition-colors">
-                            <a href={getRelativeLocaleUrl(lang, `/blog/${post.id.replace('.json', '')}`)}>{post.data.title}</a>
+                            <a href={getRelativeLocaleUrl(lang, `/blog/${post.id.replace('.json', '')}/`)}>{post.data.title}</a>
                         </h2>
                         <p class="text-gray-400 text-sm mb-6 flex-grow line-clamp-3">
                             {post.data.excerpt}
@@ -61,13 +62,13 @@ const { page, lang } = Astro.props;
         {page.total > 1 && (
             <nav class="pagination flex items-center justify-center gap-2 mt-16" aria-label="Blog pagination">
                 {page.url.prev && (
-                    <a href={page.url.prev} class="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-white transition-colors">
+                    <a href={withTrailingSlash(page.url.prev)} class="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-white transition-colors">
                         ← Previous
                     </a>
                 )}
                 {Array.from({ length: page.total }, (_, i) => i + 1).map((pageNum: number) => (
                     <a
-                        href={pageNum === 1 ? getRelativeLocaleUrl(lang, '/blog') : getRelativeLocaleUrl(lang, `/blog/${pageNum}`)}
+                        href={pageNum === 1 ? getRelativeLocaleUrl(lang, '/blog/') : getRelativeLocaleUrl(lang, `/blog/${pageNum}/`)}
                         class:list={[
                             "min-w-[40px] h-10 px-3 flex items-center justify-center text-sm font-medium rounded-lg transition-colors",
                             pageNum === page.currentPage
@@ -79,7 +80,7 @@ const { page, lang } = Astro.props;
                     </a>
                 ))}
                 {page.url.next && (
-                    <a href={page.url.next} class="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-white transition-colors">
+                    <a href={withTrailingSlash(page.url.next)} class="px-4 py-2 text-sm font-medium text-gray-400 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:text-white transition-colors">
                         Next →
                     </a>
                 )}

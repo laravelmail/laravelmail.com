@@ -2,8 +2,9 @@
 import {getRelativeLocaleUrl} from 'astro:i18n';
 import {getLangFromUrl} from '../../i18n/utils';
 import PlatformShowcase from '../PlatformShowcase.astro';
+import {withTrailingSlash} from '../../scripts/seo-text';
 const lang=getLangFromUrl(Astro.url);
-const url=(path:string)=>getRelativeLocaleUrl(lang,path);
+const url=(path:string)=>withTrailingSlash(getRelativeLocaleUrl(lang,path));
 // Existing product destinations are retained. These are related products, not
 // Laravel Mail features or an assertion that their logos are screenshots.
 const products=[

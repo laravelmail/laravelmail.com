@@ -1,8 +1,9 @@
 ---
 import {getRelativeLocaleUrl} from 'astro:i18n';
 import {getLangFromUrl} from '../../i18n/utils';
+import {withTrailingSlash} from '../../scripts/seo-text';
 const lang=getLangFromUrl(Astro.url);
-const url=(path: string)=>getRelativeLocaleUrl(lang,path);
+const url=(path: string)=>withTrailingSlash(getRelativeLocaleUrl(lang,path));
 const products=[
  {name:'Email templates',eyebrow:'01 / DESIGN',body:'Start with a responsive template. Browse the library, preview the design and make it your own.',image:'templates',href:'/templates',cta:'Explore templates',alt:'Laravel Mail starter template library with announcement, newsletter and welcome designs'},
  {name:'Email validation',eyebrow:'02 / CHECK',body:'Inspect email syntax, domains and risk signals before a campaign. Review the verdict rather than treating any check as a delivery guarantee.',image:'validation',href:'/validation',cta:'Explore validation',alt:'Laravel Mail email validation screen with health status, address checker and domain lists'},

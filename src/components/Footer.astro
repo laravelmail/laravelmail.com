@@ -1,9 +1,10 @@
 ---
 import Brand from './marketing/Brand.astro';
 import { getLangFromUrl } from '../i18n/utils';
+import { withTrailingSlash } from '../scripts/seo-text';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const lang = getLangFromUrl(Astro.url);
-const url = (path: string) => getRelativeLocaleUrl(lang, path);
+const url = (path: string) => withTrailingSlash(getRelativeLocaleUrl(lang, path));
 const groups = [
  {title:'Platform', links:[['Product','/product'],['Solutions','/solutions'],['Templates','/templates'],['Validation','/validation'],['Email Agent','/chat'],['Demo','/demo'],['Install','/early-access'],['Deploy','/deploy']]},
  {title:'Explore', links:[['Blog','/blog'],['Email Marketing','/email-marketing'],['Automation','/email-automation'],['Deliverability','/email-deliverability'],['Mailchimp Alternative','/mailchimp-alternative'],['KumoMTA','/kumomta'],['Careers','/careers'],['Contact','/contact']]},
@@ -20,6 +21,6 @@ const groups = [
    {groups.map(g => <div><h2>{g.title}</h2><ul>{g.links.map(([label,path])=><li><a href={url(path)}>{label}</a></li>)}</ul></div>)}
   </div>
   <div class="lm-footer-bottom"><span>© {new Date().getFullYear()} Laravel Mail · <a href="https://laravelcompany.com">Laravel Company</a></span><div><a href="https://github.com/laravelmail">GitHub</a><a href="https://www.linkedin.com/company/laravelmail">LinkedIn</a><a href="/sitemap-index.xml">Sitemap</a></div></div>
-  <nav class="lm-languages" aria-label="Language"><a href="/" lang="en">English</a><a href="/es" lang="es">Español</a><a href="/ru" lang="ru">Русский</a><a href="/zh" lang="zh">中文</a></nav>
+  <nav class="lm-languages" aria-label="Language"><a href="/" lang="en">English</a><a href="/es/" lang="es">Español</a><a href="/ru/" lang="ru">Русский</a><a href="/zh/" lang="zh">中文</a></nav>
  </div>
 </footer>

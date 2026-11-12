@@ -1,9 +1,10 @@
 ---
 import Brand from './marketing/Brand.astro';
 import { getLangFromUrl } from '../i18n/utils';
+import { withTrailingSlash } from '../scripts/seo-text';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const lang = getLangFromUrl(Astro.url);
-const url = (path: string) => getRelativeLocaleUrl(lang, path);
+const url = (path: string) => withTrailingSlash(getRelativeLocaleUrl(lang, path));
 const links = [['Product','/product'],['Solutions','/solutions'],['Templates','/templates'],['Validation','/validation'],['Email Agent','/chat'],['Blog','/blog']];
 ---
 <header class="lm-header">

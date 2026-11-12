@@ -5,6 +5,7 @@ import CTASection from "../../../components/CTASection.astro";
 import { injectSeoLinks } from "../../../scripts/seo-utils";
 import { marked } from 'marked';
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import { demoteContentH1, truncateAtWord } from "../../../scripts/seo-text";
 
 import { languages } from "../../../i18n/ui";
 
@@ -33,7 +34,7 @@ const t = useTranslations(lang as any);
 let { title, date, author, authorRole, authorAvatar, excerpt, content, image, tags } = post.data;
 
 // Inject internal SEO links
-content = injectSeoLinks(marked.parse(content) as string);
+content = injectSeoLinks(demoteContentH1(marked.parse(content) as string));
 
 const blogPostSchema = {
     "@context": "https://schema.org",
@@ -66,7 +67,7 @@ const blogPostSchema = {
 };
 ---
 
-<Layout title={`${title} | Laravel Mail Blog`} description={excerpt}>
+<Layout title={`${title} | Laravel Mail Blog`.length <= 60 ? `${title} | Laravel Mail Blog` : truncateAtWord(title, 60)} description={excerpt}>
     <script type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
     <article class="pt-32 pb-20 bg-brand-bg">
         <div class="container-custom">
