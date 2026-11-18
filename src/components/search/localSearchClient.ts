@@ -48,10 +48,18 @@ let pending: AbortController | null = null
 async function queryApi(query: string): Promise<SearchApiHit[]> {
     pending?.abort()
     pending = new AbortController()
+    const { signal } = pending
     // Aborted or offline fetches reject: keep the popup quiet and empty.
-    const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
-        signal: pending.signal,
+    let res = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
+        signal,
     }).catch(() => null)
+    if (res?.status === 404) {
+        // Sites built with trailingSlash: "always" mount the endpoint at
+        // /api/search/ instead.
+        res = await fetch(`/api/search/?q=${encodeURIComponent(query)}`, {
+            signal,
+        }).catch(() => null)
+    }
     if (!res?.ok) {
         return []
     }
