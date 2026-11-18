@@ -2,3 +2,6 @@
 dist/
 node_modules/
 .wrangler/
+
+# Blog search index - generated at build time
+public/search-index.json

@@ -3,6 +3,7 @@ import Brand from './marketing/Brand.astro';
 import { getLangFromUrl } from '../i18n/utils';
 import { withTrailingSlash } from '../scripts/seo-text';
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import AlgoliaDocSearch from './search/AlgoliaDocSearch';
 const lang = getLangFromUrl(Astro.url);
 const url = (path: string) => withTrailingSlash(getRelativeLocaleUrl(lang, path));
 const links = [['Product','/product'],['Solutions','/solutions'],['Templates','/templates'],['Validation','/validation'],['Email Agent','/chat'],['Blog','/blog']];
@@ -13,6 +14,7 @@ const links = [['Product','/product'],['Solutions','/solutions'],['Templates','/
     <nav class="lm-desktop-nav" aria-label="Main navigation">
       {links.map(([label,path]) => <a href={url(path)} aria-current={Astro.url.pathname.replace(/\/$/,'') === url(path).replace(/\/$/,'') ? 'page' : undefined}>{label}</a>)}
     </nav>
+    <AlgoliaDocSearch client:only="react" />
     <a class="lm-button lm-header-cta" href={url('/contact')}>Book a Demo <span aria-hidden="true">↗</span></a>
     <details class="lm-mobile-nav">
       <summary aria-label="Open navigation menu">Menu <span aria-hidden="true">☰</span></summary>

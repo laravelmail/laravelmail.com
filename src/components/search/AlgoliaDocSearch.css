@@ -1,0 +1,222 @@
+/* DocSearch trigger button: icon-only circle matching the header's glass
+   style. The site is always dark, so unlike phpteacher's port these rules
+   do not depend on the OS dark-mode media query. */
+.DocSearch-Button {
+  @apply flex h-9 w-9 p-0 m-0 items-center justify-center rounded-full font-medium shadow-none;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease;
+}
+
+.DocSearch-Button-Placeholder,
+.DocSearch-Button-Keys {
+  @apply hidden;
+}
+
+.DocSearch-Button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(167, 139, 250, 0.5);
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.DocSearch-Button:focus {
+  @apply outline-none ring-0 ring-offset-0;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.DocSearch-Search-Icon {
+  @apply h-4 w-4;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.DocSearch-Button:hover .DocSearch-Search-Icon {
+  color: #a78bfa;
+}
+
+/* Modal: restyle DocSearch to match the site's dark violet theme. */
+:root {
+  --docsearch-primary-color: #a78bfa;
+  --docsearch-text-color: #e2e8f0;
+  --docsearch-muted-color: #94a3b8;
+  --docsearch-highlight-color: #a78bfa;
+  --docsearch-container-background: rgba(10, 8, 24, 0.78);
+  --docsearch-modal-background: #130f2e;
+  --docsearch-modal-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.25),
+    0 24px 60px rgba(0, 0, 0, 0.6);
+  --docsearch-searchbox-background: #0a0818;
+  --docsearch-searchbox-focus-background: #0a0818;
+  --docsearch-searchbox-shadow: 0 0 0 2px #7c3aed;
+  --docsearch-hit-color: #cbd5e1;
+  --docsearch-hit-active-color: #ffffff;
+  --docsearch-hit-background: #0a0818;
+  --docsearch-hit-shadow: none;
+  --docsearch-key-gradient: linear-gradient(-26.5deg, #2b2352, #1a1438);
+  --docsearch-key-shadow:
+    inset 0 -2px 0 0 #141029,
+    inset 0 0 1px 1px #44337a,
+    0 2px 2px 0 rgba(3, 4, 9, 0.3);
+  --docsearch-key-pressed-shadow:
+    inset 0 -2px 0 0 #141029,
+    inset 0 0 1px 1px #44337a,
+    0 1px 1px 0 rgba(3, 4, 9, 0.3);
+  --docsearch-footer-background: #0d0a22;
+  --docsearch-footer-shadow: 0 -1px 0 0 rgba(139, 92, 246, 0.18);
+  --docsearch-logo-color: #a78bfa;
+}
+
+.DocSearch-Container {
+  color-scheme: dark;
+  backdrop-filter: blur(4px);
+}
+
+.DocSearch-Modal {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  font-family: inherit;
+}
+
+.DocSearch-SearchBar {
+  padding: 14px 16px;
+}
+
+.DocSearch-Form {
+  border-radius: 10px;
+}
+
+.DocSearch-Input {
+  font-size: 16px;
+  padding-left: 12px;
+}
+
+.DocSearch-Input::placeholder {
+  color: #7f8798;
+}
+
+.DocSearch-MagnifierLabel,
+.DocSearch-Reset {
+  color: #a78bfa;
+}
+
+.DocSearch-LoadingIndicator svg {
+  color: #a78bfa;
+}
+
+/* Hit panels */
+.DocSearch-Dropdown {
+  padding: 8px 12px;
+}
+
+.DocSearch-Hit-source {
+  background: transparent;
+  color: #a78bfa;
+  padding: 8px 4px 4px;
+}
+
+.DocSearch-Hit {
+  border-radius: 8px;
+}
+
+.DocSearch-Hit a {
+  border-radius: 8px;
+  box-shadow: none;
+  border: 1px solid rgba(139, 92, 246, 0.14);
+  background: var(--docsearch-hit-background);
+}
+
+.DocSearch-Hit[aria-selected='true'] a {
+  background: #7c3aed;
+  border-color: #7c3aed;
+}
+
+.DocSearch-Hit mark {
+  color: #e879f9;
+}
+
+.DocSearch-Hit[aria-selected='true'] mark {
+  color: #fbcfe8;
+}
+
+/* Empty states */
+.DocSearch-StartScreen,
+.DocSearch-NoResults,
+.DocSearch-ErrorScreen {
+  color: var(--docsearch-muted-color);
+  padding: 40px 0;
+}
+
+.DocSearch-NoResults .DocSearch-Title,
+.DocSearch-StartScreen .DocSearch-Help {
+  color: var(--docsearch-muted-color);
+}
+
+/* Footer: key hints only. The "Search by Algolia" logo is hidden: the
+   popup is backed by the site's own /api/search, not Algolia, so the
+   attribution would be misleading. */
+.DocSearch-Logo {
+  display: none !important;
+}
+
+.DocSearch-Footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: auto;
+  min-height: 44px;
+  padding: 10px 16px;
+}
+
+.DocSearch-Commands {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.DocSearch-Commands li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  color: var(--docsearch-muted-color);
+  font-size: 12px;
+}
+
+.DocSearch-Commands-Key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.DocSearch-Commands-Key svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 750px) {
+  .DocSearch-Modal {
+    border-radius: 0;
+    border: none;
+  }
+
+  .DocSearch-SearchBar {
+    padding: 10px 12px;
+  }
+
+  .DocSearch-Dropdown {
+    padding: 8px;
+  }
+}

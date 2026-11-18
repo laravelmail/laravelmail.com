@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 import icon from 'astro-icon';
 import preact from '@astrojs/preact';
+import react from '@astrojs/react';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
@@ -46,7 +47,12 @@ export default defineConfig({
                 },
             },
         }),
-        preact(),
+        preact({
+            exclude: ['**/components/search/**'],
+        }),
+        react({
+            include: ['**/components/search/**'],
+        }),
         icon({
             include: {
                 ph: [
