@@ -36,7 +36,7 @@ const postPageTitle = postFullTitle.length <= 60 ? postFullTitle : truncateAtWor
     <Layout title={postPageTitle} description={post.data.excerpt}>
         <script type="application/ld+json" set:html={JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "BlogPosting",
+            "@type": "NewsArticle",
             "headline": post.data.title,
             "description": post.data.excerpt,
             "image": post.data.image,

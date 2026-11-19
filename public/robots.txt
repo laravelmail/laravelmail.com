@@ -4,6 +4,7 @@ Allow: /
 
 # Sitemaps
 Sitemap: https://laravelmail.com/sitemap-index.xml
+Sitemap: https://laravelmail.com/news-sitemap.xml
 
 # Disallow admin or private areas (if any)
 Disallow: /api/

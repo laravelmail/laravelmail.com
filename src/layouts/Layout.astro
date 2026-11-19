@@ -93,6 +93,7 @@ const safeDescription = truncateAtWord(description, 160);
       return (
         <>
           <link rel="canonical" href={new URL(pathname, Astro.site)} />
+          <link rel="alternate" type="application/rss+xml" title="Laravel Mail Blog" href="/rss.xml" />
           {locales.map((locale) => {
             const href = locale === 'en'
               ? pathWithoutLocale
